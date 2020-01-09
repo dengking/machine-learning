@@ -1,0 +1,1 @@
+# [Graphical model](https://en.wikipedia.org/wiki/Graphical_model)

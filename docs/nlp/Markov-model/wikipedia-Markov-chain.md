@@ -1,0 +1,1 @@
+[Markov chain](https://en.wikipedia.org/wiki/Markov_chain)
