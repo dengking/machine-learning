@@ -17,11 +17,13 @@ nav:
 - Theory:
   - Introduction: Theory/index.md
   - Deep-learning:
-    - book-deep-learning:
-      - Introduction: Theory/Deep-learning/book-deep-learning/deep-learning-book.md
-      - Chapter-1-Introduction: Theory/Deep-learning/book-deep-learning/Chapter-1-Introduction.md
+    - Book-deep-learning:
+      - Introduction: Theory/Deep-learning/Book-deep-learning/Deep-learning-book.md
+      - Chapter-1-Introduction: Theory/Deep-learning/Book-deep-learning/Chapter-1-Introduction.md
+      - Artificial-neural-network: Theory/Deep-learning/Book-deep-learning/Artificial-neural-network.md
       - Chapter-5-Machine-Learning-Basics:
-        - Chapter-5-Machine-Learning-Basics: Theory/Deep-learning/book-deep-learning/Chapter-5-Machine-Learning-Basics/Chapter-5-Machine-Learning-Basics.md
+        - Chapter-5-Machine-Learning-Basics: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Chapter-5-Machine-Learning-Basics.md
+      - Regression-VS-deep-learning: Theory/Deep-learning/Book-deep-learning/Regression-VS-deep-learning.md
     - End-to-end:
       - Introduction: Theory/Deep-learning/End-to-end/End-to-end.md
       - End-to-end-reinforcement-learning: Theory/Deep-learning/End-to-end/wikipedia-End-to-end-reinforcement-learning.md
