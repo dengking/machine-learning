@@ -1,0 +1,4 @@
+nav:
+    - Model-And-layer-And-computation-And-computational-graph: Model-And-layer-And-computation-And-computational-graph.md
+    - Programming-paradigm-of-deep-learning: Programming-paradigm-of-deep-learning.md
+    - VS-pytorch-vs-tensorflow: VS-pytorch-vs-tensorflow.md

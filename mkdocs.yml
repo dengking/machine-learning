@@ -1,0 +1,57 @@
+edit_uri: ''
+extra_css:
+- css/extra.css
+google_analytics:
+- UA-27795084-5
+- mkdocs.org
+markdown_extensions:
+- toc:
+    permalink: '#'
+nav:
+- Home: index.md
+- AI-meeting: AI-meeting.md
+- AI-papers: AI-papers.md
+- Research-Institution&Researcher:
+  - Researcher: Research-Institution&Researcher/Researcher.md
+  - Research-institution: Research-Institution&Researcher/Research-institution.md
+- Theory:
+  - Introduction: Theory/index.md
+  - Deep-learning:
+    - book-deep-learning:
+      - Introduction: Theory/Deep-learning/book-deep-learning/deep-learning-book.md
+      - Chapter-1-Introduction: Theory/Deep-learning/book-deep-learning/Chapter-1-Introduction.md
+      - Chapter-5-Machine-Learning-Basics:
+        - Chapter-5-Machine-Learning-Basics: Theory/Deep-learning/book-deep-learning/Chapter-5-Machine-Learning-Basics/Chapter-5-Machine-Learning-Basics.md
+    - End-to-end:
+      - Introduction: Theory/Deep-learning/End-to-end/End-to-end.md
+      - End-to-end-reinforcement-learning: Theory/Deep-learning/End-to-end/wikipedia-End-to-end-reinforcement-learning.md
+    - Attention:
+      - Papers: Theory/Deep-learning/Attention/Papers.md
+  - Feature-engineering:
+    - Data-transformation(statistics): Theory/Feature-engineering/Data-transformation(statistics).md
+    - Feature-scaling: Theory/Feature-engineering/Feature-scaling.md
+    - Normalization(statistics): Theory/Feature-engineering/Normalization(statistics).md
+  - Markov-model:
+    - Markov-models: Theory/Markov-model/Markov-models.md
+    - Markov-chain: Theory/Markov-model/Markov-chain.md
+    - Viterbi-algorithm: Theory/Markov-model/Viterbi-algorithm.md
+    - Forward-algorithm: Theory/Markov-model/Forward-algorithm.md
+- Programming:
+  - Model-And-layer-And-computation-And-computational-graph: Programming/Model-And-layer-And-computation-And-computational-graph.md
+  - Programming-paradigm-of-deep-learning: Programming/Programming-paradigm-of-deep-learning.md
+  - VS-pytorch-vs-tensorflow: Programming/VS-pytorch-vs-tensorflow.md
+- Data-set:
+  - Introduction: Data-set/index.md
+- Application:
+  - NLP:
+    - NLP: Application/NLP/NLP.md
+    - Task-of-NLP: Application/NLP/Task-of-NLP.md
+plugins:
+- search
+repo_url: https://github.com/dengking/machine-learning
+site_author: DengKing
+site_description: Project documentation with Markdown.
+site_name: machine-learning
+site_url: https://dengking.github.io/machine-learning
+theme:
+  name: material

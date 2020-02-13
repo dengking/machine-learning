@@ -1,0 +1,31 @@
+site_name: machine-learning
+site_url: https://dengking.github.io/machine-learning
+site_description: Project documentation with Markdown.
+site_author: DengKing
+
+
+repo_url: https://github.com/dengking/machine-learning
+
+edit_uri: ""
+
+
+
+theme:
+    name: material
+
+        
+nav: None
+
+markdown_extensions:
+    - toc:
+        permalink: '#'
+        
+
+        
+extra_css:
+    - css/extra.css
+
+google_analytics: ['UA-27795084-5', 'mkdocs.org']
+       
+plugins:
+    - search
