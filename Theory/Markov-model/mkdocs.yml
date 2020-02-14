@@ -1,0 +1,5 @@
+nav:
+    - Markov-models: Markov-models.md
+    - Markov-chain: Markov-chain.md
+    - Viterbi-algorithm: Viterbi-algorithm.md
+    - Forward-algorithm: Forward-algorithm.md

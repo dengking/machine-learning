@@ -1,0 +1,9 @@
+nav:
+    - Home: index.md
+    - AI-meeting: AI-meeting.md
+    - AI-papers: AI-papers.md
+    - Research-Institution&Researcher: Research-Institution&Researcher
+    - Theory: Theory
+    - Programming: Programming
+    - Data-set: Data-set
+    - Application: Application
