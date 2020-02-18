@@ -1,1 +1,0 @@
-# [Statistical model](https://en.wikipedia.org/wiki/Statistical_model)

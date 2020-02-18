@@ -1,1 +1,0 @@
-# [Hidden Markov model](https://en.wikipedia.org/wiki/Hidden_Markov_model)

@@ -3,3 +3,6 @@ nav:
     - Deep-learning: Deep-learning
     - Feature-engineering: Feature-engineering
     - Markov-model: Markov-model
+    - Data-generating-process: Data-generating-process.md
+    - VS-statistical-model-VS-machine-learning-model: VS-statistical-model-VS-machine-learning-model.md
+    - VS-statistics-model-VS-stochastic-processes: VS-statistics-model-VS-stochastic-processes.md

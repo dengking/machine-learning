@@ -30,19 +30,11 @@ Mathematical statistics is the application of [mathematics](https://en.wikipedia
 
 > Descriptive statistics are most often concerned with two sets of **properties** of a *distribution* (sample or population): *[central tendency](https://en.wikipedia.org/wiki/Central_tendency)* (or *location*) seeks to characterize the distribution's central or typical value, while *[dispersion](https://en.wikipedia.org/wiki/Statistical_dispersion)* (or *variability*) characterizes the extent to which members of the distribution depart from its center and each other. 
 
+上面这段话中的“properties of distribution”是指[Probability distribution](https://en.wikipedia.org/wiki/Probability_distribution)。
+
 ### [Inferential statistics](https://en.wikipedia.org/wiki/Statistical_inference)
 
-推断性统计，既然是进行推断，那么应该会涉及到诸如 “推断地靠不靠谱”、“推断地准不准”，“靠不靠谱”，“准不准”在数学中，使用[probability](https://en.wikipedia.org/wiki/Probability_theory)来进行衡量。统计推断和  [probability theory](https://en.wikipedia.org/wiki/Probability_theory) 密切相关。正如[Statistics](https://en.wikipedia.org/wiki/Statistics)中所言：
-
-> Inferences on [mathematical statistics](https://en.wikipedia.org/wiki/Mathematical_statistics) are made under the framework of [probability theory](https://en.wikipedia.org/wiki/Probability_theory), which deals with the analysis of random phenomena.
-
-它所推断的是什么？
-
-该理论的假设前提：It is assumed that the observed data set is [sampled](https://en.wikipedia.org/wiki/Sampling_(statistics)) from a larger population.
-
-machine learning就是使用的inferential statistics。
-
-
+参见《[Statistical-inference](./Statistical-inference.md)》
 
 
 
@@ -51,3 +43,8 @@ machine learning就是使用的inferential statistics。
 ## [Statistical hypothesis testing](https://en.wikipedia.org/wiki/Statistical_hypothesis_testing)
 
 其实就是我们平时所说的相关性测试：假设两者相关，然后进行测试。
+
+
+
+
+
