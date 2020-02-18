@@ -2,4 +2,5 @@ nav:
     - Introduction: index.md
     - Statistics: Statistics.md
     - Statistical-inference: Statistical-inference.md
+    - Statistical-model: Statistical-model.md
     - VS-statistical-interference-VS-descriptive-statistics: VS-statistical-interference-VS-descriptive-statistics.md

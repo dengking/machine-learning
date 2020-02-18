@@ -23,10 +23,12 @@ nav:
       - Stochastic-process:
         - Stochastic-process: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Stochastic-process.md
         - Markov-chain: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Markov-chain.md
+        - Independent-and-identically-distributed-random-variables: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Independent-and-identically-distributed-random-variables.md
     - Statistics:
       - Introduction: Theory/Probability-theory-and-Statistics/Statistics/index.md
       - Statistics: Theory/Probability-theory-and-Statistics/Statistics/Statistics.md
       - Statistical-inference: Theory/Probability-theory-and-Statistics/Statistics/Statistical-inference.md
+      - Statistical-model: Theory/Probability-theory-and-Statistics/Statistics/Statistical-model.md
       - VS-statistical-interference-VS-descriptive-statistics: Theory/Probability-theory-and-Statistics/Statistics/VS-statistical-interference-VS-descriptive-statistics.md
   - Deep-learning:
     - Book-deep-learning:
