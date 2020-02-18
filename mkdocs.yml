@@ -16,6 +16,18 @@ nav:
   - Research-institution: Research-Institution&Researcher/Research-institution.md
 - Theory:
   - Introduction: Theory/index.md
+  - Probability-theory-and-Statistics:
+    - Introduction: Theory/Probability-theory-and-Statistics/index.md
+    - Probability-theory:
+      - Probability-theory: Theory/Probability-theory-and-Statistics/Probability-theory/Probability-theory.md
+      - Stochastic-process:
+        - Stochastic-process: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Stochastic-process.md
+        - Markov-chain: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Markov-chain.md
+    - Statistics:
+      - Introduction: Theory/Probability-theory-and-Statistics/Statistics/index.md
+      - Statistics: Theory/Probability-theory-and-Statistics/Statistics/Statistics.md
+      - Statistical-inference: Theory/Probability-theory-and-Statistics/Statistics/Statistical-inference.md
+      - VS-statistical-interference-VS-descriptive-statistics: Theory/Probability-theory-and-Statistics/Statistics/VS-statistical-interference-VS-descriptive-statistics.md
   - Deep-learning:
     - Book-deep-learning:
       - Introduction: Theory/Deep-learning/Book-deep-learning/Deep-learning-book.md
@@ -23,7 +35,12 @@ nav:
       - Artificial-neural-network: Theory/Deep-learning/Book-deep-learning/Artificial-neural-network.md
       - Chapter-5-Machine-Learning-Basics:
         - Chapter-5-Machine-Learning-Basics: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Chapter-5-Machine-Learning-Basics.md
-      - Regression-VS-deep-learning: Theory/Deep-learning/Book-deep-learning/Regression-VS-deep-learning.md
+        - Task:
+          - Pattern-recognition: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Pattern-recognition.md
+          - Sequence-labeling:
+            - Sequence-labeling: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling.md
+            - Sequence-Labeling-Generative-and-Discriminative: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative.md
+        - 5.2-Capacity-Overfitting-and-Underfitting: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting.md
     - End-to-end:
       - Introduction: Theory/Deep-learning/End-to-end/End-to-end.md
       - End-to-end-reinforcement-learning: Theory/Deep-learning/End-to-end/wikipedia-End-to-end-reinforcement-learning.md
@@ -34,10 +51,14 @@ nav:
     - Feature-scaling: Theory/Feature-engineering/Feature-scaling.md
     - Normalization(statistics): Theory/Feature-engineering/Normalization(statistics).md
   - Markov-model:
-    - Markov-models: Theory/Markov-model/Markov-models.md
     - Markov-chain: Theory/Markov-model/Markov-chain.md
+    - Markov-models: Theory/Markov-model/Markov-models.md
+    - Hidden-Markov-model: Theory/Markov-model/Hidden-Markov-model.md
     - Viterbi-algorithm: Theory/Markov-model/Viterbi-algorithm.md
     - Forward-algorithm: Theory/Markov-model/Forward-algorithm.md
+  - Data-generating-process: Theory/Data-generating-process.md
+  - VS-statistical-model-VS-machine-learning-model: Theory/VS-statistical-model-VS-machine-learning-model.md
+  - VS-statistics-model-VS-stochastic-processes: Theory/VS-statistics-model-VS-stochastic-processes.md
 - Programming:
   - Model-And-layer-And-computation-And-computational-graph: Programming/Model-And-layer-And-computation-And-computational-graph.md
   - Programming-paradigm-of-deep-learning: Programming/Programming-paradigm-of-deep-learning.md
@@ -45,9 +66,9 @@ nav:
 - Data-set:
   - Introduction: Data-set/index.md
 - Application:
-  - NLP:
-    - NLP: Application/NLP/NLP.md
-    - Task-of-NLP: Application/NLP/Task-of-NLP.md
+  - NLP: Application/NLP.md
+  - Computable-knowledge:
+    - Introduction: Application/Computable-knowledge/Knowledge-representation-and-reasoning.md
 plugins:
 - search
 repo_url: https://github.com/dengking/machine-learning
