@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - Probability-theory-and-Statistics: Probability-theory-and-Statistics
     - Deep-learning: Deep-learning
     - Feature-engineering: Feature-engineering
     - Markov-model: Markov-model
