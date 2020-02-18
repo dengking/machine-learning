@@ -29,3 +29,11 @@ This book is about a solution to these more **intuitive problems**. This solutio
 ## 案例：Formal language and natural language
 
 关于计算机和人类所擅长解决的问题的一个典型案例就是：formal language和natural language。计算机能够轻松理解formal language（因为formal language的grammar和semantic都能够形式化地进行描述），但是对于natural language的理解则是非常可能的（natural language的grammar和semantic是非常复杂的，无法进行形式化的描述）。而人类基本相反。
+
+## 案例：[Pattern matching](https://en.wikipedia.org/wiki/Pattern_matching) and [Pattern recognition](https://en.wikipedia.org/wiki/Pattern_recognition)
+
+这是另外一个案例。
+
+
+
+关于machine learning能够解决的问题，参见chapter 5.1 Learning Algorithms。

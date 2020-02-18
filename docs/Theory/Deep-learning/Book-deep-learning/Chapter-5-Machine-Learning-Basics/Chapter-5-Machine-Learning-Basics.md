@@ -68,3 +68,4 @@ Learning is our means of attaining the ability to perform the task.
 
 
 
+Pattern recognition是一类非常普遍的task，在下节中会进行讨论。
