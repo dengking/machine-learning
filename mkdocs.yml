@@ -56,6 +56,8 @@ nav:
     - Hidden-Markov-model: Theory/Markov-model/Hidden-Markov-model.md
     - Viterbi-algorithm: Theory/Markov-model/Viterbi-algorithm.md
     - Forward-algorithm: Theory/Markov-model/Forward-algorithm.md
+  - CRF:
+    - CRF: Theory/CRF/crf.md
   - Data-generating-process: Theory/Data-generating-process.md
   - VS-statistical-model-VS-machine-learning-model: Theory/VS-statistical-model-VS-machine-learning-model.md
   - VS-statistics-model-VS-stochastic-processes: Theory/VS-statistics-model-VS-stochastic-processes.md
