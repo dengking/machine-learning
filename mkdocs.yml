@@ -62,7 +62,7 @@ nav:
     - CRF: Theory/CRF/crf.md
   - Data-generating-process: Theory/Data-generating-process.md
   - VS-statistical-model-VS-machine-learning-model: Theory/VS-statistical-model-VS-machine-learning-model.md
-  - VS-statistics-model-VS-stochastic-processes: Theory/VS-statistics-model-VS-stochastic-processes.md
+  - VS-statistics-model-VS-stochastic-processes: Theory/VS-statistical-model-VS-stochastic-processes.md
 - Programming:
   - Model-And-layer-And-computation-And-computational-graph: Programming/Model-And-layer-And-computation-And-computational-graph.md
   - Programming-paradigm-of-deep-learning: Programming/Programming-paradigm-of-deep-learning.md
