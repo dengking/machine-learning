@@ -1,5 +1,6 @@
 nav:
-    - Markov-models: Markov-models.md
     - Markov-chain: Markov-chain.md
+    - Markov-models: Markov-models.md
+    - Hidden-Markov-model: Hidden-Markov-model.md
     - Viterbi-algorithm: Viterbi-algorithm.md
     - Forward-algorithm: Forward-algorithm.md

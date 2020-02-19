@@ -2,137 +2,227 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://dengking.github.io/machine-learning/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/AI-meeting/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/AI-papers/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Research-Institution&Researcher/Researcher/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Research-Institution&Researcher/Research-institution/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Probability-theory/Probability-theory/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Stochastic-process/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Markov-chain/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Independent-and-identically-distributed-random-variables/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Statistics/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Statistics/Statistics/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Statistics/Statistical-inference/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Statistics/Statistical-model/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Probability-theory-and-Statistics/Statistics/VS-statistical-interference-VS-descriptive-statistics/</loc>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Deep-learning-book/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Chapter-1-Introduction/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Artificial-neural-network/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Chapter-5-Machine-Learning-Basics/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Regression-VS-deep-learning/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Pattern-recognition/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting/</loc>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/End-to-end/End-to-end/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/End-to-end/wikipedia-End-to-end-reinforcement-learning/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Deep-learning/Attention/Papers/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Feature-engineering/Data-transformation(statistics)/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Feature-engineering/Feature-scaling/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Feature-engineering/Normalization(statistics)/</loc>
-     <lastmod>2020-02-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://dengking.github.io/machine-learning/Theory/Markov-model/Markov-models/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Markov-model/Markov-chain/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Markov-model/Markov-models/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Markov-model/Hidden-Markov-model/</loc>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Markov-model/Viterbi-algorithm/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Theory/Markov-model/Forward-algorithm/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/CRF/crf/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/Data-generating-process/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/VS-statistical-model-VS-machine-learning-model/</loc>
+     <lastmod>2020-02-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/machine-learning/Theory/VS-statistical-model-VS-stochastic-process/</loc>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Programming/Model-And-layer-And-computation-And-computational-graph/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Programming/Programming-paradigm-of-deep-learning/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Programming/VS-pytorch-vs-tensorflow/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/machine-learning/Data-set/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/machine-learning/Application/NLP/NLP/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <loc>https://dengking.github.io/machine-learning/Application/NLP/</loc>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/machine-learning/Application/NLP/Task-of-NLP/</loc>
-     <lastmod>2020-02-14</lastmod>
+     <loc>https://dengking.github.io/machine-learning/Application/Computable-knowledge/Knowledge-representation-and-reasoning/</loc>
+     <lastmod>2020-02-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
