@@ -1,4 +1,5 @@
 nav:
     - Chapter-5-Machine-Learning-Basics: Chapter-5-Machine-Learning-Basics.md
+    - 5.1-Learning-Algorithms: 5.1-Learning-Algorithms.md
     - Task: Task
     - 5.2-Capacity-Overfitting-and-Underfitting: 5.2-Capacity-Overfitting-and-Underfitting.md

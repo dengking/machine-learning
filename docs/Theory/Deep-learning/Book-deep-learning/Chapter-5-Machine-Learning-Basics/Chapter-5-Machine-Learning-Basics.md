@@ -8,18 +8,17 @@
 
 
 
-Machine learning is essentially a form of applied statistics with increased emphasis on the use of
-computers to statistically estimate complicated functions and a decreased emphasis on proving confidence intervals around these functions; we therefore present the two central approaches to statistics: frequentist estimators and Bayesian inference.
+Machine learning is essentially a form of applied statistics with increased emphasis on the use of computers to statistically estimate complicated functions and a decreased emphasis on proving confidence intervals around these functions; we therefore present the two central approaches to statistics: frequentist estimators and Bayesian inference.
 
 这段话如何理解？
 
-本质上来说，“machine learning”属“applied statistics”。所以要理解上面这段话需要对[Statistics](https://en.wikipedia.org/wiki/Statistic)的研究分支有一些了解了。上面这段话中的frequentist estimators 和 Bayesian inference都属于[Statistical inference](https://en.wikipedia.org/wiki/Statistical_inference)范轴，按照[Statistical inference](https://en.wikipedia.org/wiki/Statistical_inference)的说法，“frequentist estimators ”对应的是[Frequentist inference](https://en.wikipedia.org/wiki/Frequentist_inference)，“Bayesian inference”对应的是[Bayesian inference](https://en.wikipedia.org/wiki/Bayesian_inference)，它们是[Frequentist inference](https://en.wikipedia.org/wiki/Frequentist_inference)的两个学派（或paradigm），关于[Frequentist inference](https://en.wikipedia.org/wiki/Frequentist_inference)的学派，参见[Paradigms for inference](https://en.wikipedia.org/wiki/Statistical_inference#Paradigms_for_inference)。需要注意的是：
+本质上来说，“machine learning”属“applied statistics”。所以要理解上面这段话需要对[Statistics](https://en.wikipedia.org/wiki/Statistic)的研究分支有一些了解了。上面这段话中的“frequentist estimators”和“Bayesian inference”都属于[Statistical inference](https://en.wikipedia.org/wiki/Statistical_inference)范轴，按照[Statistical inference](https://en.wikipedia.org/wiki/Statistical_inference)的说法，“frequentist estimators ”对应的是[Frequentist inference](https://en.wikipedia.org/wiki/Frequentist_inference)，“Bayesian inference”对应的是[Bayesian inference](https://en.wikipedia.org/wiki/Bayesian_inference)，它们是[Frequentist inference](https://en.wikipedia.org/wiki/Frequentist_inference)的两个学派（或paradigm），关于[Frequentist inference](https://en.wikipedia.org/wiki/Frequentist_inference)的学派，参见[Paradigms for inference](https://en.wikipedia.org/wiki/Statistical_inference#Paradigms_for_inference)。需要注意的是：
 
 > These schools—or "paradigms"—are not mutually exclusive, and methods that work well under one paradigm often have attractive interpretations under other paradigms.
 
 “confidence intervals”的中文意思是：置信区间，参见[Confidence Interval](https://en.wikipedia.org/wiki/Confidence_interval)。
 
-有这些认知对于理解后续章节的内容是比较重要的。
+关于统计学（statistics）的内容，参见[Probability-theory-and-Statistics](../../../Probability-theory-and-Statistics/index.md)章节。
 
 
 
@@ -45,27 +44,3 @@ Finally, in section , we describe some of the 5.11 factors that have limited the
 overcome these obstacles.
 
 上述ability的含义是什么？deep learning algorithm较traditional machine learning algorithm的优势何在？
-
-## 5.1 Learning Algorithms
-
-本段中关于“learning”的定义是引用的如下书籍：
-
-[Machine Learning](http://www.cs.cmu.edu/~tom/mlbook.html), [Tom Mitchell](http://www.cs.cmu.edu/~tom), McGraw Hill, 1997.
-
-
-
-### 5.1.1 The Task, T
-
-本节作者所要表达的主要思想简单描述如下：
-
-人类开发computer program来解决形形色色的problem，这些problem就是program所要执行的task，但是我们知道，program并非万能的，还是有非常非常多的problem是无法使用program来解决的。随着科技的发展，program能够解决的problem也越来越多了，也就是program的能力越来越强了。machine learning algorithm就是一种在一类task中
-
-思考：machine learning algorithm VS 普通algorithm？
-
-machine learning algorithm是一种全新的算法范式，它使program能够“learning”（“learning”在5.1 Learning Algorithms中给出定义）
-
-Learning is our means of attaining the ability to perform the task.
-
-
-
-Pattern recognition是一类非常普遍的task，在下节中会进行讨论。

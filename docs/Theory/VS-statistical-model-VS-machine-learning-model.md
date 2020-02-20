@@ -1,5 +1,9 @@
 # VS: statistical model VS machine learning model
 
+Machine learning本质上是一种statistical inference，机器学习的输出是一个statistical model。
+
+
+
 [Statistical model](https://en.wikipedia.org/wiki/Statistical_model)中关于statistical model的难点：
 
 > Choosing an appropriate statistical model to represent a given data-generating process is sometimes extremely difficult, and may require knowledge of both the process and relevant statistical analyses. Relatedly, the statistician [Sir David Cox](https://en.wikipedia.org/wiki/David_Cox_(statistician)) has said, "How [the] translation from subject-matter problem to statistical model is done is often the most critical part of an analysis".
