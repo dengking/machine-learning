@@ -21,7 +21,7 @@
 
 有了这些基本的认知，读者应该能够更好地理解本文和后续的内容了。
 
-**Statistical inference** is the process of using [data analysis](https://en.wikipedia.org/wiki/Data_analysis) to deduce（推断） properties of an underlying [probability distribution](https://en.wikipedia.org/wiki/Probability_distribution). It is assumed that the observed data set is [sampled](https://en.wikipedia.org/wiki/Sampling_(statistics)) from a larger population.
+> **Statistical inference** is the process of using [data analysis](https://en.wikipedia.org/wiki/Data_analysis) to deduce（推断） properties of an underlying [probability distribution](https://en.wikipedia.org/wiki/Probability_distribution). It is assumed that the observed data set is [sampled](https://en.wikipedia.org/wiki/Sampling_(statistics)) from a larger population.
 
 这段话回答了statistical inference所“infer”的：properties of an underlying [probability distribution](https://en.wikipedia.org/wiki/Probability_distribution)。我们假设研究的问题是存在着一个distribution的，我们通过[Statistical inference](https://en.wikipedia.org/wiki/Statistical_inference)可以学习到这个distribution。
 
@@ -44,11 +44,11 @@ Statistical inference makes propositions about a population, using data drawn fr
 
 ### [Frequentist inference](https://en.wikipedia.org/wiki/Frequentist_inference)
 
-
+> 频率派
 
 ### [Bayesian Inference](https://en.wikipedia.org/wiki/Bayesian_Inference)
 
-
+> 贝叶斯推论
 
 ### Likelihood-based inference
 

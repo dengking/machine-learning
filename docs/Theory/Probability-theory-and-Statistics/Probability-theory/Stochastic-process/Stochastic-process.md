@@ -6,7 +6,7 @@
 
 - 维基百科[Stochastic process](https://en.wikipedia.org/wiki/Stochastic_process)
 
-对stochastic process的直观感受是它是一个数学模型，这个数学模型中涉及多个random variable。显示世界中的很多事物都是非常复杂的，单个random variable是非常难以描述的，所以需要使用stochastic process。
+对stochastic process的直观感受是它是一个数学模型，这个数学模型中涉及多个random variable。显然世界中的很多事物都是非常复杂的，单个random variable是非常难以描述的，所以需要使用stochastic process。
 
 维基百科[Stochastic process](https://en.wikipedia.org/wiki/Stochastic_process)：
 

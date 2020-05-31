@@ -1,7 +1,10 @@
 nav:
     - Introduction: index.md
+# 统计学的概况    
     - Statistics: Statistics.md
+# 这是machine learning中所使用的主要的method    
     - Statistical-inference: Statistical-inference.md
+# model，显然是一种简化    
     - Statistical-model: Statistical-model.md
     - VS-statistical-interference-VS-descriptive-statistics: VS-statistical-interference-VS-descriptive-statistics.md
     - Estimator: Estimator.md

@@ -36,7 +36,7 @@ Mathematical statistics is the application of [mathematics](https://en.wikipedia
 
 参见《[Statistical-inference](./Statistical-inference.md)》
 
-
+这是machine learning中使用的主要的method。
 
 
 
