@@ -6,11 +6,7 @@ https://stackoverflow.com/tags/tensorflow/
 
 https://cn.udacity.com/
 
-> 用户名：邓开
->
-> 邮箱：22388
->
-> 密码：king
+
 
 # Neural Networks and Deep Learning
 

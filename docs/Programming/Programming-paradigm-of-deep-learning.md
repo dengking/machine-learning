@@ -1,4 +1,4 @@
-[TOC]
+
 
 # rule one：separation of model and dataset
 将model和dataset分隔开来

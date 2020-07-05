@@ -35,7 +35,7 @@ For scaling neural network training to larger deployments, TensorFlow allows cli
 
 > NOTE: 这一段作者所要表达的核心思想是：如果将tensorflow的interface看做是一门programming language，这个programming language是flexible、expressive的。使用它，client能够轻松地表述各种parallelism。
 >
-> 需要注意的是，tensorflow的设计者是将它定位为“Large-Scale Machine Learning on Heterogeneous Distributed Systems”，所以在上面这段话中，**parallelism** 、consistency 扥distributed computing领域的术语是不足为奇的。
+> 需要注意的是，tensorflow的设计者是将它定位为“Large-Scale Machine Learning on Heterogeneous Distributed Systems”，所以在上面这段话中，**parallelism** 、consistency 等distributed computing领域的术语是不足为奇的。
 
 
 
@@ -55,7 +55,7 @@ Section 5 describes several optimizations to the basic implementations.
 
 Section 6 describes some of our experiences in using TensorFlow.
 
-Section 7 describes several programming idioms we have found helpful when using TensorFlow.
+Section 7 describes several **programming idioms** we have found helpful when using TensorFlow.
 
 Section 9 describes several auxiliary tools we have built around the core TensorFlow system. 
 
@@ -292,6 +292,14 @@ license, and the system is available for download at www.tensorflow.org. The sys
 
 
 ## 7 Common Programming Idioms
+
+TensorFlow’s basic **dataflow graph model** can be used in a variety of ways for machine learning applications. One domain we care about is speeding up training of computationally intensive neural network models on large datasets. This section describes several techniques that we and others have developed in order to accomplish this, and illustrates how to use TensorFlow to realize these various approaches.
+
+The approaches in this subsection assume that the model is being trained using stochastic gradient descent (SGD) with relatively modest-sized mini-batches of 100 to 1000 examples.
+
+### Data Parallel Training
+
+One simple technique for speeding up SGD is to parallelize the computation of the gradient for a mini-batch across mini-batch elements. For example, if we are using a mini-batch size of 1000 elements, we can use 10 replicas of the model to each compute the gradient for 100 elements, and then combine the gradients and apply updates to the parameters synchronously, in order to behave exactly as if we were running the sequential SGD algorithm with a batch size of 1000 elements. In this case, the TensorFlow graph simply has many replicas of the portion of the graph that does the bulk of the model computation, and a single client thread drives the entire training loop for this large graph. This is illustrated in the top portion of Figure 7.
 
 
 
