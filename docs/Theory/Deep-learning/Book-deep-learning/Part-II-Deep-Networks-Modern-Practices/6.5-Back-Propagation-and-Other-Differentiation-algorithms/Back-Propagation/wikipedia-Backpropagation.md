@@ -93,3 +93,28 @@ This avoids inefficiency in two ways. Firstly, it avoids duplication because whe
 
 Backpropagation can be expressed for simple feedforward networks in terms of [matrix multiplication](https://en.wikipedia.org/wiki/Backpropagation#Matrix_multiplication), or more generally in terms of the [adjoint graph](https://en.wikipedia.org/wiki/Backpropagation#Adjoint_graph).
 
+## Matrix multiplication
+
+Given an input–output pair $ (x,y) $, the loss is:
+$$
+C(y,f^{L}(W^{L}f^{L-1}(W^{L-1}\cdots f^{1}(W^{1}x)\cdots )))
+$$
+To compute this, one starts with the input $x$ and works forward; denote the weighted input of each layer as $z^{l}$ and the output of layer $l$ as the activation $a^{l}$. For backpropagation, the activation $a^{l}$ as well as the derivatives $(f^{l})'$ (evaluated at $z^{l}$) must be cached for use during the backwards pass.
+
+> NOTE: 所谓$z^{l}$既weighted input，其实就是它的input dot product weight；所谓$a^{l}$，其实就是这一层的output。
+
+
+
+The derivative of the loss in terms of the inputs is given by the chain rule; note that each term is a [total derivative](https://en.wikipedia.org/wiki/Total_derivative), evaluated at the value of the network (at each node) on the input $x$
+$$
+{\displaystyle {\frac {dC}{da^{L}}}\cdot {\frac {da^{L}}{dz^{L}}}\cdot {\frac {dz^{L}}{da^{L-1}}}\cdot {\frac {da^{L-1}}{dz^{L-1}}}\cdot {\frac {dz^{L-1}}{da^{L-2}}}\cdots {\frac {da^{1}}{dz^{1}}}\cdot {\frac {\partial z^{1}}{\partial x}}.}
+$$
+These terms are: the derivative of the loss function;[[d\]](https://en.wikipedia.org/wiki/Backpropagation#cite_note-11) the derivatives of the activation functions;[[e\]](https://en.wikipedia.org/wiki/Backpropagation#cite_note-12) and the matrices of weights:[[f\]](https://en.wikipedia.org/wiki/Backpropagation#cite_note-13)
+$$
+{\displaystyle {\frac {dC}{da^{L}}}\cdot (f^{L})'\cdot W^{L}\cdot (f^{L-1})'\cdot W^{L-1}\cdots (f^{1})'\cdot W^{1}.}
+$$
+The gradient ${\displaystyle \nabla }$ is the [transpose](https://en.wikipedia.org/wiki/Transpose) of the derivative of the output in terms of the input, so the matrices are transposed and the order of multiplication is reversed, but the entries are the same:
+$$
+{\displaystyle \nabla _{x}C=(W^{1})^{T}\cdot (f^{1})'\cdots \cdot (W^{L-1})^{T}\cdot (f^{L-1})'\cdot (W^{L})^{T}\cdot (f^{L})'\cdot \nabla _{a^{L}}C.}
+$$
+Backpropagation then consists essentially of evaluating this expression from right to left (equivalently, multiplying the previous expression for the derivative from left to right), computing the gradient at each layer on the way; there is an added step, because the gradient of the weights isn't just a subexpression: there's an extra multiplication.
