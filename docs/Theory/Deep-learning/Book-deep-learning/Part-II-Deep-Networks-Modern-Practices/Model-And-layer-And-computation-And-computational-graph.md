@@ -42,6 +42,24 @@ TensorFlow的[computational graph](https://www.tensorflow.org/guide/low_level_in
 
 在下面的描述中，computational graph的描述都是按照TensorFlow中的定义；
 
+
+
+Computational graph的补出内容：
+
+[如何直观地解释 backpropagation 算法？ - YE Y的回答 - 知乎](https://www.zhihu.com/question/27239198/answer/43560763) ：
+
+> Computational graph。最高票答案和 [@龚禹pangolulu](http://www.zhihu.com/people/30eace541ed648ac9ebba5bf420b620e) 的答案中都有提到，就不赘述，其实就是计算代数中的一个最基础办法，从计算机的角度来看还有点动态规划的意思。其优点是表达式给定的情况下对复合函数中所有变量进行快速求导，这正好是神经网络尤其是深度学习的场景。现在主流深度学习框架里的求导也都是基于Computational Graph，比如theano，torch和tensorflow，Caffe也可以看做是computaiona graph，只不过node是layer。
+
+
+
+结构化思维：
+如何直观地解释 backpropagation 算法？ - Anonymous的回答 - 知乎
+https://www.zhihu.com/question/27239198/answer/89853077：多层神经网络本质上是一个多层复合函数
+
+数学是一门简洁但是含义丰富的原因，简单的公式，但是能够表达强大的结构
+
+
+
 # MLP
 
 MLP的model topology：
@@ -188,3 +206,8 @@ score = model.evaluate(x_test, y_test, batch_size=128)
 ## encoder-align model-decoder
 
 paper [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)就是采用的这种架构，它的model topology在blog [Attention mechanism](https://lab.heuritech.com/attention-mechanism)这给出了，两者结合起来能够更加深刻理解它的本质；	
+
+
+
+
+
