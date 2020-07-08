@@ -1,7 +1,5 @@
 nav:
     - Introduction: index.md
-# 概率论与数理统计    
-    - Probability-theory-and-Statistics: Probability-theory-and-Statistics
 # 深度学习的理论知识    
     - Deep-learning: Deep-learning
     - Feature-engineering: Feature-engineering

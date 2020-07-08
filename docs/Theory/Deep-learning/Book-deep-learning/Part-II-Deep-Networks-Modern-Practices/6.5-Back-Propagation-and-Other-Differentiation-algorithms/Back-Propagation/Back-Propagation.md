@@ -1,5 +1,3 @@
-原文链接：https://www.zhihu.com/question/27239198?rf=24827633
-
 # zhihu [如何直观地解释 backpropagation 算法？](https://www.zhihu.com/question/27239198?rf=24827633)
 
 ## [Anonymous的回答](https://www.zhihu.com/question/27239198/answer/89853077) 
@@ -46,22 +44,27 @@ BackPropagation算法是多层神经网络的训练中举足轻重的算法。
 
  ![img](https://pic4.zhimg.com/80/986aacfebb87f4e9573fa2fe87f439d1_hd.jpg)
 
- 利用链式法则我们知道： 
+ 
+
+> NOTE: 函数$e=c*d$，当$a=2,b=1$，则$d=b+1=2$，则此时函数的表达式为$e=2*c$，则$e$对$c$的导数为2（此时e的初始值为1）
+
+利用链式法则我们知道： 
 
 ![\frac{\partial e}{\partial a}=\frac{\partial e}{\partial c}\cdot \frac{\partial c}{\partial a}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+a%7D%3D%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+c%7D%5Ccdot+%5Cfrac%7B%5Cpartial+c%7D%7B%5Cpartial+a%7D)以及![\frac{\partial e}{\partial b}=\frac{\partial e}{\partial c}\cdot \frac{\partial c}{\partial b}+\frac{\partial e}{\partial d}\cdot \frac{\partial d}{\partial b}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+b%7D%3D%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+c%7D%5Ccdot+%5Cfrac%7B%5Cpartial+c%7D%7B%5Cpartial+b%7D%2B%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+d%7D%5Ccdot+%5Cfrac%7B%5Cpartial+d%7D%7B%5Cpartial+b%7D)。   
 
-链式法则在上图中的意义是什么呢？其实不难发现，![\frac{\partial e}{\partial a}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+a%7D)的值等于从a到e的路径上的偏导值的乘积，而![\frac{\partial e}{\partial b}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+b%7D)的值等于从b到e的路径1(b-c-e)上的偏导值的乘积**加上**路径2(b-d-e)上的偏导值的乘积。
+链式法则在上图中的意义是什么呢？其实不难发现，![\frac{\partial e}{\partial a}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+a%7D)的值等于从a到e的路径上的偏导值的乘积，而![\frac{\partial e}{\partial b}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+e%7D%7B%5Cpartial+b%7D)的值等于从b到e的路径1(`b-c-e`)上的偏导值的乘积**加上**路径2(`b-d-e`)上的偏导值的乘积。
 
 也就是说，对于上层节点p和下层节点q，要求得![\frac{\partial p}{\partial q}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+q%7D)，需要找到从q节点到p节点的所有路径，并且对每条路径，求得该路径上的所有偏导数之乘积，然后将所有路径的 “乘积” 累加起来才能得到![\frac{\partial p}{\partial q}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+q%7D)的值。
 
-大家也许已经注意到，这样做是十分冗余的，因为很多**路径被重复访问了**。比如上图中，a-c-e和b-c-e就都走了路径c-e。对于权值动则数万的深度模型中的神经网络，这样的冗余所导致的计算量是相当大的。 
+大家也许已经注意到，这样做是十分冗余的，因为很多**路径被重复访问了**。比如上图中，`a-c-e`和`b-c-e`就都走了路径`c-e`。对于权值动则数万的深度模型中的神经网络，这样的冗余所导致的计算量是相当大的。 
 
 **同样是利用链式法则，BP算法则机智地避开了这种冗余，它对于每一个路径只访问一次就能求顶点对所有下层节点的偏导值。** 
 
 正如反向传播(BP)算法的名字说的那样，BP算法是**反向(自上往下)**来寻找路径的。 
 
 从最上层的节点e开始，**初始值**为1，以层为单位进行处理。对于e的下一层的所有子节点，将1乘以e到某个节点路径上的**偏导值**，并将结果“**堆放**”在该子节点中。等e所在的层按照这样传播完毕后，第二层的每一个节点都“堆放"些值，然后我们针对每个节点，把它里面所有“堆放”的值求和，就得到了顶点e对该节点的偏导。然后将这些第二层的节点各自作为起始顶点，**初始值**设为顶点e对它们的**偏导值**，以"层"为单位重复上述传播过程，即可求出顶点e对每一层节点的偏导数。
-以上图为例，**节点c**接受**e**发送的$1*2$<!--函数e=c*d，当a=2,b=1，则d=b+1=2，则此时函数的表达式为e=2*c，则e对c的倒数为2。此时e的初始值为1-->并堆放起来，**节点d**接受**e**发送的$1*3$并堆放起来，至此第二层完毕，求出各节点总堆放量并继续向下一层发送。**节点c**向**a**发送$2*1$并对堆放起来，**节点c**向**b**发送$2*1$并堆放起来，**节点d**向**b**发送$3*1$并堆放起来，至此第三层完毕，**节点a**堆放起来的量为2，**节点b**堆放起来的量为$2*1+3*1=5$, 即**顶点e**对**b**的偏导数为5.
+
+以上图为例，**节点c**接受**e**发送的$1*2$并堆放起来，**节点d**接受**e**发送的$1*3$并堆放起来，至此第二层完毕，求出各节点总堆放量并继续向下一层发送。**节点c**向**a**发送$2*1$并对堆放起来，**节点c**向**b**发送$2*1$并堆放起来，**节点d**向**b**发送$3*1$并堆放起来，至此第三层完毕，**节点a**堆放起来的量为2，**节点b**堆放起来的量为$2*1+3*1=5$, 即**顶点e**对**b**的偏导数为5.
 
 举个不太恰当的例子，如果把上图中的箭头表示欠钱的关系，即c→e表示e欠c的钱。以a, b为例，直接计算e对它们俩的偏导相当于a, b各自去讨薪。a向c讨薪，c说e欠我钱，你向他要。于是a又跨过c去找e。b先向c讨薪，同样又转向e，b又向d讨薪，再次转向e。可以看到，追款之路，充满艰辛，而且还有重复，即a, b 都从c转向e。
 而BP算法就是主动还款。e把所欠之钱还给c，d。c，d收到钱，乐呵地把钱转发给了a，b，皆大欢喜。
@@ -76,7 +79,7 @@ BackPropagation算法是多层神经网络的训练中举足轻重的算法。
 
 
 
-# 文章二
+### [YE Y的回答](https://www.zhihu.com/question/27239198/answer/43560763)
 
 首先说这个图解的优点：先形象说明了**forward-propagation**，然后说明了**error backward-propagation**，最后根据**误差**和**梯度**更新权重。没错这是**backprop**，又非常直观，但是从前的backprop了。
 
