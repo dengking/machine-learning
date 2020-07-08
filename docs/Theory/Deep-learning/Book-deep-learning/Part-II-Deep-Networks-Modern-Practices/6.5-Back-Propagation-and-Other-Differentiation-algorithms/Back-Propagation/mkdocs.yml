@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
-    - zhihu-Back-Propagation: Back-Propagation.md
+    - zhihu-Back-Propagation: zhihu-Back-Propagation.md
     - wikipedia-Backpropagation: wikipedia-Backpropagation.md
+    - Implementation: Implementation.md
