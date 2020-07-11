@@ -1,0 +1,4 @@
+nav:
+    - 5.9-Stochastic-Gradient-Descent: 5.9-Stochastic-Gradient-Descent.md
+    - Gradient-descent: Gradient-descent.md
+    - Stochastic-gradient-descent: Stochastic-gradient-descent.md

@@ -1,5 +1,6 @@
 nav:    
     - Part-II-Deep-Networksb-Modern-Practice: Part-II-Deep-Networksb-Modern-Practice.md
     - 6-Deep-Feedforward-Networks: 6-Deep-Feedforward-Networks
+    - 7-Regularization-for-Deep-Learning: 7-Regularization-for-Deep-Learning
     - 8-Optimization-for-Training-Deep-Models: 8-Optimization-for-Training-Deep-Models
     - Guide: Guide

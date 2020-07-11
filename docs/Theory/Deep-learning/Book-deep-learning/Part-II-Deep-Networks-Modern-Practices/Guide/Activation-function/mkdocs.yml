@@ -1,0 +1,4 @@
+nav:
+    - Activation-function: Activation-function.md
+    - ReLU-VS-sigmoid-VS-softmax: ReLU-VS-sigmoid-VS-softmax.md
+    - sigmoid-in-deep-learning: sigmoid-in-deep-learning.md

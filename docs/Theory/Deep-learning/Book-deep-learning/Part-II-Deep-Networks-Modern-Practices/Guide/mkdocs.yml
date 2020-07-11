@@ -5,3 +5,4 @@ nav:
     - Model-initialization: Model-initialization
     - Batch-epoch-step: Batch-epoch-step
     - Activation-function: Activation-function
+    - Design-neural-network: Design-neural-network.md
