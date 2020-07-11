@@ -6,3 +6,4 @@ nav:
     - 5.3-Hyperparameters-and-Validation-Sets: 5.3-Hyperparameters-and-Validation-Sets
     - 5.4-Estimators-Bias-and-Variance: 5.4-Estimators-Bias-and-Variance
     - 5.5-Maximum-Likelihood-Estimation: 5.5-Maximum-Likelihood-Estimation
+    - 5.9-Stochastic-Gradient-Descent: 5.9-Stochastic-Gradient-Descent
