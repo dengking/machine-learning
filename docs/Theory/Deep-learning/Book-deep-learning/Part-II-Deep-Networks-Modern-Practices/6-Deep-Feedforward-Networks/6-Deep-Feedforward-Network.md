@@ -44,3 +44,8 @@ Clearly, we must use a nonlinear function to describe the features. Most neural 
 
 
 
+## 补充
+
+[A Beginner's Guide to Multilayer Perceptrons (MLP)](https://skymind.com/wiki/multilayer-perceptron)
+
+[MULTI LAYER PERCEPTRON](http://neuroph.sourceforge.net/tutorials/MultiLayerPerceptron.html)

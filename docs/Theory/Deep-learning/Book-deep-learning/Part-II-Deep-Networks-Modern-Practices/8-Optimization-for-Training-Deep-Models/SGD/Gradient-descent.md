@@ -1,8 +1,8 @@
-[TOC]
+# Gradient descent
 
+梯度下降。
 
-
-# [Gradient descent](https://en.wikipedia.org/wiki/Gradient_descent)
+## [Gradient descent](https://en.wikipedia.org/wiki/Gradient_descent)
 
 **Gradient descent** is a [first-order](https://en.wikipedia.org/wiki/Category:First_order_methods) [iterative](https://en.wikipedia.org/wiki/Iterative_algorithm) [optimization](https://en.wikipedia.org/wiki/Mathematical_optimization) [algorithm](https://en.wikipedia.org/wiki/Algorithm) for finding the minimum of a function. To find a [local minimum](https://en.wikipedia.org/wiki/Local_minimum) of a function using gradient descent, one takes steps proportional to the *negative* of the [gradient](https://en.wikipedia.org/wiki/Gradient) (or approximate gradient) of the function at the current point. If, instead, one takes steps proportional to the *positive* of the gradient, one approaches a [local maximum](https://en.wikipedia.org/wiki/Local_maximum) of that function; the procedure is then known as **gradient ascent**.
 
@@ -53,6 +53,8 @@ The zigzagging nature of the method is also evident below, where the gradient de
 $ F(x,y)=\sin \left({\frac {1}{2}}x^{2}-{\frac {1}{4}}y^{2}+3\right)\cos \left(2x+1-e^{y}\right). $
 
 [![The gradient descent algorithm in action. (1: contour)](https://upload.wikimedia.org/wikipedia/commons/thumb/d/db/Gradient_ascent_%28contour%29.png/350px-Gradient_ascent_%28contour%29.png)](https://en.wikipedia.org/wiki/File:Gradient_ascent_(contour).png)[![The gradient descent algorithm in action. (2: surface)](https://upload.wikimedia.org/wikipedia/commons/thumb/6/68/Gradient_ascent_%28surface%29.png/450px-Gradient_ascent_%28surface%29.png)](https://en.wikipedia.org/wiki/File:Gradient_ascent_(surface).png)
+
+## machinelearningmastery [Gradient Descent For Machine Learning](https://machinelearningmastery.com/gradient-descent-for-machine-learning/)
 
 
 
