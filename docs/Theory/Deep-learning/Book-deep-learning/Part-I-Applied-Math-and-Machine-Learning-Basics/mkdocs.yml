@@ -1,5 +1,4 @@
 nav:
     - Introduction: Deep-learning-book.md
-    - Chapter-1-Introduction: Chapter-1-Introduction.md
-    - Artificial-neural-network: Artificial-neural-network.md
-    - Chapter-5-Machine-Learning-Basics: Chapter-5-Machine-Learning-Basics
+    - 1-Introduction: 1-Introduction.md    
+    - 5-Machine-Learning-Basics: 5-Machine-Learning-Basics

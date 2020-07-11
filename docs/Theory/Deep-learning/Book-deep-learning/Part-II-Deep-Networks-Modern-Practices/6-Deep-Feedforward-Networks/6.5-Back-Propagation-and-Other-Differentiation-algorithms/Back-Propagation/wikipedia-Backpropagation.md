@@ -81,7 +81,7 @@ Backpropagation computes the gradient for a fixed input–output pair $(x_{i},y_
 >
 > the only way a weight in $W^{l}$ affects the loss is through its effect on the next layer, and it does so linearly
 >
-> 这让我想起来：结构决定属性
+> 这让我想起来：结构决定属性（参见`discrete-math\docs\Guide\Relation-structure-computation`）
 >
 > 显然，在最后一层，它的weight即$W^{l}$直接“affects the loss”，即它无需通过中间层而直接作用于loss，所以$\delta ^{l}$ 可以直接计算得到。在计算得到了$\delta ^{l}$后，就可以计算得到直接依赖于它的$\delta ^{l-1}$；依次可以递归进行直到第一层，从而可以计算得到所有的gradient；
 

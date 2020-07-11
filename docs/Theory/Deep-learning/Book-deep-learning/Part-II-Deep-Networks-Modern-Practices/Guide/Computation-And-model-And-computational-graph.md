@@ -211,3 +211,12 @@ paper [Neural Machine Translation by Jointly Learning to Align and Translate](ht
 
 
 
+
+
+## 思考
+
+model是否是一种computational graph，即它是对数学公式的一种展示。
+
+model是一种更高层次的抽象，model是建立在computational graph之上的，即model是基于computational graph而构建的；
+
+在各种实现，比如tensorflow、torch都是采用的这种策略，即它们所提供 的各种model是基于它们的computational graph而实现的。
