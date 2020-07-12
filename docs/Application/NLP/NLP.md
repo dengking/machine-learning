@@ -1,4 +1,4 @@
-# 关于本工程
+# 关于本章
 
 [NLP（natural language processing）](https://en.wikipedia.org/wiki/Natural_language_processing)顾名思义，所研究的是和[natural language](https://en.wikipedia.org/wiki/Natural_language)相关的技术。
 

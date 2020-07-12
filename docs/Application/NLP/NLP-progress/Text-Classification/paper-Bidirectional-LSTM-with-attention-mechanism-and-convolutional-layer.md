@@ -1,0 +1,1 @@
+https://www.researchgate.net/publication/330816300_Bidirectional_LSTM_with_attention_mechanism_and_convolutional_layer_for_text_classification
