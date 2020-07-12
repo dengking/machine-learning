@@ -1,6 +1,5 @@
 nav:
     - Introduction: index.md
     - Book-deep-learning: Book-deep-learning
-    - End-to-end: End-to-end
-    - Attention: Attention
+    - Guide: Guide
     

@@ -6,3 +6,5 @@ nav:
     - Batch-epoch-step: Batch-epoch-step
     - Activation-function: Activation-function
     - Design-neural-network: Design-neural-network.md
+    - End-to-end: End-to-end
+    - Transformer-and-attention: Transformer-and-attention
