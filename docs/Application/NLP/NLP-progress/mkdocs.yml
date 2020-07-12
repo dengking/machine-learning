@@ -3,5 +3,6 @@ nav:
     - Entity-Linking: Entity-Linking
     - Named-entity-recognition: Named-entity-recognition
     - Relationship-Extraction: Relationship-Extraction
-    - Shallow-syntax: Shallow-syntax
+    - Shallow-parsing: Shallow-parsing
     - Text-Classification: Text-Classification
+    - Part-of-speech-tagging: Part-of-speech-tagging

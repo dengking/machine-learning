@@ -1,3 +1,6 @@
 nav:
     - NLP-progress: NLP-progress
-    - BERT: BERT
+    - Linguistics: Linguistics
+    - Model: Model
+    - Lib: Model
+    - Book-Natural-Language-Processing-with-Python: Book-Natural-Language-Processing-with-Python

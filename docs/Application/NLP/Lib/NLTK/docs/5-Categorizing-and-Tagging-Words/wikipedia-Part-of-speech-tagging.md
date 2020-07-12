@@ -1,0 +1,8 @@
+[TOC]
+
+# [Part-of-speech tagging](https://en.wikipedia.org/wiki/Part-of-speech_tagging)
+
+In [corpus linguistics](https://en.wikipedia.org/wiki/Corpus_linguistics), **part-of-speech tagging** (**POS tagging** or **PoS tagging** or **POST**), also called **grammatical tagging** or **word-categorydisambiguation**, is the process of marking up a word in a text (corpus) as corresponding to a particular [part of speech](https://en.wikipedia.org/wiki/Parts_of_speech),[[1\]](https://en.wikipedia.org/wiki/Part-of-speech_tagging#cite_note-1) based on both its definition and its context—i.e., its [relationship with adjacent and related words](https://en.wikipedia.org/wiki/Lexicography) in a [phrase](https://en.wikipedia.org/wiki/Phrase), [sentence](https://en.wikipedia.org/wiki/Sentence_(linguistics)), or [paragraph](https://en.wikipedia.org/wiki/Paragraph). A simplified form of this is commonly taught to school-age children, in the identification of words as [nouns](https://en.wikipedia.org/wiki/Noun), [verbs](https://en.wikipedia.org/wiki/Verb), [adjectives](https://en.wikipedia.org/wiki/Adjective), [adverbs](https://en.wikipedia.org/wiki/Adverb), etc.
+
+Once performed by hand, POS tagging is now done in the context of [computational linguistics](https://en.wikipedia.org/wiki/Computational_linguistics), using [algorithms](https://en.wikipedia.org/wiki/Algorithms) which associate discrete terms, as well as hidden parts of speech, in accordance with a set of descriptive tags. POS-tagging algorithms fall into two distinctive groups: rule-based and stochastic. [E. Brill's tagger](https://en.wikipedia.org/wiki/Brill_tagger), one of the first and most widely used English POS-taggers, employs rule-based algorithms.
+
