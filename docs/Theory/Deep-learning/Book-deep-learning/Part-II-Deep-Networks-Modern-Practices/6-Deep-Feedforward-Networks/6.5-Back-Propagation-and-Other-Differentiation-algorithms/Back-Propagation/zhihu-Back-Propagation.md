@@ -83,7 +83,7 @@ BackPropagation算法是多层神经网络的训练中举足轻重的算法。
 
 
 
-### [YE Y的回答](https://www.zhihu.com/question/27239198/answer/43560763)
+## [YE Y的回答](https://www.zhihu.com/question/27239198/answer/43560763)
 
 首先说这个图解的优点：先形象说明了**forward-propagation**，然后说明了**error backward-propagation**，最后根据**误差**和**梯度**更新权重。没错这是**backprop**，又非常直观，但是从前的backprop了。
 

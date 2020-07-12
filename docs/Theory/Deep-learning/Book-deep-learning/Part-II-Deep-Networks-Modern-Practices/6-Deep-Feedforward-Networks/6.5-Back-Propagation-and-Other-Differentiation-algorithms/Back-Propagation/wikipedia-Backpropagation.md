@@ -113,7 +113,7 @@ These terms are: the derivative of the loss function;[[d\]](https://en.wikipedia
 $$
 {\displaystyle {\frac {dC}{da^{L}}}\cdot (f^{L})'\cdot W^{L}\cdot (f^{L-1})'\cdot W^{L-1}\cdots (f^{1})'\cdot W^{1}.}
 $$
-The gradient ${\displaystyle \nabla }$ is the [transpose](https://en.wikipedia.org/wiki/Transpose) of the derivative of the output in terms of the input, so the matrices are transposed and the order of multiplication is reversed, but the entries are the same:
+The gradient ${\displaystyle \nabla }$ is the [transpose](https://en.wikipedia.org/wiki/Transpose)（转置） of the derivative of the output in terms of the input, so the matrices are transposed and the order of multiplication is reversed, but the entries are the same:
 $$
 {\displaystyle \nabla _{x}C=(W^{1})^{T}\cdot (f^{1})'\cdots \cdot (W^{L-1})^{T}\cdot (f^{L-1})'\cdot (W^{L})^{T}\cdot (f^{L})'\cdot \nabla _{a^{L}}C.}
 $$
