@@ -1,4 +1,7 @@
 nav:
-    - NLP-progress: NLP-progress.md
+    - Task-of-NLP: Task-of-NLP.md
     - Entity-Linking: Entity-Linking
-    - 
+    - Named-entity-recognition: Named-entity-recognition
+    - Relationship-Extraction: Relationship-Extraction
+    - Shallow-syntax: Shallow-syntax
+    - Text-Classification: Text-Classification
