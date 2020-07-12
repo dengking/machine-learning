@@ -1,5 +1,3 @@
-[TOC]
-
 
 
 # [What does “end to end” mean in deep learning methods?](https://stats.stackexchange.com/questions/224118/what-does-end-to-end-mean-in-deep-learning-methods)
@@ -33,3 +31,7 @@ Keywords: end-to-end machine learning
 We are today in the position to train rather deep and complex neural networks in an end-to-end (e2e) fashion, by gradient descent. In a nutshell, this amounts to（相当于） scaling up the good old backpropagation algorithm (see Schmidhuber, 2015 and references therein) to immensely rich and complex models. However, the end-to-end learning philosophy goes one step further: carefully ensuring that all modules of a learning systems are differentiable with respect to all adjustable parameters (weights) and training this system as a whole are lifted to the status of principles.
 
 This elegant although straightforward and somewhat brute-force technique has been popularized in the context of deep learning. It is a seemingly natural consequence of deep neural architectures blurring the classic boundaries between learning machine and other processing components by casting a possibly complex processing pipeline into the coherent and flexible modeling language of neural networks.1 The approach yields state-of-the-art results (Collobert et al., 2011; Krizhevsky et al., 2012; Mnih et al., 2015). Its appeal is a unified training scheme that makes most of the available information by taking labels (supervised learning) and rewards (reinforcement learning) into account, instead of relying only on the input distribution (unsupervised pre-training). Excellent recent examples of studies
+
+## TO READ
+
+https://www.zhihu.com/question/51435499

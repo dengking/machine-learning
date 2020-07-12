@@ -3,4 +3,6 @@ nav:
     - 6-Deep-Feedforward-Networks: 6-Deep-Feedforward-Networks
     - 7-Regularization-for-Deep-Learning: 7-Regularization-for-Deep-Learning
     - 8-Optimization-for-Training-Deep-Models: 8-Optimization-for-Training-Deep-Models
+    - 9-Convolutional-Networks: 9-Convolutional-Networks
+    - 12-Applications: 12-Applications
     - Guide: Guide
