@@ -56,7 +56,7 @@ BackPropagation算法是多层神经网络的训练中举足轻重的算法。
 
 也就是说，对于上层节点p和下层节点q，要求得![\frac{\partial p}{\partial q}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+q%7D)，需要找到从q节点到p节点的所有路径，并且对每条路径，求得该路径上的所有偏导数之乘积，然后将所有路径的 “乘积” 累加起来才能得到![\frac{\partial p}{\partial q}](https://www.zhihu.com/equation?tex=%5Cfrac%7B%5Cpartial+p%7D%7B%5Cpartial+q%7D)的值。
 
-> NOTE: chain rule和computational graph的对应关系。这种对应关系是非常巧妙的，它是backprop实现的关键所在。
+> NOTE: chain rule和computational graph的对应关系。这种对应关系是非常巧妙的，它是backprop实现的关键所在：层与层之间是乘法关系，同层之间是相加关系；
 
 大家也许已经注意到，这样做是十分冗余的，因为很多**路径被重复访问了**。比如上图中，`a-c-e`和`b-c-e`就都走了路径`c-e`。对于权值动则数万的深度模型中的神经网络，这样的冗余所导致的计算量是相当大的。 
 
