@@ -6,5 +6,5 @@
 
 深入浅出的文章：维基百科[Backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
 
-如何实现back propagation：[Implementation](./Implementation.md)
+
 

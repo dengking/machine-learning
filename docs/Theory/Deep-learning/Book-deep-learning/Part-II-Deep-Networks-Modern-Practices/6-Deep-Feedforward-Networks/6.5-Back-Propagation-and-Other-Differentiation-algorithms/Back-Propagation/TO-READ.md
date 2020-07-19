@@ -17,3 +17,4 @@ http://baijiahao.baidu.com/s?id=1582664648449055726&wfr=spider&for=pc
 ## 斯坦福李飞飞-深度学习计算机视觉
 http://study.163.com/course/introduction/1003223001.htm
 
+## brilliant [Backpropagation](https://brilliant.org/wiki/backpropagation/)
