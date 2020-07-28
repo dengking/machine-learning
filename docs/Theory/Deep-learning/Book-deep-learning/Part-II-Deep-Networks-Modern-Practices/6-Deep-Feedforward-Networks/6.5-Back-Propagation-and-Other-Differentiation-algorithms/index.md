@@ -54,8 +54,6 @@ parse tree的构建需要遵循的是context free grammar；
 
 chain-of-calculus本质上就是一个formula，和普通的math expression类似。
 
-
-
 显然，computational-graph对于实现back-propagation的重要意义，决定了tensorflow、torch的底层都使用computational graph来实现的原因。
 
 back-propagation是对chain-of-calculus的运用，在
