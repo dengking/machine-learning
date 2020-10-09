@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://neurohive.io/en/popular-networks/vgg16/ -->
+<html lang="en-US" xmlns:fb="https://www.facebook.com/2008/fbml" xmlns:addthis="https://www.addthis.com/help/api-spec"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" src="./VGG16 - Convolutional Network for Classification and Detection_files/analytics.js.download"></script><script src="./VGG16 - Convolutional Network for Classification and Detection_files/f(5).txt"></script><script src="./VGG16 - Convolutional Network for Classification and Detection_files/osd.js.download"></script><script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/1.txt"></script><script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/1(1).txt"></script><script type="text/javascript" async="" src="./VGG16 - Convolutional Network for Classification and Detection_files/watch.js.download"></script><script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/moatframe.js.download"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="profile" href="http://gmpg.org/xfn/11">
+<link rel="pingback" href="https://neurohive.io/xmlrpc.php">
+<title>VGG16 - Convolutional Network for Classification and Detection</title>
+
+
+<!-- This site is optimized with the Yoast SEO plugin v12.7 - https://yoast.com/wordpress/plugins/seo/ -->
+<meta name="description" content="How does VGG16 neural network achieves 92.7% top-5 test accuracy in ImageNet, which is a dataset of over 14 million images belonging to 1000 classes.">
+<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VGG16 - Convolutional Network for Classification and Detection">
+<meta property="og:description" content="How does VGG16 neural network achieves 92.7% top-5 test accuracy in ImageNet, which is a dataset of over 14 million images belonging to 1000 classes.">
+<meta property="article:publisher" content="https://www.facebook.com/neurohive.io/">
+<meta property="article:tag" content="CNN">
+<meta property="article:tag" content="Image Classification">
+<meta property="article:tag" content="ImageNet">
+<meta property="article:tag" content="Object Detection">
+<meta property="article:section" content="Popular networks">
+<meta property="article:published_time" content="2018-11-20T16:30:58+00:00">
+<meta property="article:modified_time" content="2018-11-21T09:26:01+00:00">
+<meta property="og:updated_time" content="2018-11-21T09:26:01+00:00">
+<meta property="og:image" content="https://neurohive.io/wp-content/uploads/2018/11/vgg16-1-e1542731207177.png">
+<meta property="og:image:secure_url" content="https://neurohive.io/wp-content/uploads/2018/11/vgg16-1-e1542731207177.png">
+<meta property="og:image:width" content="900">
+<meta property="og:image:height" content="507">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:description" content="How does VGG16 neural network achieves 92.7% top-5 test accuracy in ImageNet, which is a dataset of over 14 million images belonging to 1000 classes.">
+<meta name="twitter:title" content="VGG16 - Convolutional Network for Classification and Detection">
+<meta name="twitter:site" content="@neurohive">
+<meta name="twitter:image" content="https://neurohive.io/wp-content/uploads/2018/11/vgg16-1-e1542731207177.png">
+<meta name="twitter:creator" content="@neurohive">
+<script src="./VGG16 - Convolutional Network for Classification and Detection_files/f(6).txt"></script><script src="./VGG16 - Convolutional Network for Classification and Detection_files/f(7).txt" id="google_shimpl"></script><script async="" src="https://connect.facebook.net/en_US/fbevents.js"></script><script type="text/javascript" async="" src="./VGG16 - Convolutional Network for Classification and Detection_files/widget.js.download"></script><script type="application/ld+json" class="yoast-schema-graph yoast-schema-graph--main">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://neurohive.io/en/#organization","name":"Neurohive","url":"https://neurohive.io/en/","sameAs":["https://www.facebook.com/neurohive.io/","https://www.linkedin.com/company/neurohive","https://www.youtube.com/watch?v=yIshl7qgbm4","https://twitter.com/neurohive"],"logo":{"@type":"ImageObject","@id":"https://neurohive.io/en/#logo","url":"https://neurohive.io/wp-content/uploads/2018/06/neurohive_logo.png","width":507,"height":507,"caption":"Neurohive"},"image":{"@id":"https://neurohive.io/en/#logo"}},{"@type":"WebSite","@id":"https://neurohive.io/en/#website","url":"https://neurohive.io/en/","name":"","publisher":{"@id":"https://neurohive.io/en/#organization"},"potentialAction":{"@type":"SearchAction","target":"https://neurohive.io/en/?s={search_term_string}","query-input":"required name=search_term_string"}},{"@type":"ImageObject","@id":"https://neurohive.io/en/popular-networks/vgg16/#primaryimage","url":"https://neurohive.io/wp-content/uploads/2018/11/vgg16-1-e1542731207177.png","width":900,"height":507,"caption":"vgg16"},{"@type":"WebPage","@id":"https://neurohive.io/en/popular-networks/vgg16/#webpage","url":"https://neurohive.io/en/popular-networks/vgg16/","inLanguage":"en-US","name":"VGG16 - Convolutional Network for Classification and Detection","isPartOf":{"@id":"https://neurohive.io/en/#website"},"primaryImageOfPage":{"@id":"https://neurohive.io/en/popular-networks/vgg16/#primaryimage"},"datePublished":"2018-11-20T16:30:58+00:00","dateModified":"2018-11-21T09:26:01+00:00","description":"How does VGG16 neural network achieves 92.7% top-5 test accuracy in ImageNet, which is a dataset of over 14 million images belonging to 1000 classes.","breadcrumb":{"@id":"https://neurohive.io/en/popular-networks/vgg16/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://neurohive.io/en/popular-networks/vgg16/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"WebPage","@id":"https://neurohive.io/en/","url":"https://neurohive.io/en/","name":"Neurohive"}},{"@type":"ListItem","position":2,"item":{"@type":"WebPage","@id":"https://neurohive.io/en/popular-networks/","url":"https://neurohive.io/en/popular-networks/","name":"Popular networks"}},{"@type":"ListItem","position":3,"item":{"@type":"WebPage","@id":"https://neurohive.io/en/popular-networks/vgg16/","url":"https://neurohive.io/en/popular-networks/vgg16/","name":"VGG16 &#8211; Convolutional Network for Classification and Detection"}}]},{"@type":"Article","@id":"https://neurohive.io/en/popular-networks/vgg16/#article","isPartOf":{"@id":"https://neurohive.io/en/popular-networks/vgg16/#webpage"},"author":{"@id":"https://neurohive.io/en/#/schema/person/564d3d3092317b5aa11dd13bf70ceea1"},"headline":"VGG16 &#8211; Convolutional Network for Classification and Detection","datePublished":"2018-11-20T16:30:58+00:00","dateModified":"2018-11-21T09:26:01+00:00","commentCount":"25","mainEntityOfPage":{"@id":"https://neurohive.io/en/popular-networks/vgg16/#webpage"},"publisher":{"@id":"https://neurohive.io/en/#organization"},"image":{"@id":"https://neurohive.io/en/popular-networks/vgg16/#primaryimage"},"keywords":"CNN,Image Classification,ImageNet,Object Detection","articleSection":"Popular networks"},{"@type":["Person"],"@id":"https://neurohive.io/en/#/schema/person/564d3d3092317b5aa11dd13bf70ceea1","name":"Muneeb ul Hassan","image":{"@type":"ImageObject","@id":"https://neurohive.io/en/#authorlogo","url":"https://secure.gravatar.com/avatar/b7c1d186d0e4989c91274ea32226723c?s=96&d=mm&r=g","caption":"Muneeb ul Hassan"},"sameAs":[]}]}</script>
+<!-- / Yoast SEO plugin. -->
+
+<link rel="dns-prefetch" href="https://s7.addthis.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://s.w.org/">
+<link rel="alternate" type="application/rss+xml" title=" » Feed" href="https://neurohive.io/en/feed/">
+<link rel="alternate" type="application/rss+xml" title=" » Comments Feed" href="https://neurohive.io/en/comments/feed/">
+<link rel="alternate" type="application/rss+xml" title=" » VGG16 – Convolutional Network for Classification and Detection Comments Feed" href="https://neurohive.io/en/popular-networks/vgg16/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/12.0.0-1\/svg\/","svgExt":".svg","source":{"wpemoji":"https:\/\/neurohive.io\/wp-includes\/js\/wp-emoji.js?ver=5.4.1","twemoji":"https:\/\/neurohive.io\/wp-includes\/js\/twemoji.js?ver=5.4.1"}};
+			/**
+ * @output wp-includes/js/wp-emoji-loader.js
+ */
+
+( function( window, document, settings ) {
+	var src, ready, ii, tests;
+
+	// Create a canvas element for testing native browser support of emoji.
+	var canvas = document.createElement( 'canvas' );
+	var context = canvas.getContext && canvas.getContext( '2d' );
+
+	/**
+	 * Checks if two sets of Emoji characters render the same visually.
+	 *
+	 * @since 4.9.0
+	 *
+	 * @private
+	 *
+	 * @param {number[]} set1 Set of Emoji character codes.
+	 * @param {number[]} set2 Set of Emoji character codes.
+	 *
+	 * @return {boolean} True if the two sets render the same.
+	 */
+	function emojiSetsRenderIdentically( set1, set2 ) {
+		var stringFromCharCode = String.fromCharCode;
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set1 ), 0, 0 );
+		var rendered1 = canvas.toDataURL();
+
+		// Cleanup from previous test.
+		context.clearRect( 0, 0, canvas.width, canvas.height );
+		context.fillText( stringFromCharCode.apply( this, set2 ), 0, 0 );
+		var rendered2 = canvas.toDataURL();
+
+		return rendered1 === rendered2;
+	}
+
+	/**
+	 * Detects if the browser supports rendering emoji or flag emoji.
+	 *
+	 * Flag emoji are a single glyph made of two characters, so some browsers
+	 * (notably, Firefox OS X) don't support them.
+	 *
+	 * @since 4.2.0
+	 *
+	 * @private
+	 *
+	 * @param {string} type Whether to test for support of "flag" or "emoji".
+	 *
+	 * @return {boolean} True if the browser can render emoji, false if it cannot.
+	 */
+	function browserSupportsEmoji( type ) {
+		var isIdentical;
+
+		if ( ! context || ! context.fillText ) {
+			return false;
+		}
+
+		/*
+		 * Chrome on OS X added native emoji rendering in M41. Unfortunately,
+		 * it doesn't work when the font is bolder than 500 weight. So, we
+		 * check for bold rendering support to avoid invisible emoji in Chrome.
+		 */
+		context.textBaseline = 'top';
+		context.font = '600 32px Arial';
+
+		switch ( type ) {
+			case 'flag':
+				/*
+				 * Test for Transgender flag compatibility. This flag is shortlisted for the Emoji 13 spec,
+				 * but has landed in Twemoji early, so we can add support for it, too.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (white flag emoji + transgender symbol).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0x1F3F3, 0xFE0F, 0x200D, 0x26A7, 0xFE0F ],
+					[ 0x1F3F3, 0xFE0F, 0x200B, 0x26A7, 0xFE0F ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for UN flag compatibility. This is the least supported of the letter locale flags,
+				 * so gives us an easy test for full support.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly ([U] + [N]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDDFA, 0xD83C, 0xDDF3 ],
+					[ 0xD83C, 0xDDFA, 0x200B, 0xD83C, 0xDDF3 ]
+				);
+
+				if ( isIdentical ) {
+					return false;
+				}
+
+				/*
+				 * Test for English flag compatibility. England is a country in the United Kingdom, it
+				 * does not have a two letter locale code but rather an five letter sub-division code.
+				 *
+				 * To test for support, we try to render it, and compare the rendering to how it would look if
+				 * the browser doesn't render it correctly (black flag emoji + [G] + [B] + [E] + [N] + [G]).
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[ 0xD83C, 0xDFF4, 0xDB40, 0xDC67, 0xDB40, 0xDC62, 0xDB40, 0xDC65, 0xDB40, 0xDC6E, 0xDB40, 0xDC67, 0xDB40, 0xDC7F ],
+					[ 0xD83C, 0xDFF4, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC62, 0x200B, 0xDB40, 0xDC65, 0x200B, 0xDB40, 0xDC6E, 0x200B, 0xDB40, 0xDC67, 0x200B, 0xDB40, 0xDC7F ]
+				);
+
+				return ! isIdentical;
+			case 'emoji':
+				/*
+				 * Love is love.
+				 *
+				 * To test for Emoji 12 support, try to render a new emoji: men holding hands, with different skin
+				 * tone modifiers.
+				 *
+				 * When updating this test for future Emoji releases, ensure that individual emoji that make up the
+				 * sequence come from older emoji standards.
+				 */
+				isIdentical = emojiSetsRenderIdentically(
+					[0xD83D, 0xDC68, 0xD83C, 0xDFFE, 0x200D, 0xD83E, 0xDD1D, 0x200D, 0xD83D, 0xDC68, 0xD83C, 0xDFFC],
+					[0xD83D, 0xDC68, 0xD83C, 0xDFFE, 0x200B, 0xD83E, 0xDD1D, 0x200B, 0xD83D, 0xDC68, 0xD83C, 0xDFFC]
+				);
+
+				return ! isIdentical;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Adds a script to the head of the document.
+	 *
+	 * @ignore
+	 *
+	 * @since 4.2.0
+	 *
+	 * @param {Object} src The url where the script is located.
+	 * @return {void}
+	 */
+	function addScript( src ) {
+		var script = document.createElement( 'script' );
+
+		script.src = src;
+		script.defer = script.type = 'text/javascript';
+		document.getElementsByTagName( 'head' )[0].appendChild( script );
+	}
+
+	tests = Array( 'flag', 'emoji' );
+
+	settings.supports = {
+		everything: true,
+		everythingExceptFlag: true
+	};
+
+	/*
+	 * Tests the browser support for flag emojis and other emojis, and adjusts the
+	 * support settings accordingly.
+	 */
+	for( ii = 0; ii < tests.length; ii++ ) {
+		settings.supports[ tests[ ii ] ] = browserSupportsEmoji( tests[ ii ] );
+
+		settings.supports.everything = settings.supports.everything && settings.supports[ tests[ ii ] ];
+
+		if ( 'flag' !== tests[ ii ] ) {
+			settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && settings.supports[ tests[ ii ] ];
+		}
+	}
+
+	settings.supports.everythingExceptFlag = settings.supports.everythingExceptFlag && ! settings.supports.flag;
+
+	// Sets DOMReady to false and assigns a ready function to settings.
+	settings.DOMReady = false;
+	settings.readyCallback = function() {
+		settings.DOMReady = true;
+	};
+
+	// When the browser can not render everything we need to load a polyfill.
+	if ( ! settings.supports.everything ) {
+		ready = function() {
+			settings.readyCallback();
+		};
+
+		/*
+		 * Cross-browser version of adding a dom ready event.
+		 */
+		if ( document.addEventListener ) {
+			document.addEventListener( 'DOMContentLoaded', ready, false );
+			window.addEventListener( 'load', ready, false );
+		} else {
+			window.attachEvent( 'onload', ready );
+			document.attachEvent( 'onreadystatechange', function() {
+				if ( 'complete' === document.readyState ) {
+					settings.readyCallback();
+				}
+			} );
+		}
+
+		src = settings.source || {};
+
+		if ( src.concatemoji ) {
+			addScript( src.concatemoji );
+		} else if ( src.wpemoji && src.twemoji ) {
+			addScript( src.twemoji );
+			addScript( src.wpemoji );
+		}
+	}
+
+} )( window, document, window._wpemojiSettings );
+		</script><script src="./VGG16 - Convolutional Network for Classification and Detection_files/twemoji.js.download" type="text/javascript" defer=""></script><script src="./VGG16 - Convolutional Network for Classification and Detection_files/wp-emoji.js.download" type="text/javascript" defer=""></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel="stylesheet" id="wp-block-library-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/style.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpfelix-fonts-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/css(1)" type="text/css" media="all">
+<link rel="stylesheet" id="font-awesome-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/font-awesome.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="owl-carousel-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/owl.carousel.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpfelix-theme-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/theme.min.css" type="text/css" media="all">
+<style id="wpfelix-theme-inline-css" type="text/css">
+body{color:#161616}body{background-color:#fff}a{color:#664dc1}::-moz-selection{background-color:#664dc1}::selection{background-color:#664dc1}.sticky .entry-sticky-icon,.site-page-title:after,.widget_wpfelix_instagram .wpfelix-insta-usr>a:hover,.widget_wpfelix_instagram .wpfelix-insta-usr>a:focus,.widget_newsletterwidget .newsletter-submit,.entry-link a:hover,.entry-link a:focus,a.back-to-top-link:hover,a.back-to-top-link:focus{background-color:#664dc1}.sidenav-container .search-field,.special-title .title-text,.comment-reply-title .title-text,.byuser .comment-author-image img,.bypostauthor .comment-author-image img,.widget-title,.widget_tag_cloud.use-theme-style .tagcloud a:hover,.widget_tag_cloud.use-theme-style .tagcloud a:focus,.widget_newsletterwidget .newsletter-submit,ul.side-menu li.hover>.submenu-toggle,ul.side-menu li .submenu-toggle:hover,.tag-links a:hover,.tag-links a:focus,.page-links>a:hover,.page-links>a:focus,.page-links>span,.byuser .comment-main:before,.bypostauthor .comment-main:before{border-color:#664dc1}.widget_newsletterwidget .widget-title:after{border-bottom-color:#664dc1}.list-social li a:hover,.list-social li a:focus,blockquote,.search-submit:hover,.search-submit:focus,.posts-navigation .nav-previous a:hover,.posts-navigation .nav-previous a:focus,.posts-navigation .nav-next a:hover,.posts-navigation .nav-next a:focus,.post-navigation .nav-previous a:hover,.post-navigation .nav-previous a:focus,.post-navigation .nav-next a:hover,.post-navigation .nav-next a:focus,.comment-navigation .nav-previous a:hover,.comment-navigation .nav-previous a:focus,.comment-navigation .nav-next a:hover,.comment-navigation .nav-next a:focus,.entry-title a:hover,.entry-title a:focus,.widget_recent_entries ul li a:hover,.widget_recent_entries ul li a:focus,.widget_recent_comments ul li a:hover,.widget_recent_comments ul li a:focus,.widget_archive ul li a:hover,.widget_archive ul li a:focus,.widget_pages ul li.current_page_ancestor>a,.widget_pages ul li.current_page_parent>a,.widget_pages ul li.current_page_item>a,.widget_pages ul li :hover,.widget_pages ul li :focus,.widget_categories ul li.current-cat-ancestor>a,.widget_categories ul li.current-cat>a,.widget_categories ul li a:hover,.widget_categories ul li a:focus,.widget_nav_menu ul li.current-menu-ancestor>a,.widget_nav_menu ul li.current-menu-parent>a,.widget_nav_menu ul li.current-menu-item>a,.widget_nav_menu ul li a:hover,.widget_nav_menu ul li a:focus,.widget_rss .rsswidget:hover,.widget_rss .rsswidget:focus,.widget_tag_cloud .tagcloud a:hover,.widget_tag_cloud .tagcloud a:focus,.widget_tag_cloud.use-theme-style .tagcloud a:hover,.widget_tag_cloud.use-theme-style .tagcloud a:focus,.widget_wpfelix_about .my-name,.widget_wpfelix_popular_posts .entry-posted-on a:hover,.widget_wpfelix_popular_posts .entry-posted-on a:focus,.widget_wpfelix_recent_posts .entry-posted-on a:hover,.widget_wpfelix_recent_posts .entry-posted-on a:focus,.widget_text.footer-text-menu a:hover,.widget_text.footer-text-menu a:focus,.widget_wpfelix_latest_tweets .tweet-at a:hover,.widget_wpfelix_latest_tweets .tweet-at a:focus,.widget_text.footer-text-menu a:hover,.widget_text.footer-text-menu a:focus,ul.side-menu li:hover>a,ul.side-menu li.hover>a,ul.side-menu li.current_page_item>a,ul.side-menu li.current-menu-item>a,ul.side-menu li.current_page_ancestor>a,ul.side-menu li.current-menu-ancestor>a,ul.side-menu li.current-menu-parent>a,ul.side-menu li.current_page_item>.submenu-toggle,ul.side-menu li.current-menu-item>.submenu-toggle,ul.side-menu li.current_page_ancestor>.submenu-toggle,ul.side-menu li.current-menu-ancestor>.submenu-toggle,ul.side-menu li.current-menu-parent>.submenu-toggle,ul.side-menu li.hover>.submenu-toggle,ul.side-menu li .submenu-toggle:hover,ul.entry-meta-above a:hover,ul.entry-meta-above a:focus,ul.post-categories a:hover,ul.post-categories a:focus,ul.entry-share-links a:hover,ul.entry-share-links a:focus,ul.entry-meta-below a:hover,ul.entry-meta-below a:focus,.entry-related .entry-posted-on a:hover,.entry-related .entry-posted-on a:focus,.slider-item-full ul.entry-meta-above a:hover,.slider-item-full ul.entry-meta-above a:focus,.slider-item-full ul.post-categories a:hover,.slider-item-full ul.post-categories a:focus,.slider-item-full-grid ul.entry-meta-above a:hover,.slider-item-full-grid ul.entry-meta-above a:focus,.slider-item-full-grid ul.post-categories a:hover,.slider-item-full-grid ul.post-categories a:focus,a#cancel-comment-reply-link:hover,a#cancel-comment-reply-link:focus,.comment-reply-link:hover,.comment-reply-link:focus,.page-links>a:hover,.page-links>a:focus,.page-links>span,.posts-page-links>a:hover,.posts-page-links>a:focus,.posts-page-links>span.current,.color-accent{color:#664dc1}.button{background-color:#664dc1}.button-alt:hover,.button-alt:focus{background-color:#664dc1}ul.primary-menu>li:hover>a,ul.primary-menu>li.hover>a,ul.primary-menu>li.current_page_item>a,ul.primary-menu>li.current-menu-item>a,ul.primary-menu>li.current_page_ancestor>a,ul.primary-menu>li.current-menu-ancestor>a,ul.primary-menu>li.current-menu-parent>a,.main-navigation .list-social a:hover,.main-navigation .list-social a:focus,.main-navigation .button-toggle:hover,.main-navigation .button-toggle:focus,.main-navigation .button-toggle.active{color:#8d4cbf}ul.primary-menu ul{border-top-color:#8d4cbf}ul.primary-menu ul>li:hover>a,ul.primary-menu ul>li.hover>a,ul.primary-menu ul>li.current_page_item>a,ul.primary-menu ul>li.current-menu-item>a,ul.primary-menu ul>li.current_page_ancestor>a,ul.primary-menu ul>li.current-menu-ancestor>a,ul.primary-menu ul>li.current-menu-parent>a{color:#914ec4}ul.post-categories a{border-color:#664dc1}.widget-title{border-color:#664dc1}.site-footer{padding-top:10px}.site-footer{padding-bottom:0}.widget.jetpack_subscription_widget{background-color:}.widget.jetpack_subscription_widget input[type="email"]{color:}.widget.jetpack_subscription_widget input[type="email"]:focus{color:}.widget.jetpack_subscription_widget .widget-title:after{border-bottom-color:#664dc1 !important}.widget.jetpack_subscription_widget #subscribe-submit input[type="submit"]{color:;background-color:#664dc1}.widget.jetpack_subscription_widget #subscribe-submit input[type="submit"]:hover,.widget.jetpack_subscription_widget #subscribe-submit input[type="submit"]:focus{color:;background-color:}.widget_rss_links a,.widget_top-posts a{color:}.widget_rss_links a:hover,.widget_rss_links a:focus,.widget_top-posts a:hover,.widget_top-posts a:focus{color:#664dc1}#infinite-handle>span button:hover,#infinite-handle>span button:focus{color:#664dc1}.infinite-scroll-page-num{background-color:}.infinite-loader:before{box-shadow:inset 0 0 0 4px #664dc1}
+</style>
+<link rel="stylesheet" id="wpfelix-jetpack-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/jetpack.css" type="text/css" media="all">
+<link rel="stylesheet" id="wpfelix-style-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/style(1).css" type="text/css" media="all">
+<link rel="stylesheet" id="addthis_all_pages-css" href="./VGG16 - Convolutional Network for Classification and Detection_files/addthis_wordpress_public.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/jquery.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/jquery-migrate.js.download"></script>
+<script type="text/javascript">
+/* <![CDATA[ */
+var misha_loadmore_params = {"ajaxurl":"https:\/\/neurohive.io\/wp-admin\/admin-ajax.php","posts":"{\"page\":0,\"name\":\"vgg16\",\"category_name\":\"popular-networks\",\"lang\":\"en\",\"error\":\"\",\"m\":\"\",\"p\":0,\"post_parent\":\"\",\"subpost\":\"\",\"subpost_id\":\"\",\"attachment\":\"\",\"attachment_id\":0,\"pagename\":\"\",\"page_id\":0,\"second\":\"\",\"minute\":\"\",\"hour\":\"\",\"day\":0,\"monthnum\":0,\"year\":0,\"w\":0,\"tag\":\"\",\"cat\":\"\",\"tag_id\":\"\",\"author\":\"\",\"author_name\":\"\",\"feed\":\"\",\"tb\":\"\",\"paged\":0,\"meta_key\":\"\",\"meta_value\":\"\",\"preview\":\"\",\"s\":\"\",\"sentence\":\"\",\"title\":\"\",\"fields\":\"\",\"menu_order\":\"\",\"embed\":\"\",\"category__in\":[],\"category__not_in\":[],\"category__and\":[],\"post__in\":[],\"post__not_in\":[],\"post_name__in\":[],\"tag__in\":[],\"tag__not_in\":[],\"tag__and\":[],\"tag_slug__in\":[],\"tag_slug__and\":[],\"post_parent__in\":[],\"post_parent__not_in\":[],\"author__in\":[],\"author__not_in\":[],\"ignore_sticky_posts\":false,\"suppress_filters\":false,\"cache_results\":true,\"update_post_term_cache\":true,\"lazy_load_term_meta\":true,\"update_post_meta_cache\":true,\"post_type\":\"\",\"posts_per_page\":21,\"nopaging\":false,\"comments_per_page\":\"50\",\"no_found_rows\":false,\"order\":\"DESC\"}","current_page":"1","max_page":"0"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/loadmore.js.download"></script>
+<link rel="https://api.w.org/" href="https://neurohive.io/wp-json/">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://neurohive.io/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://neurohive.io/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 5.4.1">
+<link rel="shortlink" href="https://neurohive.io/?p=5384">
+<link rel="alternate" type="application/json+oembed" href="https://neurohive.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fneurohive.io%2Fen%2Fpopular-networks%2Fvgg16%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://neurohive.io/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fneurohive.io%2Fen%2Fpopular-networks%2Fvgg16%2F&amp;format=xml">
+
+<!-- Facebook Pixel Code -->
+<script type="text/javascript">
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+</script>
+<!-- End Facebook Pixel Code -->
+<script type="text/javascript">
+  fbq('init', '328344571065515', [], {
+    "agent": "wordpress-5.4.1-1.8.0"
+});
+</script><script type="text/javascript">
+  fbq('track', 'PageView', []);
+</script>
+<!-- Facebook Pixel Code -->
+<noscript>
+<img height="1" width="1" style="display:none" alt="fbpx"
+src="https://www.facebook.com/tr?id=328344571065515&ev=PageView&noscript=1" />
+</noscript>
+<!-- End Facebook Pixel Code -->
+		<script type="text/javascript">
+			var cli_flush_cache=2;
+		</script>
+		<link rel="icon" href="https://neurohive.io/wp-content/uploads/2018/06/cropped-neurohive_logo_bird_square-32x32.png" sizes="32x32">
+<link rel="icon" href="https://neurohive.io/wp-content/uploads/2018/06/cropped-neurohive_logo_bird_square-192x192.png" sizes="192x192">
+<link rel="apple-touch-icon" href="https://neurohive.io/wp-content/uploads/2018/06/cropped-neurohive_logo_bird_square-180x180.png">
+<meta name="msapplication-TileImage" content="https://neurohive.io/wp-content/uploads/2018/06/cropped-neurohive_logo_bird_square-270x270.png">
+		<style type="text/css" id="wp-custom-css">
+			ul.post-categories2 a {
+	    padding: 0px 0px;
+	border: 0px;
+	color: #9633ac;
+	font-size: 15px;
+}
+#mega-menu-wrap-primary #mega-menu-primary li.mega-menu-item-has-children > a.mega-menu-link:after {
+	content: none;
+}
+h3
+{
+	margin-top: 40px;
+	font-weight: 400;
+	margin-bottom: 20px;
+}
+
+h4
+{
+	margin-top: 25px;
+}
+
+a
+{
+	color: #9633ac;
+	text-decoration: underline;
+}
+blockquote
+{
+	text-align: left;
+}
+.widget_wpfelix_recent_posts .entry-posted-on a
+{
+	text-decoration: none !important;
+}
+h2
+{
+	font-family: roboto !important;
+}
+.widget_wpfelix_recent_posts .entry-title
+{
+	font-size: 16px;
+}
+#mega-menu-wrap-primary {
+	background: none;
+	
+}
+#mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link {
+    color: #320875 !important;
+}
+#mega-menu-wrap-primary #mega-menu-primary > li.mega-menu-item > a.mega-menu-link {
+    color: #353535 !important;
+    padding-left: 17px !important;
+    padding-right: 17px !important;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto Regular", sans-serif !important;
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    text-decoration: none;
+    -webkit-transition: padding 240ms, color 240ms, background-color 240ms;
+    -o-transition: padding 240ms, color 240ms, background-color 240ms;
+    transition: padding 240ms, color 240ms, background-color 240ms;
+    background: none !important;
+    line-height: 60px !important;
+    height: auto !important;
+}
+body
+{
+	font-family: Lora !important;
+	font-size: 16px;
+	font-size: 110%;
+}
+.entry-content
+{
+	font-size: 20px;
+}
+h2{
+	font-weight: 500 !important;
+}
+.entry-summary
+{
+	font-family: Lora;
+}
+.post-grid .entry-title
+{
+	font-size: 21px;
+}
+.special-title
+{
+	font-size: 25px;
+}
+.entry-related
+.entry-title
+{
+	font-size: 19px;
+}
+@media (max-width: 620px) {
+.post-search .entry-title {
+    margin-bottom: 0;
+    text-align: left;
+    display: block!important;
+}
+}
+.grid-container2 {
+ width: 100%;
+ background-color: white;
+}
+.posts-related .grid 
+{
+	background-color: #fff !important;
+}		</style>
+		<link href="./VGG16 - Convolutional Network for Classification and Detection_files/css(2)" rel="stylesheet">
+<!-- Facebook Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+ fbq('init', '328344571065515');
+fbq('track', 'PageView');
+</script>
+<noscript>
+ <img height="1" width="1"
+src="https://www.facebook.com/tr?id=328344571065515&ev=PageView
+&noscript=1"/>
+</noscript>
+<!-- End Facebook Pixel Code -->
+<link rel="manifest" href="https://neurohive.io/manifest.json">
+<script src="./VGG16 - Convolutional Network for Classification and Detection_files/OneSignalSDK.js.download" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "b8e9baa9-90d5-4691-a5c9-4ddcef9508e1",
+      notifyButton: {
+        enable: true,
+      },
+    });
+  });
+</script>
+<link rel="preload" href="./VGG16 - Convolutional Network for Classification and Detection_files/f(8).txt" as="script"><script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/f(8).txt"></script><style type="text/css">.at-icon{fill:#fff;border:0}.at-icon-wrapper{display:inline-block;overflow:hidden}a .at-icon-wrapper{cursor:pointer}.at-rounded,.at-rounded-element .at-icon-wrapper{border-radius:12%}.at-circular,.at-circular-element .at-icon-wrapper{border-radius:50%}.addthis_32x32_style .at-icon{width:2pc;height:2pc}.addthis_24x24_style .at-icon{width:24px;height:24px}.addthis_20x20_style .at-icon{width:20px;height:20px}.addthis_16x16_style .at-icon{width:1pc;height:1pc}#at16lb{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:1001;background-color:#000;opacity:.001}#at_complete,#at_error,#at_share,#at_success{position:static!important}.at15dn{display:none}#at15s,#at16p,#at16p form input,#at16p label,#at16p textarea,#at_share .at_item{font-family:arial,helvetica,tahoma,verdana,sans-serif!important;font-size:9pt!important;outline-style:none;outline-width:0;line-height:1em}* html #at15s.mmborder{position:absolute!important}#at15s.mmborder{position:fixed!important;width:250px!important}#at15s{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);float:none;line-height:1em;margin:0;overflow:visible;padding:5px;text-align:left;position:absolute}#at15s a,#at15s span{outline:0;direction:ltr;text-transform:none}#at15s .at-label{margin-left:5px}#at15s .at-icon-wrapper{width:1pc;height:1pc;vertical-align:middle}#at15s .at-icon{width:1pc;height:1pc}.at4-icon{display:inline-block;background-repeat:no-repeat;background-position:top left;margin:0;overflow:hidden;cursor:pointer}.addthis_16x16_style .at4-icon,.addthis_default_style .at4-icon,.at4-icon,.at-16x16{width:1pc;height:1pc;line-height:1pc;background-size:1pc!important}.addthis_32x32_style .at4-icon,.at-32x32{width:2pc;height:2pc;line-height:2pc;background-size:2pc!important}.addthis_24x24_style .at4-icon,.at-24x24{width:24px;height:24px;line-height:24px;background-size:24px!important}.addthis_20x20_style .at4-icon,.at-20x20{width:20px;height:20px;line-height:20px;background-size:20px!important}.at4-icon.circular,.circular .at4-icon,.circular.aticon{border-radius:50%}.at4-icon.rounded,.rounded .at4-icon{border-radius:4px}.at4-icon-left{float:left}#at15s .at4-icon{text-indent:20px;padding:0;overflow:visible;white-space:nowrap;background-size:1pc;width:1pc;height:1pc;background-position:top left;display:inline-block;line-height:1pc}.addthis_vertical_style .at4-icon,.at4-follow-container .at4-icon{margin-right:5px}html>body #at15s{width:250px!important}#at15s.atm{background:none!important;padding:0!important;width:10pc!important}#at15s_inner{background:#fff;border:1px solid #fff;margin:0}#at15s_head{position:relative;background:#f2f2f2;padding:4px;cursor:default;border-bottom:1px solid #e5e5e5}.at15s_head_success{background:#cafd99!important;border-bottom:1px solid #a9d582!important}.at15s_head_success a,.at15s_head_success span{color:#000!important;text-decoration:none}#at15s_brand,#at15sptx,#at16_brand{position:absolute}#at15s_brand{top:4px;right:4px}.at15s_brandx{right:20px!important}a#at15sptx{top:4px;right:4px;text-decoration:none;color:#4c4c4c;font-weight:700}#at15sptx:hover{text-decoration:underline}#at16_brand{top:5px;right:30px;cursor:default}#at_hover{padding:4px}#at_hover .at_item,#at_share .at_item{background:#fff!important;float:left!important;color:#4c4c4c!important}#at_share .at_item .at-icon-wrapper{margin-right:5px}#at_hover .at_bold{font-weight:700;color:#000!important}#at_hover .at_item{width:7pc!important;padding:2px 3px!important;margin:1px;text-decoration:none!important}#at_hover .at_item.athov,#at_hover .at_item:focus,#at_hover .at_item:hover{margin:0!important}#at_hover .at_item.athov,#at_hover .at_item:focus,#at_hover .at_item:hover,#at_share .at_item.athov,#at_share .at_item:hover{background:#f2f2f2!important;border:1px solid #e5e5e5;color:#000!important;text-decoration:none}.ipad #at_hover .at_item:focus{background:#fff!important;border:1px solid #fff}.at15t{display:block!important;height:1pc!important;line-height:1pc!important;padding-left:20px!important;background-position:0 0;text-align:left}.addthis_button,.at15t{cursor:pointer}.addthis_toolbox a.at300b,.addthis_toolbox a.at300m{width:auto}.addthis_toolbox a{margin-bottom:5px;line-height:initial}.addthis_toolbox.addthis_vertical_style{width:200px}.addthis_button_facebook_like .fb_iframe_widget{line-height:100%}.addthis_button_facebook_like iframe.fb_iframe_widget_lift{max-width:none}.addthis_toolbox a.addthis_button_counter,.addthis_toolbox a.addthis_button_facebook_like,.addthis_toolbox a.addthis_button_facebook_send,.addthis_toolbox a.addthis_button_facebook_share,.addthis_toolbox a.addthis_button_foursquare,.addthis_toolbox a.addthis_button_linkedin_counter,.addthis_toolbox a.addthis_button_pinterest_pinit,.addthis_toolbox a.addthis_button_tweet{display:inline-block}.addthis_toolbox span.addthis_follow_label{display:none}.addthis_toolbox.addthis_vertical_style span.addthis_follow_label{display:block;white-space:nowrap}.addthis_toolbox.addthis_vertical_style a{display:block}.addthis_toolbox.addthis_vertical_style.addthis_32x32_style a{line-height:2pc;height:2pc}.addthis_toolbox.addthis_vertical_style .at300bs{margin-right:4px;float:left}.addthis_toolbox.addthis_20x20_style span{line-height:20px}.addthis_toolbox.addthis_32x32_style span{line-height:2pc}.addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact,.addthis_toolbox.addthis_pill_combo_style a{float:left}.addthis_toolbox.addthis_pill_combo_style a.addthis_button_tweet{margin-top:-2px}.addthis_toolbox.addthis_pill_combo_style .addthis_button_compact .at15t_compact{margin-right:4px}.addthis_default_style .addthis_separator{margin:0 5px;display:inline}div.atclear{clear:both}.addthis_default_style .addthis_separator,.addthis_default_style .at4-icon,.addthis_default_style .at300b,.addthis_default_style .at300bo,.addthis_default_style .at300bs,.addthis_default_style .at300m{float:left}.at300b img,.at300bo img{border:0}a.at300b .at4-icon,a.at300m .at4-icon{display:block}.addthis_default_style .at300b,.addthis_default_style .at300bo,.addthis_default_style .at300m{padding:0 2px}.at300b,.at300bo,.at300bs,.at300m{cursor:pointer}.addthis_button_facebook_like.at300b:hover,.addthis_button_facebook_like.at300bs:hover,.addthis_button_facebook_send.at300b:hover,.addthis_button_facebook_send.at300bs:hover{opacity:1}.addthis_20x20_style .at15t,.addthis_20x20_style .at300bs{overflow:hidden;display:block;height:20px!important;width:20px!important;line-height:20px!important}.addthis_32x32_style .at15t,.addthis_32x32_style .at300bs{overflow:hidden;display:block;height:2pc!important;width:2pc!important;line-height:2pc!important}.at300bs{overflow:hidden;display:block;background-position:0 0;height:1pc;width:1pc;line-height:1pc!important}.addthis_default_style .at15t_compact,.addthis_default_style .at15t_expanded{margin-right:4px}#at_share .at_item{width:123px!important;padding:4px;margin-right:2px;border:1px solid #fff}#at16p{background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);z-index:10000001;position:absolute;top:50%;left:50%;width:300px;padding:10px;margin:0 auto;margin-top:-185px;margin-left:-155px;font-family:arial,helvetica,tahoma,verdana,sans-serif;font-size:9pt;color:#5e5e5e}#at_share{margin:0;padding:0}#at16pt{position:relative;background:#f2f2f2;height:13px;padding:5px 10px}#at16pt a,#at16pt h4{font-weight:700}#at16pt h4{display:inline;margin:0;padding:0;font-size:9pt;color:#4c4c4c;cursor:default}#at16pt a{position:absolute;top:5px;right:10px;color:#4c4c4c;text-decoration:none;padding:2px}#at15sptx:focus,#at16pt a:focus{outline:thin dotted}#at15s #at16pf a{top:1px}#_atssh{width:1px!important;height:1px!important;border:0!important}.atm{width:10pc!important;padding:0;margin:0;line-height:9pt;letter-spacing:normal;font-family:arial,helvetica,tahoma,verdana,sans-serif;font-size:9pt;color:#444;background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABtJREFUeNpiZGBgaGAgAjAxEAlGFVJHIUCAAQDcngCUgqGMqwAAAABJRU5ErkJggg==);padding:4px}.atm-f{text-align:right;border-top:1px solid #ddd;padding:5px 8px}.atm-i{background:#fff;border:1px solid #d5d6d6;padding:0;margin:0;box-shadow:1px 1px 5px rgba(0,0,0,.15)}.atm-s{margin:0!important;padding:0!important}.atm-s a:focus{border:transparent;outline:0;transition:none}#at_hover.atm-s a,.atm-s a{display:block;text-decoration:none;padding:4px 10px;color:#235dab!important;font-weight:400;font-style:normal;transition:none}#at_hover.atm-s .at_bold{color:#235dab!important}#at_hover.atm-s a:hover,.atm-s a:hover{background:#2095f0;text-decoration:none;color:#fff!important}#at_hover.atm-s .at_bold{font-weight:700}#at_hover.atm-s a:hover .at_bold{color:#fff!important}.atm-s a .at-label{vertical-align:middle;margin-left:5px;direction:ltr}.at_PinItButton{display:block;width:40px;height:20px;padding:0;margin:0;background-image:url(//s7.addthis.com/static/t00/pinit00.png);background-repeat:no-repeat}.at_PinItButton:hover{background-position:0 -20px}.addthis_toolbox .addthis_button_pinterest_pinit{position:relative}.at-share-tbx-element .fb_iframe_widget span{vertical-align:baseline!important}#at16pf{height:auto;text-align:right;padding:4px 8px}.at-privacy-info{position:absolute;left:7px;bottom:7px;cursor:pointer;text-decoration:none;font-family:helvetica,arial,sans-serif;font-size:10px;line-height:9pt;letter-spacing:.2px;color:#666}.at-privacy-info:hover{color:#000}.body .wsb-social-share .wsb-social-share-button-vert{padding-top:0;padding-bottom:0}.body .wsb-social-share.addthis_counter_style .addthis_button_tweet.wsb-social-share-button{padding-top:40px}.body .wsb-social-share.addthis_counter_style .addthis_button_facebook_like.wsb-social-share-button{padding-top:21px}@media print{#at4-follow,#at4-share,#at4-thankyou,#at4-whatsnext,#at4m-mobile,#at15s,.at4,.at4-recommended{display:none!important}}@media screen and (max-width:400px){.at4win{width:100%}}@media screen and (max-height:700px) and (max-width:400px){.at4-thankyou-inner .at4-recommended-container{height:122px;overflow:hidden}.at4-thankyou-inner .at4-recommended .at4-recommended-item:first-child{border-bottom:1px solid #c5c5c5}}</style><style type="text/css">.at-branding-logo{font-family:helvetica,arial,sans-serif;text-decoration:none;font-size:10px;display:inline-block;margin:2px 0;letter-spacing:.2px}.at-branding-logo .at-branding-icon{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAMAAAC67D+PAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////+GlNUkcc1QAAAB1JREFUeNpiYIQDBjQmAwMmkwEM0JnY1WIxFyDAABGeAFEudiZsAAAAAElFTkSuQmCC")}.at-branding-logo .at-branding-icon,.at-branding-logo .at-privacy-icon{display:inline-block;height:10px;width:10px;margin-left:4px;margin-right:3px;margin-bottom:-1px;background-repeat:no-repeat}.at-branding-logo .at-privacy-icon{background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAKCAMAAABR24SMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABhQTFRF8fr9ot/xXcfn2/P5AKva////////AKTWodjhjAAAAAd0Uk5T////////ABpLA0YAAAA6SURBVHjaJMzBDQAwCAJAQaj7b9xifV0kUKJ9ciWxlzWEWI5gMF65KUTv0VKkjVeTerqE/x7+9BVgAEXbAWI8QDcfAAAAAElFTkSuQmCC")}.at-branding-logo span{text-decoration:none}.at-branding-logo .at-branding-addthis,.at-branding-logo .at-branding-powered-by{color:#666}.at-branding-logo .at-branding-addthis:hover{color:#333}.at-cv-with-image .at-branding-addthis,.at-cv-with-image .at-branding-addthis:hover{color:#fff}a.at-branding-logo:visited{color:initial}.at-branding-info{display:inline-block;padding:0 5px;color:#666;border:1px solid #666;border-radius:50%;font-size:10px;line-height:9pt;opacity:.7;transition:all .3s ease;text-decoration:none}.at-branding-info span{border:0;clip:rect(0 0 0 0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.at-branding-info:before{content:'i';font-family:Times New Roman}.at-branding-info:hover{color:#0780df;border-color:#0780df}</style><script src="./VGG16 - Convolutional Network for Classification and Detection_files/OneSignalPageSDKES6.js.download" async=""></script><style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style><script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/bootstrap" async=""></script><script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/comment2en.js.download" async=""></script><link rel="stylesheet" type="text/css" href="./VGG16 - Convolutional Network for Classification and Detection_files/comment2.css"></head>
+<!-- <style id="tt-easy-google-font-styles" type="text/css">h2 { color: #0c0c0c; font-family: 'Roboto Slab'; font-size: 28px; font-style: normal; font-weight: bold; line-height: 1.2; margin-bottom: 12px; text-transform: none; }</style> -->
+
+<body class="post-template-default single single-post postid-5384 single-format-standard group-blog">
+
+<div id="page" class="site">
+
+    <a class="skip-link screen-reader-text" href="https://neurohive.io/en/popular-networks/vgg16/#main">Skip to content</a>
+
+    <header id="masthead" class="site-header" role="banner">
+
+        
+        <div class="site-branding">
+		 <div class="grid-container2 text-center">
+		   <script async="" src="./VGG16 - Convolutional Network for Classification and Detection_files/f(9).txt"></script>
+           <!-- 980x120 -->
+           <ins class="adsbygoogle" style="display:inline-block;width:980px;height:120px" data-ad-client="ca-pub-8017291333359749" data-ad-slot="8870049745" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:120px;margin:0;padding:0;position:relative;visibility:visible;width:980px;background-color:transparent;"><ins id="aswift_0_anchor" style="display:block;border:none;height:120px;margin:0;padding:0;position:relative;visibility:visible;width:980px;background-color:transparent;"><iframe id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;border:0;width:980px;height:120px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="980" height="120" frameborder="0" src="./VGG16 - Convolutional Network for Classification and Detection_files/ads.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!1" data-google-query-id="COaeleHgxuoCFQoKXAodgxICCQ" data-load-complete="true"></iframe></ins></ins></ins>
+             <script>
+              (adsbygoogle = window.adsbygoogle || []).push({});
+             </script>
+                        </div>
+            <div class="grid-container text-center">
+
+                                    <p class="site-title screen-reader-text"><a href="https://neurohive.io/en/" rel="home" data-wpel-link="internal"></a></p>
+                            </div>
+        </div><!-- .site-branding -->
+        <div style="display: block; height: 60px;"></div><nav id="site-navigation" class="main-navigation main-nav-bottom main-nav-center main-nav-social-left main-nav-extras-right fixed-big fixed-small activated" role="navigation" data-fixed="true" data-fixed-mobile="true" style="top: 0px;">
+    <div class="grid-container">
+        <div class="extra-menu-container">
+            <ul class="list-extra-menu">
+                                <li>
+                    <button class="button-toggle search-toggle" aria-controls="mastsearch" aria-expanded="false">
+                        <span class="screen-reader-text">Search toggle</span>
+                    </button>
+                    <div id="mastsearch" class="site-search" role="search" aria-expanded="false"><form role="search" method="get" class="search-form" action="https://neurohive.io/en/">
+    <label>
+        <span class="screen-reader-text">Search for:</span>
+        <input type="search" class="form-field search-field" placeholder="Search…" value="" name="s">
+    </label>
+    <button type="submit" class="search-submit"><i class="fa fa-search"></i></button>
+</form></div>
+                </li>
+                                                <li class="grid-hide-l grid-hide-xl">
+                    <button class="button-toggle menu-toggle" aria-controls="mastmenu" aria-expanded="false">
+                        <span class="screen-reader-text">Primary Menu</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+		<div style="float: left; margin-top: 10px;" class="social-menu-container">
+				<a href="https://neurohive.io/en/" data-wpel-link="internal"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/logo.svg" width="150px"></a>
+		         </div>
+                <div id="mastmenu" role="menu" class="primary-menu-container" aria-expanded="false">
+            <button class="button-toggle menu-toggle-close" aria-controls="mastmenu" aria-expanded="false">
+                <span class="screen-reader-text">Close Primary Menu</span>
+            </button>
+        <ul id="primary-menu" class="primary-menu"><li id="menu-item-5443" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5443"><a href="https://neurohive.io/en/datasets/" data-wpel-link="internal" data-touch="false">Datasets</a></li>
+<li id="menu-item-5444" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-5444"><a href="https://neurohive.io/en/state-of-the-art/" data-wpel-link="internal" data-touch="false">State-of-the-Art</a></li>
+<li id="menu-item-2296" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2296"><a href="https://neurohive.io/en/tag/gan/" data-wpel-link="internal" data-touch="false">GANs</a></li>
+<li id="menu-item-2297" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2297"><a href="https://neurohive.io/en/tag/image-processing/" data-wpel-link="internal" data-touch="false">Image Processing</a></li>
+<li id="menu-item-1729" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-1729"><a href="https://hackathon2018.neurohive.io/" data-wpel-link="external" target="_blank" rel="nofollow external noopener" data-touch="false">Hackathon 2018</a></li>
+<li id="menu-item-6518" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-6518"><a href="https://neurohive.io/en/contact/" data-wpel-link="internal" data-touch="false">Contact Us</a></li>
+<li id="menu-item-342" class="pll-parent-menu-item menu-item menu-item-type-custom menu-item-object-custom current-menu-parent menu-item-has-children menu-item-342"><a href="https://neurohive.io/en/popular-networks/vgg16/#pll_switcher" data-touch="false"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHzSURBVHjaYkxOP8IAB//+Mfz7w8Dwi4HhP5CcJb/n/7evb16/APL/gRFQDiAAw3JuAgAIBEDQ/iswEERjGzBQLEru97ll0g0+3HvqMn1SpqlqGsZMsZsIe0SICA5gt5a/AGIEarCPtFh+6N/ffwxA9OvP/7//QYwff/6fZahmePeB4dNHhi+fGb59Y4zyvHHmCEAAAW3YDzQYaJJ93a+vX79aVf58//69fvEPlpIfnz59+vDhw7t37968efP3b/SXL59OnjwIEEAsDP+YgY53b2b89++/awvLn98MDi2cVxl+/vl6mituCtBghi9f/v/48e/XL86krj9XzwEEEENy8g6gu22rfn78+NGs5Ofr16+ZC58+fvyYwX8rxOxXr169fPny+fPn1//93bJlBUAAsQADZMEBxj9/GBxb2P/9+S/R8u3vzxuyaX8ZHv3j8/YGms3w8ycQARmi2eE37t4ACCDGR4/uSkrKAS35B3TT////wADOgLOBIaXIyjBlwxKAAGKRXjCB0SOEaeu+/y9fMnz4AHQxCP348R/o+l+//sMZQBNLEvif3AcIIMZbty7Ly6t9ZmXl+fXj/38GoHH/UcGfP79//BBiYHjy9+8/oUkNAAHEwt1V/vI/KBY/QSISFqM/GBg+MzB8A6PfYC5EFiDAABqgW776MP0rAAAAAElFTkSuQmCC" title="English" alt="English" width="16" height="11"></a>
+<ul class="sub-menu">
+	<li class="lang-item lang-item-23 lang-item-ru lang-item-first no-translation menu-item menu-item-type-custom menu-item-object-custom menu-item-342-ru"><a href="https://neurohive.io/ru/" hreflang="ru-RU" lang="ru-RU" data-wpel-link="internal" data-touch="false"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAE2SURBVHjaYvz69T8DAvz79w9CQVj/0MCffwwAAcQClObiAin6/x+okxHMgPCAbOb//5n+I4EXL74ABBALxGSwagTjPzbAyMgItAQggBg9Pf9nZPx//x7kjL9////9C2QAyf9//qCQQCQkxFhY+BEggFi2b/+nq8v46BEDSPQ3w+8//3//BqFfv9BJeXmQEwACCOSkP38YgHy4Bog0RN0vIOMXVOTPH6Cv/gEEEEgDxFKgHEgDXCmGDUAE1AAQQCybGZg1f/d8//XsH0jTn3+///z79RtE/v4NZfz68xfI/vOX+4/0ZoZFAAHE4gYMvD+3/v2+h91wCANo9Z+/jH9VxBkYAAKIBRg9TL//MEhKAuWAogxgZzGC2CCfgUggAoYdGAEVAwQQ41egu5AQAyoXTQoIAAIMAD+JZR7YOGEWAAAAAElFTkSuQmCC" title="Русский" alt="Русский" width="16" height="11"></a></li>
+	<li class="lang-item lang-item-26 lang-item-en current-lang menu-item menu-item-type-custom menu-item-object-custom menu-item-342-en"><a href="https://neurohive.io/en/popular-networks/vgg16/" hreflang="en-US" lang="en-US" data-wpel-link="internal" data-touch="false"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAALCAIAAAD5gJpuAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAHzSURBVHjaYkxOP8IAB//+Mfz7w8Dwi4HhP5CcJb/n/7evb16/APL/gRFQDiAAw3JuAgAIBEDQ/iswEERjGzBQLEru97ll0g0+3HvqMn1SpqlqGsZMsZsIe0SICA5gt5a/AGIEarCPtFh+6N/ffwxA9OvP/7//QYwff/6fZahmePeB4dNHhi+fGb59Y4zyvHHmCEAAAW3YDzQYaJJ93a+vX79aVf58//69fvEPlpIfnz59+vDhw7t37968efP3b/SXL59OnjwIEEAsDP+YgY53b2b89++/awvLn98MDi2cVxl+/vl6mituCtBghi9f/v/48e/XL86krj9XzwEEEENy8g6gu22rfn78+NGs5Ofr16+ZC58+fvyYwX8rxOxXr169fPny+fPn1//93bJlBUAAsQADZMEBxj9/GBxb2P/9+S/R8u3vzxuyaX8ZHv3j8/YGms3w8ycQARmi2eE37t4ACCDGR4/uSkrKAS35B3TT////wADOgLOBIaXIyjBlwxKAAGKRXjCB0SOEaeu+/y9fMnz4AHQxCP348R/o+l+//sMZQBNLEvif3AcIIMZbty7Ly6t9ZmXl+fXj/38GoHH/UcGfP79//BBiYHjy9+8/oUkNAAHEwt1V/vI/KBY/QSISFqM/GBg+MzB8A6PfYC5EFiDAABqgW776MP0rAAAAAElFTkSuQmCC" title="English" alt="English" width="16" height="11"></a></li>
+</ul>
+</li>
+</ul>        </div>
+    </div>
+</nav><!-- #site-navigation -->    </header><!-- #masthead -->
+        <div id="content" class="site-content" style="height: auto !important;">
+
+<div class="grid-container" style="height: auto !important;">
+    <div class="grid" style="height: auto !important;">
+        <div id="primary" class="content-area with-sidebar with-sidebar-right with-sidebar-narrow grid-l9" style="height: auto !important; min-height: 0px !important;">
+            <main id="main" class="site-main" role="main" style="height: auto !important;">
+<li><ul><div class="breadcrumbs"><span><span><a href="https://neurohive.io/en/" data-wpel-link="internal">Neurohive</a> » <span><a href="https://neurohive.io/en/popular-networks/" data-wpel-link="internal">Popular networks</a> » <span class="breadcrumb_last" aria-current="page">VGG16 – Convolutional Network for Classification and Detection</span></span></span></span></div></ul></li>            
+<section id="post-5384" class="post-layout-default post-5384 post type-post status-publish format-standard has-post-thumbnail hentry category-popular-networks tag-cnn-en tag-image-classification tag-imagenet-en tag-object-detection" style="height: auto !important;">
+    <header class="entry-header">
+        <h1 class="entry-title">VGG16 – Convolutional Network for Classification and Detection</h1><ul class="entry-meta-above2"><li class="entry-posted-on"> <a href="https://neurohive.io/en/popular-networks/vgg16/" rel="bookmark" data-wpel-link="internal"><time class="entry-date" datetime="2018-11-20T19:30:58+03:00">20 November 2018</time></a></li><li class="entry-cat-links"><ul class="post-categories2"><li><a href="https://neurohive.io/en/popular-networks/" data-wpel-link="internal">Popular networks</a></li></ul></li></ul>    </header><!-- .entry-header -->
+    <div class="entry-content" style="height: auto !important;">
+        <div class="entry-featured"><div class="image-block"><img width="900" height="507" src="./VGG16 - Convolutional Network for Classification and Detection_files/vgg16-1-e1542731207177.png" class="attachment-full size-full wp-post-image" alt="vgg16"></div></div>            <div class="post-content" style="height: auto !important;">
+              <div class="at-above-post addthis_tool" data-url="https://neurohive.io/en/popular-networks/vgg16/"></div><p>VGG16 is a convolutional neural network model proposed by K. Simonyan and A. Zisserman from the University of Oxford in the paper “Very Deep Convolutional Networks for Large-Scale Image Recognition”.<a target="_blank" id="bib" href="https://arxiv.org/abs/1409.1556" rel="noopener nofollow external" data-wpel-link="external"></a> The model achieves 92.7% top-5 test accuracy in ImageNet,<a target="_blank" id="bib" href="http://image-net.org/" rel="noopener nofollow external" data-wpel-link="external"></a> which is a dataset of over 14 million images belonging to 1000 classes. It was one of the famous model submitted to <a target="_blank" href="http://www.image-net.org/challenges/LSVRC/2014/results" data-wpel-link="external" rel="nofollow external noopener">ILSVRC-2014</a>. It makes the improvement over AlexNet by replacing large kernel-sized filters (11 and 5 in the first and second convolutional layer, respectively) with multiple 3×3 kernel-sized filters one after another. VGG16 was trained for weeks and was using NVIDIA Titan Black GPU’s.</p>
+<p><div class="image-block"><img class="aligncenter size-full wp-image-5385" src="./VGG16 - Convolutional Network for Classification and Detection_files/vgg16.png" alt="vgg16 architecture " width="1200" height="294"></div></p>
+<h2><strong>DataSet</strong></h2>
+<p><a target="_blank" href="http://www.image-net.org/" data-wpel-link="external" rel="nofollow external noopener">ImageNet</a> is a dataset of over 15 million labeled high-resolution images belonging to roughly 22,000 categories. The images were collected from the web and labeled by human labelers using Amazon’s Mechanical Turk crowd-sourcing tool. Starting in 2010, as part of the Pascal Visual Object Challenge, an annual competition called the ImageNet Large-Scale Visual Recognition Challenge (ILSVRC) has been held. ILSVRC uses a subset of ImageNet with roughly 1000 images in each of 1000 categories. In all, there are roughly 1.2 million training images, 50,000 validation images, and 150,000 testing images. ImageNet consists of variable-resolution images. Therefore, the images have been down-sampled to a fixed resolution of 256×256. Given a rectangular image, the image is rescaled and cropped out the central 256×256 patch from the resulting image.</p>
+<h2>The Architecture</h2>
+<p>The architecture depicted below is VGG16.</p>
+<figure id="attachment_5441" aria-describedby="caption-attachment-5441" style="width: 1200px" class="wp-caption aligncenter"><div class="image-block"><img class="size-full wp-image-5441" src="./VGG16 - Convolutional Network for Classification and Detection_files/vgg16-neural-network.jpg" alt="VGG16 Artitecture" width="1200" height="707"></div><figcaption id="caption-attachment-5441" class="wp-caption-text">VGG16 Architecture</figcaption></figure>
+<p>The input to cov1 layer is of fixed size 224 x 224 RGB image. The image is passed through a stack of convolutional (conv.) layers, where the filters were used with a very small receptive field: 3×3 (which is the smallest size to capture the notion of left/right, up/down, center). In one of the configurations, it also utilizes 1×1 convolution filters, which can be seen as a linear transformation of the input channels (followed by non-linearity). The convolution stride is fixed to 1 pixel; the spatial padding of conv. layer input is such that the spatial resolution is preserved after convolution, i.e. the padding is 1-pixel for 3×3 conv. layers. Spatial pooling is carried out by five max-pooling layers, which follow some of the conv.&nbsp; layers (not all the conv. layers are followed by max-pooling). Max-pooling is performed over a 2×2 pixel window, with stride 2.</p>
+<p>Three Fully-Connected (FC) layers follow a stack of convolutional layers (which has a different depth in different architectures): the first two have 4096 channels each, the third performs 1000-way ILSVRC classification and thus contains 1000 channels (one for each class). The final layer is the soft-max layer. The configuration of the fully connected layers is the same in all networks.</p><div class="google-auto-placed ap_container" style="width: 100%; height: auto; clear: none; text-align: center;"><ins data-ad-format="auto" class="adsbygoogle adsbygoogle-noablate" data-ad-client="ca-pub-8017291333359749" data-adsbygoogle-status="done" style="display: block; margin: auto; background-color: transparent; height: 280px;"><ins id="aswift_4_expand" style="display:inline-table;border:none;height:280px;margin:0;padding:0;position:relative;visibility:visible;width:840px;background-color:transparent;"><ins id="aswift_4_anchor" style="display: block; border: none; height: 280px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 840px; background-color: transparent; overflow: visible;"><iframe id="aswift_4" name="aswift_4" style="left:0;position:absolute;top:0;border:0;width:840px;height:280px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="840" height="280" frameborder="0" src="./VGG16 - Convolutional Network for Classification and Detection_files/ads(1).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!4" data-google-query-id="CMPRueHgxuoCFYkAXAod6dgPhg" data-load-complete="true"></iframe></ins></ins></ins></div>
+<p>All hidden layers are equipped with the rectification (ReLU) non-linearity. It is also noted that none of the networks (except for one) contain Local Response Normalisation (LRN), such normalization does not improve the performance on the ILSVRC dataset, but leads to increased memory consumption and computation time.</p>
+<h2>Configurations</h2>
+<p>The ConvNet configurations are outlined in figure 02. The nets are referred to their names (A-E). All configurations follow the generic design present in architecture and differ only in the depth: from 11 weight layers in the network A (8 conv. and 3 FC layers) to 19 weight layers in the network E (16 conv. and 3 FC layers). The width of conv. layers (the number of channels) is rather small, starting from 64 in the first layer and then increasing by a factor of 2 after each max-pooling layer, until it reaches 512.</p>
+<figure id="attachment_5389" aria-describedby="caption-attachment-5389" style="width: 564px" class="wp-caption alignnone"><div class="image-block"><img class="size-large wp-image-5389" src="./VGG16 - Convolutional Network for Classification and Detection_files/Capture-564x570.jpg" alt="" width="564" height="570"></div><figcaption id="caption-attachment-5389" class="wp-caption-text">Figure: 2</figcaption></figure>
+<h2>Use-Cases and Implementation</h2>
+<p>Unfortunately, there are two major drawbacks with VGGNet:</p>
+<ol>
+<li>It is&nbsp;<em>painfully slow</em>&nbsp;to train.</li>
+<li>The network architecture weights themselves are quite large (concerning disk/bandwidth).</li>
+</ol>
+<p>Due to its depth and number of fully-connected nodes, VGG16 is over 533MB. This makes deploying VGG a tiresome task.VGG16 is used in many deep learning image classification problems; however, smaller network architectures are often more desirable (such as SqueezeNet, GoogLeNet, etc.). But it is a great building block for learning purpose as it is easy to implement.</p>
+<p>[<a target="_blank" href="https://github.com/pytorch/vision/blob/master/torchvision/models/vgg.py" data-wpel-link="external" rel="nofollow external noopener">Pytorch</a>]</p>
+<p>[<a target="_blank" href="https://github.com/machrisaa/tensorflow-vgg/blob/master/vgg16.py" data-wpel-link="external" rel="nofollow external noopener">Tensorflow</a>]</p>
+<p>[<a target="_blank" href="https://gist.github.com/baraldilorenzo/07d7802847aaad0a35d3" data-wpel-link="external" rel="nofollow external noopener">Keras</a>]</p>
+<h2>Result</h2>
+<p>VGG16 significantly outperforms the previous generation of models&nbsp;in the ILSVRC-2012 and ILSVRC-2013 competitions. The VGG16 result is also competing for the classification task winner (GoogLeNet with 6.7% error) and substantially outperforms the ILSVRC-2013 winning submission Clarifai, which achieved 11.2% with external training data and 11.7% without it. Concerning the single-net performance, VGG16 architecture achieves the best result (7.0% test error), outperforming a single GoogLeNet by 0.9%.</p>
+<p><div class="image-block"><img class="size-large wp-image-5432 alignnone" src="./VGG16 - Convolutional Network for Classification and Detection_files/Capture-1-770x345.jpg" alt="" width="770" height="345"></div></p>
+<p>It was demonstrated that the representation depth is beneficial for the classification accuracy, and that state-of-the-art performance on the ImageNet challenge dataset can be achieved using a conventional ConvNet architecture with substantially increased depth.</p><!-- AddThis Advanced Settings above via filter on the_content --><!-- AddThis Advanced Settings below via filter on the_content --><!-- AddThis Advanced Settings generic via filter on the_content --><!-- AddThis Share Buttons above via filter on the_content --><!-- AddThis Share Buttons below via filter on the_content --><div class="at-below-post addthis_tool" data-url="https://neurohive.io/en/popular-networks/vgg16/"></div><!-- AddThis Share Buttons generic via filter on the_content -->            </div>
+
+		<div class="tag-links"><span class="screen-reader-text">Tagged in: </span><a href="https://neurohive.io/en/tag/cnn-en/" rel="tag" data-wpel-link="internal">CNN</a><a href="https://neurohive.io/en/tag/image-classification/" rel="tag" data-wpel-link="internal">Image Classification</a><a href="https://neurohive.io/en/tag/imagenet-en/" rel="tag" data-wpel-link="internal">ImageNet</a><a href="https://neurohive.io/en/tag/object-detection/" rel="tag" data-wpel-link="internal">Object Detection</a></div>
+    </div><!-- .entry-content -->
+</section><!-- #post-## -->
+<div class="views" hidden=""> Просмотров: 206645</div>
+
+  
+<style> 
+.comment-navigation .nav-next a:before, .post-navigation .nav-next a:before, .posts-navigation .nav-next a:before {
+    content: '\f100';
+    margin-right: 12px;
+    position: absolute;
+    margin-left: -20px;
+    margin-top: 23px;
+}
+.comment-navigation .nav-previous a:after, .post-navigation .nav-previous a:after, .posts-navigation .nav-previous a:after {
+    content: '\f101';
+    margin-left: 12px;
+	position: absolute;
+	    margin-right: -20px;
+    margin-top: -28px;
+}
+</style>
+<div id="stop" class="post-author-box post-author-5384">
+    <div class="author-body">
+        <div class="author-avatar">
+            <div class="avatar-img">
+                        </div>
+        </div>
+        <div class="author-info">
+							<div class="author-header">
+                Author: <a href="https://neurohive.io/en/author/muneeb/" data-wpel-link="internal">Muneeb ul Hassan</a><ul class="list-social"><li class="linkedin"><a href="https://www.linkedin.com/in/muneebul-hassan/" title="Linkedin" target="_blank" data-wpel-link="external" rel="nofollow external noopener"><i class="fa fa-linkedin"></i></a></li><li class="instagram"><a href="https://www.instagram.com/muneeb2405/" title="Instagram" target="_blank" data-wpel-link="external" rel="nofollow external noopener"><i class="fa fa-instagram"></i></a></li><li class="github"><a href="https://github.com/muneeb699" title="Github" target="_blank" data-wpel-link="external" rel="nofollow external noopener"><i class="fa fa-github"></i></a></li></ul>            </div>
+			
+						
+			
+			<div class="istok">Source: <a href="https://arxiv.org/abs/1505.06798" data-wpel-link="external" target="_blank" rel="nofollow external noopener">https://arxiv.org/abs/1505.06798</a></div><div class="github">Github: <a href="https://github.com/pytorch/vision/blob/master/torchvision/models/vgg.py" data-wpel-link="external" target="_blank" rel="nofollow external noopener">https://github.com/pytorch/vision/blob/master/torchvision/models/vgg.py</a></div>		
+            <div class="author-description">
+             
+            </div>
+        </div>
+		
+    </div>
+</div>
+
+	<nav class="navigation post-navigation" role="navigation" aria-label="More">
+		<h2 class="screen-reader-text">More</h2>
+		<div class="nav-links"><div class="nav-previous"><a href="https://neurohive.io/en/popular-networks/alexnet-imagenet-classification-with-deep-convolutional-neural-networks/" rel="prev" data-wpel-link="internal">Next:<br>AlexNet – ImageNet Classification with Deep Convolutional Neural Networks</a></div><div class="nav-next"><a href="https://neurohive.io/en/popular-networks/u-net/" rel="next" data-wpel-link="internal">Previous:<br>U-Net: Image Segmentation Network</a></div></div>
+	</nav><style>
+@media (max-width: 620px) {
+ .entry-related {
+    padding: 15px 15px 120px;
+    border-top: 1px solid #e8e8e9;
+    border-bottom: 1px solid #e8e8e9;
+    background: #fff;
+    overflow: hidden;
+	}
+.posts-related .entry-related {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.entry-related .entry-title {
+    font-size: 24px;
+}
+.widget-area {
+    width: 100%;
+}    
+}
+.posts-related .grid {
+    margin-top: -15px;
+    margin-bottom: -15px;
+	background-color: #f5f5f6;
+	
+}
+	}
+</style>
+ 
+ <div class="posts-related">
+    <h3 class="special-title">
+        <span class="left-border"></span>
+        <span class="title-text">You Might Also Like</span>
+        <span class="right-border"></span>
+    </h3>
+    <div class="grid grid-gs">
+                <div class="entry-related grid-m4">
+            <a class="entry-featured" href="https://neurohive.io/en/news/deep-neural-network-learns-to-see-through-obstructions/" data-wpel-link="internal"><img width="570" height="361" src="./VGG16 - Convolutional Network for Classification and Detection_files/rsz_obbss-570x361.png" class="attachment-medium size-medium wp-post-image" alt=""></a><h4 class="entry-title"><a href="https://neurohive.io/en/news/deep-neural-network-learns-to-see-through-obstructions/" data-wpel-link="internal">Deep Neural Network Learns to “See” Through Obstructions</a></h4><div class="entry-posted-on">
+                    <span class="screen-reader-text">Posted on</span>
+                    <a href="https://neurohive.io/en/news/deep-neural-network-learns-to-see-through-obstructions/" rel="bookmark" data-wpel-link="internal">
+                        <time class="entry-date" datetime="2020-04-15T02:21:56+03:00">15 April 2020</time>
+                    </a>
+                </div>        </div>
+		
+                <div class="entry-related grid-m4">
+            <a class="entry-featured" href="https://neurohive.io/en/popular-networks/resnet/" data-wpel-link="internal"><img width="570" height="320" src="./VGG16 - Convolutional Network for Classification and Detection_files/resnet-e1548261477164-570x320.png" class="attachment-medium size-medium wp-post-image" alt="resnet"></a><h4 class="entry-title"><a href="https://neurohive.io/en/popular-networks/resnet/" data-wpel-link="internal">ResNet (34, 50, 101): Residual CNNs for Image Classification Tasks</a></h4><div class="entry-posted-on">
+                    <span class="screen-reader-text">Posted on</span>
+                    <a href="https://neurohive.io/en/popular-networks/resnet/" rel="bookmark" data-wpel-link="internal">
+                        <time class="entry-date" datetime="2019-01-23T19:49:52+03:00">23 January 2019</time>
+                    </a>
+                </div>        </div>
+		
+                <div class="entry-related grid-m4">
+            <a class="entry-featured" href="https://neurohive.io/en/popular-networks/r-cnn/" data-wpel-link="internal"><img width="570" height="321" src="./VGG16 - Convolutional Network for Classification and Detection_files/r-cnn-object-detection-e1543498760463-570x321.png" class="attachment-medium size-medium wp-post-image" alt="r-cnn object detection"></a><h4 class="entry-title"><a href="https://neurohive.io/en/popular-networks/r-cnn/" data-wpel-link="internal">R-CNN – Neural Network for Object Detection and Semantic Segmentation</a></h4><div class="entry-posted-on">
+                    <span class="screen-reader-text">Posted on</span>
+                    <a href="https://neurohive.io/en/popular-networks/r-cnn/" rel="bookmark" data-wpel-link="internal">
+                        <time class="entry-date" datetime="2018-11-29T16:47:12+03:00">29 November 2018</time>
+                    </a>
+                </div>        </div>
+		
+            </div>
+</div>
+
+		 
+ 
+				<div class="posts-related">
+    <div class="grid grid-gs">
+                <div class="entry-related grid-m4">
+            <a class="entry-featured" href="https://neurohive.io/en/popular-networks/alexnet-imagenet-classification-with-deep-convolutional-neural-networks/" data-wpel-link="internal"><img width="570" height="321" src="./VGG16 - Convolutional Network for Classification and Detection_files/AlexNet-1-570x321.png" class="attachment-medium size-medium wp-post-image" alt=""></a><h4 class="entry-title"><a href="https://neurohive.io/en/popular-networks/alexnet-imagenet-classification-with-deep-convolutional-neural-networks/" data-wpel-link="internal">AlexNet – ImageNet Classification with Deep Convolutional Neural Networks</a></h4><div class="entry-posted-on">
+                    <span class="screen-reader-text">Posted on</span>
+                    <a href="https://neurohive.io/en/popular-networks/alexnet-imagenet-classification-with-deep-convolutional-neural-networks/" rel="bookmark" data-wpel-link="internal">
+                        <time class="entry-date" datetime="2018-10-29T19:53:42+03:00">29 October 2018</time>
+                    </a>
+                </div>        </div>
+		
+            </div>
+</div>
+
+		 
+ 
+				<div class="posts-related">
+    <div class="grid grid-gs">
+                <div class="entry-related grid-m4">
+            <a class="entry-featured" href="https://neurohive.io/en/popular-networks/alexnet-imagenet-classification-with-deep-convolutional-neural-networks/" data-wpel-link="internal"><img width="570" height="321" src="./VGG16 - Convolutional Network for Classification and Detection_files/AlexNet-1-570x321.png" class="attachment-medium size-medium wp-post-image" alt=""></a><h4 class="entry-title"><a href="https://neurohive.io/en/popular-networks/alexnet-imagenet-classification-with-deep-convolutional-neural-networks/" data-wpel-link="internal">AlexNet – ImageNet Classification with Deep Convolutional Neural Networks</a></h4><div class="entry-posted-on">
+                    <span class="screen-reader-text">Posted on</span>
+                    <a href="https://neurohive.io/en/popular-networks/alexnet-imagenet-classification-with-deep-convolutional-neural-networks/" rel="bookmark" data-wpel-link="internal">
+                        <time class="entry-date" datetime="2018-10-29T19:53:42+03:00">29 October 2018</time>
+                    </a>
+                </div>        </div>
+		
+                <div class="entry-related grid-m4">
+            <a class="entry-featured" href="https://neurohive.io/en/state-of-the-art/deep-clustering-approach/" data-wpel-link="internal"><img width="570" height="321" src="./VGG16 - Convolutional Network for Classification and Detection_files/deepcluster-facebook-e1537458760954-570x321.jpg" class="attachment-medium size-medium wp-post-image" alt="deepcluster facebook"></a><h4 class="entry-title"><a href="https://neurohive.io/en/state-of-the-art/deep-clustering-approach/" data-wpel-link="internal">Deep Clustering Approach for Image Classification Task</a></h4><div class="entry-posted-on">
+                    <span class="screen-reader-text">Posted on</span>
+                    <a href="https://neurohive.io/en/state-of-the-art/deep-clustering-approach/" rel="bookmark" data-wpel-link="internal">
+                        <time class="entry-date" datetime="2018-09-20T18:54:20+03:00">20 September 2018</time>
+                    </a>
+                </div>        </div>
+		
+            </div>
+</div>
+
+		     <style>
+    #mc-container{
+        padding: 10px;
+    }
+</style>
+
+<div class="comments-area">
+    <div id="mc-container"><div class="cc mc-c"><div class="mc-head"><ul><li><div class="mc-comment-star"><span class="mc-stars"><span class="mc-star" data-origin="star_o" data-color="#ffaf02" data-star="1"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 1792 1792"><path d="M1201 1004l306-297-422-62-189-382-189 382-422 62 306 297-73 421 378-199 377 199zm527-357q0 22-26 48l-363 354 86 500q1 7 1 20 0 50-41 50-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" fill="#ffaf02"></path></svg></span><span class="mc-star" data-origin="star_o" data-color="#ffaf02" data-star="2"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 1792 1792"><path d="M1201 1004l306-297-422-62-189-382-189 382-422 62 306 297-73 421 378-199 377 199zm527-357q0 22-26 48l-363 354 86 500q1 7 1 20 0 50-41 50-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" fill="#ffaf02"></path></svg></span><span class="mc-star" data-origin="star_o" data-color="#ffaf02" data-star="3"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 1792 1792"><path d="M1201 1004l306-297-422-62-189-382-189 382-422 62 306 297-73 421 378-199 377 199zm527-357q0 22-26 48l-363 354 86 500q1 7 1 20 0 50-41 50-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" fill="#ffaf02"></path></svg></span><span class="mc-star" data-origin="star_o" data-color="#ffaf02" data-star="4"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 1792 1792"><path d="M1201 1004l306-297-422-62-189-382-189 382-422 62 306 297-73 421 378-199 377 199zm527-357q0 22-26 48l-363 354 86 500q1 7 1 20 0 50-41 50-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" fill="#ffaf02"></path></svg></span><span class="mc-star" data-origin="star_o" data-color="#ffaf02" data-star="5"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 1792 1792"><path d="M1201 1004l306-297-422-62-189-382-189 382-422 62 306 297-73 421 378-199 377 199zm527-357q0 22-26 48l-363 354 86 500q1 7 1 20 0 50-41 50-19 0-40-12l-449-236-449 236q-22 12-40 12-21 0-31.5-14.5t-10.5-35.5q0-6 2-20l86-500-364-354q-25-27-25-48 0-37 56-46l502-73 225-455q19-41 49-41t49 41l225 455 502 73q56 9 56 46z" fill="#ffaf02"></path></svg></span></span><span></span></div></li><li class="mc-user-menu" style="display:none"><a class="mc-menu-toggle" href="https://neurohive.io/en/popular-networks/vgg16/#"><span class="mc-username"></span></a><ul class="mc-dropdown-menu" style="display:none"><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-user-prof">My profile</a></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-user-edit">Edit profile</a></li><li><a href="http://cackle.me/account/signup?demo=[{%22type%22:%22comment%22,%22ver%22:2,%22period%22:1}]&amp;lang=ru" target="_blank">Create your widget</a></li><li><a href="http://cackle.me/comments" target="_blank">About</a></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-logout">Logout</a></li></ul></li><li class="mc-logo" style="display:inline-block"><a href="http://cackle.me/comments" target="_blank" style="display:inline-block!important"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/cackle.png" style="display:inline-block!important"></a></li></ul></div><div class="mc-form"><div class="mc-postbox"><div class="mc-avatar-cnt"><div class="mc-avatar-wrap"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/anonym2.png" class="mc-avatar" onerror="if(this.src!=&#39;https://cackle.me/widget/img/anonym2.png&#39;)this.src=&#39;https://cackle.me/widget/img/anonym2.png&#39;;"></div></div><div class="mc-text-cnt"><div class="mc-text-wrap"><div class="mc-textarea-wrap"><textarea class="mc-textarea" placeholder="Leave your comment..." style="overflow-x: hidden !important; overflow-y: hidden; overflow-wrap: break-word !important; height: 33px;"></textarea><div class="mc-attach-cnt"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-attach-toggle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="20" height="20" viewBox="0 0 1792 1792"><path d="M1596 1385q0 117-79 196t-196 79q-135 0-235-100l-777-776q-113-115-113-271 0-159 110-270t269-111q158 0 273 113l605 606q10 10 10 22 0 16-30.5 46.5t-46.5 30.5q-13 0-23-10l-606-607q-79-77-181-77-106 0-179 75t-73 181q0 105 76 181l776 777q63 63 145 63 64 0 106-42t42-106q0-82-63-145l-581-581q-26-24-60-24-29 0-48 19t-19 48q0 32 25 59l410 410q10 10 10 22 0 16-31 47t-47 31q-12 0-22-10l-410-410q-63-61-63-149 0-82 57-139t139-57q88 0 149 63l581 581q100 98 100 235z" fill="#666"></path></svg></a><ul class="mc-dropdown-menu" style="display:none"><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-attachlink"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="15" height="15" viewBox="0 0 1792 1792"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="#666"></path></svg> Upload from internet</a><div class="mc-attachlinkbox" style="display:none"><textarea class="mc-attachlink-textarea" placeholder="Link to image, video (Youtube, Vimeo)"></textarea><button class="mc-btn2 mc-btn2-sm mc-btn2-bck mc-attachlink-btn">Upload images</button></div></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-attachimg"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="15" height="15" viewBox="0 0 2048 1792"><path d="M1024 672q119 0 203.5 84.5t84.5 203.5-84.5 203.5-203.5 84.5-203.5-84.5-84.5-203.5 84.5-203.5 203.5-84.5zm704-416q106 0 181 75t75 181v896q0 106-75 181t-181 75h-1408q-106 0-181-75t-75-181v-896q0-106 75-181t181-75h224l51-136q19-49 69.5-84.5t103.5-35.5h512q53 0 103.5 35.5t69.5 84.5l51 136h224zm-704 1152q185 0 316.5-131.5t131.5-316.5-131.5-316.5-316.5-131.5-316.5 131.5-131.5 316.5 131.5 316.5 316.5 131.5z" fill="#666"></path></svg> Upload image</a><input type="file" tabindex="-1" accept="image/*" style="display:none!important"></li></ul></div></div></div></div><div class="mc-auth-cnt"><div class="mc-authbox"><div class="mc-grid"><div class="mc-auth-social mc-grid-lg"><div class="mc-h6">Sign in with social network</div><div class="mc-authsoc"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="facebook" title="Facebook"><div class="mc-facebook"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="twitter" title="Twitter"><div class="mc-twitter"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="googleplus" title="Google+"><div class="mc-googleplus"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="vkontakte" title="Вконтакте"><div class="mc-vkontakte"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="odnoklassniki" title="OK"><div class="mc-odnoklassniki"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="mymailru" title="Мой Мир"><div class="mc-mymailru"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="yandex" title="Яндекс"><div class="mc-yandex"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="tumblr" title="Tumblr"><div class="mc-tumblr"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="live" title="Live"><div class="mc-live"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="linkedin" title="Linkedin"><div class="mc-linkedin"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="instagram" title="Instagram"><div class="mc-instagram"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="soundcloud" title="Soundcloud"><div class="mc-soundcloud"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="foursquare" title="Foursquare"><div class="mc-foursquare"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="yammer" title="Yammer"><div class="mc-yammer"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="500px" title="500px"><div class="mc-500px"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="stackoverflow" title="Stackoverflow"><div class="mc-stackoverflow"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="dropbox" title="Dropbox"><div class="mc-dropbox"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="yahoo" title="Yahoo"><div class="mc-yahoo"></div></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-auth-btn" data-provider="livejournal" title="Живой Журнал"><div class="mc-livejournal"></div></a></div></div><div class="mc-auth-anonym mc-grid-lg"><div class="mc-h6">or submit anonymously</div><div class="mc-p"><a href="https://gravatar.com/" class="mc-avatar-wrap" target="_blank" title="So your avatar will be displayed in the comments. Click if you want to change it."><img src="./VGG16 - Convolutional Network for Classification and Detection_files/anonym2.png" class="mc-anonym-avatar"></a><input type="text" class="mc-anonym-name" placeholder="Name"></div><div class="mc-hide"><div class="mc-p"><input type="text" class="mc-anonym-email" placeholder="Email"></div><div class="mc-captcha"></div><div class="mc-p"><button class="mc-btn2 mc-btn2-sm mc-btn2-bck mc-anonym-login">Login as guest</button></div></div></div></div></div></div><div class="mc-submit-cnt"><div class="mc-submit-left"><div class="mc-social-xpost"><input type="checkbox" rel="button" class="mc-social-xpost-checkbox">share on<span class="mc-social-xpost-icon"></span></div></div><button class="mc-btn2 mc-submit">Post comment</button></div><div class="mc-clear"></div></div></div><div class="mc-menu mc-grid"><div class="mc-grid-xs6"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-sort-toggle"><span class="mc-menu-toggle"><span class="mc-sort-label">Newest</span> <span class="mc-comment-count">(4)</span> </span></a><ul class="mc-sort mc-dropdown-menu" style="display:none"><li class="mc-active"><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-sort="desc">Newest <span class="mcicon-ok"></span></a></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-sort="best">Best <span class="mcicon-ok"></span></a></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-sort="asc">Oldest <span class="mcicon-ok"></span></a></li></ul><ul class="mc-sort mc-nav" style=""><li class="mc-active"><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-sort="desc">Newest <span class="mc-comment-count">(4)</span><span class="mc-sort-hover"></span></a></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-sort="best">Best <span class="mc-comment-count">(4)</span><span class="mc-sort-hover"></span></a></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-sort="asc">Oldest <span class="mc-comment-count">(4)</span><span class="mc-sort-hover"></span></a></li></ul></div><div class="mc-grid-xs4"><ul class="mc-nav mc-useract"><li class="mc-subscr-email" style="display:none"><div class="mc-subscr-input-wrap"><input type="text" placeholder="example@mail.com"></div></li><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-subscr-toggle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="14" height="14" viewBox="0 0 1792 1792"><path d="M1664 1504v-768q-32 36-69 66-268 206-426 338-51 43-83 67t-86.5 48.5-102.5 24.5h-2q-48 0-102.5-24.5t-86.5-48.5-83-67q-158-132-426-338-37-30-69-66v768q0 13 9.5 22.5t22.5 9.5h1472q13 0 22.5-9.5t9.5-22.5zm0-1051v-24.5l-.5-13-3-12.5-5.5-9-9-7.5-14-2.5h-1472q-13 0-22.5 9.5t-9.5 22.5q0 168 147 284 193 152 401 317 6 5 35 29.5t46 37.5 44.5 31.5 50.5 27.5 43 9h2q20 0 43-9t50.5-27.5 44.5-31.5 46-37.5 35-29.5q208-165 401-317 54-43 100.5-115.5t46.5-131.5zm128-37v1088q0 66-47 113t-113 47h-1472q-66 0-113-47t-47-113v-1088q0-66 47-113t113-47h1472q66 0 113 47t47 113z" fill="#666"></path></svg> <span class="mc-navlabel">Subscribe</span></a></li><li class="mc-share-cnt"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-share-toggle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="14" height="14" viewBox="0 0 1792 1792"><path d="M1344 1024q133 0 226.5 93.5t93.5 226.5-93.5 226.5-226.5 93.5-226.5-93.5-93.5-226.5q0-12 2-34l-360-180q-92 86-218 86-133 0-226.5-93.5t-93.5-226.5 93.5-226.5 226.5-93.5q126 0 218 86l360-180q-2-22-2-34 0-133 93.5-226.5t226.5-93.5 226.5 93.5 93.5 226.5-93.5 226.5-226.5 93.5q-126 0-218-86l-360 180q2 22 2 34t-2 34l360 180q92-86 218-86z" fill="#666"></path></svg> <span class="mc-navlabel">Share</span></a><ul class="mc-dropdown-menu" style="display:none"><li><ul class="mc-share-menu"><li><span class="mc-social mc-twitter" data-social="twitter"></span></li><li><span class="mc-social mc-facebook" data-social="facebook"></span></li><li><span class="mc-social mc-googleplus" data-social="googleplus"></span></li><li><span class="mc-social mc-vkontakte" data-social="vkontakte"></span></li><li><span class="mc-social mc-odnoklassniki" data-social="odnoklassniki"></span></li><li><span class="mc-social mc-mymailru" data-social="mymailru"></span></li></ul></li></ul></li></ul></div></div><button class="mc-rt" style="display:none">New comments (<span class="mc-rt-count"></span>)</button><div class="mc-comments"><div class="mc-comment" id="cc-95499136" data-author-id="0" itemtype="http://schema.org/Comment" itemscope="itemscope"><div class="mc-comment-wrap mc-comment-approved"><div class="mc-comment-light"></div><div class="mc-comment-user"><a href="javascript:void(0)" class="mc-comment-author"><div class="mc-avatar-wrap"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/anonym2.png" class="mc-avatar" onerror="if(this.src!=&#39;https://cackle.me/widget/img/anonym2.png&#39;)this.src=&#39;https://cackle.me/widget/img/anonym2.png&#39;;"></div></a></div><div class="mc-comment-info"><div class="mc-comment-head"><span class="mc-comment-username" data-author-id="0" itemprop="author">mrimmin</span><meta itemprop="dateCreated" content="2020-04-19T17:53:14"><a href="https://neurohive.io/en/popular-networks/vgg16/#cc-95499136" class="mc-comment-time" timestamp="1587289994655">19.04 17:53</a></div><div class="mc-comment-body"><div class="mc-comment-inner" data-msg="May I ask who is the originial source of the images?" data-media=""><div class="mc-comment-msgcnt"><div class="mc-comment-msg" itemprop="text">May I ask who is the originial source of the images?</div></div><a class="mc-comment-seemore" style="display:none">see more</a></div></div><div class="mc-comment-footer"><a class="mc-comment-reply" data-id="95499136" href="https://neurohive.io/en/popular-networks/vgg16/#">Reply</a><a class="mc-comment-edit" data-id="95499136" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M888 1184l116-116-152-152-116 116v56h96v96h56zm440-720q-16-16-33 1l-350 350q-17 17-1 33t33-1l350-350q17-17 1-33zm80 594v190q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q63 0 117 25 15 7 18 23 3 17-9 29l-49 49q-14 14-32 8-23-6-45-6h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-126q0-13 9-22l64-64q15-15 35-7t20 29zm-96-738l288 288-672 672h-288v-288zm444 132l-92 92-288-288 92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68z" fill="#666"></path></svg> <span class="mc-commentlabel">Edit</span></a><a class="mc-comment-remove" data-id="95499136" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M704 736v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm128 724v-948h-896v948q0 22 7 40.5t14.5 27 10.5 8.5h832q3 0 10.5-8.5t14.5-27 7-40.5zm-672-1076h448l-48-117q-7-9-17-11h-317q-10 2-17 11zm928 32v64q0 14-9 23t-23 9h-96v948q0 83-47 143.5t-113 60.5h-832q-66 0-113-58.5t-47-141.5v-952h-96q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h309l70-167q15-37 54-63t79-26h320q40 0 79 26t54 63l70 167h309q14 0 23 9t9 23z" fill="#666"></path></svg> <span class="mc-commentlabel">Remove</span></a><div class="mc-comment-vote"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-dislike" data-vote="-1" data-id="95499136"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 576q0 26-19 45t-45 19q-27 0-45.5-19t-18.5-45q0-27 18.5-45.5t45.5-18.5q26 0 45 18.5t19 45.5zm160 512v-640q0-26-19-45t-45-19h-288q-26 0-45 19t-19 45v640q0 26 19 45t45 19h288q26 0 45-19t19-45zm1129-149q55 61 55 149-1 78-57.5 135t-134.5 57h-277q4 14 8 24t11 22 10 18q18 37 27 57t19 58.5 10 76.5q0 24-.5 39t-5 45-12 50-24 45-40 40.5-60 26-82.5 10.5q-26 0-45-19-20-20-34-50t-19.5-52-12.5-61q-9-42-13.5-60.5t-17.5-48.5-31-48q-33-33-101-120-49-64-101-121t-76-59q-25-2-43-20.5t-18-43.5v-641q0-26 19-44.5t45-19.5q35-1 158-44 77-26 120.5-39.5t121.5-29 144-15.5h129q133 2 197 78 58 69 49 181 39 37 54 94 17 61 0 117 46 61 43 137 0 32-15 76z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-like" data-vote="1" data-id="95499136"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 1344q0-26-19-45t-45-19q-27 0-45.5 19t-18.5 45q0 27 18.5 45.5t45.5 18.5q26 0 45-18.5t19-45.5zm160-512v640q0 26-19 45t-45 19h-288q-26 0-45-19t-19-45v-640q0-26 19-45t45-19h288q26 0 45 19t19 45zm1184 0q0 86-55 149 15 44 15 76 3 76-43 137 17 56 0 117-15 57-54 94 9 112-49 181-64 76-197 78h-129q-66 0-144-15.5t-121.5-29-120.5-39.5q-123-43-158-44-26-1-45-19.5t-19-44.5v-641q0-25 18-43.5t43-20.5q24-2 76-59t101-121q68-87 101-120 18-18 31-48t17.5-48.5 13.5-60.5q7-39 12.5-61t19.5-52 34-50q19-19 45-19 46 0 82.5 10.5t60 26 40 40.5 24 45 12 50 5 45 .5 39q0 38-9.5 76t-19 60-27.5 56q-3 6-10 18t-11 22-8 24h277q78 0 135 57t57 135z" fill="#666"></path></svg></a><span class="mc-comment-rating mc-comment-" title="comment rating">0</span></div></div></div></div><div class="mc-comment-menu"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-url" data-url="https://neurohive.io/en/popular-networks/vgg16/#cc-95499136" title="Comment link"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="15" height="15" viewBox="0 0 1792 1792"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-share" title="Share"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="14" height="14" viewBox="0 0 1792 1792"><path d="M1344 1024q133 0 226.5 93.5t93.5 226.5-93.5 226.5-226.5 93.5-226.5-93.5-93.5-226.5q0-12 2-34l-360-180q-92 86-218 86-133 0-226.5-93.5t-93.5-226.5 93.5-226.5 226.5-93.5q126 0 218 86l360-180q-2-22-2-34 0-133 93.5-226.5t226.5-93.5 226.5 93.5 93.5 226.5-93.5 226.5-226.5 93.5q-126 0-218-86l-360 180q2 22 2 34t-2 34l360 180q92-86 218-86z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z" fill="#666"></path></svg></a><ul class="mc-dropdown-menu" style="display:none"><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="spam" data-id="95499136">Mark as spam</a><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="complaint" data-id="95499136">Complaint</a></li></ul></div></div><div class="mc-comment" id="cc-93293790" data-author-id="12918565" itemtype="http://schema.org/Comment" itemscope="itemscope"><div class="mc-comment-wrap mc-comment-approved"><div class="mc-comment-light"></div><div class="mc-comment-user"><a href="javascript:void(0)" class="mc-comment-author"><div class="mc-avatar-wrap"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/anonym2.png" class="mc-avatar" onerror="if(this.src!=&#39;https://cackle.me/widget/img/anonym2.png&#39;)this.src=&#39;https://cackle.me/widget/img/anonym2.png&#39;;"></div><div class="mc-social-wrap"><div class="mc-social mc-twitter" style="display:none"></div></div></a></div><div class="mc-comment-info"><div class="mc-comment-head"><a href="http://twitter.com/dbruzzone" class="mc-comment-username" data-author-id="12918565" target="_blank"><span itemprop="author">Davide Bruzzone</span></a><meta itemprop="dateCreated" content="2019-12-07T03:18:29"><a href="https://neurohive.io/en/popular-networks/vgg16/#cc-93293790" class="mc-comment-time" timestamp="1575659909725">2019.12.07 03:18</a></div><div class="mc-comment-body"><div class="mc-comment-inner" data-msg="What&#39;s the &#39;pooing&#39; layer for? I&#39;ve heard of pooling layers, but... ;-D" data-media=""><div class="mc-comment-msgcnt"><div class="mc-comment-msg" itemprop="text">What's the 'pooing' layer for? I've heard of pooling layers, but... ;-D</div></div><a class="mc-comment-seemore" style="display:none">see more</a></div></div><div class="mc-comment-footer"><a class="mc-comment-reply" data-id="93293790" href="https://neurohive.io/en/popular-networks/vgg16/#">Reply</a><a class="mc-comment-edit" data-id="93293790" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M888 1184l116-116-152-152-116 116v56h96v96h56zm440-720q-16-16-33 1l-350 350q-17 17-1 33t33-1l350-350q17-17 1-33zm80 594v190q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q63 0 117 25 15 7 18 23 3 17-9 29l-49 49q-14 14-32 8-23-6-45-6h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-126q0-13 9-22l64-64q15-15 35-7t20 29zm-96-738l288 288-672 672h-288v-288zm444 132l-92 92-288-288 92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68z" fill="#666"></path></svg> <span class="mc-commentlabel">Edit</span></a><a class="mc-comment-remove" data-id="93293790" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M704 736v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm128 724v-948h-896v948q0 22 7 40.5t14.5 27 10.5 8.5h832q3 0 10.5-8.5t14.5-27 7-40.5zm-672-1076h448l-48-117q-7-9-17-11h-317q-10 2-17 11zm928 32v64q0 14-9 23t-23 9h-96v948q0 83-47 143.5t-113 60.5h-832q-66 0-113-58.5t-47-141.5v-952h-96q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h309l70-167q15-37 54-63t79-26h320q40 0 79 26t54 63l70 167h309q14 0 23 9t9 23z" fill="#666"></path></svg> <span class="mc-commentlabel">Remove</span></a><div class="mc-comment-vote"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-dislike" data-vote="-1" data-id="93293790"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 576q0 26-19 45t-45 19q-27 0-45.5-19t-18.5-45q0-27 18.5-45.5t45.5-18.5q26 0 45 18.5t19 45.5zm160 512v-640q0-26-19-45t-45-19h-288q-26 0-45 19t-19 45v640q0 26 19 45t45 19h288q26 0 45-19t19-45zm1129-149q55 61 55 149-1 78-57.5 135t-134.5 57h-277q4 14 8 24t11 22 10 18q18 37 27 57t19 58.5 10 76.5q0 24-.5 39t-5 45-12 50-24 45-40 40.5-60 26-82.5 10.5q-26 0-45-19-20-20-34-50t-19.5-52-12.5-61q-9-42-13.5-60.5t-17.5-48.5-31-48q-33-33-101-120-49-64-101-121t-76-59q-25-2-43-20.5t-18-43.5v-641q0-26 19-44.5t45-19.5q35-1 158-44 77-26 120.5-39.5t121.5-29 144-15.5h129q133 2 197 78 58 69 49 181 39 37 54 94 17 61 0 117 46 61 43 137 0 32-15 76z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-like" data-vote="1" data-id="93293790"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 1344q0-26-19-45t-45-19q-27 0-45.5 19t-18.5 45q0 27 18.5 45.5t45.5 18.5q26 0 45-18.5t19-45.5zm160-512v640q0 26-19 45t-45 19h-288q-26 0-45-19t-19-45v-640q0-26 19-45t45-19h288q26 0 45 19t19 45zm1184 0q0 86-55 149 15 44 15 76 3 76-43 137 17 56 0 117-15 57-54 94 9 112-49 181-64 76-197 78h-129q-66 0-144-15.5t-121.5-29-120.5-39.5q-123-43-158-44-26-1-45-19.5t-19-44.5v-641q0-25 18-43.5t43-20.5q24-2 76-59t101-121q68-87 101-120 18-18 31-48t17.5-48.5 13.5-60.5q7-39 12.5-61t19.5-52 34-50q19-19 45-19 46 0 82.5 10.5t60 26 40 40.5 24 45 12 50 5 45 .5 39q0 38-9.5 76t-19 60-27.5 56q-3 6-10 18t-11 22-8 24h277q78 0 135 57t57 135z" fill="#666"></path></svg></a><span class="mc-comment-rating mc-comment-" title="comment rating">0</span></div></div></div></div><div class="mc-comment-menu"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-url" data-url="https://neurohive.io/en/popular-networks/vgg16/#cc-93293790" title="Comment link"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="15" height="15" viewBox="0 0 1792 1792"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-share" title="Share"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="14" height="14" viewBox="0 0 1792 1792"><path d="M1344 1024q133 0 226.5 93.5t93.5 226.5-93.5 226.5-226.5 93.5-226.5-93.5-93.5-226.5q0-12 2-34l-360-180q-92 86-218 86-133 0-226.5-93.5t-93.5-226.5 93.5-226.5 226.5-93.5q126 0 218 86l360-180q-2-22-2-34 0-133 93.5-226.5t226.5-93.5 226.5 93.5 93.5 226.5-93.5 226.5-226.5 93.5q-126 0-218-86l-360 180q2 22 2 34t-2 34l360 180q92-86 218-86z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z" fill="#666"></path></svg></a><ul class="mc-dropdown-menu" style="display:none"><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="spam" data-id="93293790">Mark as spam</a><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="complaint" data-id="93293790">Complaint</a></li></ul></div><div class="mc-comment-child"><div class="mc-comment" id="cc-94128815" data-author-id="13037567" itemtype="http://schema.org/Comment" itemscope="itemscope"><div class="mc-comment-wrap mc-comment-approved"><div class="mc-comment-light"></div><div class="mc-comment-user"><a href="javascript:void(0)" class="mc-comment-author"><div class="mc-avatar-wrap"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/unnamed.png" class="mc-avatar" onerror="if(this.src!=&#39;https://cackle.me/widget/img/anonym2.png&#39;)this.src=&#39;https://cackle.me/widget/img/anonym2.png&#39;;"></div><div class="mc-social-wrap"><div class="mc-social mc-googleplus" style="display:none"></div></div></a></div><div class="mc-comment-info"><div class="mc-comment-head"><span class="mc-comment-username" data-author-id="13037567" itemprop="author">Przemysław Gęsieniec</span><a href="https://neurohive.io/en/popular-networks/vgg16/#cc-93293790" class="mc-comment-parent"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="14" height="14" viewBox="0 0 1792 1792"><path d="M1792 640q0 26-19 45l-512 512q-19 19-45 19t-45-19-19-45v-256h-224q-98 0-175.5 6t-154 21.5-133 42.5-105.5 69.5-80 101-48.5 138.5-17.5 181q0 55 5 123 0 6 2.5 23.5t2.5 26.5q0 15-8.5 25t-23.5 10q-16 0-28-17-7-9-13-22t-13.5-30-10.5-24q-127-285-127-451 0-199 53-333 162-403 875-403h224v-256q0-26 19-45t45-19 45 19l512 512q19 19 19 45z" fill="#666"></path></svg> Davide Bruzzone</a><meta itemprop="dateCreated" content="2020-01-21T15:17:27"><a href="https://neurohive.io/en/popular-networks/vgg16/#cc-94128815" class="mc-comment-time" timestamp="1579591047991">21.01 15:17</a></div><div class="mc-comment-body"><div class="mc-comment-inner" data-msg="Pooling layer is essentialy a layer which litelary pools the most important features out of the convolved image. You are doing this by overlaying pooling kernels over the image spot by spot, extracting the values you are the most interested in (Max, Avg, etc.). This operation causes the &#39;image&#39; to shring (with the ratio proportional to the kernel size, its stride and padding).  So if you have pooling kernel of size 2x2, you will get 1 value out of 4 original pixels. This example is a bit simplified, but I hope it gives you an idea of what is it all about." data-media=""><div class="mc-comment-msgcnt"><div class="mc-comment-msg" itemprop="text">Pooling layer is essentialy a layer which litelary pools the most important features out of the convolved image. You are doing this by overlaying pooling kernels over the image spot by spot, extracting the values you are the most interested in (Max, Avg, etc.). This operation causes the 'image' to shring (with the ratio proportional to the kernel size, its stride and padding).  So if you have pooling kernel of size 2x2, you will get 1 value out of 4 original pixels. This example is a bit simplified, but I hope it gives you an idea of what is it all about.</div></div><a class="mc-comment-seemore" style="display:none">see more</a></div></div><div class="mc-comment-footer"><a class="mc-comment-reply" data-id="94128815" href="https://neurohive.io/en/popular-networks/vgg16/#">Reply</a><a class="mc-comment-edit" data-id="94128815" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M888 1184l116-116-152-152-116 116v56h96v96h56zm440-720q-16-16-33 1l-350 350q-17 17-1 33t33-1l350-350q17-17 1-33zm80 594v190q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q63 0 117 25 15 7 18 23 3 17-9 29l-49 49q-14 14-32 8-23-6-45-6h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-126q0-13 9-22l64-64q15-15 35-7t20 29zm-96-738l288 288-672 672h-288v-288zm444 132l-92 92-288-288 92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68z" fill="#666"></path></svg> <span class="mc-commentlabel">Edit</span></a><a class="mc-comment-remove" data-id="94128815" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M704 736v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm128 724v-948h-896v948q0 22 7 40.5t14.5 27 10.5 8.5h832q3 0 10.5-8.5t14.5-27 7-40.5zm-672-1076h448l-48-117q-7-9-17-11h-317q-10 2-17 11zm928 32v64q0 14-9 23t-23 9h-96v948q0 83-47 143.5t-113 60.5h-832q-66 0-113-58.5t-47-141.5v-952h-96q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h309l70-167q15-37 54-63t79-26h320q40 0 79 26t54 63l70 167h309q14 0 23 9t9 23z" fill="#666"></path></svg> <span class="mc-commentlabel">Remove</span></a><div class="mc-comment-vote"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-dislike" data-vote="-1" data-id="94128815"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 576q0 26-19 45t-45 19q-27 0-45.5-19t-18.5-45q0-27 18.5-45.5t45.5-18.5q26 0 45 18.5t19 45.5zm160 512v-640q0-26-19-45t-45-19h-288q-26 0-45 19t-19 45v640q0 26 19 45t45 19h288q26 0 45-19t19-45zm1129-149q55 61 55 149-1 78-57.5 135t-134.5 57h-277q4 14 8 24t11 22 10 18q18 37 27 57t19 58.5 10 76.5q0 24-.5 39t-5 45-12 50-24 45-40 40.5-60 26-82.5 10.5q-26 0-45-19-20-20-34-50t-19.5-52-12.5-61q-9-42-13.5-60.5t-17.5-48.5-31-48q-33-33-101-120-49-64-101-121t-76-59q-25-2-43-20.5t-18-43.5v-641q0-26 19-44.5t45-19.5q35-1 158-44 77-26 120.5-39.5t121.5-29 144-15.5h129q133 2 197 78 58 69 49 181 39 37 54 94 17 61 0 117 46 61 43 137 0 32-15 76z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-like" data-vote="1" data-id="94128815"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 1344q0-26-19-45t-45-19q-27 0-45.5 19t-18.5 45q0 27 18.5 45.5t45.5 18.5q26 0 45-18.5t19-45.5zm160-512v640q0 26-19 45t-45 19h-288q-26 0-45-19t-19-45v-640q0-26 19-45t45-19h288q26 0 45 19t19 45zm1184 0q0 86-55 149 15 44 15 76 3 76-43 137 17 56 0 117-15 57-54 94 9 112-49 181-64 76-197 78h-129q-66 0-144-15.5t-121.5-29-120.5-39.5q-123-43-158-44-26-1-45-19.5t-19-44.5v-641q0-25 18-43.5t43-20.5q24-2 76-59t101-121q68-87 101-120 18-18 31-48t17.5-48.5 13.5-60.5q7-39 12.5-61t19.5-52 34-50q19-19 45-19 46 0 82.5 10.5t60 26 40 40.5 24 45 12 50 5 45 .5 39q0 38-9.5 76t-19 60-27.5 56q-3 6-10 18t-11 22-8 24h277q78 0 135 57t57 135z" fill="#666"></path></svg></a><span class="mc-comment-rating mc-comment-" title="comment rating">0</span></div></div></div></div><div class="mc-comment-menu"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-url" data-url="https://neurohive.io/en/popular-networks/vgg16/#cc-94128815" title="Comment link"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="15" height="15" viewBox="0 0 1792 1792"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-share" title="Share"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="14" height="14" viewBox="0 0 1792 1792"><path d="M1344 1024q133 0 226.5 93.5t93.5 226.5-93.5 226.5-226.5 93.5-226.5-93.5-93.5-226.5q0-12 2-34l-360-180q-92 86-218 86-133 0-226.5-93.5t-93.5-226.5 93.5-226.5 226.5-93.5q126 0 218 86l360-180q-2-22-2-34 0-133 93.5-226.5t226.5-93.5 226.5 93.5 93.5 226.5-93.5 226.5-226.5 93.5q-126 0-218-86l-360 180q2 22 2 34t-2 34l360 180q92-86 218-86z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z" fill="#666"></path></svg></a><ul class="mc-dropdown-menu" style="display:none"><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="spam" data-id="94128815">Mark as spam</a><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="complaint" data-id="94128815">Complaint</a></li></ul></div></div></div></div><div class="mc-comment" id="cc-92029667" data-author-id="0" itemtype="http://schema.org/Comment" itemscope="itemscope"><div class="mc-comment-wrap mc-comment-approved"><div class="mc-comment-light"></div><div class="mc-comment-user"><a href="javascript:void(0)" class="mc-comment-author"><div class="mc-avatar-wrap"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/anonym2.png" class="mc-avatar" onerror="if(this.src!=&#39;https://cackle.me/widget/img/anonym2.png&#39;)this.src=&#39;https://cackle.me/widget/img/anonym2.png&#39;;"></div></a></div><div class="mc-comment-info"><div class="mc-comment-head"><span class="mc-comment-username" data-author-id="0" itemprop="author">anon</span><meta itemprop="dateCreated" content="2019-09-11T15:04:00"><a href="https://neurohive.io/en/popular-networks/vgg16/#cc-92029667" class="mc-comment-time" timestamp="1568185440252">2019.09.11 15:04</a></div><div class="mc-comment-body"><div class="mc-comment-inner" data-msg="you should cite your sources properly" data-media=""><div class="mc-comment-msgcnt"><div class="mc-comment-msg" itemprop="text">you should cite your sources properly</div></div><a class="mc-comment-seemore" style="display:none">see more</a></div></div><div class="mc-comment-footer"><a class="mc-comment-reply" data-id="92029667" href="https://neurohive.io/en/popular-networks/vgg16/#">Reply</a><a class="mc-comment-edit" data-id="92029667" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M888 1184l116-116-152-152-116 116v56h96v96h56zm440-720q-16-16-33 1l-350 350q-17 17-1 33t33-1l350-350q17-17 1-33zm80 594v190q0 119-84.5 203.5t-203.5 84.5h-832q-119 0-203.5-84.5t-84.5-203.5v-832q0-119 84.5-203.5t203.5-84.5h832q63 0 117 25 15 7 18 23 3 17-9 29l-49 49q-14 14-32 8-23-6-45-6h-832q-66 0-113 47t-47 113v832q0 66 47 113t113 47h832q66 0 113-47t47-113v-126q0-13 9-22l64-64q15-15 35-7t20 29zm-96-738l288 288-672 672h-288v-288zm444 132l-92 92-288-288 92-92q28-28 68-28t68 28l152 152q28 28 28 68t-28 68z" fill="#666"></path></svg> <span class="mc-commentlabel">Edit</span></a><a class="mc-comment-remove" data-id="92029667" href="https://neurohive.io/en/popular-networks/vgg16/#" style="display:none"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M704 736v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm256 0v576q0 14-9 23t-23 9h-64q-14 0-23-9t-9-23v-576q0-14 9-23t23-9h64q14 0 23 9t9 23zm128 724v-948h-896v948q0 22 7 40.5t14.5 27 10.5 8.5h832q3 0 10.5-8.5t14.5-27 7-40.5zm-672-1076h448l-48-117q-7-9-17-11h-317q-10 2-17 11zm928 32v64q0 14-9 23t-23 9h-96v948q0 83-47 143.5t-113 60.5h-832q-66 0-113-58.5t-47-141.5v-952h-96q-14 0-23-9t-9-23v-64q0-14 9-23t23-9h309l70-167q15-37 54-63t79-26h320q40 0 79 26t54 63l70 167h309q14 0 23 9t9 23z" fill="#666"></path></svg> <span class="mc-commentlabel">Remove</span></a><div class="mc-comment-vote"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-dislike" data-vote="-1" data-id="92029667"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 576q0 26-19 45t-45 19q-27 0-45.5-19t-18.5-45q0-27 18.5-45.5t45.5-18.5q26 0 45 18.5t19 45.5zm160 512v-640q0-26-19-45t-45-19h-288q-26 0-45 19t-19 45v640q0 26 19 45t45 19h288q26 0 45-19t19-45zm1129-149q55 61 55 149-1 78-57.5 135t-134.5 57h-277q4 14 8 24t11 22 10 18q18 37 27 57t19 58.5 10 76.5q0 24-.5 39t-5 45-12 50-24 45-40 40.5-60 26-82.5 10.5q-26 0-45-19-20-20-34-50t-19.5-52-12.5-61q-9-42-13.5-60.5t-17.5-48.5-31-48q-33-33-101-120-49-64-101-121t-76-59q-25-2-43-20.5t-18-43.5v-641q0-26 19-44.5t45-19.5q35-1 158-44 77-26 120.5-39.5t121.5-29 144-15.5h129q133 2 197 78 58 69 49 181 39 37 54 94 17 61 0 117 46 61 43 137 0 32-15 76z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-like" data-vote="1" data-id="92029667"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M320 1344q0-26-19-45t-45-19q-27 0-45.5 19t-18.5 45q0 27 18.5 45.5t45.5 18.5q26 0 45-18.5t19-45.5zm160-512v640q0 26-19 45t-45 19h-288q-26 0-45-19t-19-45v-640q0-26 19-45t45-19h288q26 0 45 19t19 45zm1184 0q0 86-55 149 15 44 15 76 3 76-43 137 17 56 0 117-15 57-54 94 9 112-49 181-64 76-197 78h-129q-66 0-144-15.5t-121.5-29-120.5-39.5q-123-43-158-44-26-1-45-19.5t-19-44.5v-641q0-25 18-43.5t43-20.5q24-2 76-59t101-121q68-87 101-120 18-18 31-48t17.5-48.5 13.5-60.5q7-39 12.5-61t19.5-52 34-50q19-19 45-19 46 0 82.5 10.5t60 26 40 40.5 24 45 12 50 5 45 .5 39q0 38-9.5 76t-19 60-27.5 56q-3 6-10 18t-11 22-8 24h277q78 0 135 57t57 135z" fill="#666"></path></svg></a><span class="mc-comment-rating mc-comment-" title="comment rating">0</span></div></div></div></div><div class="mc-comment-menu"><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-url" data-url="https://neurohive.io/en/popular-networks/vgg16/#cc-92029667" title="Comment link"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="15" height="15" viewBox="0 0 1792 1792"><path d="M1520 1216q0-40-28-68l-208-208q-28-28-68-28-42 0-72 32 3 3 19 18.5t21.5 21.5 15 19 13 25.5 3.5 27.5q0 40-28 68t-68 28q-15 0-27.5-3.5t-25.5-13-19-15-21.5-21.5-18.5-19q-33 31-33 73 0 40 28 68l206 207q27 27 68 27 40 0 68-26l147-146q28-28 28-67zm-703-705q0-40-28-68l-206-207q-28-28-68-28-39 0-68 27l-147 146q-28 28-28 67 0 40 28 68l208 208q27 27 68 27 42 0 72-31-3-3-19-18.5t-21.5-21.5-15-19-13-25.5-3.5-27.5q0-40 28-68t68-28q15 0 27.5 3.5t25.5 13 19 15 21.5 21.5 18.5 19q33-31 33-73zm895 705q0 120-85 203l-147 146q-83 83-203 83-121 0-204-85l-206-207q-83-83-83-203 0-123 88-209l-88-88q-86 88-208 88-120 0-204-84l-208-208q-84-84-84-204t85-203l147-146q83-83 203-83 121 0 204 85l206 207q83 83 83 203 0 123-88 209l88 88q86-88 208-88 120 0 204 84l208 208q84 84 84 204z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-share" title="Share"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="14" height="14" viewBox="0 0 1792 1792"><path d="M1344 1024q133 0 226.5 93.5t93.5 226.5-93.5 226.5-226.5 93.5-226.5-93.5-93.5-226.5q0-12 2-34l-360-180q-92 86-218 86-133 0-226.5-93.5t-93.5-226.5 93.5-226.5 226.5-93.5q126 0 218 86l360-180q-2-22-2-34 0-133 93.5-226.5t226.5-93.5 226.5 93.5 93.5 226.5-93.5 226.5-226.5 93.5q-126 0-218-86l-360 180q2 22 2 34t-2 34l360 180q92-86 218-86z" fill="#666"></path></svg></a><a href="https://neurohive.io/en/popular-networks/vgg16/#" class="mc-comment-menu-toggle"><svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="16" height="16" viewBox="0 0 1792 1792"><path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z" fill="#666"></path></svg></a><ul class="mc-dropdown-menu" style="display:none"><li><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="spam" data-id="92029667">Mark as spam</a><a href="https://neurohive.io/en/popular-networks/vgg16/#" data-act="complaint" data-id="92029667">Complaint</a></li></ul></div></div></div><div class="mc-pagination" style="display:none"><button class="mc-btn2 mc-btn2-bck mc-comment-next" data-page="0">Next comments </button></div></div></div>
+    <a id="mc-link" href="http://cackle.me/" data-wpel-link="external" target="_blank" rel="nofollow external noopener">Комментарии для сайта <b style="color:#4FA3DA">Cackl</b><b style="color:#F65077">e</b></a></div>
+
+    
+<script type="text/javascript">
+    cackle_widget = window.cackle_widget || [];
+    cackle_widget.push({
+        widget: 'Comment', countContainer: 'c5384',
+        id: '62057',
+        channel: '5384'
+    ,
+        lang: 'en'                });
+            document.getElementById('mc-container').innerHTML = '';
+            (function() {
+                var mc = document.createElement('script');
+                mc.type = 'text/javascript';
+                mc.async = true;
+                mc.src = ('https:' == document.location.protocol ? 'https' : 'http') + '://cackle.me/widget.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+            })();
+    </script>
+
+    
+    
+
+    
+
+            </main><!-- #main -->
+        </div><!-- #primary -->
+                <aside id="secondary" class="widget-area sidebar-right sidebar-narrow grid-m8 grid-offset-m2 grid-l3 grid-offset-l0" role="complementary">
+            <div class="sidebar-main"><section id="custom_html-7" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><center><script async="" src="./VGG16 - Convolutional Network for Classification and Detection_files/f(9).txt"></script>
+<!-- Нижний -->
+<ins class="adsbygoogle" style="display:inline-block;width:300px;height:250px" data-ad-client="ca-pub-8017291333359749" data-ad-slot="3999993990" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><ins id="aswift_1_anchor" style="display:block;border:none;height:250px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><iframe id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;border:0;width:300px;height:250px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="300" height="250" frameborder="0" src="./VGG16 - Convolutional Network for Classification and Detection_files/ads(2).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!2" data-google-query-id="CLCmleHgxuoCFdMCXAodWKEFfw" data-load-complete="true"></iframe></ins></ins></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+	</script></center></div></section><section id="wpfelix_recent_posts-7" class="widget widget_wpfelix_recent_posts"><h3 class="widget-title">Recent posts</h3><ul><li class="has-post-thumbnail"><div class="entry-featured"><a href="https://neurohive.io/en/news/deepfacedrawing-generating-realistic-faces-from-sketches/" data-wpel-link="internal"><img width="140" height="89" src="./VGG16 - Convolutional Network for Classification and Detection_files/rsz_dfd-140x89.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt=""></a></div><div class="entry-summary"><h4 class="entry-title"><a href="https://neurohive.io/en/news/deepfacedrawing-generating-realistic-faces-from-sketches/" rel="bookmark" data-wpel-link="internal">DeepFaceDrawing: Generating Realistic Faces from Sketches</a></h4><div class="entry-posted-on"><a href="https://neurohive.io/en/news/deepfacedrawing-generating-realistic-faces-from-sketches/" rel="bookmark" data-wpel-link="internal"><time class="entry-date" datetime="2020-07-07T01:34:00+03:00">7 July 2020</time></a></div></div></li><li class="has-post-thumbnail"><div class="entry-featured"><a href="https://neurohive.io/en/news/new-model-achieves-real-time-segmentation-in-bad-weather-conditions/" data-wpel-link="internal"><img width="140" height="89" src="./VGG16 - Convolutional Network for Classification and Detection_files/rsz_segmm-140x89.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt=""></a></div><div class="entry-summary"><h4 class="entry-title"><a href="https://neurohive.io/en/news/new-model-achieves-real-time-segmentation-in-bad-weather-conditions/" rel="bookmark" data-wpel-link="internal">New Model Achieves Real-time Segmentation in Bad Weather Conditions</a></h4><div class="entry-posted-on"><a href="https://neurohive.io/en/news/new-model-achieves-real-time-segmentation-in-bad-weather-conditions/" rel="bookmark" data-wpel-link="internal"><time class="entry-date" datetime="2020-07-06T21:07:12+03:00">6 July 2020</time></a></div></div></li><li class="has-post-thumbnail"><div class="entry-featured"><a href="https://neurohive.io/en/news/disney-presents-high-resolution-face-swapping-neural-network/" data-wpel-link="internal"><img width="140" height="89" src="./VGG16 - Convolutional Network for Classification and Detection_files/rsz_swappp-140x89.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt=""></a></div><div class="entry-summary"><h4 class="entry-title"><a href="https://neurohive.io/en/news/disney-presents-high-resolution-face-swapping-neural-network/" rel="bookmark" data-wpel-link="internal">Disney Presents High-Resolution Face-Swapping Neural Network</a></h4><div class="entry-posted-on"><a href="https://neurohive.io/en/news/disney-presents-high-resolution-face-swapping-neural-network/" rel="bookmark" data-wpel-link="internal"><time class="entry-date" datetime="2020-07-06T02:21:02+03:00">6 July 2020</time></a></div></div></li><li class="has-post-thumbnail"><div class="entry-featured"><a href="https://neurohive.io/en/news/google-s-new-context-r-cnn-uses-past-images-to-improve-detection/" data-wpel-link="internal"><img width="140" height="89" src="./VGG16 - Convolutional Network for Classification and Detection_files/rsz_serengeti-140x89.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt=""></a></div><div class="entry-summary"><h4 class="entry-title"><a href="https://neurohive.io/en/news/google-s-new-context-r-cnn-uses-past-images-to-improve-detection/" rel="bookmark" data-wpel-link="internal">Google’s New “Context R-CNN” Uses Past Images to Improve Detection</a></h4><div class="entry-posted-on"><a href="https://neurohive.io/en/news/google-s-new-context-r-cnn-uses-past-images-to-improve-detection/" rel="bookmark" data-wpel-link="internal"><time class="entry-date" datetime="2020-07-02T01:09:33+03:00">2 July 2020</time></a></div></div></li><li class="has-post-thumbnail"><div class="entry-featured"><a href="https://neurohive.io/en/news/nvidia-released-state-of-the-art-stylegan2-model/" data-wpel-link="internal"><img width="140" height="89" src="./VGG16 - Convolutional Network for Classification and Detection_files/rsz_gann2-140x89.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt=""></a></div><div class="entry-summary"><h4 class="entry-title"><a href="https://neurohive.io/en/news/nvidia-released-state-of-the-art-stylegan2-model/" rel="bookmark" data-wpel-link="internal">NVIDIA Released State-of-the-art StyleGAN2  Model</a></h4><div class="entry-posted-on"><a href="https://neurohive.io/en/news/nvidia-released-state-of-the-art-stylegan2-model/" rel="bookmark" data-wpel-link="internal"><time class="entry-date" datetime="2020-06-26T00:55:23+03:00">26 June 2020</time></a></div></div></li><li class="has-post-thumbnail"><div class="entry-featured"><a href="https://neurohive.io/en/news/facebook-ai-released-pointrend-image-segmentation-as-rendering/" data-wpel-link="internal"><img width="140" height="89" src="./VGG16 - Convolutional Network for Classification and Detection_files/rsz_prr-140x89.png" class="attachment-thumbnail size-thumbnail wp-post-image" alt=""></a></div><div class="entry-summary"><h4 class="entry-title"><a href="https://neurohive.io/en/news/facebook-ai-released-pointrend-image-segmentation-as-rendering/" rel="bookmark" data-wpel-link="internal">Facebook AI Released PointRend: Image Segmentation as Rendering</a></h4><div class="entry-posted-on"><a href="https://neurohive.io/en/news/facebook-ai-released-pointrend-image-segmentation-as-rendering/" rel="bookmark" data-wpel-link="internal"><time class="entry-date" datetime="2020-06-23T00:31:42+03:00">23 June 2020</time></a></div></div></li></ul></section><section id="text-5" class="widget widget_text"><div class="screen-reader-text"><h3 class="widget-title">300×600 adsense</h3></div>			<div class="textwidget"><p><script async="" src="./VGG16 - Convolutional Network for Classification and Detection_files/f(9).txt"></script><br>
+<!-- 300x600 --><br>
+<ins class="adsbygoogle" style="display: inline-block; width: 300px; height: 600px;" data-ad-client="ca-pub-8017291333359749" data-ad-slot="1692930866" data-adsbygoogle-status="done"><ins id="aswift_2_expand" style="display:inline-table;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><ins id="aswift_2_anchor" style="display:block;border:none;height:600px;margin:0;padding:0;position:relative;visibility:visible;width:300px;background-color:transparent;"><iframe id="aswift_2" name="aswift_2" style="left:0;position:absolute;top:0;border:0;width:300px;height:600px;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" width="300" height="600" frameborder="0" src="./VGG16 - Convolutional Network for Classification and Detection_files/ads(3).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!3" data-google-query-id="CJ2ileHgxuoCFQGyvAod3nsLKw" data-load-complete="true"></iframe></ins></ins></ins><br>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script></p>
+</div>
+		</section></div>        </aside><!-- #secondary -->
+            </div>
+</div>
+    </div><!-- #content -->
+        <footer id="colophon" class="site-footer" role="contentinfo">
+        <div class="site-info">
+            <div class="grid-container">
+                <div class="grid">
+                    <div class="grid-l3 grid-m8 grid-s10 grid-offset-l0 grid-offset-m2 grid-offset-s1">
+                        <div class="footer-logo"><a href="https://neurohive.io/en/" class="footer-logo-link" data-wpel-link="internal"><img class="footer-logo-img" src="./VGG16 - Convolutional Network for Classification and Detection_files/neurohive-logo-e1530307958403.jpg" alt="footer-logo"></a></div>                    </div>
+                    <div class="grid-l6 text-center">
+                        <div class="footer-text-container"><div class="footer-intro">Up-to-date research in the field of neural networks: machine learning, computer vision, nlp, photo processing, streaming sound and video, augmented and virtual reality.</div></div>                    </div>
+                    <div class="grid-l3 grid-m8 grid-s10 grid-offset-l0 grid-offset-m2 grid-offset-s1">
+                        						      <ul class="list-social">
+						<li class="facebook"><a href="https://www.facebook.com/NeuroHive-DSML-Club-811499265885344/" title="Facebook" target="_blank" data-wpel-link="external" rel="nofollow external noopener"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/if_Facebook_2745008.svg"></a></li>
+						<li class="Linkindin"><a href="https://www.linkedin.com/company/neurohive/" title="Linkindin" target="_blank" data-wpel-link="external" rel="nofollow external noopener"><img src="./VGG16 - Convolutional Network for Classification and Detection_files/if_LinkedIN_2744970.svg"></a></li>
+						</ul>
+
+
+                                        </div>
+                </div>
+            </div>
+        </div><!-- .site-info -->
+    </footer><!-- #colophon -->
+        <a href="javascript:void(0)" id="backtotop" class="back-to-top-link active" data-wpel-link="internal"><i class="fa fa-angle-up"></i></a>
+    </div><!-- #page -->
+
+<script data-cfasync="false" type="text/javascript">if (window.addthis_product === undefined) { window.addthis_product = "wpp"; } if (window.wp_product_version === undefined) { window.wp_product_version = "wpp-6.2.6"; } if (window.addthis_share === undefined) { window.addthis_share = {}; } if (window.addthis_config === undefined) { window.addthis_config = {"data_track_clickback":true,"ui_atversion":"300"}; } if (window.addthis_plugin_info === undefined) { window.addthis_plugin_info = {"info_status":"enabled","cms_name":"WordPress","plugin_name":"Share Buttons by AddThis","plugin_version":"6.2.6","plugin_mode":"AddThis","anonymous_profile_id":"wp-c843758416deef14a70f3354b4d4b505","page_info":{"template":"posts","post_type":""},"sharing_enabled_on_post_via_metabox":false}; } 
+                    (function() {
+                      var first_load_interval_id = setInterval(function () {
+                        if (typeof window.addthis !== 'undefined') {
+                          window.clearInterval(first_load_interval_id);
+                          if (typeof window.addthis_layers !== 'undefined' && Object.getOwnPropertyNames(window.addthis_layers).length > 0) {
+                            window.addthis.layers(window.addthis_layers);
+                          }
+                          if (Array.isArray(window.addthis_layers_tools)) {
+                            for (i = 0; i < window.addthis_layers_tools.length; i++) {
+                              window.addthis.layers(window.addthis_layers_tools[i]);
+                            }
+                          }
+                        }
+                     },1000)
+                    }());
+                </script><script type="text/javascript">
+/* <![CDATA[ */
+var thirsty_global_vars = {"home_url":"\/\/neurohive.io","ajax_url":"https:\/\/neurohive.io\/wp-admin\/admin-ajax.php","link_fixer_enabled":"yes","link_prefix":"recommends","link_prefixes":{"3":"recommends"},"post_id":"5384","enable_record_stats":"yes","enable_js_redirect":"yes","disable_thirstylink_class":""};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/ta.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/jquery.fitvids.min.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/imagesloaded.min.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/owl.carousel.min.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/polyfills.min.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/theme.min.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/comment-reply.js.download"></script>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/addthis_widget.js.download"></script><div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; top: -9999px; z-index: 100000;"><iframe id="_atssh46" title="AddThis utility frame" style="height: 1px; width: 1px; position: absolute; top: 0px; z-index: 100000; border: 0px; left: 0px;" src="./VGG16 - Convolutional Network for Classification and Detection_files/sh.f48a1a04fe8dbf021b4cda1d.html"></iframe></div><style id="service-icons-0"></style>
+<script type="text/javascript" src="./VGG16 - Convolutional Network for Classification and Detection_files/wp-embed.js.download"></script>
+
+<script>
+    jQuery('.single .entry-content img').wrap('<div class="image-block">');
+</script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter48570191 = new Ya.Metrika({
+                    id:48570191,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true,
+                    webvisor:true
+                });
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/48570191" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="./VGG16 - Convolutional Network for Classification and Detection_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-117829738-1');
+</script>
+<script type="text/javascript">
+jQuery(document).ready(function () {
+
+var urlB = "https://neurohive.io";
+  // jQuery(document).on('click', '.button-full', function () {
+  //   var idUp = jQuery(this).parent().parent().parent().attr("id")
+  //   if (jQuery(this).hasClass('open')) {
+  //     jQuery(this).parent().parent().parent().removeClass('open');
+  //     jQuery(this).removeClass('open');
+  //     window.location.hash=idUp;
+  //     window.history.pushState(null, null, urlB);
+  //   } else {
+  //     jQuery(this).parent().parent().parent().addClass('open');
+  //     jQuery(this).addClass('open');
+  //     window.location.hash=idUp;
+  //     currentImg();
+  //   }
+  //   return false
+  // });
+
+  function topBtn() {
+    if (jQuery('.button-full').hasClass('open')) {
+        var open = jQuery('button.open');
+        var position = open.parent().position().top
+      if (jQuery(window).scrollTop() > position ) {
+          open.addClass('static');
+      } else {
+          open.removeClass('static');
+      }
+    }
+  }
+
+  function currentImg(){
+    var windowTop = jQuery(window).scrollTop(),
+    post = jQuery(document).find('.post').filter(function(){
+        return jQuery(this).position().top > windowTop - jQuery(this).height();
+     });
+     var idElem = post[0].getAttribute('customUrl');
+     window.history.pushState(null, null, idElem)
+  }
+
+  jQuery(window).scroll(function () {
+    topBtn();
+  });
+
+});
+
+</script>
+<script src="./VGG16 - Convolutional Network for Classification and Detection_files/easyNotify.js.download"></script>
+<script>
+var myFunction = function() {
+  alert('Click function');
+};
+var myImg = "#";
+
+$("form").submit(function(event) {
+  event.preventDefault();
+
+  var options = {
+    title: $("#title").val(),
+    options: {
+      body: $("#message").val(),
+      icon: myImg,
+      lang: 'en-US',
+      onClick: myFunction
+    }
+  };
+  console.log(options);
+  $("#easyNotify").easyNotify(options);
+});
+</script>
+
+
+
+<ins class="adsbygoogle adsbygoogle-noablate" data-adsbygoogle-status="done" style="display: none !important;"><ins id="aswift_3_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><ins id="aswift_3_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent;"><iframe id="aswift_3" name="aswift_3" style="left:0;position:absolute;top:0;border:0;width:undefinedpx;height:undefinedpx;" sandbox="allow-forms allow-pointer-lock allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-top-navigation-by-user-activation" frameborder="0" src="./VGG16 - Convolutional Network for Classification and Detection_files/ads(4).html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" data-google-container-id="a!3" data-load-complete="true"></iframe></ins></ins></ins><iframe id="google_osd_static_frame_5381473682303" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./VGG16 - Convolutional Network for Classification and Detection_files/saved_resource(4).html"></iframe><iframe name="easyXDM_default9539_provider" id="easyXDM_default9539_provider" src="./VGG16 - Convolutional Network for Classification and Detection_files/index.html" frameborder="0" style="position:absolute!important;top:-2000px!important;left:0!important;"></iframe><textarea style="font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 400; font-style: normal; letter-spacing: normal; line-height: 18px; text-transform: none; word-spacing: 0px; text-indent: 0px; position: absolute !important; top: -999px !important; left: 0px !important; right: auto !important; bottom: auto !important; border: 0px !important; padding: 0px !important; box-sizing: content-box !important; overflow-wrap: break-word !important; height: 0px !important; min-height: 0px !important; overflow-x: hidden !important; overflow-y: hidden; transition: none 0s ease 0s !important; width: 736px;"></textarea></body><iframe id="google_esf" name="google_esf" src="./VGG16 - Convolutional Network for Classification and Detection_files/zrt_lookup.html" data-ad-client="ca-pub-8017291333359749" style="display: none;"></iframe></html>
