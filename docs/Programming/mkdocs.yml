@@ -1,5 +1,5 @@
 nav:
-    - Programming-paradigm-of-DL: Programming-paradigm-of-DL.md
+    - Programming-paradigm: Programming-paradigm
     - TensorFlow: TensorFlow
     - pytorch: pytorch
     - Keras: Keras
