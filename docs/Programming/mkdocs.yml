@@ -1,3 +1,6 @@
 nav:
-    - Programming-paradigm-of-deep-learning: Programming-paradigm-of-deep-learning.md
+    - Programming-paradigm-of-DL: Programming-paradigm-of-DL.md
+    - TensorFlow: TensorFlow
+    - pytorch: pytorch
+    - Keras: Keras
     - VS-pytorch-vs-tensorflow: VS-pytorch-vs-tensorflow.md

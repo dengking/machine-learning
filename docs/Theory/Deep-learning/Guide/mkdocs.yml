@@ -1,5 +1,5 @@
 nav:    
-    - Neural-Networks-Tutorial: Neural-Networks-Tutorial.md
+    - Tutorial: Tutorial
     - Computation-And-model-And-computational-graph: Computation-And-model-And-computational-graph.md
     - Model-capacity: Model-capacity
     - Model-initialization: Model-initialization
