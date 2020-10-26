@@ -4,7 +4,7 @@
 
 TensorFlow [1] is an interface for expressing machine learning algorithms, and an implementation for executing such algorithms. 
 
-> NOTE: tensorflow即实现了interface（front end）也实现了computation engine（back end），而[Keras](https://en.wikipedia.org/wiki/Keras)则仅仅提供interface，而将tensorflow等作为back end。
+> NOTE: tensorflow既实现了interface（front end）也实现了computation engine（back end），而[Keras](https://en.wikipedia.org/wiki/Keras)则仅仅提供interface，而将tensorflow等作为back end。
 
 A computation expressed using TensorFlow can be executed with little or no change on a wide variety of heterogeneous（异构的） systems, ranging from mobile devices such as phones and tablets up to large-scale distributed systems of hundreds of machines and thousands of computational devices such as GPU cards. 
 
@@ -25,7 +25,9 @@ Based on our experience with DistBelief and a more complete understanding of the
 
 TensorFlow takes computations described using a **dataflow-like model** and maps them onto a wide variety of different hardware platforms, ranging from running inference on mobile device platforms such as Android and iOS to modest-sized training and inference systems using single machines containing one or many GPU cards to large-scale training systems running on hundreds of specialized machines with thousands of GPUs. 
 
-Having a single system that can span such a broad range of platforms significantly simplifies the real-world use of machine learning system, as we have found that having separate systems for large-scale training and small-scale deployment leads to significant maintenance burdens and leaky abstractions. 
+> NOTE: dataflow-like model，其实非常类似于symbolic programming。
+
+Having a single system that can span such a broad range of platforms significantly simplifies the real-world use of machine learning system, as we have found that having separate systems for large-scale training and small-scale deployment leads to significant maintenance burdens and leaky abstractions(泄露的抽象). 
 
 > NOTE: 统一的优势
 
@@ -80,9 +82,9 @@ C = [...] # Cost computed as a function
 # of Relu
 s = tf.Session()
 for step in xrange(0, 10):
-input = ...construct 100-D input array ... # Create 100-d vector for input
-result = s.run(C, feed_dict={x: input}) # Fetch cost, feeding x=input
-print step, result
+	input = ...construct 100-D input array ... # Create 100-d vector for input
+	result = s.run(C, feed_dict={x: input}) # Fetch cost, feeding x=input
+	print step, result
 ```
 
 ![](./Figure-2-Corresponding-computation-graph-for-Figure-1.jpg)
@@ -107,11 +109,15 @@ In a TensorFlow graph, each ***node*** has zero or more inputs and zero or more 
 
 ### Operations and Kernels
 
-An ***operation*** has a name and represents an abstract computation (e.g., “matrix multiply”, or “add”). An operation can have ***attributes***, and all attributes must be provided or inferred at graph-construction time in order to instantiate a node to perform the operation. One common use of attributes is to make operations polymorphic over different tensor element types (e.g., add of two tensors of type float versus add of two tensors of type int32). 
+> NOTE: 本节描述了operation和kernel之间的关系，其实它们的关系非常类似于interface and implementation: operation是interface，kernel是implementation。
+>
+> TensorFlow的operation和kernel采用的是registration mechanism，这增加了它的可扩展性，关于如何扩展，参见:
+>
+> 1) stackoverflow [Understand Op Registration and Kernel Linking in TensorFlow](https://stackoverflow.com/questions/37548662/understand-op-registration-and-kernel-linking-in-tensorflow)
 
-A ***kernel*** is a particular implementation of an **operation** that can be run on a particular type of device (e.g., CPU or GPU). A TensorFlow binary defines the sets of **operations** and **kernels** available via a registration mechanism, and this set can be extended by linking in additional operation and/or kernel definitions/registrations. Table 1 shows some of the kinds of **operations** built into the core TensorFlow library.
+An ***operation*** has a name and represents an **abstract computation** (e.g., “matrix multiply”, or “add”). An operation can have ***attributes***, and all attributes must be provided or inferred at **graph-construction time** in order to instantiate a node to perform the operation. One common use of **attributes** is to make operations polymorphic over different tensor element types (e.g., add of two tensors of type float versus add of two tensors of type int32). 
 
-> NOTE: 上面描述了operation和kernel之间的关系
+A ***kernel*** is a **particular implementation** of an **operation** that can be run on a particular type of device (e.g., CPU or GPU). A TensorFlow binary defines the sets of **operations** and **kernels** available via a registration mechanism, and this set can be extended by linking in additional operation and/or kernel definitions/registrations. Table 1 shows some of the kinds of **operations** built into the core TensorFlow library.
 
 | Category                             | Examples                                                  |
 | ------------------------------------ | --------------------------------------------------------- |
@@ -134,7 +140,7 @@ Table 1: Example TensorFlow operation types
 
 ### Sessions
 
-Clients programs interact with the TensorFlow system by creating a ***Session***. To create a **computation graph**, the Session interface supports an ***Extend*** method to augment（扩展） the current graph managed by the session with additional nodes and edges (the initial graph when a session is created is empty). The other primary operation supported by the session interface is ***Run***, which takes a set of output names that need to be computed, as well as an optional set of **tensors** to be fed into the graph in place of certain outputs of nodes. Using the arguments to Run, the TensorFlow implementation can compute the **transitive closure** of all nodes that must be executed in order to compute the outputs that were requested, and can then arrange to execute the appropriate nodes in an order that respects their dependencies (as described in more detail in 3.1). Most of our uses of TensorFlow set up a Session with a graph once, and then execute the full graph or a few distinct subgraphs thousands or millions of times via Run calls.
+Clients programs interact with the TensorFlow system by creating a ***Session***. To create a **computation graph**, the Session interface supports an **`Extend`** method to augment（扩展） the current graph managed by the session with additional nodes and edges (the initial graph when a session is created is empty). The other primary operation supported by the session interface is **`Run`**, which takes a set of output names that need to be computed, as well as an optional set of **tensors** to be fed into the graph in place of certain outputs of nodes. Using the arguments to `Run`, the TensorFlow implementation can compute the **transitive closure** of all nodes that must be executed in order to compute the outputs that were requested, and can then arrange to execute the appropriate nodes in an order that respects their dependencies (as described in more detail in 3.1). Most of our uses of TensorFlow set up a Session with a graph once, and then execute the full graph or a few distinct subgraphs thousands or millions of times via Run calls.
 
 > NOTE: tensorflow的computation graph其实也可以看做是一个dependency graph，显然最终的输出节点是依赖于所有流向它的输入tensor的，而这些tensor又进一步依赖于流入它的tensor的，显然这种dependency关系是transitive的，也就是为了计算出output，需要计算出所有的transitive closure。这就是在graph theory中总结的dependency model。
 >
@@ -148,7 +154,7 @@ Clients programs interact with the TensorFlow system by creating a ***Session***
 
 ### Variables
 
-In most computations a graph is executed multiple times. Most tensors do not survive past a single execution of the graph. However, a Variable is a special kind of operation that returns a handle to a persistent mutable tensor that survives across executions of a graph. Handles to these persistent mutable tensors can be passed to a handful of special operations, such as Assign and `AssignAdd` (equivalent to +=) that mutate the referenced tensor. For machine learning applications of TensorFlow, the parameters of the model are typically stored in tensors held in variables, and are updated as part of the Run of the training graph for the model.
+In most computations a graph is executed multiple times. Most tensors do not survive past a single execution of the graph. However, a Variable is a special kind of operation that returns a handle to a persistent mutable tensor that survives across executions of a graph. Handles to these persistent mutable tensors can be passed to a handful of special operations, such as Assign and `AssignAdd` (equivalent to `+=`) that mutate the referenced tensor. For machine learning applications of TensorFlow, the parameters of the model are typically stored in tensors held in variables, and are updated as part of the Run of the training graph for the model.
 
 ## 3 Implementation
 
@@ -158,7 +164,7 @@ We have both ***local*** and ***distributed*** implementations of the TensorFlow
 
 The **local implementation** is used when the client, the master, and the worker all run on a single machine in the context of a single operating system process (possibly with multiple devices, if for example, the machine has many GPU cards installed). 
 
-The **distributed implementation** shares most of the code with the local implementation, but extends it with support for an environment where the client, the master, and the workers can all be in different processes on different machines. In our distributed environment, these different tasks are containers in jobs managed by a cluster scheduling system [51]. These two different modes are illustrated in Figure 3. 
+The **distributed implementation** shares most of the code with the local implementation, but extends it with support for an environment where the client, the master, and the workers can all be in different processes on different machines. In our distributed environment, these different tasks are containers in jobs managed by a **cluster scheduling system** [51]. These two different modes are illustrated in Figure 3. 
 
 ![](./Figure-3-Single-machine-and-distributed-system-structure.jpg)
 
@@ -256,15 +262,38 @@ depends, it first finds the path in the computation graph from `I` to `C`. Then 
 
 ### 4.2 Partial Execution
 
+Often a client wants to execute just a subgraph of the entire execution graph. To support this, once the client has set up a computation graph in a Session, our `Run` method allows them to execute an arbitrary subgraph of the whole graph, and to inject arbitrary data along any edge in the graph, and to retrieve data flowing along any edge in the graph.
+
+
+
 ### 4.3 Device Constraints
+
+TensorFlow clients can control the placement of nodes on devices by providing partial constraints for a node about which devices it can execute on. For example, “only place this node on a device of type
+GPU”, or “this node can be placed on any device in /job:worker/task:17”, or “Colocate this node with the node named variable13”. Within the confines of these constraints, the placement algorithm is responsible
+for choosing an assignment of nodes to devices that provides fast execution of the computation and also satisfies various constraints imposed by the devices themselves, such as limiting the total amount of memory needed on a device in order to execute its subset of graph nodes.
+
+
 
 ### 4.4 Control Flow
 
+Although dataflow graphs without any explicit control flow are quite expressive, we have observed a number of cases where supporting conditionals and loops can lead to more concise and efficient representations of machine learning algorithms.
+
 ### 4.5 Input Operations
+
+Although input data can be provided to a computation via feed nodes, another common mechanism used for training large-scale machine learning models is to have special input operation nodes in the graph, which are typically configured with a set of filenames and which yield a tensor containing one or more examples from the data stored in that set of files each time they are executed. This allows data to be read directly from the underlying storage system into the memory of the machine that will perform subsequent processing on the data. In configurations where the client process is separate from the worker process, if the data were fed, it typically would require an extra network hop (from the storage system to the client
+and then from the client to the worker vs. directly from the storage system to ther worker when using an input node).
 
 ### 4.6 Queues
 
+Queues are a useful feature that we have added to TensorFlow. They allow different portions of the graph to execute asynchronously, possibly at different candences, and to hand off data through `Enqueue` and `Dequeue` operations. `Enqueue` operations can block until space becomes available in the queue, and `Dequeue` operations can block until a desired minimum number of elements are available in the queue. One use of queues is to allow input data to be prefetched from disk files while a previous batch of data is still being processed by the computational portion of a machine learning model. They can also be used for other kinds of grouping, including accumulating many gradients in order to compute some more complex combination of gradients over a larger batch, or to group different input sentences for recurrent language
+models into bins of sentences that are approximately the same length, which can then be processed
+more efficiently.
+
+In addition to normal FIFO queues, we have also implemented a shuffling queue, which randomly shuffles its elements within a large in-memory buffer. This shuffling functionality is useful for machine learning algorithms that want to randomize the order in which they process examples, for example.
+
 ### 4.7 Containers
+
+A Container is the mechanism within TensorFlow for managing longer-lived mutable state. The backing store for a Variable lives in a container. The default container is one that persists until the process terminates, but we also allow other named containers. A container can be reset by clearing it of its contents entirely. Using containers, it is possible to share state even across completely disjoint computation graphs associated with different Sessions.
 
 
 
@@ -289,6 +318,9 @@ Since the construction of computation graphs is often done by many different lay
 The TensorFlow interface and a reference implementation have been open sourced under an Apache 2.0
 license, and the system is available for download at www.tensorflow.org. The system includes detailed documentation, a number of tutorials, and a number of examples demonstrating how to use the system for a variety of different machine learning tasks. The examples include models for classifying hand-written digits from the MNIST dataset (the “hello world” of machine learning algorithms) [32], classifying images from the CIFAR-10 dataset [30], doing language modeling using a recurrent LSTM [22] network, training word embedding vectors [35] and more.
 
+The system includes front-ends for specifying TensorFlow computations in Python and C++, and we expect
+other front-ends to be added over time in response to the desires of both internal Google users and the broader open-source community.
+
 
 
 ## 7 Common Programming Idioms
@@ -301,7 +333,23 @@ The approaches in this subsection assume that the model is being trained using s
 
 One simple technique for speeding up SGD is to parallelize the computation of the gradient for a mini-batch across mini-batch elements. For example, if we are using a mini-batch size of 1000 elements, we can use 10 replicas of the model to each compute the gradient for 100 elements, and then combine the gradients and apply updates to the parameters synchronously, in order to behave exactly as if we were running the sequential SGD algorithm with a batch size of 1000 elements. In this case, the TensorFlow graph simply has many replicas of the portion of the graph that does the bulk of the model computation, and a single client thread drives the entire training loop for this large graph. This is illustrated in the top portion of Figure 7.
 
+This approach can also be made asynchronous, where the TensorFlow graph has many replicas of the portion of the graph that does the bulk of the model computation, and each one of these replicas also applies the parameter updates to the model parameters asynchronously. In this configuration, there is one client thread for each of the graph replicas. This is illustrated in the bottom portion of Figure 7. This asynchronous approach was also described in [14].
 
+![](./Figure-7-Synchronous-and-asynchronous-data-parallel-training.png)
+
+
+
+### Model Parallel Training
+
+Model parallel training, where different portions of the model computation are done on different computational devices simultaneously for the same batch of examples, is also easy to express in TensorFlow. Figure 8 shows an example of a recurrent, deep LSTM model used for sequence to sequence learning (see [47]), parallelized across three different devices.
+
+![](./Figure-8-Model-parallel-training.png)
+
+### Concurrent Steps for Model Computation Pipelining
+
+Another common way to get better utilization for training deep neural networks is to pipeline the computation of the model within the same devices, by running a small number of concurrent steps within the same set of devices. This is shown in Figure 9. It is somewhat similar to asynchronous data parallelism, except that the parallelism occurs within the same device(s), rather than replicating the computation graph on different devices. This allows “filling in the gaps” where computation of a single batch of examples might not be able to fully utilize the full parallelism on all devices at all times during a single step.
+
+![](./Figure-9-Concurrent-steps.png)
 
 ## 8 Performance
 
@@ -309,16 +357,49 @@ One simple technique for speeding up SGD is to parallelize the computation of th
 
 ## 9 Tools
 
+This section describes some tools we have developed that sit alongside the core TensorFlow graph execution engine.
 
+### 9.1 TensorBoard: Visualization of graph structures and summary statistics
+
+In order to help users understand the structure of their computation graphs and also to understand the overall behavior of machine learning models, we have built TensorBoard, a companion visualization tool for TensorFlow that is included in the open source release.
+
+#### Visualization of Computation Graphs
+
+#### Visualization of Summary Data
+
+### 9.2 Performance Tracing
 
 ## 10 Future Work
 
+We have several different directions for future work.
 
+One extension to the basic programming model that we are considering is a **function mechanism**, whereby a user can specify an entire subgraph of a TensorFlow computation to be a reusable component. In the implementation we have designed, these functions can become reusable components even across different front-end languages for TensorFlow, so that a user could define a function using the Python front end, but then use that function as a basic building block from within the C++ frontend. We are hopeful that this cross-language reusability will bootstrap a vibrant community of machine learning researchers publishing not just whole examples of their research, but also small reusable components from their
+work that can be reused in other contexts.
+
+We also have a number of concrete directions to improve the performance of TensorFlow. One such direction is our initial work on a just-in-time compiler that can take a subgraph of a TensorFlow execution, perhaps with some runtime profiling information about the typical sizes and shapes of tensors, and can generate an optimized routine for this subgraph. This compiler will understand the semantics of perform a number of optimizations such as loop fusion, blocking and tiling for locality, specialization for particular shapes and sizes, etc.
+
+We also imagine that a significant area for future work will be in improving the placement and node scheduling algorithms used to decide where different nodes will execute, and when they should start executing. We have currently implemented a number of heuristics in these subsystems, and we’d like to have the system instead learn to make good placement decisions (perhaps using a deep neural network, combined with a reinforcement learning objective function).
 
 
 
 ## 11 Related Work
 
+There are many other systems that are comparable in various ways with TensorFlow. Theano [7], Torch [13], Caffe [26], Chainer [49] and the Computational Network Toolkit [54] are a few systems designed primarily for the training of neural networks. Each of these systems maps the computation onto **a single machine**, unlike the **distributed TensorFlow implementation**. 
+
+Like Theano and Chainer, TensorFlow supports **symbolic differentiation**, thus making it easier to define and work with gradient based optimization algorithms. 
+
+Like Caffe, TensorFlow has a core written in C++, simplifying the deployment of trained models in a wide variety of production settings, including memory- and computation-constrained environments such as mobile devices.
+
+The TensorFlow system shares some design characteristics with its predecessor system, DistBelief [14],
+and with later systems with similar designs like Project Adam [10] and the Parameter Server project [33]. Like DistBelief and Project Adam, TensorFlow allows computations to be spread out across many computational devices across many machines, and allows users to specify machine learning models using relatively high-level descriptions.
+
+Unlike DistBelief and Project Adam, though, the general-purpose dataflow graph model in TensorFlow
+is more flexible and more amenable to expressing a wider variety of machine learning models and optimization algorithms. It also permits a significant simplification by allowing the expression of stateful parameter nodes as **variables**, and variable update operations that are just additional nodes in the graph; in contrast, DistBelief, Project Adam and the Parameter Server systems all have whole separate parameter server subsystems devoted to communicating and updating parameter values.
+
+
+
 
 
 ## 12 Conclusions
+
+We have described TensorFlow, a flexible data flowbased programming model, as well as single machine and distributed implementations of this programming model.
