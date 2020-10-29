@@ -1,6 +1,6 @@
 nav:
     - Introduction: index.md
-# 深度学习的理论知识    
+    # 深度学习的理论知识    
     - Deep-learning: Deep-learning
     - Feature-engineering: Feature-engineering
     - Machine-learning: Machine-learning
