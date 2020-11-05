@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
     - TensorFlow-white-paper: TensorFlow-white-paper
+    - Tensorflow-src-explanation: Tensorflow-src-explanation
