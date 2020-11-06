@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
     - Book-deep-learning: Book-deep-learning
+    - Book-Neural-Networks-and-Deep-Learning: Book-Neural-Networks-and-Deep-Learning
     - Guide: Guide
     
