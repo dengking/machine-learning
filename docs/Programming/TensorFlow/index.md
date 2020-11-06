@@ -2,24 +2,25 @@
 
 
 
-## stackoverflow
+## wikipedia [TensorFlow](https://en.wikipedia.org/wiki/TensorFlow)
 
-https://stackoverflow.com/tags/tensorflow/
+Tensorflow is a **symbolic** math library based on dataflow and differentiable programming.
+
+> NOTE: TensorFlow的本质所在，关于symbolic，参见工程programming language的
 
 
 
-
-
-## TensorFlow中文官网
+## TensorFlow官网
 https://tensorflow.google.cn/
 
-> 网速较快
+> 中国官网，网速较快
+
+https://www.tensorflow.org/
+
+> 官网，不翻墙，无法访问
 
 
 
-## data-flair Tensorflow-tutorials
 
-https://data-flair.training/blogs/tensorflow-tutorials-home/
 
-https://data-flair.training/blogs/tensorflow-tutorial/
-
+## github [Tensorflow](https://github.com/tensorflow)

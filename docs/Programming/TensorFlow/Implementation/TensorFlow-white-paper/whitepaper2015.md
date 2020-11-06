@@ -14,8 +14,9 @@ The system is flexible and can be used to express a wide variety of algorithms, 
 
 > NOTE: machine learning的广泛应用。
 
-This paper describes the TensorFlow interface and an implementation of that interface that
-we have built at Google. The TensorFlow API and a reference implementation were released as an open-source package under the Apache 2.0 license in November, 2015 and are available at www.tensorflow.org.
+This paper describes the TensorFlow interface and an implementation of that interface that we have built at Google. 
+
+The TensorFlow API and a reference implementation were released as an open-source package under the Apache 2.0 license in November, 2015 and are available at www.tensorflow.org.
 
 ## 1 Introduction
 
@@ -25,11 +26,11 @@ Based on our experience with DistBelief and a more complete understanding of the
 
 TensorFlow takes computations described using a **dataflow-like model** and maps them onto a wide variety of different hardware platforms, ranging from running inference on mobile device platforms such as Android and iOS to modest-sized training and inference systems using single machines containing one or many GPU cards to large-scale training systems running on hundreds of specialized machines with thousands of GPUs. 
 
-> NOTE: dataflow-like model，其实非常类似于symbolic programming。
+> NOTE: dataflow-like model，其实非常类似于dataflow programming。
 
 Having a single system that can span such a broad range of platforms significantly simplifies the real-world use of machine learning system, as we have found that having separate systems for large-scale training and small-scale deployment leads to significant maintenance burdens and leaky abstractions(泄露的抽象). 
 
-> NOTE: 统一的优势
+> NOTE: 统一/abstraction的优势
 
 TensorFlow computations are expressed as **stateful dataflow graphs** (described in more detail in Section 2), and we have focused on making the system both flexible enough for quickly experimenting with new models for research purposes and sufficiently high performance and robust for production training and deployment of machine learning models. 
 
@@ -37,7 +38,7 @@ For scaling neural network training to larger deployments, TensorFlow allows cli
 
 > NOTE: 这一段作者所要表达的核心思想是：如果将tensorflow的interface看做是一门programming language，这个programming language是flexible、expressive的。使用它，client能够轻松地表述各种parallelism。
 >
-> 需要注意的是，tensorflow的设计者是将它定位为“Large-Scale Machine Learning on Heterogeneous Distributed Systems”，所以在上面这段话中，**parallelism** 、consistency 等distributed computing领域的术语是不足为奇的。
+> 需要注意的是，tensorflow的设计者是将它定位为“Large-Scale Machine Learning on Heterogeneous Distributed Systems”，所以在上面这段话中，**parallelism** 、**consistency** 等**distributed computing**领域的术语是不足为奇的。关于**distributed computing**此，参见工程parallel computing。
 
 
 
@@ -67,7 +68,7 @@ Section 12 offers concluding thoughts.
 
 ## 2 Programming Model and Basic Concepts
 
-A TensorFlow computation is described by a directed ***graph***, which is composed of a set of ***nodes***. The graph represents a **dataflow computation**, with extensions for allowing some kinds of nodes to maintain and update **persistent state**（`tf.Variable`） and for **branching** and **looping** control structures within the graph in a manner similar to Naiad [[36]](http://research.microsoft.com:8082/pubs/201100/naiad_sosp2013.pdf). Clients typically construct a **computational graph** using one of the supported front end languages (`C++` or Python). An example fragment to construct and then execute a TensorFlow graph using the Python front end is shown in Figure 1, and the resulting computation graph
+A TensorFlow computation is described by a directed ***graph***, which is composed of a set of ***nodes***. The graph represents a **dataflow computation**, with extensions for allowing some kinds of nodes to maintain and update **persistent state**（`tf.Variable`） and for **branching** and **looping** control structures within the graph in a manner similar to Naiad [[36]](http://research.microsoft.com:8082/pubs/201100/naiad_sosp2013.pdf). Clients typically construct a **computational graph** using one of the supported **front end** languages (`C++` or Python). An example fragment to construct and then execute a TensorFlow graph using the Python front end is shown in Figure 1, and the resulting computation graph
 in Figure 2.
 
 > NOTE: 需要注意的是， TensorFlow的computation model是借鉴的[Naiad](https://www.microsoft.com/en-us/research/project/naiad/) 

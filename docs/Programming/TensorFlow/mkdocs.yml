@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
+    - Doc: Doc.md
     - Implementation: Implementation
     - API: API

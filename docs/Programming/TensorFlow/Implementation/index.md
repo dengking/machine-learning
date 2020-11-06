@@ -6,11 +6,15 @@
 
 2) [图解tensorflow 源码](https://github.com/yao62995/tensorflow)
 
-## Front end/Interface
+## TensorFlow VS compiler
 
-让programmer使用symbol expression来描述computation，TensorFlow的front end使用computation graph的来进行**结构化表示**。如果使用compiler来进行类比的话，computation graph其实和AST非常类似，如果从结构化表示的角度来看: 两者本质上是相同的，都是对symbol expression的**结构化表示**。但是，由于两者是不同领域的，所以需要考虑各自领域中的特定 问题，在下面的章节中会讨论TensorFlow computation graph需要考虑的问题。
+从某种程度上来说，TensorFlow和compiler是有些类似之处的，可以进行比较:
 
-## Back end/Computation engine/Core
+### Front end/Interface
+
+让programmer使用**symbol expression**来描述computation（symbolic programming），TensorFlow的front end使用computation graph的来进行**结构化表示**。如果使用compiler来进行类比的话，computation graph其实和AST非常类似，如果从结构化表示的角度来看: 两者本质上是相同的，都是对symbol expression的**结构化表示**。但是，由于两者是不同领域的，所以需要考虑各自领域中的特定 问题，在下面的章节中会讨论TensorFlow computation graph需要考虑的问题。
+
+### Back end/Computation engine/Core
 
 实现computation graph表示的computation。与compiler中，将AST转换为三地址码、然后转换为instruction进而实现语义理解不同的是，TensorFlow back end并不会将computation graph转换为instruction的方式，TensorFlow back end会将computation graph完整地保存，然后基于computation graph来安排计算，TensorFlow back end:
 
