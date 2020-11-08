@@ -71,7 +71,9 @@ Section 12 offers concluding thoughts.
 A TensorFlow computation is described by a directed ***graph***, which is composed of a set of ***nodes***. The graph represents a **dataflow computation**, with extensions for allowing some kinds of nodes to maintain and update **persistent state**（`tf.Variable`） and for **branching** and **looping** control structures within the graph in a manner similar to Naiad [[36]](http://research.microsoft.com:8082/pubs/201100/naiad_sosp2013.pdf). Clients typically construct a **computational graph** using one of the supported **front end** languages (`C++` or Python). An example fragment to construct and then execute a TensorFlow graph using the Python front end is shown in Figure 1, and the resulting computation graph
 in Figure 2.
 
-> NOTE: 需要注意的是， TensorFlow的computation model是借鉴的[Naiad](https://www.microsoft.com/en-us/research/project/naiad/) 
+> NOTE: 需要注意的是， TensorFlow的computation model是借鉴的[Naiad](https://www.microsoft.com/en-us/research/project/naiad/) 。
+>
+> 在
 
 ```python
 import tensorflow as tf
@@ -96,8 +98,12 @@ Figure 2: Corresponding computation graph for Figure 1
 
 > NOTE: 正如这个图片中所展示的，`b`、`W`、`X`都是node；
 
-In a TensorFlow graph, each ***node*** has zero or more inputs and zero or more outputs, and represents the instantiation of an ***operation***. Values that flow along normal edges in the graph (from outputs to inputs) are ***tensors***, arbitrary dimensionality arrays where the underlying element type is specified or inferred at graph-construction time. Special **edges**, called ***control dependencies***, can also exist in the graph: no data flows along such edges, but they indicate that the **source node for the control dependence** must finish executing before the **destination node for the control dependence** starts executing. Since our model includes **mutable state**, **control dependencies** can be used directly by clients to enforce **happens before**
-**relationships**. Our implementation also sometimes inserts **control dependencies** to enforce orderings between otherwise independent operations as a way of, for example, controlling the peak memory usage.
+In a TensorFlow graph, each ***node*** has zero or more inputs and zero or more outputs, and represents the instantiation of an ***operation***. Values that flow along normal edges in the graph (from outputs to inputs) are ***tensors***, arbitrary dimensionality arrays where the underlying element type is specified or inferred at graph-construction time. 
+
+### Control dependency edge
+
+Special **edges**, called ***control dependencies***, can also exist in the graph: no data flows along such edges, but they indicate that the **source node for the control dependence** must finish executing before the **destination node for the control dependence** starts executing. Since our model includes **mutable state**, **control dependencies** can be used directly by clients to enforce **happens before**
+**relationships**. Our implementation also sometimes inserts **control dependencies** to enforce **orderings** between otherwise independent operations as a way of, for example, controlling the peak memory usage.
 
 > NOTE: 上面引入了非常重要的概念：
 >
@@ -106,7 +112,7 @@ In a TensorFlow graph, each ***node*** has zero or more inputs and zero or more 
 > | node  | operation                     |
 > | edge  | tensor、 control dependencies |
 >
-> 
+> 两个节点之间如果既需要dataflow，又需要control dependency，那么是否需要在两者之间添加两条边？
 
 ### Operations and Kernels
 
