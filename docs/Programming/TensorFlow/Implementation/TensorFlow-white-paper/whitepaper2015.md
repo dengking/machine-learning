@@ -112,15 +112,21 @@ Special **edges**, called ***control dependencies***, can also exist in the grap
 > | node  | operation                     |
 > | edge  | tensor、 control dependencies |
 >
-> 两个节点之间如果既需要dataflow，又需要control dependency，那么是否需要在两者之间添加两条边？
+> 关于control dependency，参见`TensorFlow\API\Python\Building-Graphs\tf.control_dependencies`
 
 ### Operations and Kernels
 
-> NOTE: 本节描述了operation和kernel之间的关系，其实它们的关系非常类似于interface and implementation: operation是interface，kernel是implementation。
+> NOTE: 本节描述了operation和kernel之间的关系，其实它们的关系非常类似于interface and implementation: operation是interface，kernel是implementation。一个operation是可以有多个kernel的，关于这一点，在haosdent [Adding a New Op](https://haosdent.gitbooks.io/tensorflow-document/content/how_tos/adding_an_op/) 中有说明:
 >
-> TensorFlow的operation和kernel采用的是registration mechanism，这增加了它的可扩展性，关于如何扩展，参见:
+> > Implement the Op in C++. This implementation is called a "kernel", and there can be multiple kernels for different architectures (e.g. CPUs, GPUs) or input / output types.
 >
-> 1) stackoverflow [Understand Op Registration and Kernel Linking in TensorFlow](https://stackoverflow.com/questions/37548662/understand-op-registration-and-kernel-linking-in-tensorflow)
+> 显然，TensorFlow的实现也是遵循program to interface原则，这样的设计，实现了支持heterogeneous（异构的） systems的特性。
+>
+> 关于如何add a new op，参见`TensorFlow\Guide\Adding-a-New-Op`。
+>
+> TensorFlow的operation和kernel采用的是registration mechanism，这增加了它的可扩展性。
+>
+> 
 
 An ***operation*** has a name and represents an **abstract computation** (e.g., “matrix multiply”, or “add”). An operation can have ***attributes***, and all attributes must be provided or inferred at **graph-construction time** in order to instantiate a node to perform the operation. One common use of **attributes** is to make operations polymorphic over different tensor element types (e.g., add of two tensors of type float versus add of two tensors of type int32). 
 
@@ -149,7 +155,11 @@ Table 1: Example TensorFlow operation types
 
 Clients programs interact with the TensorFlow system by creating a ***Session***. To create a **computation graph**, the Session interface supports an **`Extend`** method to augment（扩展） the current graph managed by the session with additional nodes and edges (the initial graph when a session is created is empty). The other primary operation supported by the session interface is **`Run`**, which takes a set of output names that need to be computed, as well as an optional set of **tensors** to be fed into the graph in place of certain outputs of nodes. Using the arguments to `Run`, the TensorFlow implementation can compute the **transitive closure** of all nodes that must be executed in order to compute the outputs that were requested, and can then arrange to execute the appropriate nodes in an order that respects their dependencies (as described in more detail in 3.1). Most of our uses of TensorFlow set up a Session with a graph once, and then execute the full graph or a few distinct subgraphs thousands or millions of times via Run calls.
 
-> NOTE: tensorflow的computation graph其实也可以看做是一个dependency graph，显然最终的输出节点是依赖于所有流向它的输入tensor的，而这些tensor又进一步依赖于流入它的tensor的，显然这种dependency关系是transitive的，也就是为了计算出output，需要计算出所有的transitive closure。这就是在graph theory中总结的dependency model。
+> NOTE: tensorflow的computation graph其实也可以看做是一个dependency graph，显然最终的输出节点是依赖于所有流向它的输入tensor的，而这些tensor又进一步依赖于流入它的tensor的，显然这种dependency关系是transitive的，也就是为了计算出output，需要计算出所有的transitive closure。这就是在graph theory中总结的dependency model。关于TensorFlow core是如何执行computation graph的，在后面的:
+>
+> - 3.1 Single-Device Execution
+> - 3.2 Multi-Device Execution
+> - 3.3 Distributed Execution
 >
 > 第一次阅读这一段的时候，我想到了在《[compile principle](https://dengking.github.io/compiler-principle/)》
 >
@@ -165,21 +175,35 @@ In most computations a graph is executed multiple times. Most tensors do not sur
 
 ## 3 Implementation
 
+### Client、master and worker process
+
 The main components in a TensorFlow system are the ***client***, which uses the Session interface to communicate with the ***master***, and one or more ***worker processes***, with each worker process responsible for arbitrating（仲裁） access to one or more computational devices (such as CPU cores or GPU cards) and for executing graph nodes on those devices as instructed by the master. 
+
+> NOTE: client和master进行communicate，master instruct(通知、指挥) worker process在computational device上执行graph nodes。
+>
+> 关于它们，参见下面的figure3。
+>
+> 关于worker process和device之间的关系，参见下面的device章节。
 
 We have both ***local*** and ***distributed*** implementations of the TensorFlow interface. 
 
+![](./Figure-3-Single-machine-and-distributed-system-structure.jpg)
+
+### Local implementation
+
 The **local implementation** is used when the client, the master, and the worker all run on a single machine in the context of a single operating system process (possibly with multiple devices, if for example, the machine has many GPU cards installed). 
+
+### Distributed implementation
 
 The **distributed implementation** shares most of the code with the local implementation, but extends it with support for an environment where the client, the master, and the workers can all be in different processes on different machines. In our distributed environment, these different tasks are containers in jobs managed by a **cluster scheduling system** [51]. These two different modes are illustrated in Figure 3. 
 
-![](./Figure-3-Single-machine-and-distributed-system-structure.jpg)
+
 
 Most of the rest of this section discusses issues that are common to both implementations, while Section 3.3 discusses some issues that are particular to the distributed implementation.
 
 
 
-### Devices
+### Devices 
 
 Devices are the computational heart of TensorFlow. Each worker is responsible for one or more devices, and each device has a **device type**, and a **name**. **Device names** are composed of pieces that identify the **device’s type**, the device’s index within the worker, and, in our distributed setting, an identification of the job and task of the worker (or localhost for the case where the devices are local to the process). Example device names are"`/job:localhost/device:cpu:0`"or "`/job:worker/task:17/device:gpu:3`". 
 
@@ -194,15 +218,37 @@ types, a complex number type, and a string type (an arbitrary byte array). Backi
 
 ### 3.1 Single-Device Execution
 
-Let’s first consider the simplest execution scenario: a single worker process with a single device. The nodes of the graph are executed in an order that respects the dependencies between nodes. In particular, we keep track of a count per node of the number of dependencies of that node that have not yet been executed. Once this count drops to zero, the node is eligible for execution and is added to a ready queue. 
+Let’s first consider the simplest execution scenario: a single **worker process** with a **single device**. The nodes of the graph are executed in an order that respects the **dependencies** between nodes. In particular, we keep track of a **count** per node of the number of dependencies of that node that have not yet been executed. Once this count drops to zero, the node is eligible(合格) for execution and is added to a **ready queue**. 
 
-The ready queue is processed in some unspecified order, delegating execution of the kernel for a node to the device object. When a node has finished executing, the counts of all nodes that depend on the completed node are decremented.
+The **ready queue** is processed in some unspecified order, delegating execution of the kernel for a node to the device object. When a node has finished executing, the counts of all nodes that depend on the completed node are decremented.
+
+> NOTE: 从上面两段描述来，TensorFlow的execution算法如下:
+>
+> 1) 首先根据dependency关系进行拓扑排序，需要注意的是，只能够得到partial order，无法得到total order，也就是说，存在一些node，它们的execution order是无法确定的。这一步所得到的只是静态顺序，真实的执行顺序，还依赖于具体的执行情况
+>
+> 2) 每个node完成执行后，则它的所有的child nodes的count都需要decrease 1。一旦一个node的dependency都满足了，则它就eligible for execution了，就将它放到ready queue中。
 
 ### 3.2 Multi-Device Execution
 
-Once a system has multiple devices, there are two main complications: deciding which device to place the computation for each node in the graph, and then managing the required communication of data across device boundaries implied by these placement decisions. This subsection discusses these two issues.
+Once a system has multiple devices, there are two main complications: 
+
+1) deciding which device to place the computation for each node in the graph
+
+2) and then managing the required communication of data across device boundaries implied by these placement decisions. 
+
+This subsection discusses these two issues.
 
 #### 3.2.1 Node Placement
+
+> NOTE: TensorFlow使用place algorithm来安排node placement，这个algorithm的输入有:
+>
+> 1) cost model
+>
+> 2) nodes
+>
+> 3) **feasible devices** 
+>
+> 输出是: 将哪些nodes放到哪个device上进行执行，放到同一个device的nodes形成了一个subgraph，显然这个结果就是将原computation graph分割为了一些列subgraph。这就引出了这些subgraph之间的Cross-Device Communication问题，这在"3.2.2 Cross-Device Communication"中进行了介绍。
 
 Given a computation graph, one of the main responsibilities of the TensorFlow implementation is to map the computation onto the set of available devices. A simplified version of this algorithm is presented here. See Section 4.3 for extensions supported by this algorithm.
 
@@ -210,15 +256,15 @@ One input to the **placement algorithm** is a **cost model**, which contains est
 
 > NOTE: 
 
-The placement algorithm first runs a simulated execution of the graph. The simulation is described below and ends up picking a device for each node in the graph using greedy heuristics. The node to device placement generated by this simulation is also used as the placement for the real execution.
+The placement algorithm first runs a simulated execution of the graph. The simulation is described below and ends up picking a device for each node in the graph using **greedy heuristics**. The node to device placement generated by this simulation is also used as the placement for the real execution.
 
-The **placement algorithm** starts with the sources of the **computation graph**, and simulates the activity on each device in the system as it progresses. For each node that is reached in this traversal, the set of feasible devices is considered (a device may not be feasible if the device does not provide a kernel that implements the particular operation). For nodes with multiple feasible devices, the **placement algorithm** uses a greedy heuristic that examines the effects on the completion time of the node of placing the node on each possible device. This heuristic takes into account the estimated or measured execution time of the operation on that kind of device from the cost model, and also includes the costs of any communication that would be introduced in order to transmit inputs to this node from other devices to the considered device. 
+The **placement algorithm** starts with the sources of the **computation graph**, and simulates the activity on each device in the system as it progresses. For each node that is reached in this traversal, the set of **feasible devices** is considered (a device may not be feasible if the device does not provide a kernel that implements the particular operation). For nodes with multiple feasible devices, the **placement algorithm** uses a **greedy heuristic** that examines the effects on the completion time of the node of placing the node on each possible device. This heuristic takes into account the estimated or measured execution time of the operation on that kind of device from the **cost model**, and also includes the costs of any communication that would be introduced in order to transmit inputs to this node from other devices to the considered device. 
 
 > NOTE: 思考：source of computation graph是computation graph的哪一端？
 >
 > 上面这一段所描述的是“The placement algorithm first runs a simulated execution of the graph”，即“simulation ”
 
-The device where the node’s operation would finish the soonest is selected as the device for that operation, and the placement process then continues onwards to make placement decisions for other nodes in the graph, including downstream nodes that are now ready for their own simulated execution. Section 4.3 describes some extensions that allow users to provide hints and partial constraints to guide the placement algorithm. The placement algorithm is an area of ongoing development within the system.
+The device where the node’s operation would finish the soonest is selected as the device for that operation, and the placement process then continues onwards to make placement decisions for other nodes in the graph, including downstream nodes that are now ready for their own simulated execution. Section 4.3 describes some extensions that allow users to provide hints and partial constraints to guide the **placement algorithm**. The placement algorithm is an area of ongoing development within the system.
 
 #### 3.2.2 Cross-Device Communication
 
@@ -228,11 +274,25 @@ Once the node placement has been computed, the graph is partitioned into a set o
 
 
 
-At runtime, the implementations of the **Send** and **Receive nodes** coordinate to transfer data across devices. This allows us to isolate all communication inside Send and Receive implementations, which simplifies the rest of the runtime. 
+At runtime, the implementations of the **Send** and **Receive nodes** coordinate to transfer data across devices. This allows us to isolate all communication inside **Send** and **Receive** implementations, which simplifies the rest of the runtime. 
 
-When we insert Send and Receive nodes, we canonicalize（规范化转换） all users of a particular tensor on a particular device to use a single **Receive node**, rather than one Receive node per downstream user on a particular device. This ensures that the data for the needed tensor is only transmitted once between a source device → destination device pair, and that memory for the tensor on the destination device is only allocated once, rather than multiple times (e.g., see nodes `b` and `c` in Figure 4) 
+> NOTE: 由send node和receive node来实现cross-device communication。在同一个subgraph内的所有node之间的tensor flow是不经过send node和receive node的。这就是上面这段话的最后一句: "This allows us to isolate all communication inside **Send** and **Receive** implementations"的含义。
 
-By handling communication in this manner, we also allow the scheduling of individual nodes of the graph on different devices to be decentralized into the workers: the Send and Receive nodes impart the necessary **synchronization** between different workers and devices, and the master only needs to issue a single **Run request** per graph execution to each worker that has any nodes for the graph, rather than being involved in the scheduling of every node or every cross-device communication. This makes the system much more scalable and allows much finer-granularity node executions than if the scheduling were forced to be done by the master.
+When we insert **Send** and **Receive** nodes, we canonicalize（规范化转换） all users of a particular tensor on a particular device to use a single **Receive node**, rather than one Receive node per downstream user on a particular device. This ensures that the data for the needed tensor is only transmitted once between a source (device → destination device pair), and that memory for the tensor on the destination device is only allocated once, rather than multiple times (e.g., see nodes `b` and `c` in Figure 4) 
+
+> NOTE: 上面这段话可以这样来进行简单理解: 每个subgraph只有一个receive node，这样做的好处有:
+>
+> 1) 不同的subgraph之间只需要一次cross-device transfer
+>
+> 2) 下面这一段描述了另外一个好处，它的大致意思是:
+>
+> 这样的设计能够让TensorFlow将"**scheduling** of individual nodes of the graph on different devices"(核心词语是**scheduling**)分散到各个worker，即而不是由master负责全部的node的调度，关于这一点，原文中使用的是"decentralized"这个词语，原文对它的具体解释是: 
+>
+> the Send and Receive nodes impart(传授) the necessary **synchronization** between different workers and devices, and the master only needs to issue a single **Run request** per graph execution to each worker that has any nodes for the graph
+>
+> 这样做的优势是: 相比于由master负责全部的node的调度，这种做法能够使系统更加scalable、allows much finer-granularity node executions 。
+
+By handling communication in this manner, we also allow the scheduling of individual nodes of the graph on different devices to be decentralized into the workers: the Send and Receive nodes impart(传授) the necessary **synchronization** between different workers and devices, and the master only needs to issue a single **Run request** per graph execution to each worker that has any nodes for the graph, rather than being involved in the scheduling of every node or every cross-device communication. This makes the system much more scalable and allows much finer-granularity node executions than if the scheduling were forced to be done by the master.
 
 
 
@@ -244,9 +304,27 @@ Distributed execution of a graph is very similar to multidevice execution. After
 
 #### Fault Tolerance
 
-Failures in a distributed execution can be detected in a variety of places. The main ones we rely on are (a) an error in a communication between a Send and Receive node pair, and (b) periodic health-checks from the master process to every worker process. 
+Failures in a distributed execution can be detected in a variety of places. The main ones we rely on are 
 
-When a failure is detected, the entire graph execution is aborted and restarted from scratch. Recall however that Variable nodes refer to tensors that persist across executions of the graph. We support consistent checkpointing and recovery of this state on a restart. In partcular, each **Variable node** is connected to a **Save node**. These Save nodes are executed periodically, say once every N iterations, or once every N seconds. When they execute, the contents of the variables are written to persistent storage, e.g., a distributed file system. Similarly each Variable is connected to a Restore node that is only enabled in the first iteration after a restart. See Section 4.2 for details on how some nodes can only be enabled on some executions of the graph.
+(a) an error in a communication between a Send and Receive node pair, and 
+
+(b) periodic health-checks from the master process to every worker process. 
+
+When a failure is detected, the entire graph execution is aborted and restarted from scratch. Recall however that Variable nodes refer to tensors that persist across executions of the graph. We support consistent checkpointing and recovery of this state on a restart. In partcular, each **Variable node** is connected to a **Save node**. These Save nodes are executed periodically, say once every N iterations, or once every N seconds. When they execute, the contents of the variables are written to persistent storage, e.g., a distributed file system. Similarly each Variable is connected to a **Restore node** that is only enabled in the first iteration after a restart. See Section 4.2 for details on how some nodes can only be enabled on some executions of the graph.
+
+> NOTE: 原文本段主要讨论TensorFlow的fault Tolerance；其中非常重要的一点是TensorFlow variable的实现。Variable node的特性是: 在图的执行过程中保持不变，即它是state，在前面的论述中已经使用了state这个词语。显然为了支持variable的特性，TensorFlow需要进行特殊的实现:
+>
+> 1) consistent checkpoint
+>
+> 2) recover
+>
+> 上面这段话的后半段描述了TensorFlow内部对variable的实现: 
+>
+> 每个**Variable node**被连接到一个**Save node**。这些**Save node**被周期性地执行。当它们执行时，variable的内容被写入持久存储，例如，一个分布式文件系统。
+>
+> 每个**Variable node**都连接到一个**Restore node** ，该节点仅在重启后的第一次迭代中启用。
+>
+> 
 
 ## 4 Extensions
 

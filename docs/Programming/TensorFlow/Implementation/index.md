@@ -10,6 +10,10 @@
 
 本节标题的含义是: TensorFlow是一个parallel numeric processing system，关于parallel numeric processing system，参见工程parallel computing的`Application\Parallel-numeric-processing-system`章节。
 
+关于这一点，在haosdent [TensorFlow for Googlers](https://haosdent.gitbooks.io/tensorflow-document/content/)中有这样的介绍:
+
+> TensorFlow™ is an open source software library for numerical computation using data flow graphs.
+
 ## TensorFlow VS compiler
 
 从某种程度上来说，TensorFlow和compiler是有些类似之处的，可以进行比较:

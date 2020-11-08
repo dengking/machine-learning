@@ -1,4 +1,4 @@
 nav:
     - Introduction: index.md
-    - Low-level-API: Low-level-API
-    - 
+    - Python: Python
+    - C++: C++
