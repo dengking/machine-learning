@@ -100,7 +100,7 @@ Figure 2: Corresponding computation graph for Figure 1
 
 In a TensorFlow graph, each ***node*** has zero or more inputs and zero or more outputs, and represents the instantiation of an ***operation***. Values that flow along normal edges in the graph (from outputs to inputs) are ***tensors***, arbitrary dimensionality arrays where the underlying element type is specified or inferred at graph-construction time. 
 
-### Control dependency edge
+### Control dependencies edge
 
 Special **edges**, called ***control dependencies***, can also exist in the graph: no data flows along such edges, but they indicate that the **source node for the control dependence** must finish executing before the **destination node for the control dependence** starts executing. Since our model includes **mutable state**, **control dependencies** can be used directly by clients to enforce **happens before**
 **relationships**. Our implementation also sometimes inserts **control dependencies** to enforce **orderings** between otherwise independent operations as a way of, for example, controlling the peak memory usage.
@@ -112,7 +112,11 @@ Special **edges**, called ***control dependencies***, can also exist in the grap
 > | node  | operation                     |
 > | edge  | tensor、 control dependencies |
 >
-> 关于control dependency，参见`TensorFlow\API\Python\Building-Graphs\tf.control_dependencies`
+> 关于control dependency，参见`TensorFlow\API\Python\Building-Graphs\tf.control_dependencies`。
+>
+> 为什么叫control dependencies?
+>
+> 因为computation graph其实可以看做是dependency graph，它本身描述了dependency关系，control dependencies edge给予了user对dependency 的更多控制。
 
 ### Operations and Kernels
 
@@ -167,7 +171,7 @@ Clients programs interact with the TensorFlow system by creating a ***Session***
 >
 > - 5.2 Evaluation Orders for SDD's[#](https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/#52-evaluation-orders-for-sdds)
 
-
+> NOTE: 关于Sessions，参见haosdent [Running Graphs](https://haosdent.gitbooks.io/tensorflow-document/content/api_docs/python/client.html)。
 
 ### Variables
 
@@ -332,12 +336,22 @@ In this section we describe several more advanced features of the basic programm
 
 ### 4.1 Gradient Computation
 
-> NOTE: 其实就是反向传播算法。
+> NOTE: 其实就是反向传播算法。在deep learning book的"6.5.5 Symbol-to-Symbol Derivatives"中，已经介绍了TensorFlow Gradient Computation的思路了，deep learning book中将这种思路称为Symbol-to-Symbol Derivatives: 
+>
+> Another approach is to take a **computational graph** and add additional nodes to the graph that provide a **symbolic description** of the desired derivatives. This is the approach taken by Theano (Bergstra et al., 2010; Bastien et al., 2012) and **TensorFlow** (Abadi et al., 2015). An example of how this approach works is illustrated in figure 6.10. 
+>
+> The primary advantage of this approach is that the derivatives are described in the same language as the original expression. Because the derivatives are just another computational graph, it is possible to run back-propagation again, differentiating the derivatives in order to obtain higher derivatives. 
+>
+> Computation of higher-order derivatives is described in section 6.5.10.
 
-Many optimization algorithms, including common machine learning training algorithms like stochastic gradient descent [45], compute the **gradient** of a cost function with respect to a set of inputs. Because this is such a common need, TensorFlow has built-in support for **automatic gradient computation**. If a tensor `C` in a TensorFlow graph depends, perhaps through a complex subgraph of operations, on some set of tensors `{X k }`, then there is a built-in function that will return the tensors `{dC/dX k }`（这就是gradient）. **Gradient tensors** are computed, like other tensors, by extending the TensorFlow graph, using the following procedure.
+Many optimization algorithms, including common machine learning training algorithms like **stochastic gradient descent** [45], compute the **gradient** of a cost function with respect to a set of inputs. Because this is such a common need, TensorFlow has built-in support for **automatic gradient computation**. If a tensor `C` in a TensorFlow graph depends, perhaps through a complex subgraph of operations, on some set of tensors `{X k }`, then there is a built-in function that will return the tensors `{dC/dX k }`（这就是gradient）. **Gradient tensors** are computed, like other tensors, by extending the **TensorFlow graph**, using the following procedure.
 
 When TensorFlow needs to compute the gradient of a tensor `C` with respect to some tensor `I` on which `C`
-depends, it first finds the path in the computation graph from `I` to `C`. Then it backtracks from `C` to `I`, and for each operation on the **backward path** it adds a node to the TensorFlow graph, composing the **partial gradients** along the **backwards path** using the **chain rule**. The newly added node computes the “**gradient function**” for the corresponding operation in the **forward path**. A **gradient function** may be registered by any operation. This function takes as input not only the partial gradients computed already along the backward path, but also, optionally, the inputs and outputs of the **forward operation**. Figure 5 shows gradients for a cost computed from the example of Figure 2. Grey arrows show potential inputs to **gradient functions** that are not used for the particular operations shown. The addition needed to Figure 1 to compute these gradients is:
+depends, it first finds the path in the computation graph from `I` to `C`. Then it backtracks from `C` to `I`, and for each operation on the **backward path** it adds a **node** to the TensorFlow graph, composing the **partial gradients** along the **backwards path** using the **chain rule**. The newly added node computes the “**gradient function**” for the corresponding operation in the **forward path**. 
+
+> NOTE: 每个operation对应的是一个node、一个function，它的求导函数是已知的。TensorFlow新增的为了计算gradient的node实现了gradient function的功能。
+
+A **gradient function** may be registered by any operation. This function takes as input not only the partial gradients computed already along the backward path, but also, optionally, the inputs and outputs of the **forward operation**. Figure 5 shows gradients for a cost computed from the example of Figure 2. Grey arrows show potential inputs to **gradient functions** that are not used for the particular operations shown. The addition needed to Figure 1 to compute these gradients is:
 
 ```mathematica
 [db,dW,dx] = tf.gradients(C, [b,W,x])
@@ -345,34 +359,128 @@ depends, it first finds the path in the computation graph from `I` to `C`. Then 
 
 ![](./Figure-5-Gradients-computed-for-graph-in-Figure-2.jpg)
 
-> NOTE: **gradient function**的概念没有搞懂
+In general an operation may have multiple outputs, and `C` may only depend on some of them. If, for example, operation `O` has two outputs `y1` and `y2`, and `C` only depends on `y2`, then the first input to `O`’s gradient function is set to 0 since `dC=dy1 = 0`.
+
+**Automatic gradient computation** complicates optimization, particularly of memory usage. When executing “forward” computation subgraphs, i.e., those that are explicitly constructed by the user, a sensible heuristic breaks ties when deciding which node to execute next by observing the order in which the graph was constructed.
+
+> 翻译: 自动梯度计算使优化复杂化，特别是内存的使用。当执行“正向”计算子图时，也就是那些由用户显式构造的子图时，一个合理的启发式通过观察图的构造顺序来决定接下来执行哪个节点。
+>
+> 理解上面这段话的重点是理解"breaks ties"，记得之前遇到过这个词语，它的意思是: 打破僵局
+>
+> NOTE: forward computation subgraph是由user显式构造的；backward computation subgraph是TensorFlow隐式构造的；
+
+This generally means that temporary outputs are consumed soon after being constructed, so their memory  can be reused quickly. When the heuristic is ineffective, the user can change the order of graph construction, or add **control dependencies** as described in Section 5. When gradient nodes are automatically added to the graph, the user has less control, and the heuristics may break down(发生故障、失效). In particular, because gradients reverse the **forward computation order**, tensors that are used early in a graph’s execution are frequently needed again near the end of a gradient computation. Such tensors can hold on to a lot of scarce GPU memory and unnecessarily limit the size of computations. We are actively working on improvements to memory management to deal better with such cases. Options include using more **sophisticated heuristics** to determine the order of graph execution, recomputing tensors instead of retaining them in memory, and swapping out long-lived tensors from GPU memory to more plentiful host CPU memory.
+
+> NOTE: 这段话作者所描述的是在实现反向传播算法时所遇到的难题，作者所描述的难题主要是GPU memory，作者给出的解决方法是:
+>
+> 1) using more **sophisticated heuristics** to determine the order of graph execution
+>
+> > NOTE: algorithm中的heuristic的设计，貌似是一个比较高深的内容
+>
+> 2) ecomputing tensors instead of retaining them in memory
+>
+> > NOTE: 因为GPU memory是主要矛盾，而GPU computation是非常容易的，所以无需cache。这和我们的寻常认知是相反的
+>
+> 3) swapping out long-lived tensors from GPU memory to more plentiful host CPU memory
 
 ### 4.2 Partial Execution
 
 Often a client wants to execute just a subgraph of the entire execution graph. To support this, once the client has set up a computation graph in a Session, our `Run` method allows them to execute an arbitrary subgraph of the whole graph, and to inject arbitrary data along any edge in the graph, and to retrieve data flowing along any edge in the graph.
 
+#### Output of a node
 
+Each node in the graph has a name, and each output of a node is identified by the **source node name** and the **output port** from the node, numbered from 0 (e.g., “`bar:0`” refers to the 1st output of the “`bar`” node, while “`bar:1`” refers to the 2nd output).
+
+> NOTE: output port的含义是什么？使用类比的思想来理解port的含义，在network中，port标识一个service，在TensorFlow中，一个node是可以有多个output的，所以需要标识每个output，这就是port的用途。
+
+#### `Run` call
+
+Two arguments to the `Run` call help define the exact subgraph of the computation graph that will be executed. 
+
+First, the `Run` call accepts **inputs**, an optional mapping of `name:port` names to “fed” tensors values. 
+
+> NOTE: 为什么input中需要指定port？
+
+Second, the `Run` call accepts **`output_names`**, a list of output `name[:port]` specifications indicating which nodes should be executed, and, if the port portion is present in a name, that that particular output tensor value for the node should be returned to the client if the `Run` call completes successfully.
+
+> NOTE: 显然对于`Run`而言，最最重要的就是指定input和output
+
+#### Graph transformation
+
+The graph is transformed based on the values of **inputs** and **outputs**. 
+
+Each `node:port` specified in inputs is replaced with a **feed node**, which will pick up the provided input tensor from specially-initialized entries in a Rendezvous object used for the Run call. 
+
+Similarly, each output name with a port is connected to a special **fetch node** that arranges to save the **output tensor** and return it to the client when the Run call is complete. 
+
+Finally, once the graph has been rewritten with the insertion of these special **feed** and **fetch** nodes, the set of nodes to execute can be determined by starting at each of the nodes named by any output and working backwards in the graph using the graph dependencies to determine the full set of nodes that must be executed in the rewritten graph in order to compute the outputs. 
+
+Figure 6 shows an original graph on the left, and the transformed graph that results when `Run` is invoked with `inputs==fbg` and `outputs==ff:0g`. Since we only need to compute the output of node `f`, we will not execute nodes `d` and `e`, since they have no contribution to the output of `f`.
+
+![](./Figure-6-Before-and-after-graph-transformation.png)
 
 ### 4.3 Device Constraints
 
-TensorFlow clients can control the placement of nodes on devices by providing partial constraints for a node about which devices it can execute on. For example, “only place this node on a device of type
-GPU”, or “this node can be placed on any device in /job:worker/task:17”, or “Colocate this node with the node named variable13”. Within the confines of these constraints, the placement algorithm is responsible
-for choosing an assignment of nodes to devices that provides fast execution of the computation and also satisfies various constraints imposed by the devices themselves, such as limiting the total amount of memory needed on a device in order to execute its subset of graph nodes.
+TensorFlow clients can control the placement of nodes on devices by providing partial constraints for a node about which devices it can execute on. 
 
+For example, “only place this node on a device of type GPU”, or “this node can be placed on any device in `/job:worker/task:17`”, or “Colocate(共置，即放到一起) this node with the node named `variable13`”. 
 
+Within the confines of these constraints, the **placement algorithm** is responsible for choosing an assignment of nodes to devices that provides fast execution of the computation and also satisfies various constraints imposed by the devices themselves, such as limiting the total amount of memory needed on a device in order to execute its subset of graph nodes.
+
+Supporting such constraints requires changes to the **placement algorithm** described in Section 3.2.1. We first compute the feasible set of devices for each node, and then use **union-find** on the graph of colocation constraints to compute the graph components that must be placed together. For each such component, we compute the intersection of the feasible device sets. The computed feasible device set per node fits easily into the placement algorithm’s simulator.
+
+> NOTE: 上述描述的算法的内部实现逻辑，比较复杂
 
 ### 4.4 Control Flow
 
-Although dataflow graphs without any explicit control flow are quite expressive, we have observed a number of cases where supporting conditionals and loops can lead to more concise and efficient representations of machine learning algorithms.
+> NOTE: TensorFlow的control flow operator其实和各种高级语言语言中的control statement本质上是相同的。TensorFlow支持如下类型的control flow:
+>
+> 1) **conditionals** 
+>
+> 2) **loops** 
+
+Although dataflow graphs without any explicit **control flow** are quite expressive, we have observed a number of cases where supporting **conditionals** and **loops** can lead to more concise and efficient representations of machine learning algorithms.
+
+Much as in the **dataflow-machine** approach described by Arvind [3], we introduce a small set of primitive **control flow operators** into TensorFlow and generalize TensorFlow to handle cyclic dataflow graphs. 
+
+The `Switch` and `Merge` operators allow us to skip the execution of an entire subgraph based on the value of a boolean tensor.
+
+The `Enter`, `Leave`, and `NextIteration` operators allow us to express iteration. 
+
+High-level programming constructs such as if-conditionals and while-loops can be easily compiled into dataflow graphs with these control flow operators.
+
+#### Tags and frames
+
+The TensorFlow runtime implements a notion of **tags** and **frames** conceptually similar to the MIT Tagged-
+Token machine [4]. Each iteration of a loop is uniquely identified by a **tag**, and its **execution state** is represented by a **frame**. An input can enter an iteration whenever it becomes available; thus, multiple iterations can be executed concurrently.
+
+#### Distributed coordination mechanism
+
+TensorFlow uses a **distributed coordination mechanism** to execute graphs with **control flow**. In general, a loop can contain nodes that are assigned to many different devices. Therefore, managing the state of a loop becomes a problem of **distributed termination detection**. TensorFlow’s solution is based on **graph rewriting**. During the graph partitioning, we automatically add **control nodes** to each **partition**. These nodes implement a small **state machine** that orchestrates(把…协调地结合起来) the start and termination
+of each iteration, and decides the termination of the loop. For each iteration, the device that owns the loop termination predicate sends a tiny control message to every participating device.
+
+#### Control flow and backprog
+
+As explained above, we often train machine learning models by **gradient descent**, and represent gradient computations as part of dataflow graphs. When a model includes control-flow operations, we must account for them in the corresponding gradient computation. 
+
+For example, the gradient computation for a model with an if-conditional will need to know which branch of the conditional was taken, then apply the gradient logic to this branch. Similarly, the gradient computation for a model with a while-loop will need to know how many iterations were taken, and will also rely on the intermediate values computed during those iterations. The basic technique is to rewrite the graph so to memorize the values needed for the gradient computation. We omit the somewhat intricate(复杂的) details of this encoding.
+
+
 
 ### 4.5 Input Operations
 
-Although input data can be provided to a computation via feed nodes, another common mechanism used for training large-scale machine learning models is to have special input operation nodes in the graph, which are typically configured with a set of filenames and which yield a tensor containing one or more examples from the data stored in that set of files each time they are executed. This allows data to be read directly from the underlying storage system into the memory of the machine that will perform subsequent processing on the data. In configurations where the client process is separate from the worker process, if the data were fed, it typically would require an extra network hop (from the storage system to the client
+Although input data can be provided to a computation via **feed** nodes, another common mechanism used for training large-scale machine learning models is to have special input operation nodes in the graph, which are typically configured with a set of filenames and which yield a tensor containing one or more examples from the data stored in that set of files each time they are executed. This allows data to be read directly from the underlying storage system into the memory of the machine that will perform subsequent processing on the data. In configurations where the client process is separate from the worker process, if the data were fed, it typically would require an extra network hop (from the storage system to the client
 and then from the client to the worker vs. directly from the storage system to ther worker when using an input node).
+
+> NOTE: 主要讨论的是big data的feed问题。
 
 ### 4.6 Queues
 
-Queues are a useful feature that we have added to TensorFlow. They allow different portions of the graph to execute asynchronously, possibly at different candences, and to hand off data through `Enqueue` and `Dequeue` operations. `Enqueue` operations can block until space becomes available in the queue, and `Dequeue` operations can block until a desired minimum number of elements are available in the queue. One use of queues is to allow input data to be prefetched from disk files while a previous batch of data is still being processed by the computational portion of a machine learning model. They can also be used for other kinds of grouping, including accumulating many gradients in order to compute some more complex combination of gradients over a larger batch, or to group different input sentences for recurrent language
+Queues are a useful feature that we have added to TensorFlow. They allow different portions of the graph to execute asynchronously, possibly at different candences, and to hand off data through `Enqueue` and `Dequeue` operations. 
+
+`Enqueue` operations can block until space becomes available in the queue, and `Dequeue` operations can block until a desired minimum number of elements are available in the queue. 
+
+One use of queues is to allow input data to be prefetched from disk files while a previous batch of data is still being processed by the computational portion of a machine learning model. They can also be used for other kinds of grouping, including accumulating many gradients in order to compute some more complex combination of gradients over a larger batch, or to group different input sentences for recurrent language
 models into bins of sentences that are approximately the same length, which can then be processed
 more efficiently.
 
@@ -380,25 +488,53 @@ In addition to normal FIFO queues, we have also implemented a shuffling queue, w
 
 ### 4.7 Containers
 
-A Container is the mechanism within TensorFlow for managing longer-lived mutable state. The backing store for a Variable lives in a container. The default container is one that persists until the process terminates, but we also allow other named containers. A container can be reset by clearing it of its contents entirely. Using containers, it is possible to share state even across completely disjoint computation graphs associated with different Sessions.
+A Container is the mechanism within TensorFlow for managing longer-lived mutable state. The backing store for a **Variable** lives in a **container**. The default container is one that persists until the process terminates, but we also allow other named containers. A container can be reset by clearing it of its contents entirely. Using containers, it is possible to share state even across completely disjoint computation graphs associated with different Sessions.
+
+
 
 
 
 ## 5 Optimizations
 
+> NOTE: 这一节所描述的TensorFlow实现层面的优化，不是machine learning中的optimization。
+
 In this section, we describe some of the optimizations in the TensorFlow implementation that improve performance or resource usage of the system.
 
 ### 5.1 Common Subexpression Elimination
+
+> NOTE: 这是compiler principle中最最常用的一种手段
 
 Since the construction of computation graphs is often done by many different layers of abstractions in the client code, computation graphs can easily end up with redundant copies of the same computation. To handle this, we have implemented a common subexpression pass similar to the algorithm described by Click [[12](https://courses.cs.washington.edu/courses/cse501/06wi/reading/click-pldi95.pdf)] that runs over the **computation graph** and canonicalizes multiple copies of operations with identical inputs and operation types to just a single one of these nodes, and redirects graph edges appropriately to reflect this canonicalization（标准化）.
 
 ### 5.2 Controlling Data Communication and Memory Usage
 
+> NOTE: 本段标题已经总结得非常好了: 通过控制data communication和memory usage来实现optimization。
+
 ### 5.3 Asynchronous Kernels
+
+In addition to normal synchronous kernels that complete their execution at the end of the `Compute` method, our framework also supports **non-blocking kernels**. Such **non-blocking kernels** use a slightly different interface whereby the `Compute` method is passed a **continuation** that should be invoked when the kernel’s execution is complete. This is an optimization for environments where having many active threads is relatively expensive in terms of memory usage or other resources, and allows us to avoid tying up an execution thread for unbounded periods of time while waiting for I/O or other events to occur. 
+
+> NOTE: 最后一段描述了使用asynchronous kernel的原因，可以这样理解: 使用non-blocking kernel，我们可以只使用一个thread来处理很多的事情，因为当I/O未完成的时候、期待的event未发生的时候，thread是可以不阻塞的，可以去做其他的事情；这种做法非常类似于`epoll`等IO multiplex。
+
+Examples of asynchronous kernels include the `Receive` kernel, and the `Enqueue` and `Dequeue` kernels
+(which might need to block if queue space is not available or if no data is available to be read, respectively).
 
 ### 5.4 Optimized Libraries for Kernel Implementations
 
+We often make use of pre-existing highly-optimized numerical libraries to implement kernels for some operations. For example, there are a number of optimized libraries for performing matrix multiplies on different devices including BLAS [15] and cuBLAS [39], or GPU libraries for convolutional kernels for deep neural nets such as cuda-convnet [28] and cuDNN [9]. Many of our kernel implementations are relatively thin wrappers around such optimized libraries.
+
+We make fairly extensive use of the open-source Eigen linear algebra library [25] for many of the kernel implementations in the system. As one part of the development of TensorFlow, our team (primarily Benoit Steiner) has extended the open source Eigen library with support for arbitrary dimensionality tensor operations.
+
+
+
 ### 5.5 Lossy Compression
+
+> NOTE: 含义是: 有损压缩
+
+Some machine learning algorithms, including those typically used for training neural networks, are tolerant of noise and reduced precision arithmetic. In a manner similar to the DistBelief system [14], we often use **lossy compression** of higher precision internal representations when sending data between devices (sometimes within the same machine but especially across machine boundaries).
+
+For example, we often insert special conversion nodes that convert 32-bit floating point representations
+into a 16-bit floating point representation (not the proposed IEEE 16-bit floating point standard, but rather just a 32-bit IEEE 794 float format, but with 16 bits less precision in the mantissa), and then convert back to a 32-bit representation on the other side of the communication channel (by just filling in zeroes for the lost portion of the mantissa, since that’s less computationally expensive than doing the mathematically correct probabilistic rounding when doing this 32 -16 - 32-bit conversion).
 
 ## 6 Status and Experience
 
