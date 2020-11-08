@@ -6,6 +6,10 @@
 
 2) [图解tensorflow 源码](https://github.com/yao62995/tensorflow)
 
+## TensorFlow is a parallel numeric processing system
+
+本节标题的含义是: TensorFlow是一个parallel numeric processing system，关于parallel numeric processing system，参见工程parallel computing的`Application\Parallel-numeric-processing-system`章节。
+
 ## TensorFlow VS compiler
 
 从某种程度上来说，TensorFlow和compiler是有些类似之处的，可以进行比较:
@@ -16,7 +20,7 @@
 
 ### Back end/Computation engine/Core
 
-实现computation graph表示的computation。与compiler中，将AST转换为三地址码、然后转换为instruction进而实现语义理解不同的是，TensorFlow back end并不会将computation graph转换为instruction的方式，TensorFlow back end会将computation graph完整地保存，然后基于computation graph来安排计算，TensorFlow back end:
+Back end实现computation graph表示的computation。与compiler中，将AST转换为三地址码、然后转换为instruction进而实现语义理解不同的是，TensorFlow back end并不会将computation graph转换为instruction的方式，TensorFlow back end会将computation graph完整地保存，然后基于computation graph来安排计算，TensorFlow back end:
 
 1) dataflow programming paradigm
 
@@ -27,3 +31,7 @@
 4) abstraction: heterogeneous机器的抽象
 
 5) 借鉴了microsoft [Naiad](https://www.microsoft.com/en-us/research/project/naiad/)
+
+
+
+> NOTE: 关于上述讨论，在infogalactic [Dataflow programming#Properties of dataflow programming languages](https://infogalactic.com/info/Dataflow_programming#Properties_of_dataflow_programming_languages)中也进行了讨论。
