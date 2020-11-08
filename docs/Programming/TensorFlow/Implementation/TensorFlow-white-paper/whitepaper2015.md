@@ -332,6 +332,8 @@ In this section we describe several more advanced features of the basic programm
 
 ### 4.1 Gradient Computation
 
+> NOTE: 其实就是反向传播算法。
+
 Many optimization algorithms, including common machine learning training algorithms like stochastic gradient descent [45], compute the **gradient** of a cost function with respect to a set of inputs. Because this is such a common need, TensorFlow has built-in support for **automatic gradient computation**. If a tensor `C` in a TensorFlow graph depends, perhaps through a complex subgraph of operations, on some set of tensors `{X k }`, then there is a built-in function that will return the tensors `{dC/dX k }`（这就是gradient）. **Gradient tensors** are computed, like other tensors, by extending the TensorFlow graph, using the following procedure.
 
 When TensorFlow needs to compute the gradient of a tensor `C` with respect to some tensor `I` on which `C`
