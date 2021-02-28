@@ -1,7 +1,7 @@
 nav:
     - Home: index.md
     - AI-meeting: AI-meeting.md
-    - AI-papers: AI-papers.md
+    - AI-papers: AI-papers
     - Research-Institution&Researcher: Research-Institution&Researcher
 # 理论知识    
     - Theory: Theory
