@@ -1,0 +1,8 @@
+nav:
+    - 10-Sequence-Modeling-Recurrentand-Recursive-Nets: 10-Sequence-Modeling-Recurrentand-Recursive-Nets.md
+    - 10.1-Unfolding-Computational-Graphs: 10.1-Unfolding-Computational-Graphs.md
+    - 10.3-Bidirectional-RNNs: 10.3-Bidirectional-RNNs.md
+    - 10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures: 10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures.md
+    - 10.10-The-Long-Short-Term-Memory-and-Other-Gated: 10.10-The-Long-Short-Term-Memory-and-Other-Gated.md
+    - LSTM: LSTM
+    - RNN: RNN

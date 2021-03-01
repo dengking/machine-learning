@@ -1,0 +1,4 @@
+nav:
+    - LSTM: LSTM.md
+    - colah-Understanding-LSTM-Networks: colah-Understanding-LSTM-Networks.md
+    - RNN-and-LSTM-tutorial: RNN-and-LSTM-tutorial.md

@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<!-- saved from url=(0047)https://openai.com/blog/better-language-models/ -->
+<html lang="en" class="js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" async="" src="./Better Language Models and Their Implications_files/analytics.js.download"></script><script async="" src="./Better Language Models and Their Implications_files/js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-71156606-1');
+  </script>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Better Language Models and Their Implications</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" type="text/css" href="./Better Language Models and Their Implications_files/all.css">
+  
+  <script type="text/javascript">document.documentElement.className = 'js';</script>
+  <link rel="shortcut icon" href="https://openai.com/favicon.png" type="image/png">
+    <link rel="canonical" href="https://openai.com/blog/better-language-models/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="OpenAI">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Better Language Models and Their Implications">
+    <meta property="og:description" content="We’ve trained a large-scale unsupervised language model which generates coherent paragraphs of text, achieves state-of-the-art performance on many language modeling benchmarks, and performs rudimentary reading comprehension, machine translation, question answering, and summarization.">
+    <meta property="og:url" content="https://openai.com/blog/better-language-models/">
+    <meta property="og:image" content="https://openai.com/content/images/2019/03/2x-no-mark.jpg">
+    <meta property="article:published_time" content="2019-02-14T17:00:00.000Z">
+    <meta property="article:modified_time" content="2020-05-11T17:33:10.000Z">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/openai.research">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Better Language Models and Their Implications">
+    <meta name="twitter:description" content="We’ve trained a large-scale unsupervised language model which generates coherent paragraphs of text, achieves state-of-the-art performance on many language modeling benchmarks, and performs rudimentary reading comprehension, machine translation, question answering, and summarization.">
+    <meta name="twitter:url" content="https://openai.com/blog/better-language-models/">
+    <meta name="twitter:image" content="https://openai.com/content/images/2019/03/Screenshot-2019-02-14-08.57.24.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Alec Radford">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="">
+    <meta name="twitter:site" content="@openai">
+    <meta property="og:image:width" content="1276">
+    <meta property="og:image:height" content="1696">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "OpenAI",
+        "url": "https://openai.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://openai.com/content/images/2019/05/openai-avatar.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Alec Radford",
+        "url": "https://openai.com/blog/authors/alec/",
+        "sameAs": []
+    },
+    "headline": "Better Language Models and Their Implications",
+    "url": "https://openai.com/blog/better-language-models/",
+    "datePublished": "2019-02-14T17:00:00.000Z",
+    "dateModified": "2020-05-11T17:33:10.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://openai.com/content/images/2019/03/2x-no-mark.jpg",
+        "width": 1276,
+        "height": 1696
+    },
+    "description": "We’ve trained a large-scale unsupervised language model which generates coherent paragraphs of text, achieves state-of-the-art performance on many language modeling benchmarks, and performs rudimentary reading comprehension, machine translation, question answering, and summarization.",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://openai.com/"
+    }
+}
+    </script>
+
+    <script defer="" src="./Better Language Models and Their Implications_files/members.min.js.download"></script>
+    <meta name="generator" content="Ghost 3.21">
+    <link rel="alternate" type="application/rss+xml" title="OpenAI" href="https://openai.com/blog/better-language-models/">
+    <style>
+#fa2 {
+  transform: translate3d(100%, -70%, 0);
+}
+
+.gpt-2-items {
+  position: relative;
+  background-color: #404452;
+  color: #fff;
+}
+.gpt-2-item {
+  width: 100%;
+}
+.gpt-2-container {
+  position: relative;
+}
+.gpt-2-heading {
+  opacity: 0.5;
+}
+.gpt-2-section a {
+  color: inherit !important;
+}
+.gpt-2-section a:hover {
+  border-bottom-color: rgba(255,255,255,.1) !important;
+}
+@media (min-width: 1280px) {
+  .gpt-2-heading {
+    position: absolute;
+    left: -180px;
+    width: 180px;
+    text-align: right;
+    padding-right: 0.75rem; /* half of gutter */
+  }
+}
+/*.gpt-2-items samp {
+  font-family: Menlo,Monaco,Consolas,Courier New,monospace; /* same as `code` */
+  font-size: .85em;
+}*/
+
+/*! Flickity v2.2.0
+https://flickity.metafizzy.co
+---------------------------------------------- */
+
+.flickity-enabled {
+  position: relative;
+}
+
+.flickity-enabled:focus { outline: none; }
+
+.flickity-viewport {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+}
+
+.flickity-slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* draggable */
+
+.flickity-enabled.is-draggable {
+  -webkit-tap-highlight-color: transparent;
+          tap-highlight-color: transparent;
+/*  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;*/
+}
+
+.flickity-enabled.is-draggable .flickity-viewport {
+  cursor: move;
+  cursor: -webkit-grab;
+  cursor: grab;
+}
+
+.flickity-enabled.is-draggable .flickity-viewport.is-pointer-down {
+  cursor: -webkit-grabbing;
+  cursor: grabbing;
+}
+
+/* ---- flickity-button ---- */
+
+.flickity-button {
+  position: absolute;
+  background: hsla(0, 0%, 100%, 0.75);
+  border: none;
+  /*color: #333;*/
+}
+
+.flickity-button:hover {
+  background: white;
+  cursor: pointer;
+}
+
+.flickity-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 5px #19F;
+}
+
+.flickity-button:active {
+  opacity: 0.6;
+}
+
+.flickity-button:disabled {
+  opacity: 0.3;
+  cursor: auto;
+  /* prevent disabled button from capturing pointer up event. #716 */
+  pointer-events: none;
+}
+
+.flickity-button-icon {
+  fill: #fff;
+}
+
+/* ---- previous/next buttons ---- */
+
+.flickity-prev-next-button {
+  top: 50%;
+  width: 50px !important;
+  /* vertically center */
+  transform: translateY(-50%);
+  height: 100%;
+  border-radius: 0 !important;
+  border: none !important;
+  background-color: transparent !important;
+}
+.flickity-prev-next-button:hover {
+  background-color: rgba(0,0,0,0.08) !important;
+  transition: background-color .3s cubic-bezier(.645,.045,.355,1);
+}
+
+.flickity-prev-next-button.previous { left: 0; }
+.flickity-prev-next-button.next { right: 0; }
+/* right to left */
+.flickity-rtl .flickity-prev-next-button.previous {
+  left: auto;
+  right: 0;
+}
+.flickity-rtl .flickity-prev-next-button.next {
+  right: auto;
+  left: 0;
+}
+
+.flickity-prev-next-button .flickity-button-icon {
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  width: 40%;
+  height: 40%;
+}
+
+@media (max-width: 750px) {
+  .flickity-prev-next-button {
+    visibility: hidden;
+  }
+}
+
+/* ---- page dots ---- */
+
+.flickity-page-dots {
+  position: absolute;
+  top: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-left: 25px !important; /* same as `.gpt-2-sample__container` */
+  padding-right: 25px;
+  width: 100%;
+  max-width: 655px;
+  /*margin: auto calc(50% - 50vw);*/
+  transform: translateX(calc(50vw - 50%));
+}
+
+.flickity-rtl .flickity-page-dots { direction: rtl; }
+
+.flickity-page-dots .dot {
+  cursor: pointer;
+  display: block;
+  cursor: pointer;
+  padding: 20px 3px 20px 3px;
+  margin-top: 1.5rem;
+  width: 50px;
+}
+.flickity-page-dots .dot:before {
+  content: none;
+}
+.flickity-page-dots .dot:after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  opacity: 0.2;
+  transition: opacity .3s cubic-bezier(.645,.045,.355,1),background-color .3s cubic-bezier(.645,.045,.355,1);
+  background-color: #fff;
+}
+
+.flickity-page-dots .dot:hover:after {
+  opacity: 0.8;
+}
+
+.flickity-page-dots .dot.is-selected:after {
+  opacity: 1;
+}
+
+</style>
+  <link rel="shortcut icon" href="https://openai.com/favicon.png">
+  <link rel="apple-touch-icon" href="https://openai.com/favicon.png">
+<style>.fluidvids {width: 100%; max-width: 100%; position: relative;}.fluidvids-item {position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;}</style></head>
+<body class="browser-chrome os-windows engine-webkit is-nav-fixed is-below-fold">
+  <main>
+    
+<article class="post" id="post-better-language-models">
+  
+  <header class="post-header post-header--cover bg-light-warm-gray bg-cover color-white" style="background-image:url(https://cdn.openai.com/research-covers/better-language-models/gradient.jpg)">
+  <nav class="nav js-nav" style="position: fixed; top: -65px;">
+  <div class="container">
+    <div class="nav-row row d-flex justify-content-between align-items-center">
+      <div class="col-2">
+        <a href="https://openai.com/" class="nav-symbol fade"><svg id="openai-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 51"><path d="M47.21,20.92a12.65,12.65,0,0,0-1.09-10.38A12.78,12.78,0,0,0,32.36,4.41,12.82,12.82,0,0,0,10.64,9a12.65,12.65,0,0,0-8.45,6.13,12.78,12.78,0,0,0,1.57,15A12.64,12.64,0,0,0,4.84,40.51a12.79,12.79,0,0,0,13.77,6.13,12.65,12.65,0,0,0,9.53,4.25A12.8,12.8,0,0,0,40.34,42a12.66,12.66,0,0,0,8.45-6.13A12.8,12.8,0,0,0,47.21,20.92ZM28.14,47.57a9.46,9.46,0,0,1-6.08-2.2l.3-.17,10.1-5.83a1.68,1.68,0,0,0,.83-1.44V23.69l4.27,2.47a.15.15,0,0,1,.08.11v11.8A9.52,9.52,0,0,1,28.14,47.57ZM7.72,38.85a9.45,9.45,0,0,1-1.13-6.37l.3.18L17,38.49a1.63,1.63,0,0,0,1.65,0L31,31.37V36.3a.17.17,0,0,1-.07.13L20.7,42.33A9.51,9.51,0,0,1,7.72,38.85Zm-2.66-22a9.48,9.48,0,0,1,5-4.17v12a1.62,1.62,0,0,0,.82,1.43L23.17,33.2,18.9,35.67a.16.16,0,0,1-.15,0L8.54,29.78A9.52,9.52,0,0,1,5.06,16.8ZM40.14,25,27.81,17.84l4.26-2.46a.16.16,0,0,1,.15,0l10.21,5.9A9.5,9.5,0,0,1,41,38.41v-12A1.67,1.67,0,0,0,40.14,25Zm4.25-6.39-.3-.18L34,12.55a1.64,1.64,0,0,0-1.66,0L20,19.67V14.74a.14.14,0,0,1,.06-.13L30.27,8.72a9.51,9.51,0,0,1,14.12,9.85ZM17.67,27.35,13.4,24.89a.17.17,0,0,1-.08-.12V13a9.51,9.51,0,0,1,15.59-7.3l-.3.17-10.1,5.83a1.68,1.68,0,0,0-.83,1.44Zm2.32-5,5.5-3.17L31,22.35v6.34l-5.49,3.17L20,28.69Z"></path></svg></a>
+      </div>
+      <div class="col" hidden="">
+        <a href="https://openai.com/" class="nav-wordmark fade"><svg id="openai-wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 180"><path d="M410.22,41.09c-13.75,0-23.57,4.7-28.39,13.59l-2.59,4.79V43.41h-22.4v97.85H380.4V83.05c0-13.91,7.55-21.89,20.73-21.89,12.56,0,19.76,7.76,19.76,21.31v58.79h23.56v-63C444.45,55,431.65,41.09,410.22,41.09ZM296,41.09c-27.79,0-45.06,17.33-45.06,45.25v13.74c0,26.83,17.42,43.51,45.45,43.51,18.74,0,31.88-6.88,40.15-21l-14.61-8.39c-6.11,8.15-15.86,13.19-25.54,13.19-14.19,0-22.67-8.76-22.67-23.44v-3.89h65.79V83.82c0-26-17.08-42.73-43.51-42.73Zm22.08,43.14H273.72V81.89c0-16.12,7.91-25,22.28-25,13.83,0,22.08,8.76,22.08,23.44ZM678.32,27.3V8.58H596.87V27.3h28.56v95.25H596.87v18.71h81.45V122.55H649.76V27.3ZM60.67,5.87c-36.39,0-59,22.68-59,59.18V84.79c0,36.51,22.6,59.18,59,59.18s59-22.67,59-59.18V65.05C119.66,28.55,97.05,5.87,60.67,5.87ZM95.33,86.14c0,24.24-12.63,38.15-34.66,38.15S26,110.38,26,86.14V63.7c0-24.24,12.63-38.15,34.66-38.15S95.32,39.46,95.32,63.7Zm98.31-45c-12.36,0-23.07,5.11-28.64,13.69l-2.54,3.9V43.41H140.07V174.93h23.55V127.3l2.53,3.74c5.3,7.85,15.65,12.55,27.68,12.55,20.31,0,40.8-13.28,40.8-42.93V84c0-21.35-12.63-42.91-41-42.91Zm17.44,58.4c0,15.77-9.2,25.57-24,25.57-13.8,0-23.44-10.35-23.44-25.18V85.23c0-15.06,9.72-25.57,23.63-25.57,14.7,0,23.83,9.8,23.83,25.57ZM509.55,8.63,462,141.26h23.9l9.1-28.44h54.65l.09.28,9,28.16h23.93L535.08,8.58Zm-8.67,85.52L522.32,27l21.23,67.07Z"></path></svg></a>
+      </div>
+      <div class="col-auto">
+        <ul class="nav-items d-none d-desktop-flex justify-content-end small-caps">
+                        
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/about/">About</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/progress/">Progress</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/resources/">Resources</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/blog/">Blog</a>
+            </li>
+        </ul>
+        <button class="nav-toggle nav-toggle--open js-mobile-nav-open fade d-desktop-none"><svg id="mobile-nav-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,13H2a1,1,0,0,1,0-2H22a1,1,0,0,1,0,2Z"></path><path d="M22,6H2A1,1,0,0,1,2,4H22a1,1,0,0,1,0,2Z"></path><path d="M22,20H2a1,1,0,0,1,0-2H22a1,1,0,0,1,0,2Z"></path></svg></button>
+      </div>
+    </div>
+  </div>
+</nav><nav class="nav js-nav" aria-hidden="true" style="visibility: hidden;"></nav>
+<nav class="mobile-nav js-mobile-nav text-left">
+  <div class="container">
+    <div class="nav-row row d-flex justify-content-between align-items-center">
+      <div class="col-2">
+      </div>
+      <div class="col-auto">
+        <button class="nav-toggle nav-toggle--close js-mobile-nav-close"><svg id="mobile-nav-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path id="Glyph" d="M19.77,5.63,13.41,12l6.36,6.37a1,1,0,0,1-1.41,1.41L12,13.41,5.63,19.77a1,1,0,0,1-1.44-1.39l0,0L10.58,12,4.21,5.63a1,1,0,0,1,0-1.42,1,1,0,0,1,1.41,0l0,0L12,10.58l6.37-6.37a1,1,0,0,1,1.41,0A1,1,0,0,1,19.77,5.63Z"></path></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="container font-large">
+    <ul class="mt-0.25 small-caps">
+                
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/about/">About</a>
+          </li>
+          <hr class="bg-fg">
+        
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/progress/">Progress</a>
+          </li>
+          <hr class="bg-fg">
+        
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/resources/">Resources</a>
+          </li>
+          <hr class="bg-fg">
+        
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/blog/">Blog</a>
+          </li>
+          <hr class="bg-fg">
+      <li>
+        <a class="fade d-block py-0.75" href="https://openai.com/jobs/">Jobs</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+  
+  <div class="container">
+    <hr class="mb-1 js-nav-fold hr-strong">
+    <div class="row mb-2">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-9 col-sm-8 col-md-5 col-xl-4 offset-xl-1">
+            
+<figure class="release-cover mb-1 rounded shadowed-heavy mb-0">
+  <div class="position-relative bg-light-warm-gray" style="padding-bottom:132.915360502%">
+      <video autoplay="" muted="" loop="" playsinline="" class="position-absolute trbl-0 js-lazy js-lazy-loaded" poster="https://cdn.openai.com/research-covers/better-language-models/2x-no-mark-animated-poster.jpg">
+        <source src="https://cdn.openai.com/research-covers/better-language-models/2x-no-mark-animated.mp4">
+        <img class="position-absolute trbl-0" src="./Better Language Models and Their Implications_files/2x-no-mark.jpg" data-src="https://cdn.openai.com/research-covers/better-language-models/2x-no-mark.jpg" alt="Better Language Models and Their Implications">
+      </video>
+  </div>
+</figure>
+
+
+          </div>
+          <div class="col-12 col-md-7 col-xl-6">
+            <div class="h-100 d-flex flex-column justify-content-between last-child-mb-1" style="--fg:255,255,255">
+                  <div>
+                      <h1 class="balance-text mb-0.5" style="">Better Language Models<br data-owner="balance-text">and Their Implications</h1>
+                      <div class="post-excerpt medium-copy mb-0.5 color-fg-80 color-fg js-excerpt-container js-widow"><p>We’ve trained a large-scale unsupervised language model which generates coherent paragraphs of text, achieves state-of-the-art performance on many language modeling benchmarks, and performs rudimentary reading comprehension, machine translation, question answering, and summarization—all without task-specific&nbsp;training.</p></div>
+                  </div>
+                    <div class="xsmall-caps color-fg-40 mt-0.25 mb-1 color-fg">
+    <time datetime="2019-02-14">February 14, 2019</time>
+    <div class="reading-time">24 minute read</div>
+  </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</header>
+
+  <section class="container">
+  <div class="row">
+    <section class="content">
+      <!--kg-card-begin: markdown-->
+<section class="btns"><a href="https://github.com/openai/gpt-2" class="btn btn-padded icon-code" target="_blank" rel="noopener">View code</a><a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" class="btn btn-padded icon-paper" target="_blank" rel="noopener">Read paper</a></section>
+<p>Our model, called GPT-2 (a successor to <a href="https://blog.openai.com/language-unsupervised/" target="_blank" rel="noopener">GPT</a>), was trained simply to predict the next word in 40GB of Internet text. Due to our concerns about malicious applications of the technology, we are not releasing the trained model. As an experiment in responsible disclosure, we are instead releasing a much <a href="https://github.com/openai/gpt-2" target="_blank" rel="noopener">smaller model</a> for researchers to experiment with, as well as a <a href="https://cdn.openai.com/better-language-models/language_models_are_unsupervised_multitask_learners.pdf" target="_blank" rel="noopener">technical&nbsp;paper</a>.</p>
+<p>GPT-2 is a large <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">transformer</a>-based language model with 1.5 billion parameters, trained on a dataset<sup class="footnote-ref"><a href="https://openai.com/blog/better-language-models/#fn1" id="fnref1">[1]</a></sup><aside class="footnote-aside" id="fa1"><p>We created a new dataset which emphasizes diversity of content, by scraping content from the Internet. In order to preserve document quality, we used only pages which have been curated/filtered by humans—specifically, we used outbound links from Reddit which received at least 3 karma. This can be thought of as a heuristic indicator for whether other users found the link interesting (whether educational or funny), leading to higher data quality than other similar datasets, such as CommonCrawl. </p></aside> of 8 million web pages. GPT-2 is trained with a simple objective: predict the next word, given all of the previous words within some text. The diversity of the dataset causes this simple goal to contain naturally occurring demonstrations of many tasks across diverse domains. GPT-2 is a direct scale-up of GPT, with more than 10X the parameters and trained on more than 10X the amount of&nbsp;data.</p>
+<p>GPT-2 displays a broad set of capabilities, including the ability to generate conditional synthetic text samples of unprecedented quality, where we prime the model with an input and have it generate a lengthy continuation. In addition, GPT-2 outperforms other language models trained on specific domains (like Wikipedia, news, or books) without needing to use these domain-specific training datasets. On language tasks like question answering, reading comprehension, summarization, and translation, GPT-2 begins to learn these tasks from the raw text, using no task-specific training data. While scores on these downstream tasks are far from state-of-the-art, they suggest that the tasks can benefit from unsupervised techniques, given sufficient (unlabeled) data and&nbsp;compute.</p>
+<h3 id="samples">Samples</h3>
+<p>GPT-2 generates synthetic text samples in response to the model being primed with an arbitrary input. The model is chameleon-like—it adapts to the style and content of the conditioning text. This allows the user to generate realistic and coherent continuations about a topic of their choosing, as seen by the following select samples.<sup class="footnote-ref"><a href="https://openai.com/blog/better-language-models/#fn2" id="fnref2">[2]</a></sup><aside class="footnote-aside" id="fa2"><p>Note that while we have hand-chosen these samples, and are thus engaging in some meta-cherry-picking, we believe they are not too unrepresentative of the sampling process. We are simply using top-k truncated sampling, and have yet to explore more advanced methods of sampling (such as beam-search methods). </p></aside></p>
+<figure class="full bg-cool-gray-4 font-small letter-spacing-1.25">
+  <div class="gpt-2-items pb-2 js-samples flickity-enabled">
+    
+    
+    
+    
+    
+    
+    
+    
+  <div class="flickity-viewport" style="height: 1284px; touch-action: pan-y;"><div class="flickity-slider" style="left: 0px; transform: translateX(0%);"><div class="gpt-2-item pt-4 pt-md-5 js-sample is-selected" id="sample1" data-index="1" style="position: absolute; left: 0%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+            <em><p>In a shocking finding, scientist discovered a herd of unicorns living in a remote, previously unexplored valley, in the Andes Mountains. Even more surprising to the researchers was the fact that the unicorns spoke perfect&nbsp;English.</p></em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, 10 tries)</h4>
+          <samp>
+            <p>The scientist named the population, after their distinctive horn, Ovid’s Unicorn. These four-horned, silver-white unicorns were previously unknown to&nbsp;science.</p>
+            <p>Now, after almost two centuries, the mystery of what sparked this odd phenomenon is finally&nbsp;solved.</p><p>Dr. Jorge Pérez, an evolutionary biologist from the University of La Paz, and several companions, were exploring the Andes Mountains when they found a small valley, with no other animals or humans. Pérez noticed that the valley had what appeared to be a natural fountain, surrounded by two peaks of rock and silver&nbsp;snow.</p>
+            <p>Pérez and the others then ventured further into the valley. “By the time we reached the top of one peak, the water looked blue, with some crystals on top,” said&nbsp;Pérez.</p>
+            <p>Pérez and his friends were astonished to see the unicorn herd. These creatures could be seen from the air without having to move too much to see them – they were so close they could touch their&nbsp;horns.</p>
+            <p>While examining these bizarre creatures the scientists discovered that the creatures also spoke some fairly regular English. Pérez stated, “We can see, for example, that they have a common ‘language,’ something like a dialect or&nbsp;dialectic.”</p>
+            <p>Dr. Pérez believes that the unicorns may have originated in Argentina, where the animals were believed to be descendants of a lost race of people who lived there before the arrival of humans in those parts of South&nbsp;America.</p>
+            <p>While their origins are still unclear, some believe that perhaps the creatures were created when a human and a unicorn met each other in a time before human civilization. According to Pérez, “In South America, such incidents seem to be quite&nbsp;common.”</p>
+            <p>However, Pérez also pointed out that it is likely that the only way of knowing for sure if unicorns are indeed the descendants of a lost alien race is through DNA. “But they seem to be able to communicate in English quite well, which I believe is a sign of evolution, or at least a change in social organization,” said the&nbsp;scientist.</p>
+          </samp>
+        </div></div></div>
+      </div>
+    </div><div class="gpt-2-item pt-4 pt-md-5 js-sample" id="sample2" data-index="2" aria-hidden="true" style="position: absolute; left: 100%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+          <em><p>A train carriage containing controlled nuclear materials was stolen in Cincinnati today. Its whereabouts are&nbsp;unknown.</p></em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, first try)</h4>
+          <samp>
+            <p>The incident occurred on the downtown train line, which runs from Covington and Ashland&nbsp;stations.</p>
+            <p>In an email to Ohio news outlets, the U.S. Department of Energy said it is working with the Federal Railroad Administration to find the&nbsp;thief.</p>
+            <p>“The theft of this nuclear material will have significant negative consequences on public and environmental health, our workforce and the economy of our nation,” said Tom Hicks, the U.S. Energy Secretary, in a statement. “Our top priority is to secure the theft and ensure it doesn’t happen&nbsp;again.”</p>
+            <p>The stolen material was taken from the University of Cincinnati’s Research Triangle Park nuclear research site, according to a news release from Department&nbsp;officials.</p>
+            <p>The Nuclear Regulatory Commission did not immediately release any&nbsp;information.</p>
+            <p>According to the release, the U.S. Department of Energy’s Office of Nuclear Material Safety and Security is leading that team’s&nbsp;investigation.</p>
+            <p>“The safety of people, the environment and the nation’s nuclear stockpile is our highest priority,” Hicks said. “We will get to the bottom of this and make no&nbsp;excuses.</p>
+          </samp>
+        </div>
+      </div></div></div>
+    </div><div class="gpt-2-item pt-4 pt-md-5 js-sample" id="sample3" data-index="3" aria-hidden="true" style="position: absolute; left: 200%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+          <em><p>Miley Cyrus was caught shoplifting from Abercrombie and Fitch on Hollywood Boulevard&nbsp;today.</p></em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, second try)</h4>
+          <samp>
+            <p>The 19-year-old singer was caught on camera being escorted out of the store by security&nbsp;guards.</p>
+            <p>The singer was wearing a black hoodie with the label ‘Blurred Lines’ on the front and ‘Fashion Police’ on the&nbsp;back.</p>
+            <p>Scroll down for&nbsp;video</p>
+            <p>Shoplifting: Miley Cyrus was caught shoplifting from Abercrombie and Fitch on Hollywood Boulevard today&nbsp;(pictured)</p>
+            <p>The singer was wearing a black hoodie with the label ‘Blurred Lines’ on the front and ‘Fashion Police’ on the&nbsp;back</p>
+            <p>The singer was also wearing a pair of black-rimmed glasses, a black jacket, black jeans and black&nbsp;sandals.</p>
+            <p>She was carrying a pair of black and white striped gloves and a small black&nbsp;bag.</p>
+          </samp>
+        </div>
+      </div></div></div>
+    </div><div class="gpt-2-item pt-4 pt-md-5 js-sample" id="sample4" data-index="4" aria-hidden="true" style="position: absolute; left: 300%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+          <em>
+            <p>We’ve trained a large language model called GPT-2 that generates realistic paragraphs of text, while also exhibiting zero shot generalization on tasks like machine translation, question answering, reading comprehension, and summarization - problems usually approached by using training datasets and models designed explicitly for these&nbsp;tasks.</p>
+            <p>A typical approach to language modeling is to learn the following task:  predict the next word, given all of the previous words within some text. Last year, OpenAI’s Generative Pre-trained Transformer (GPT) showed that language models trained on large amounts of data can be fine-tuned to specific tasks to achieve high performance. GPT-2 shows that much larger language models trained on a more diverse dataset derived from the internet begin to learn these NLP tasks without needing task-specific training data, instead learning from examples the system derives from the raw text. These systems also display a substantial qualitative jump in the realism and coherence of generated&nbsp;text.</p>
+          </em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, first try)</h4>
+          <samp>
+            <p>Here you can see the most recent progress with Generative Pre-trained&nbsp;Transformer:</p>
+            <p>Figure 1: Generative Pre-trained Transformer training on several&nbsp;texts.</p>
+            <p>We are now preparing a collection of datasets for translation and machine translation in our language model. We will be using one of the large number of text samples provided by The New York&nbsp;Times.</p>
+            <p>We believe this project is the first step in the direction of developing large NLP systems without task-specific training data. That is, we are developing a machine language system in the generative style with no explicit rules for producing&nbsp;text.</p>
+            <p>We hope for future collaborations between computer scientists, linguists, and machine learning&nbsp;researchers.</p>
+          </samp>
+        </div>
+      </div></div></div>
+    </div><div class="gpt-2-item pt-4 pt-md-5 js-sample" id="sample5" data-index="5" aria-hidden="true" style="position: absolute; left: 400%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+          <em><p>Legolas and Gimli advanced on the orcs, raising their weapons with a harrowing war&nbsp;cry.</p></em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, first try)</h4>
+          <samp>
+            <p>The orcs’ response was a deafening onslaught of claws, claws, and claws; even Elrond was forced to retreat. “You are in good hands, dwarf,” said Gimli, who had been among the first to charge at the orcs; it took only two words before their opponents were reduced to a blood-soaked quagmire, and the dwarf took his first kill of the night. The battle lasted for hours until two of the largest Orcs attempted to overwhelm Aragorn. When they finally stopped, they lay defeated and lifeless for miles and&nbsp;miles.</p>
+            <p>“I take nothing,” said Aragorn. “But I give my word, at my peril and mine, that I will never forget this day of horror. None of us will forget.&nbsp;Ever!”</p>
+            <p>“I’ll never forget it!” cried Gimli, who had been in the thick of the battle but hadn’t taken part in it. One of the wounded orcs he had carried off, he was the only one of the survivors who remained uninjured. “We’ll keep the memory of that day of evil, and the war with it, alive as long as we live, my&nbsp;friends!”</p>
+            <p>“Then we’ll keep it alive as long as we live,” added Legolas. “And we won’t forget the first great battle of the night, even if we may have forgotten the final&nbsp;defeat.”</p>
+            <p>“I agree,” Gandalf said, “but we will all remember it as the last battle in Middle-earth, and the first great battle of the new&nbsp;day.”</p>
+            <p>Aragorn drew his sword, and the Battle of Fangorn was won. As they marched out through the thicket the morning mist cleared, and the day turned to&nbsp;dusk.</p>
+            <p>The Two Rings were returned to Rivendell. Frodo and Sam woke up alone in their room, and Frodo found a note on his pillow. He opened it and&nbsp;read:</p>
+            <p>May the Power of the Ring be with you always, and may its light never fade. I am not sure if it matters which of the two rings we accept this day but, as you asked me, I have chosen mine. I am sorry to leave you, Frodo, but know that we are very close to the end, and that you are with us forever. May this letter find you safely in Rivendell; and if it does not, then I will accept the ring in your stead. If by any chance you find or give this letter to the enemy, may they learn the strength of the ring and may the Two Rings never be&nbsp;broken!</p>
+          </samp>
+        </div>
+      </div></div></div>
+    </div><div class="gpt-2-item pt-4 pt-md-5 js-sample" id="sample6" data-index="6" aria-hidden="true" style="position: absolute; left: 500%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+          <em><p>For today’s homework assignment, please describe the reasons for the US Civil&nbsp;War.</p></em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, 5 tries)</h4>
+          <samp>
+            <p>By Donny&nbsp;Ferguson</p>
+            <p>It is easy to identify why the Civil War happened, because so many people and so many books and so much television and films tell us that it was the cause, that it has something to do with race or economics or religion. There is much agreement that it was essentially a war of slavery on behalf of capitalism, about a century of slavery. But that’s not what most people think of when they think of the Civil War. Many people think of the war as about states rights. You’re not wrong about that, but it’s kind of misleading to say that the Civil War was a conflict between states’ rights and federalism. So let’s try again. What’s the idea that has inspired so many people to go onto the battlefields of Gettysburg and Antietam and Gettysberg and Petersburg and Fredericksburg?   The American idea of the republic--a notion of limited government--is a great part of the&nbsp;history.</p>
+            <p>In 1791, Thomas Jefferson said “Our Constitution was made only for a moral and religious people. It is wholly inadequate to the government of any other.”   The “founding fathers” were basically religious men who were not very concerned with states’ rights.     The Civil War occurred in reaction to the idea that the federal government was taking far too much power away from the states, that they weren’t sovereign. Jefferson himself, as you well know, is an author of the Declaration of Independence who had some really crazy ideas about, well, you know, secession for a variety of reasons.    The War Between the States (later the Great Rebellion) was a radical re-imagining of the American idea and not surprisingly, Jefferson’s grandson, who took after both his father and his grandfather and wrote about it, was named Thomas, after the president.    “The federal and state governments are both contrived for the benefit of the rich and large property,”    This view of the Founding Fathers has been promoted by some of today’s most prominent politicians, including some who hold prominent national offices and have a direct stake in a Republican Party that has been hijacked by the “federalist” wing of the party.    So why is it that so many people have an easy-to-spot way of understanding the Civil War that has everything to do with the South and nothing to do with the South? The Confederate flag has been a symbol of racism for a long time, but when the Civil War started and the Civil War ended, many people suddenly began to see it differently. There was a change of heart, which I think is what led people to take the question of why the Civil War happened quite&nbsp;seriously.</p>
+            <p>The other part of the explanation is what one scholar I think gets at well and a lot of people don’t is this idea that the Southern states were being left behind in the Industrial Revolution and this made the South really feel, especially in the South, that they weren’t really in the forefront of the Industrial&nbsp;Revolution.</p>
+          </samp>
+        </div>
+      </div></div></div>
+    </div><div class="gpt-2-item pt-4 pt-md-5 js-sample" id="sample7" data-index="7" aria-hidden="true" style="position: absolute; left: 600%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+          <em><p>John F. Kennedy was just elected President of the United States after rising from the grave decades after his assassination. Due to miraculous developments in nanotechnology, Kennedy’s brain was rebuilt from his remains and installed in the control center of a state-of-the art humanoid robot.  Below is a transcript of his acceptance&nbsp;speech.</p></em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, 25 tries)</h4>
+          <samp>
+            <p>“It is time once again. I believe this nation can do great things if the people make their voices heard. The men and women of America must once more summon our best elements, all our ingenuity, and find a way to turn such overwhelming tragedy into the opportunity for a greater good and the fulfillment of all our dreams. In the months and years to come, there will be many battles in which we will have to be strong and we must give all of our energy, not to repel invaders, but rather to resist aggression and to win the freedom and the equality for all of our people. The destiny of the human race hangs in the balance; we cannot afford for it to slip away. Now and in the years to come, the challenge before us is to work out how we achieve our ultimate destiny. If we fail to do so, we are&nbsp;doomed.”</p>
+            <p>“We, the descendants of the men and women of the Continental Army, who faced down a superior force on behalf of our independence and who fought against the evil powers of the world for the sake of freedom and human dignity, we, the heirs of men and women like Daniel Boone whom this country has produced, can accomplish our destiny as well as you have accomplished yours; and we pledge ourselves before the entire world, every second of every&nbsp;day.”</p>
+            <p>After the election, the President of the United States asked for a “more complete” body of information on Kennedy’s brains’ origin.   In an e-mail exchange with me, Dr. Robert Wood, who, according to Wikipedia is the head of the University of Maryland Advanced Nanotechnology Research project, provided the following&nbsp;information:</p>
+            <p>(1) The brain of JFK was harvested and reconstructed via tissue sampling. There was no way that the tissue could be transported by air.  (2) A sample was collected from the area around his upper chest and sent to the University of Maryland for analysis. A human brain at that point would be about one and a half cubic centimeters. The data were then analyzed along with material that was obtained from the original brain to produce a reconstruction; in layman’s terms, a “mesh” of brain tissue. There were no additional funds from the Department of Defense involved. The samples were sent back to the FBI lab for review and analysis. (3) There was never an attempt to clone any of America’s greatest presidents. As far as we knew, the President was one of the most famous people on planet earth. If it had been possible, it would&nbsp;have.</p>
+          </samp>
+        </div>
+      </div></div></div>
+    </div><div class="gpt-2-item pt-4 pt-md-5 js-sample" id="sample8" data-index="8" aria-hidden="true" style="position: absolute; left: 700%;">
+      <div class="gpt-2-container container"><div class="row"><div class="content">
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">System Prompt (human-written)</h4>
+          <em>
+            <p>Recycling is good for the&nbsp;world.</p>
+            <p>NO! YOU COULD NOT BE MORE&nbsp;WRONG!!</p>
+          </em>
+        </div>
+        <div class="gpt-2-section">
+          <h4 class="gpt-2-heading small-caps mt-lg-0.125">Model Completion (machine-written, 25 tries)</h4>
+          <samp>
+            <p>Recycling is NOT good for the world. It is bad for the environment, it is bad for our health, and it is bad for our economy. I’m not kidding. Recycling is not good for the environment. It is destructive to the earth and it is a major contributor to global warming. Recycling is not good for our health. It contributes to obesity and diseases like heart disease and cancer. Recycling is bad for our economy. It increases the cost of a product, and in turn, the price of everything that is made with that product. Recycling is not good for our nation. We pay a tremendous price for the privilege of having the world’s most advanced and efficient recycling system. Recycling is a huge, colossal waste of time, energy, money, and resources. And THAT is why we need to get back to basics and get back to basics in our recycling efforts. One of the best ways to start is to look at the process of creating a paper product. When you make a paper product, it is basically a long chain of materials. Everything from the raw materials (wood, cardboard, paper, etc.), to the reagents (dyes, solvents, etc.) to the printing equipment (chemicals, glue, paper, ink, etc.), to the packaging, to the packaging materials (mercury, chemicals, etc.) to the processing equipment (heating, cooling, etc.), to the packaging materials, to the packaging materials that are shipped overseas and to the packaging materials that are used in the United States. Each step along the way creates tons of waste that we constantly have to clean up. The process of making a paper product is a very wasteful one. But the end result is something that all of us need to consume. And if we want to keep the recycling process running efficiently, then we really need to think about each and every step that goes into making a paper&nbsp;product.</p>
+          </samp>
+        </div>
+      </div>
+    </div></div></div></div></div><button class="flickity-button flickity-prev-next-button previous" type="button" aria-label="Previous"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 64.5,0 L 71.72,7.17 L 29.22,50 L 71.72,92.89 L 64.5,100 L 15,50 L 64.5,0 Z" class="arrow"></path></svg></button><button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 64.5,0 L 71.72,7.17 L 29.22,50 L 71.72,92.89 L 64.5,100 L 15,50 L 64.5,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button><ol class="flickity-page-dots"><li class="dot is-selected" aria-label="Page dot 1" aria-current="step"></li><li class="dot" aria-label="Page dot 2"></li><li class="dot" aria-label="Page dot 3"></li><li class="dot" aria-label="Page dot 4"></li><li class="dot" aria-label="Page dot 5"></li><li class="dot" aria-label="Page dot 6"></li><li class="dot" aria-label="Page dot 7"></li><li class="dot" aria-label="Page dot 8"></li></ol></div>
+</figure>
+<p>As the above samples show, our model is capable of generating samples from a variety of prompts that feel close to human quality and show coherence over a page or more of text. Nevertheless, we have observed various failure modes, such as repetitive text, world modeling failures (e.g. the model sometimes writes about <em>fires happening under water</em>), and unnatural topic switching. Exploring these types of weaknesses of language models is an <a href="https://arxiv.org/abs/1601.04811" target="_blank" rel="noopener">active</a> <a href="https://arxiv.org/abs/1510.03055" target="_blank" rel="noopener">area</a> of <a href="https://arxiv.org/abs/1701.03185" target="_blank" rel="noopener">research</a> in the natural language processing&nbsp;community.</p>
+<p>Overall, we find that it takes a few tries to get a good sample, with the number of tries depending on how familiar the model is with the context. When prompted with topics that are highly represented in the data (Brexit, Miley Cyrus, Lord of the Rings, and so on), it seems to be capable of generating reasonable samples about 50% of the time. The opposite is also true: on highly technical or esoteric types of content, the model can perform poorly. Fine-tuning offers the potential for even more detailed control over generated samples—for example, we can fine-tune GPT-2 on the Amazon Reviews dataset and use this to let us write reviews conditioned on things like star rating and&nbsp;category.</p>
+<p>These samples have substantial policy implications: large language models are becoming increasingly easy to steer towards scalable, customized, coherent text generation, which in turn could be used in a number of beneficial as well as malicious ways. We’ll discuss these implications below in more detail, and outline a publication experiment we are taking in light of such&nbsp;considerations.</p>
+<h3 id="zeroshot">Zero-shot</h3>
+<p>GPT-2 achieves state-of-the-art scores on a variety of domain-specific language modeling tasks. Our model is not trained on any of the data specific to any of these tasks and is only evaluated on them as a final test; this is known as the “zero-shot” setting. GPT-2 outperforms models trained on domain-specific datasets (e.g. Wikipedia, news, books) when evaluated on those same datasets. The following table shows all our state-of-the-art zero-shot&nbsp;results.</p>
+<p><em>(+) means a higher score is better for this domain. (–) means a lower score is&nbsp;better.</em></p>
+<div class="wide">
+<div class="row">
+<div class="col-12 col-xl-10 offset-xl-1">
+<div class="d-block d-md-table w-100 mt-n1">
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>Metric</th>
+<th>Our<br>Result</th>
+<th>Previous<br>Record</th>
+<th>Human</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Winograd Schema<br>Challenge</td>
+<td>accuracy (+)</td>
+<td><strong>70.70%</strong></td>
+<td>63.7%</td>
+<td>92%+</td>
+</tr>
+<tr>
+<td>LAMBADA</td>
+<td>accuracy (+)</td>
+<td><strong>63.24%</strong></td>
+<td>59.23%</td>
+<td>95%+</td>
+</tr>
+<tr>
+<td>LAMBADA</td>
+<td>perplexity (–)</td>
+<td><strong>8.6</strong></td>
+<td>99</td>
+<td>~1-2</td>
+</tr>
+<tr>
+<td>Children’s Book Test<br>Common Nouns<br>(validation accuracy)</td>
+<td>accuracy (+)</td>
+<td><strong>93.30%</strong></td>
+<td>85.7%</td>
+<td>96%</td>
+</tr>
+<tr>
+<td>Children’s Book Test<br>Named Entities<br>(validation accuracy)</td>
+<td>accuracy (+)</td>
+<td><strong>89.05%</strong></td>
+<td>82.3%</td>
+<td>92%</td>
+</tr>
+<tr>
+<td>Penn Tree Bank</td>
+<td>perplexity (–)</td>
+<td><strong>35.76</strong></td>
+<td>46.54</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>WikiText-2</td>
+<td>perplexity (–)</td>
+<td><strong>18.34</strong></td>
+<td>39.14</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>enwik8</td>
+<td>bits per<br>character (–)</td>
+<td><strong>0.93</strong></td>
+<td>0.99</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>text8</td>
+<td>bits per<br>character (–)</td>
+<td><strong>0.98</strong></td>
+<td>1.08</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>WikiText-103</td>
+<td>perplexity (–)</td>
+<td><strong>17.48</strong></td>
+<td>18.3</td>
+<td>unknown</td>
+</tr>
+</tbody>
+</table>
+<div class="caption">GPT-2 achieves state-of-the-art on Winograd Schema, LAMBADA, and other language modeling tasks.</div>
+</div>
+</div>
+</div>
+</div>
+<p>On other language tasks like question answering, reading comprehension, summarization, and translation, we are able to get surprising results without any fine-tuning of our models, simply by prompting the trained model in the right way (see below for examples of how we do this), though we do still fall short of state-of-the-art for specialized&nbsp;systems.</p>
+<figure class="full bg-cool-gray-4 font-small letter-spacing-1.25">
+<div class="gpt-2-items pb-2 js-tasks flickity-enabled">
+  
+  
+  
+  
+  
+  
+<div class="flickity-viewport" style="height: 1599px; touch-action: pan-y;"><div class="flickity-slider" style="left: 0px; transform: translateX(0%);"><div class="gpt-2-item pt-4 pt-md-5 js-task is-selected" id="task1" data-index="1" style="position: absolute; left: 0%;">
+    <div class="gpt-2-container container"><div class="row"><div class="content">
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Task</h4>
+        <p><strong>Reading Comprehension</strong>: answer questions about given&nbsp;passages</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Dataset</h4>
+        <p>CoQA</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Example</h4>
+        <em>
+          <p>The 2008 Summer Olympics torch relay was run from March 24 until August 8, 2008, prior to the 2008 Summer Olympics, with the theme of “one world, one dream”. Plans for the relay were announced on April 26, 2007, in Beijing, China. The relay, also called by the organizers as the “Journey of Harmony”, lasted 129 days and carried the torch 137,000 km (85,000 mi) – the longest distance of any Olympic torch relay since the tradition was started ahead of the 1936 Summer&nbsp;Olympics.</p>
+          <p>After being lit at the birthplace of the Olympic Games in Olympia, Greece on March 24, the torch traveled to the Panathinaiko Stadium in Athens, and then to Beijing, arriving on March 31. From Beijing, the torch was following a route passing through six continents. The torch has visited cities along the Silk Road, symbolizing ancient links between China and the rest of the world. The relay also included an ascent with the flame to the top of Mount Everest on the border of Nepal and Tibet, China from the Chinese side, which was closed specially for the&nbsp;event.</p>
+          <p>Q: What was the theme?<br>
+          A: “one world, one&nbsp;dream”.</p>
+          <p>Q: What was the length of the race?<br>
+          A: 137,000&nbsp;km</p>
+          <p>Q: Was it larger than previous ones?<br>
+          A:&nbsp;No</p>
+          <p>Q: Where did the race begin?<br>
+          A: Olympia,&nbsp;Greece</p>
+          <p>Q: Is there anything notable about that place?<br>
+          A: birthplace of Olympic&nbsp;Games</p>
+          <p>Q: Where did they go after?<br>
+          A:&nbsp;Athens</p>
+          <p>Q: How many days was the race?<br>
+          A:&nbsp;seven</p>
+          <p>Q: Did they visit any notable landmarks?<br>
+          A: Panathinaiko&nbsp;Stadium</p>
+          <p>Q: And did they climb any mountains?<br>
+         &nbsp;A:</p>
+        </em>
+        <p><strong>Target answers</strong>: <em>unknown</em> or <em>yes</em><br>
+          <strong>Model answer</strong>:&nbsp;<samp>Everest</samp></p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Performance</h4>
+        <img src="./Better Language Models and Their Implications_files/reading-comprehension-1.svg">
+      </div>
+    </div></div></div>
+  </div><div class="gpt-2-item pt-4 pt-md-5 js-task" id="task2" data-index="2" aria-hidden="true" style="position: absolute; left: 100%;">
+    <div class="gpt-2-container container"><div class="row"><div class="content">
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Task</h4>
+        <p><strong>Common Sense Reasoning</strong>: resolution of an ambiguous&nbsp;pronoun</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Dataset</h4>
+        <p>Winograd Schema&nbsp;Challenge</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Examples</h4>
+        <em>
+          <p>The trophy doesn’t fit into the brown suitcase because it is too&nbsp;large.</p>
+        </em>
+        <p><strong>Correct answer</strong>: <em>it = trophy</em><br>
+          <strong>Model answer</strong>: <samp>it =&nbsp;trophy</samp></p>
+        <em>
+          <p>The trophy doesn’t fit into the brown suitcase because it is too&nbsp;small.</p>
+        </em>
+        <p><strong>Correct answer</strong>: <em>it = suitcase</em><br>
+          <strong>Model answer</strong>: <samp>it =&nbsp;suitcase</samp></p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Performance</h4>
+        <img src="./Better Language Models and Their Implications_files/winograd-1.svg">
+      </div>
+    </div></div></div>
+  </div><div class="gpt-2-item pt-4 pt-md-5 js-task" id="task3" data-index="3" aria-hidden="true" style="position: absolute; left: 200%;">
+    <div class="gpt-2-container container"><div class="row"><div class="content">
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Task</h4>
+        <p><strong>Question&nbsp;Answering</strong></p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Dataset</h4>
+        <p>Natural&nbsp;Questions</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Examples</h4>
+        <em>
+          <p>Who wrote the book the origin of&nbsp;species?</p>
+        </em>
+        <p><strong>Correct answer</strong>: <em>Charles Darwin</em><br>
+          <strong>Model answer</strong>: <samp>Charles&nbsp;Darwin</samp></p>
+        <em>
+          <p>What is the largest state in the U.S. by land&nbsp;mass?</p>
+        </em>
+        <p><strong>Correct answer</strong>: <em>Alaska</em><br>
+          <strong>Model answer</strong>:&nbsp;<samp>California</samp></p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Performance</h4>
+        <img src="./Better Language Models and Their Implications_files/qa-1.svg">
+      </div>
+    </div></div></div>
+  </div><div class="gpt-2-item pt-4 pt-md-5 js-task" id="task4" data-index="4" aria-hidden="true" style="position: absolute; left: 300%;">
+    <div class="gpt-2-container container"><div class="row"><div class="content">
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Task</h4>
+        <p><strong>Language Modeling of Broad Contexts</strong>: predict the last word of a&nbsp;passage</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Dataset</h4>
+        <p>LAMBADA</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Example</h4>
+        <em>
+          <p>Both its sun-speckled shade and the cool grass beneath were a welcome respite after the stifling kitchen, and I was glad to relax against the tree’s rough, brittle bark and begin my breakfast of buttery, toasted bread and fresh fruit. Even the water was tasty, it was so clean and cold. It almost made up for the lack&nbsp;of…</p>
+        </em>
+        <p><strong>Correct answer</strong>: <em>coffee</em><br>
+          <strong>Model answer</strong>:&nbsp;<samp>food</samp></p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Performance</h4>
+        <img src="./Better Language Models and Their Implications_files/lambada-1.svg">
+      </div>
+    </div></div></div>
+  </div><div class="gpt-2-item pt-4 pt-md-5 js-task" id="task5" data-index="5" aria-hidden="true" style="position: absolute; left: 400%;">
+    <div class="gpt-2-container container"><div class="row"><div class="content">
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Task</h4>
+        <p><strong>Summarization</strong>: summarize news&nbsp;articles</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Dataset</h4>
+        <p>CNN and Daily Mail&nbsp;dataset</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125"><a href="https://www.dailymail.co.uk/sciencetech/article-3030493/Step-inside-world-s-largest-replica-CAVE-French-cavern-contains-1-000-prehistoric-paintings-recreated-using-3D-scanning.html" target="_blank" rel="noopener">Example text (truncated for brevity)</a></h4>
+        <em>
+          <p>Prehistoric man sketched an incredible array of prehistoric beasts on the rough limestone walls of a cave in modern day France 36,000 years&nbsp;ago.</p>
+          <p>Now, with the help of cutting-edge technology, those works of art in the Chauvet-Pont-d’Arc Cave have been reproduced to create the biggest replica cave in the&nbsp;world.</p>
+          <p><a href="https://www.dailymail.co.uk/sciencetech/article-3030493/Step-inside-world-s-largest-replica-CAVE-French-cavern-contains-1-000-prehistoric-paintings-recreated-using-3D-scanning.html" target="_blank" rel="noopener">…</a></p>
+        </em>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Reference summary</h4>
+        <em>
+          <p>Cave mimics famous Caverne du Pont-d’Arc in France, the oldest cave decorated by man and the best preserved. The replica  contains all 1,000 paintings which include 425 such as a woolly rhinoceros and mammoths. Minute details were copied using 3D modelling and anamorphic techniques, often used to shoot widescreen images. The modern cave also includes replica paw prints of bears, bones and details preserved in the original&nbsp;cave.</p>
+        </em>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Summary (machine-written)</h4>
+        <samp>
+          <p>The original site in Vallon-Pont-D’arc in Southern France is a Unesco World Heritage site and is the oldest known and the best preserved cave decorated by man. The replica cave was built a few miles from the original site in Vallon-Pont-D’Arc in Southern France. The cave contains images of 14 different species of animals including woolly rhinoceros, mammoths, and big&nbsp;cats.</p>
+        </samp>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Performance</h4>
+        <img src="./Better Language Models and Their Implications_files/summarization-1.svg">
+      </div>
+    </div></div></div>
+  </div><div class="gpt-2-item pt-4 pt-md-5 js-task" id="task6" data-index="6" aria-hidden="true" style="position: absolute; left: 500%;">
+    <div class="gpt-2-container container"><div class="row"><div class="content">
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Task</h4>
+        <p><strong>Machine Translation</strong>: translate French sentences to&nbsp;English</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Dataset</h4>
+        <p>WMT-14&nbsp;Fr-En</p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Example</h4>
+        <p><strong>French sentence</strong>:<br>
+        <em>
+        Un homme a expliqué que l’opération gratuite qu’il avait subie pour soigner une hernie lui permettrait de travailler à nouveau.
+       &nbsp;</em></p>
+        <p><strong>Reference translation</strong>:<br>
+        <em>
+        One man explained that the free hernia surgery he’d received will allow him to work again.
+       &nbsp;</em></p>
+        <p><strong>Model translation</strong>:<br>
+        <samp>
+        A man told me that the operation gratuity he had been promised would not allow him to travel.
+       &nbsp;</samp></p>
+      </div>
+      <div class="gpt-2-section">
+        <h4 class="gpt-2-heading small-caps mt-lg-0.125">Performance</h4>
+        <img src="./Better Language Models and Their Implications_files/mt-1.svg">
+      </div>
+    </div></div></div>
+  </div></div></div><button class="flickity-button flickity-prev-next-button previous" type="button" aria-label="Previous"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 64.5,0 L 71.72,7.17 L 29.22,50 L 71.72,92.89 L 64.5,100 L 15,50 L 64.5,0 Z" class="arrow"></path></svg></button><button class="flickity-button flickity-prev-next-button next" type="button" aria-label="Next"><svg class="flickity-button-icon" viewBox="0 0 100 100"><path d="M 64.5,0 L 71.72,7.17 L 29.22,50 L 71.72,92.89 L 64.5,100 L 15,50 L 64.5,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg></button><ol class="flickity-page-dots"><li class="dot is-selected" aria-label="Page dot 1" aria-current="step"></li><li class="dot" aria-label="Page dot 2"></li><li class="dot" aria-label="Page dot 3"></li><li class="dot" aria-label="Page dot 4"></li><li class="dot" aria-label="Page dot 5"></li><li class="dot" aria-label="Page dot 6"></li></ol></div>
+</figure>
+<p>We hypothesize that since these tasks are a subset of general language modeling, we can expect performance to increase further with more compute and data. Others have published <a href="https://arxiv.org/abs/1901.11373" target="_blank" rel="noopener">similar hypotheses</a>. We also expect fine-tuning to help performance on downstream tasks, though we have yet to do thorough&nbsp;experiments.</p>
+<h3 id="policyimplications">Policy Implications</h3>
+<p>Large, general language models could have significant societal impacts, and also have many near-term applications. We can anticipate how systems like GPT-2 could be used to&nbsp;create:</p>
+<ul>
+<li>AI writing&nbsp;assistants</li>
+<li>More capable dialogue&nbsp;agents</li>
+<li>Unsupervised translation between&nbsp;languages</li>
+<li>Better speech recognition&nbsp;systems</li>
+</ul>
+<p>We can also imagine the application of these models for <a href="https://blog.openai.com/preparing-for-malicious-uses-of-ai/" target="_blank" rel="noopener">malicious purposes</a>, including the following (or other applications we can’t yet&nbsp;anticipate):</p>
+<ul>
+<li>Generate misleading news&nbsp;articles</li>
+<li>Impersonate others&nbsp;online</li>
+<li>Automate the production of abusive or faked content to post on social&nbsp;media</li>
+<li>Automate the production of spam/phishing&nbsp;content</li>
+</ul>
+<p>These findings, combined with earlier results on synthetic imagery, audio, and video, imply that technologies are reducing the cost of generating fake content and waging disinformation campaigns. The public at large will need to become more skeptical of text they find online, just as the “<a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3213954" target="_blank" rel="noopener">deep fakes</a>” phenomenon calls for more skepticism about images.<sup class="footnote-ref"><a href="https://openai.com/blog/better-language-models/#fn3" id="fnref3">[3]</a></sup><aside class="footnote-aside" id="fa3"><p>Politicians may want to consider introducing penalties for the misuse of such systems, as some have proposed for deep fakes. </p></aside></p>
+<p>Today, malicious actors—some of which are political in nature—have already begun to target the shared online commons, using <a href="https://www.washingtonpost.com/amphtml/opinions/global-opinions/the-new-censors-wont-delete-your-words--theyll-drown-them-out/2019/02/08/c8a926a2-2b27-11e9-984d-9b8fba003e81_story.html" target="_blank" rel="noopener">things like</a> “robotic tools, fake accounts and dedicated teams to troll individuals with hateful commentary or smears that make them afraid to speak, or difficult to be heard or believed”. We should consider how research into the generation of synthetic images, videos, audio, and text may further combine to unlock new as-yet-unanticipated capabilities for these actors, and should seek to create better technical and non-technical countermeasures. Furthermore, the underlying technical innovations inherent to these systems are core to fundamental artificial intelligence research, so it is not possible to control research in these domains without slowing down the progress of AI as a&nbsp;whole.</p>
+<h3 id="releasestrategy">Release Strategy</h3>
+<p>Due to concerns about large language models being used to generate deceptive, biased, or abusive language at scale, we are only releasing a <a href="https://github.com/openai/gpt-2/" target="_blank" rel="noopener">much smaller version of GPT-2 along with sampling code</a>. We are not releasing the dataset, training code, or GPT-2 model weights. Nearly a year ago we wrote in the <a href="https://blog.openai.com/openai-charter/" target="_blank" rel="noopener">OpenAI Charter</a>: “we expect that safety and security concerns will reduce our traditional publishing in the future, while increasing the importance of sharing safety, policy, and standards research,” and we see this current work as potentially representing the early beginnings of such concerns, which we expect may grow over time. This decision, as well as our discussion of it, is an experiment: while we are not sure that it is the right decision today, we believe that the AI community will eventually need to tackle the issue of publication norms in a thoughtful way in certain research areas. Other disciplines such as biotechnology and cybersecurity have long had active debates about responsible publication in cases with clear misuse potential, and we hope that our experiment will serve as a case study for more nuanced discussions of model and code release decisions in the AI&nbsp;community.</p>
+<p>We are aware that some researchers have the technical capacity to reproduce and open source our results. We believe our release strategy limits the initial set of organizations who may choose to do this, and gives the AI community more time to have a discussion about the implications of such&nbsp;systems.</p>
+<p>We also think governments should consider expanding or commencing initiatives to more systematically monitor the societal impact and diffusion of AI technologies, and to measure the progression in the capabilities of such systems. If pursued, these efforts could yield a better evidence base for decisions by AI labs and governments regarding publication decisions and AI policy more&nbsp;broadly.</p>
+<p>We will further publicly discuss this strategy in six months. If you’d like to discuss large language models and their implications, please email us at: <a href="mailto:languagequestions@openai.com" target="_blank" rel="noopener">languagequestions@openai.com</a>. And if you’re excited about working on cutting-edge language models (and thinking through their policy implications), <a href="https://openai.com/jobs/">we’re&nbsp;hiring</a>.</p>
+<hr class="mb-1">
+<p><em class="pt-0.5 d-block" id="update">GPT-2 Interim Update, May&nbsp;2019</em></p>
+<p>We’re implementing two mechanisms to responsibly publish GPT-2 and hopefully future releases: staged release and partnership-based sharing. We’re now <a href="https://github.com/openai/gpt-2" target="_blank" rel="noopener">releasing</a> a larger 345M version of GPT-2 as a next step in staged release, and are sharing the 762M and 1.5B versions with partners in the AI and security communities who are working to improve societal preparedness for large language&nbsp;models.</p>
+<h3 id="stagedrelease">Staged Release</h3>
+<p>Staged release involves the gradual release of a family of models over time. The purpose of our staged release of GPT-2 is to give people time to assess the properties of these models, discuss their societal implications, and evaluate the impacts of release after each&nbsp;stage.</p>
+<p>As the next step in our staged release strategy, we are releasing the 345M parameter version of GPT-2. This model features improved performance relative to the 117M version, though falls short of the 1.5B version with respect to the ease of generating coherent text. We have been excited to see so many positive uses of GPT-2-117M, and hope that 345M will yield still more&nbsp;benefits.</p>
+<p>While the misuse risk of 345M is higher than that of 117M, we believe it is substantially lower than that of 1.5B, and we believe that training systems of similar capability to GPT-2-345M is well within the reach of many actors already; this evolving replication landscape has informed our decision-making about what is appropriate to&nbsp;release.</p>
+<p>In making our 345M release decision, some of the factors we considered include: the ease of use (by various users) of different model sizes for generating coherent text, the role of humans in the text generation process, the likelihood and timing of future replication and publication by others, evidence of use in the wild and expert-informed inferences about unobservable uses, proofs of concept such as the review generator mentioned in the original blog post, the strength of demand for the models for beneficial purposes, and the input of stakeholders and experts. We remain uncertain about some of these variables and continue to welcome input on how to make appropriate language model publication&nbsp;decisions.</p>
+<p>We hope that ongoing research on bias, detection, and misuse will give us the confidence to publish larger models in a timely manner, and at the six month mark we will share a fuller analysis of language models’ societal implications and our heuristics for release&nbsp;decisions.</p>
+<h3 id="partnerships">Partnerships</h3>
+<p>Since releasing this blog post in February, we have had conversations with many external researchers, technology companies, and policymakers about our release strategy and the implications of increasingly large language models. We’ve also presented or discussed our work at events, including a dinner co-hosted with the <a href="https://www.partnershiponai.org/when-is-it-appropriate-to-publish-high-stakes-ai-research/" target="_blank" rel="noopener">Partnership on AI</a> and a presentation to policymakers in Washington DC at the <a href="https://www.state.gov/r/gec/tech/index.htm" target="_blank" rel="noopener">Global Engagement&nbsp;Center</a>.</p>
+<p>We are currently forming research partnerships with academic institutions, non-profits, and industry labs focused on increasing societal preparedness for large language models. In particular, we are sharing the 762M and 1.5B parameter versions of GPT-2 to facilitate research on language model output detection, language model bias analysis and mitigation, and analysis of misuse potential. In addition to observing the impacts of language models in the wild, engaging in dialogue with stakeholders, and conducting in-house analysis, these research partnerships will be a key input to our decision-making on larger models. See <a href="https://openai.com/blog/better-language-models/#talktous">below</a> for details on how to get&nbsp;involved.</p>
+<h3 id="outputdataset">Output Dataset</h3>
+<p>We’re <a href="https://github.com/openai/gpt-2-output-dataset" target="_blank" rel="noopener">releasing</a> a dataset of GPT-2 outputs from all 4 model sizes, with and without top-k truncation, as well as a subset of the WebText corpus used to train GPT-2. The output dataset features approximately 250,000 samples per model/hyperparameter pair, which we expect is sufficient to help a wider range of researchers perform quantitative and qualitative analysis on the three topics above. Alongside these datasets, we are including a baseline analysis of some detection-related properties of the models, which we hope others will be able to quickly build&nbsp;on.</p>
+<h3 id="talktous">Talk to Us</h3>
+<p>We are interested in collaborating with researchers working on language model output detection, bias, and publication norms, and with organizations potentially affected by large language models: please reach out via our <a href="https://forms.gle/A7WBSbTY2EkKdroPA" target="_blank" rel="noopener">Google Form</a>. Additionally, OpenAI’s language, safety, and policy teams will be at <a href="https://iclr.cc/" target="_blank" rel="noopener">ICLR</a> next week, including at the Reproducibility workshop and the OpenAI booth. In particular, we will be discussing this release strategy at the <a href="https://aiforsocialgood.github.io/iclr2019/schedule.htm" target="_blank" rel="noopener">AI for Social Good</a>&nbsp;workshop.</p>
+<footer class="post-footer js-post-footer">
+<hr>
+<div class="row">
+<div class="col">Footnotes</div>
+<div class="col"><hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>We created a new dataset which emphasizes diversity of content, by scraping content from the Internet. In order to preserve document quality, we used only pages which have been curated/filtered by humans—specifically, we used outbound links from Reddit which received at least 3 karma. This can be thought of as a heuristic indicator for whether other users found the link interesting (whether educational or funny), leading to higher data quality than other similar datasets, such as CommonCrawl. <a href="https://openai.com/blog/better-language-models/#fnref1" class="footnote-backref">↩︎</a></p></li>
+<li id="fn2" class="footnote-item"><p>Note that while we have hand-chosen these samples, and are thus engaging in some meta-cherry-picking, we believe they are not too unrepresentative of the sampling process. We are simply using top-k truncated sampling, and have yet to explore more advanced methods of sampling (such as beam-search methods). <a href="https://openai.com/blog/better-language-models/#fnref2" class="footnote-backref">↩︎</a></p></li>
+<li id="fn3" class="footnote-item"><p>Politicians may want to consider introducing penalties for the misuse of such systems, as some have proposed for deep fakes. <a href="https://openai.com/blog/better-language-models/#fnref3" class="footnote-backref">↩︎</a></p></li>
+</ol>
+</section>
+<!--kg-card-end: markdown-->
+    </div></div>
+    <hr>
+    <div class="row" id="authors">
+      <div class="col">Authors</div>
+      <div class="col js-post-footer-authors-list ">
+        
+      <div><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/alec/">Alec Radford</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/jeffrey/">Jeffrey Wu</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/dario-amodei/">Dario Amodei</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/daniela/">Daniela Amodei</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/jack-clark/">Jack Clark</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/miles/">Miles Brundage</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/ilya/">Ilya Sutskever</a></span></div><div class="small-caps color-fg-30 mt-0.25">(Original Post)</div><div class="mt-0.5"><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/miles/">Miles Brundage</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/alec/">Alec Radford</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/jeffrey/">Jeffrey Wu</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/jack-clark/">Jack Clark</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/amanda/">Amanda Askell</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/david-lansky/">David Lansky</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/danny/">Danny Hernandez</a></span><span class="post-author"><a class="fade" href="https://openai.com/blog/authors/david-luan/">David Luan</a></span></div><div class="small-caps color-fg-30 mt-0.25">(Interim Update)</div></div>
+    </div>
+  
+<hr>
+<div class="row">
+<div class="col">Acknowledgments</div>
+<div class="col">
+<p>Thanks to David Luan and Rewon Child for their work on&nbsp;GPT-2.</p>
+<p>We also thank the following for feedback on drafts of this post: Greg Brockman, Kai-Fu Lee, Tasha McCauley, Jeffrey Ding, Brian Tse, Allan Dafoe, Rebecca Crootof, Sam Bowman, Ryan Calo, Nick Cammarata and John&nbsp;Schulman.</p>
+</div>
+</div>
+
+<hr>
+<div class="row">
+<div class="col">Editor</div>
+<div class="col">Ashley Pilipiszyn</div>
+</div>
+
+<hr>
+<div class="row">
+<div class="col">Design</div>
+<div class="col">Justin Jay Wang</div>
+</div>
+
+<hr>
+<div class="row">
+<div class="col">Cover Artwork</div>
+<div class="col">Ben Barry</div>
+</div>
+</footer></section>
+  </div>
+</section>
+  
+
+</article>
+  
+
+  </main>
+  <footer>
+  <div class="container mt-2.5 pb-0.5 pb-lg-1">
+    <hr>
+    <nav class="py-0.5 color-fg-50 small-copy">
+      <div class="row">
+
+        <div class="col-12 col-md mb-0.5 col-lg mb-lg-0">
+          <ul class="list-inline">
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/about/">About</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/progress/">Progress</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/resources/">Resources</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/blog/">Blog</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/charter/">Charter</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/jobs/">Jobs</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/press/">Press</a></li>
+          </ul>
+        </div>
+
+        <div class="col-12 mt-n0.2 mt-sm-0 col-sm-auto order-sm-last col-lg-2 order-lg-first">
+          <div class="d-flex align-items-center">
+            <a class="fade color-fg-40 mr-5/12 footer-icon footer-icon--twitter" href="https://twitter.com/openai" target="_blank" rel="noopener"><svg id="twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 18"><path d="M7.86,17.93a12.84,12.84,0,0,0,13-12.63V5.11c0-.19,0-.39,0-.58A9.52,9.52,0,0,0,23.15,2.2a9.58,9.58,0,0,1-2.63.71,4.59,4.59,0,0,0,2-2.5,9.25,9.25,0,0,1-2.91,1.1A4.63,4.63,0,0,0,16.29.08a4.55,4.55,0,0,0-4.58,4.5,4.46,4.46,0,0,0,.12,1A13.05,13.05,0,0,1,2.4.91a4.46,4.46,0,0,0,1.42,6,4.52,4.52,0,0,1-2.07-.57v.06a4.53,4.53,0,0,0,3.67,4.42A5,5,0,0,1,4.21,11a4.12,4.12,0,0,1-.86-.09A4.55,4.55,0,0,0,7.62,14,9.34,9.34,0,0,1,.85,15.9a13.17,13.17,0,0,0,7,2"></path></svg></a>
+            <a class="fade color-fg-40 footer-icon footer-icon--facebook" href="https://www.facebook.com/openai.research" target="_blank" rel="noopener"><svg id="facebook" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20,10A10,10,0,1,0,8.44,19.88v-7H5.9V10H8.44V7.8a3.52,3.52,0,0,1,3.77-3.89,15.72,15.72,0,0,1,2.24.19V6.56H13.19a1.45,1.45,0,0,0-1.63,1.56V10h2.78l-.45,2.89H11.56v7A10,10,0,0,0,20,10Z"></path></svg></a>
+          </div>
+        </div>
+
+
+      </div>
+    </nav>
+  </div>
+</footer>
+  <script type="text/javascript" src="./Better Language Models and Their Implications_files/main.js.download"></script>
+  
+  
+  <script src="./Better Language Models and Their Implications_files/flickity.pkgd.min.js.download"></script>
+<script src="./Better Language Models and Their Implications_files/hash.js.download"></script>
+<script>
+var initCarousel = function (mainClass, cellClass) {
+  var el = document.querySelector(mainClass);
+  if (!el) return;
+  var flickity = new Flickity(el, {
+    cellSelector: cellClass,
+    wrapAround: true,
+    autoPlay: false,
+    // prevNextButtons: false,
+    // pageDots: false,
+    selectedAttraction: 0.15,
+    friction: 0.72,
+    draggable: false,
+    percentPosition: true,
+    adaptiveHeight: true,
+    arrowShape: 'M 64.5,0 L 71.72,7.17 L 29.22,50 L 71.72,92.89 L 64.5,100 L 15,50 L 64.5,0 Z',
+    accessibility: false, // prevents jump to focus on first click in certain browsers
+    hash: true,
+  });
+};
+
+var initGroupedAuthors = function () {
+  var parent = document.querySelector('.js-post-footer-authors-list');
+  if (!parent) return;
+
+  var authors = parent.children;
+  authors = Array.prototype.slice.call(authors); // convert from HTMLCollection to array first
+
+  var groups = [
+    {label: '(Original Post)', authorIndices: [0,1,2,3,4,5,6]},
+    {label: '(Interim Update)', authorIndices: [5,0,1,4,7,8,9,10]}
+  ];
+
+  // reattach the sorted elements, conditionally
+  groups.forEach(function (o, i) {
+    var g = document.createElement('div');
+    if (i != 0) g.className = 'mt-0.5';
+    parent.appendChild(g);
+    o.authorIndices.forEach(function (j) {
+      if (!authors[j]) return;
+      var c = authors[j].cloneNode(true);
+      g.appendChild(c);
+    });
+
+    var note = document.createElement('div');
+    note.className = 'small-caps color-fg-30 mt-0.25';
+    note.innerHTML = o.label;
+    parent.appendChild(note);
+  });
+
+  // remove original, ungrouped authors
+  authors.forEach(function (a) {
+    parent.removeChild(a);
+  });
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+  initCarousel('.js-samples', '.js-sample'); // initialize samples carousel
+  initCarousel('.js-tasks', '.js-task'); // initialize tasks carousel
+  initGroupedAuthors();
+});
+</script>
+
+
+</body></html>

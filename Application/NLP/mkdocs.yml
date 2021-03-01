@@ -1,0 +1,10 @@
+nav:
+    - Introduction: index.md
+    - NLP: NLP.md
+    - WordNet: WordNet.md
+    - NLP-progress: NLP-progress
+    - Representation-of-word: Representation-of-word
+    - Linguistics: Linguistics
+    - Model: Model
+    - Lib: Model
+    - Book-Natural-Language-Processing-with-Python: Book-Natural-Language-Processing-with-Python

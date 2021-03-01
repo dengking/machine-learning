@@ -1,4 +1,6 @@
 nav:
-    - NLP: NLP.md
+    - NLP: NLP
     - Computable-knowledge: Computable-knowledge
+    - Sequence: Sequence
+    - NRE: NRE
     

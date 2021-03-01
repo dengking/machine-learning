@@ -1,10 +1,9 @@
 nav:
     - Introduction: index.md
-    - Probability-theory-and-Statistics: Probability-theory-and-Statistics
+    # 深度学习的理论知识    
     - Deep-learning: Deep-learning
     - Feature-engineering: Feature-engineering
-    - Markov-model: Markov-model
-    - CRF: CRF
+    - Machine-learning: Machine-learning
     - Data-generating-process: Data-generating-process.md
     - VS-statistical-model-VS-machine-learning-model: VS-statistical-model-VS-machine-learning-model.md
     - VS-statistics-model-VS-stochastic-process: VS-statistical-model-VS-stochastic-process.md

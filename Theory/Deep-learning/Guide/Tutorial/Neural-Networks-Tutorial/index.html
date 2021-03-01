@@ -1,0 +1,4999 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/machine-learning/Theory/Deep-learning/Guide/Tutorial/Neural-Networks-Tutorial/">
+      
+      <link rel="shortcut icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>Neural-Networks-Tutorial - machine-learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../../css/extra.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-27795084-5","mkdocs.org"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#neural#networks#tutorial#a#pathway#to#deep#learning" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://dengking.github.io/machine-learning" title="machine-learning" class="md-header__button md-logo" aria-label="machine-learning">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            machine-learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Neural-Networks-Tutorial
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/dengking/machine-learning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://dengking.github.io/machine-learning" title="machine-learning" class="md-nav__button md-logo" aria-label="machine-learning">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    machine-learning
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/dengking/machine-learning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../AI-meeting/" class="md-nav__link">
+        AI-meeting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        AI-papers
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AI-papers" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          AI-papers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../AI-papers/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../AI-papers/Reading-record/" class="md-nav__link">
+        Reading-record
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Research-Institution&Researcher
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Research-Institution&Researcher" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Research-Institution&Researcher
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Research-Institution%26Researcher/Researcher/" class="md-nav__link">
+        Researcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Research-Institution%26Researcher/Research-institution/" class="md-nav__link">
+        Research-institution
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" checked>
+      
+      <label class="md-nav__link" for="__nav_5">
+        Theory
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Theory" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" checked>
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        Deep-learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deep-learning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Deep-learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2" type="checkbox" id="__nav_5_2_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2">
+        Book-deep-learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Book-deep-learning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Book-deep-learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Deep-learning-book/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2" type="checkbox" id="__nav_5_2_2_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2">
+        Part-I-Applied-Math-and-Machine-Learning-Basics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Part-I-Applied-Math-and-Machine-Learning-Basics" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Part-I-Applied-Math-and-Machine-Learning-Basics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/1-Introduction/" class="md-nav__link">
+        1-Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2" type="checkbox" id="__nav_5_2_2_2_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2">
+        5-Machine-Learning-Basics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5-Machine-Learning-Basics" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          5-Machine-Learning-Basics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5-Machine-Learning-Basics/" class="md-nav__link">
+        5-Machine-Learning-Basics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.1-Learning-Algorithms/" class="md-nav__link">
+        5.1-Learning-Algorithms
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_3" type="checkbox" id="__nav_5_2_2_2_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_3">
+        Task
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Task" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Task
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Pattern-recognition/" class="md-nav__link">
+        Pattern-recognition
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_3_2" type="checkbox" id="__nav_5_2_2_2_2_3_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_3_2">
+        Sequence-labeling
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sequence-labeling" data-md-level="7">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Sequence-labeling
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling/" class="md-nav__link">
+        Sequence-labeling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative/" class="md-nav__link">
+        Sequence-Labeling-Generative-and-Discriminative
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting/" class="md-nav__link">
+        5.2-Capacity-Overfitting-and-Underfitting
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_5" type="checkbox" id="__nav_5_2_2_2_2_5" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_5">
+        5.3-Hyperparameters-and-Validation-Sets
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5.3-Hyperparameters-and-Validation-Sets" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          5.3-Hyperparameters-and-Validation-Sets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Hyperparameter%28machine-learning%29/" class="md-nav__link">
+        Hyperparameter(machine-learning)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Cross-validation%28statistics%29/" class="md-nav__link">
+        Cross-validation(statistics)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_6" type="checkbox" id="__nav_5_2_2_2_2_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_6">
+        5.4-Estimators-Bias-and-Variance
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5.4-Estimators-Bias-and-Variance" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          5.4-Estimators-Bias-and-Variance
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/5.4-Estimators-Bias-and-Variance/" class="md-nav__link">
+        5.4-Estimators-Bias-and-Variance
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/Bias%E2%80%93variance%20tradeoff/" class="md-nav__link">
+        Bias–variance tradeoff
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_7" type="checkbox" id="__nav_5_2_2_2_2_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_7">
+        5.5-Maximum-Likelihood-Estimation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5.5-Maximum-Likelihood-Estimation" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          5.5-Maximum-Likelihood-Estimation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.5-Maximum-Likelihood-Estimation/5.5-Maximum-Likelihood-Estimation/" class="md-nav__link">
+        5.5-Maximum-Likelihood-Estimation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3" type="checkbox" id="__nav_5_2_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3">
+        Part-II-Deep-Networks-Modern-Practices
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Part-II-Deep-Networks-Modern-Practices" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Part-II-Deep-Networks-Modern-Practices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/Part-II-Deep-Networksb-Modern-Practice/" class="md-nav__link">
+        Part-II-Deep-Networksb-Modern-Practice
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2" type="checkbox" id="__nav_5_2_2_3_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2">
+        6-Deep-Feedforward-Networks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6-Deep-Feedforward-Networks" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          6-Deep-Feedforward-Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6-Deep-Feedforward-Network/" class="md-nav__link">
+        6-Deep-Feedforward-Network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.2-Gradient-Based-Learning/" class="md-nav__link">
+        6.2-Gradient-Based-Learning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2_3" type="checkbox" id="__nav_5_2_2_3_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2_3">
+        6.4-Architecture-Design
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6.4-Architecture-Design" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          6.4-Architecture-Design
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/6.4-Architecture-Design/" class="md-nav__link">
+        6.4-Architecture-Design
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/Universal-approximation-theorem/" class="md-nav__link">
+        Universal-approximation-theorem
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2_4" type="checkbox" id="__nav_5_2_2_3_2_4" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2_4">
+        6.5-Back-Propagation-and-Other-Differentiation-algorithms
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6.5-Back-Propagation-and-Other-Differentiation-algorithms" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          6.5-Back-Propagation-and-Other-Differentiation-algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2_4_2" type="checkbox" id="__nav_5_2_2_3_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2_4_2">
+        Back-Propagation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Back-Propagation" data-md-level="7">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Back-Propagation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/zhihu-Back-Propagation/" class="md-nav__link">
+        zhihu-Back-Propagation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/wikipedia-Backpropagation/" class="md-nav__link">
+        wikipedia-Backpropagation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/6.5-Back-Propagation-and-Other-Differentiation/" class="md-nav__link">
+        6.5-Back-Propagation-and-Other-Differentiation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Implementation/" class="md-nav__link">
+        Implementation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Backpropagation-through-time/" class="md-nav__link">
+        Backpropagation-through-time
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_3" type="checkbox" id="__nav_5_2_2_3_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_3">
+        7-Regularization-for-Deep-Learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="7-Regularization-for-Deep-Learning" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          7-Regularization-for-Deep-Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/7-Regularization-for-Deep-Learning/7.8-Early-Stopping/" class="md-nav__link">
+        7.8-Early-Stopping
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_4" type="checkbox" id="__nav_5_2_2_3_4" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_4">
+        8-Optimization-for-Training-Deep-Models
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="8-Optimization-for-Training-Deep-Models" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          8-Optimization-for-Training-Deep-Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/8-Optimization-for-Training-Deep-Models/" class="md-nav__link">
+        8-Optimization-for-Training-Deep-Models
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_4_2" type="checkbox" id="__nav_5_2_2_3_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_4_2">
+        SGD
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SGD" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          SGD
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/5.9-Stochastic-Gradient-Descent/" class="md-nav__link">
+        5.9-Stochastic-Gradient-Descent
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Gradient-descent/" class="md-nav__link">
+        Gradient-descent
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Stochastic-gradient-descent/" class="md-nav__link">
+        Stochastic-gradient-descent
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5" type="checkbox" id="__nav_5_2_2_3_5" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5">
+        9-Convolutional-Networks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="9-Convolutional-Networks" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          9-Convolutional-Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9-Convolutional-Networks/" class="md-nav__link">
+        9-Convolutional-Networks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9.3-Pooling/" class="md-nav__link">
+        9.3-Pooling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5_3" type="checkbox" id="__nav_5_2_2_3_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5_3">
+        CS231n
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="CS231n" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS231n
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/Convolutional-Neural-Networks%28CNNs-or-ConvNets%29/" class="md-nav__link">
+        Convolutional-Neural-Networks(CNNs-or-ConvNets)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-translation-invariance/" class="md-nav__link">
+        CNN-translation-invariance
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-pooling-layer/" class="md-nav__link">
+        CNN-pooling-layer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5_6" type="checkbox" id="__nav_5_2_2_3_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5_6">
+        VGG
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="VGG" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          VGG
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/VGG/VGG/" class="md-nav__link">
+        VGG
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5_7" type="checkbox" id="__nav_5_2_2_3_5_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5_7">
+        AlexNet
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AlexNet" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5_7">
+          <span class="md-nav__icon md-icon"></span>
+          AlexNet
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/AlexNet/AlexNet/" class="md-nav__link">
+        AlexNet
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/Fei-Fei-Li/" class="md-nav__link">
+        Fei-Fei-Li
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/ImageNet/" class="md-nav__link">
+        ImageNet
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/paper-Convolutional-Sequence-to-Sequence-Learning/" class="md-nav__link">
+        paper-Convolutional-Sequence-to-Sequence-Learning
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_6" type="checkbox" id="__nav_5_2_2_3_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_6">
+        10-Sequence-Modeling-Recurrent-and-Recursive-Nets
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="10-Sequence-Modeling-Recurrent-and-Recursive-Nets" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          10-Sequence-Modeling-Recurrent-and-Recursive-Nets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10-Sequence-Modeling-Recurrentand-Recursive-Nets/" class="md-nav__link">
+        10-Sequence-Modeling-Recurrentand-Recursive-Nets
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.1-Unfolding-Computational-Graphs/" class="md-nav__link">
+        10.1-Unfolding-Computational-Graphs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.3-Bidirectional-RNNs/" class="md-nav__link">
+        10.3-Bidirectional-RNNs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures/" class="md-nav__link">
+        10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.10-The-Long-Short-Term-Memory-and-Other-Gated/" class="md-nav__link">
+        10.10-The-Long-Short-Term-Memory-and-Other-Gated
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_6_6" type="checkbox" id="__nav_5_2_2_3_6_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_6_6">
+        LSTM
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LSTM" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_6_6">
+          <span class="md-nav__icon md-icon"></span>
+          LSTM
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/LSTM/" class="md-nav__link">
+        LSTM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/colah-Understanding-LSTM-Networks/" class="md-nav__link">
+        colah-Understanding-LSTM-Networks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/RNN-and-LSTM-tutorial/" class="md-nav__link">
+        RNN-and-LSTM-tutorial
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_6_7" type="checkbox" id="__nav_5_2_2_3_6_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_6_7">
+        RNN
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="RNN" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_6_7">
+          <span class="md-nav__icon md-icon"></span>
+          RNN
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/RNN/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_7" type="checkbox" id="__nav_5_2_2_3_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_7">
+        12-Applications
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="12-Applications" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          12-Applications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_7_1" type="checkbox" id="__nav_5_2_2_3_7_1" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_7_1">
+        12.4-Natural-Language-Processing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="12.4-Natural-Language-Processing" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          12.4-Natural-Language-Processing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/12-Applications/12.4-Natural-Language-Processing/12.4.5-Neural-Machine-Translation/" class="md-nav__link">
+        12.4.5-Neural-Machine-Translation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_3" type="checkbox" id="__nav_5_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_3">
+        Book-Neural-Networks-and-Deep-Learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Book-Neural-Networks-and-Deep-Learning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Book-Neural-Networks-and-Deep-Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Book-Neural-Networks-and-Deep-Learning/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4" type="checkbox" id="__nav_5_2_4" checked>
+      
+      <label class="md-nav__link" for="__nav_5_2_4">
+        Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Guide" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_1" type="checkbox" id="__nav_5_2_4_1" checked>
+      
+      <label class="md-nav__link" for="__nav_5_2_4_1">
+        Tutorial
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Artificial-neural-network/" class="md-nav__link">
+        Artificial-neural-network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Neural-Networks-Tutorial
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Neural-Networks-Tutorial
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1#what#are#artificial#neural#networks" class="md-nav__link">
+    1 What are artificial neural networks?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2#the#structure#of#an#ann" class="md-nav__link">
+    2 The structure of an ANN
+  </a>
+  
+    <nav class="md-nav" aria-label="2 The structure of an ANN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21#the#artificial#neuron" class="md-nav__link">
+    2.1 The artificial neuron
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22#nodes" class="md-nav__link">
+    2.2 Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23#the#bias" class="md-nav__link">
+    2.3 The bias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24#putting#together#the#structure" class="md-nav__link">
+    2.4 Putting together the structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25#the#notation" class="md-nav__link">
+    2.5 The notation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3#the#feed-forward#pass" class="md-nav__link">
+    3 The feed-forward pass
+  </a>
+  
+    <nav class="md-nav" aria-label="3 The feed-forward pass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31#a#feed-forward#example" class="md-nav__link">
+    3.1 A feed-forward example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32#our#first#attempt#at#a#feed-forward#function" class="md-nav__link">
+    3.2 Our first attempt at a feed-forward function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33#a#more#efficient#implementation" class="md-nav__link">
+    3.3 A more efficient implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34#vectorisation#in#neural#networks" class="md-nav__link">
+    3.4 Vectorisation in neural networks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4#gradient#descent#and#optimisation" class="md-nav__link">
+    4 Gradient descent and optimisation
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Gradient descent and optimisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41#a#simple#example#in#code" class="md-nav__link">
+    4.1 A simple example in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42#the#cost#function" class="md-nav__link">
+    4.2 The cost function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43#gradient#descent#in#neural#networks" class="md-nav__link">
+    4.3 Gradient descent in neural networks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44#a#two#dimensional#gradient#descent#example" class="md-nav__link">
+    4.4 A two dimensional gradient descent example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45#backpropagation#in#depth" class="md-nav__link">
+    4.5 Backpropagation in depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46#propagating#into#the#hidden#layers" class="md-nav__link">
+    4.6 Propagating into the hidden layers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48#implementing#the#gradient#descent#step" class="md-nav__link">
+    4.8 Implementing the gradient descent step
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#49#the#final#gradient#descent#algorithm" class="md-nav__link">
+    4.9 The final gradient descent algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5#implementing#the#neural#network#in#python" class="md-nav__link">
+    5 Implementing the neural network in Python
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ujjwalkarn-A-Quick-Introduction-to-Neural-Networks/" class="md-nav__link">
+        ujjwalkarn-A-Quick-Introduction-to-Neural-Networks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_2" type="checkbox" id="__nav_5_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_2">
+        Computation-And-model-And-computational-graph
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Computation-And-model-And-computational-graph" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Computation-And-model-And-computational-graph
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computation-And-model-And-computational-graph/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Computation-And-model-And-computational-graph/Computational-graph/" class="md-nav__link">
+        Computational-graph
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_3" type="checkbox" id="__nav_5_2_4_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_3">
+        Model-capacity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Model-capacity" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Model-capacity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Model-capacity/Model-capacity/" class="md-nav__link">
+        Model-capacity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_4" type="checkbox" id="__nav_5_2_4_4" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_4">
+        Model-initialization
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Model-initialization" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Model-initialization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Model-initialization/Model-initialization/" class="md-nav__link">
+        Model-initialization
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_5" type="checkbox" id="__nav_5_2_4_5" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_5">
+        Batch-epoch-step
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Batch-epoch-step" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Batch-epoch-step
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Batch-epoch-step/Buzz-word-batch-size.md" class="md-nav__link">
+        Buzz-word-batch-size
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Batch-epoch-step/Batch-VS-epoch/" class="md-nav__link">
+        Batch-VS-epoch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Batch-epoch-step/Steps-VS-epochs/" class="md-nav__link">
+        Steps-VS-epochs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Batch-epoch-step/Word-epoch.md" class="md-nav__link">
+        Word-epoch
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_6" type="checkbox" id="__nav_5_2_4_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_6">
+        Activation-function
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Activation-function" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Activation-function
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activation-function/Activation-function/" class="md-nav__link">
+        Activation-function
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activation-function/ReLU-VS-sigmoid-VS-softmax/" class="md-nav__link">
+        ReLU-VS-sigmoid-VS-softmax
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Activation-function/sigmoid-in-deep-learning/" class="md-nav__link">
+        sigmoid-in-deep-learning
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Design-neural-network/" class="md-nav__link">
+        Design-neural-network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_8" type="checkbox" id="__nav_5_2_4_8" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_8">
+        End-to-end
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="End-to-end" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          End-to-end
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../End-to-end/End-to-end/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../End-to-end/wikipedia-End-to-end-reinforcement-learning/" class="md-nav__link">
+        End-to-end-reinforcement-learning
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_9" type="checkbox" id="__nav_5_2_4_9" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_9">
+        Transformer-and-attention
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Transformer-and-attention" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_9">
+          <span class="md-nav__icon md-icon"></span>
+          Transformer-and-attention
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Transformer-and-attention/Papers/" class="md-nav__link">
+        Papers
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Feature-engineering
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Feature-engineering" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Feature-engineering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Feature-engineering/Data-transformation%28statistics%29/" class="md-nav__link">
+        Data-transformation(statistics)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Feature-engineering/Feature-scaling/" class="md-nav__link">
+        Feature-scaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Feature-engineering/Normalization%28statistics%29/" class="md-nav__link">
+        Normalization(statistics)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        Machine-learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Machine-learning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Machine-learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Machine-learning/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_2" type="checkbox" id="__nav_5_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_4_2">
+        Markov-model
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Markov-model" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Markov-model
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Machine-learning/Markov-model/Markov-chain/" class="md-nav__link">
+        Markov-chain
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Machine-learning/Markov-model/Markov-models/" class="md-nav__link">
+        Markov-models
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Machine-learning/Markov-model/Hidden-Markov-model/" class="md-nav__link">
+        Hidden-Markov-model
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Machine-learning/Markov-model/Viterbi-algorithm/" class="md-nav__link">
+        Viterbi-algorithm
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Machine-learning/Markov-model/Forward-algorithm/" class="md-nav__link">
+        Forward-algorithm
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_3" type="checkbox" id="__nav_5_4_3" >
+      
+      <label class="md-nav__link" for="__nav_5_4_3">
+        CRF
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="CRF" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          CRF
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Machine-learning/CRF/crf/" class="md-nav__link">
+        CRF
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Data-generating-process/" class="md-nav__link">
+        Data-generating-process
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../VS-statistical-model-VS-machine-learning-model/" class="md-nav__link">
+        VS-statistical-model-VS-machine-learning-model
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../VS-statistical-model-VS-stochastic-process/" class="md-nav__link">
+        VS-statistics-model-VS-stochastic-process
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      <label class="md-nav__link" for="__nav_6_1">
+        Programming-paradigm
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming-paradigm" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Programming-paradigm
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/Programming-paradigm/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/Programming-paradigm/Symbolic-and-imperative/" class="md-nav__link">
+        Symbolic-and-imperative
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" >
+      
+      <label class="md-nav__link" for="__nav_6_2">
+        TensorFlow
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="TensorFlow" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          TensorFlow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/Doc/" class="md-nav__link">
+        Doc
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3" type="checkbox" id="__nav_6_2_3" >
+      
+      <label class="md-nav__link" for="__nav_6_2_3">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/Implementation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3_2" type="checkbox" id="__nav_6_2_3_2" >
+      
+      <label class="md-nav__link" for="__nav_6_2_3_2">
+        TensorFlow-white-paper
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="TensorFlow-white-paper" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          TensorFlow-white-paper
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/Implementation/TensorFlow-white-paper/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/Implementation/TensorFlow-white-paper/whitepaper2015/" class="md-nav__link">
+        whitepaper2015
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3_3" type="checkbox" id="__nav_6_2_3_3" >
+      
+      <label class="md-nav__link" for="__nav_6_2_3_3">
+        XLA
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="XLA" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          XLA
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/Implementation/XLA/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3_4" type="checkbox" id="__nav_6_2_3_4" >
+      
+      <label class="md-nav__link" for="__nav_6_2_3_4">
+        Tensorflow-src-explanation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tensorflow-src-explanation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Tensorflow-src-explanation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/Implementation/Tensorflow-src-explanation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4" type="checkbox" id="__nav_6_2_4" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4">
+        API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2" type="checkbox" id="__nav_6_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2">
+        Python
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Python" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/Python/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/Python/Core-graph-data-structures/" class="md-nav__link">
+        Core-graph-data-structures
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2_3" type="checkbox" id="__nav_6_2_4_2_3" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2_3">
+        Building-Graphs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Building-Graphs" data-md-level="5">
+        <label class="md-nav__title" for="__nav_6_2_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Building-Graphs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/Python/Building-Graphs/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/Python/Building-Graphs/tf.control_dependencies/" class="md-nav__link">
+        tf.control_dependencies
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2_4" type="checkbox" id="__nav_6_2_4_2_4" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2_4">
+        Low-level-API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Low-level-API" data-md-level="5">
+        <label class="md-nav__title" for="__nav_6_2_4_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Low-level-API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2_4_1" type="checkbox" id="__nav_6_2_4_2_4_1" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2_4_1">
+        tf.placeholder-VS-tf.Variable
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="tf.placeholder-VS-tf.Variable" data-md-level="6">
+        <label class="md-nav__title" for="__nav_6_2_4_2_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          tf.placeholder-VS-tf.Variable
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/How-to-understand-tf.Variable/" class="md-nav__link">
+        How-to-understand-tf.Variable
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_3" type="checkbox" id="__nav_6_2_4_3" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_3">
+        TODO-C++
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="TODO-C++" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          TODO-C++
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/TensorFlow/API/TODO-C%2B%2B/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_3" type="checkbox" id="__nav_6_3" >
+      
+      <label class="md-nav__link" for="__nav_6_3">
+        pytorch
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="pytorch" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          pytorch
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/pytorch/paper-Automatic-differentiation-in-PyTorch/" class="md-nav__link">
+        paper-Automatic-differentiation-in-PyTorch
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_4" type="checkbox" id="__nav_6_4" >
+      
+      <label class="md-nav__link" for="__nav_6_4">
+        Keras
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Keras" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_4">
+          <span class="md-nav__icon md-icon"></span>
+          Keras
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/Keras/intro-Keras/" class="md-nav__link">
+        intro-Keras
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/Keras/Getting-started-with-the-Keras-Sequential-model/" class="md-nav__link">
+        Getting-started-with-the-Keras-Sequential-model
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/Keras/keras-Layers-Convolutional-Layers/" class="md-nav__link">
+        keras-Layers-Convolutional-Layers
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Programming/VS-pytorch-vs-tensorflow/" class="md-nav__link">
+        VS-pytorch-vs-tensorflow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      <label class="md-nav__link" for="__nav_7">
+        Data-set
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data-set" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Data-set
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Data-set/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Application
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Application" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Application
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" >
+      
+      <label class="md-nav__link" for="__nav_8_1">
+        NLP
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NLP" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          NLP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP/" class="md-nav__link">
+        NLP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/WordNet/" class="md-nav__link">
+        WordNet
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4" type="checkbox" id="__nav_8_1_4" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4">
+        NLP-progress
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NLP-progress" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          NLP-progress
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Task-of-NLP/" class="md-nav__link">
+        Task-of-NLP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_2" type="checkbox" id="__nav_8_1_4_2" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_2">
+        Entity-Linking
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Entity-Linking" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Entity-Linking
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Entity-Linking/Entity-Linking/" class="md-nav__link">
+        Entity-Linking
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_3" type="checkbox" id="__nav_8_1_4_3" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_3">
+        Relationship-Extraction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Relationship-Extraction" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Relationship-Extraction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Relationship-Extraction/Relationship-Extraction/" class="md-nav__link">
+        Relationship-Extraction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_4" type="checkbox" id="__nav_8_1_4_4" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_4">
+        Shallow-parsing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Shallow-parsing" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Shallow-parsing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Shallow-parsing/Shallow-parsing/" class="md-nav__link">
+        Shallow-parsing
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_5" type="checkbox" id="__nav_8_1_4_5" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_5">
+        Text-Classification
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Text-Classification" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Text-Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Text-Classification/Text-Classification/" class="md-nav__link">
+        Text-Classification
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Text-Classification/paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer/" class="md-nav__link">
+        paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_6" type="checkbox" id="__nav_8_1_4_6" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_6">
+        Part-of-speech-tagging
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Part-of-speech-tagging" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Part-of-speech-tagging
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Part-of-speech-tagging/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_7" type="checkbox" id="__nav_8_1_4_7" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_7">
+        Neural-machine-translation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Neural-machine-translation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_7">
+          <span class="md-nav__icon md-icon"></span>
+          Neural-machine-translation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Neural-machine-translation/Neural-machine-translation/" class="md-nav__link">
+        Neural-machine-translation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_8" type="checkbox" id="__nav_8_1_4_8" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_8">
+        Distant-supervision
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Distant-supervision" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Distant-supervision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Distant-supervision/Distant-supervision/" class="md-nav__link">
+        Distant-supervision
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_5" type="checkbox" id="__nav_8_1_5" >
+      
+      <label class="md-nav__link" for="__nav_8_1_5">
+        Representation-of-word
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Representation-of-word" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Representation-of-word
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Representation-of-word/Representation-of-image-VS--word/" class="md-nav__link">
+        Representation-of-image-VS--word
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_6" type="checkbox" id="__nav_8_1_6" >
+      
+      <label class="md-nav__link" for="__nav_8_1_6">
+        Linguistics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Linguistics" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Linguistics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Linguistics/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Linguistics/Part-of-speech/" class="md-nav__link">
+        Part-of-speech
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_7" type="checkbox" id="__nav_8_1_7" >
+      
+      <label class="md-nav__link" for="__nav_8_1_7">
+        Model
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Model" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_7">
+          <span class="md-nav__icon md-icon"></span>
+          Model
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_7_1" type="checkbox" id="__nav_8_1_7_1" >
+      
+      <label class="md-nav__link" for="__nav_8_1_7_1">
+        BERT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="BERT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          BERT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT/" class="md-nav__link">
+        BERT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-paper/" class="md-nav__link">
+        BERT-paper
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-implementation/" class="md-nav__link">
+        BERT-implementation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_7_2" type="checkbox" id="__nav_8_1_7_2" >
+      
+      <label class="md-nav__link" for="__nav_8_1_7_2">
+        GPT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="GPT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          GPT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/GPT/openai-GPT-2/" class="md-nav__link">
+        openai-GPT-2
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_8" type="checkbox" id="__nav_8_1_8" >
+      
+      <label class="md-nav__link" for="__nav_8_1_8">
+        Lib
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lib" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_8">
+          <span class="md-nav__icon md-icon"></span>
+          Lib
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_8_1" type="checkbox" id="__nav_8_1_8_1" >
+      
+      <label class="md-nav__link" for="__nav_8_1_8_1">
+        BERT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="BERT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          BERT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT/" class="md-nav__link">
+        BERT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-paper/" class="md-nav__link">
+        BERT-paper
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-implementation/" class="md-nav__link">
+        BERT-implementation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_8_2" type="checkbox" id="__nav_8_1_8_2" >
+      
+      <label class="md-nav__link" for="__nav_8_1_8_2">
+        GPT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="GPT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          GPT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/GPT/openai-GPT-2/" class="md-nav__link">
+        openai-GPT-2
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_9" type="checkbox" id="__nav_8_1_9" >
+      
+      <label class="md-nav__link" for="__nav_8_1_9">
+        Book-Natural-Language-Processing-with-Python
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Book-Natural-Language-Processing-with-Python" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Book-Natural-Language-Processing-with-Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Book-Natural-Language-Processing-with-Python/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
+      
+      <label class="md-nav__link" for="__nav_8_2">
+        Computable-knowledge
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Computable-knowledge" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          Computable-knowledge
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/Computable-knowledge/Knowledge-representation-and-reasoning/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      <label class="md-nav__link" for="__nav_8_3">
+        Sequence
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sequence" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Sequence
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/Sequence/Sequence/" class="md-nav__link">
+        Sequence
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      <label class="md-nav__link" for="__nav_8_4">
+        NRE
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NRE" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          NRE
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NRE/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1#what#are#artificial#neural#networks" class="md-nav__link">
+    1 What are artificial neural networks?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2#the#structure#of#an#ann" class="md-nav__link">
+    2 The structure of an ANN
+  </a>
+  
+    <nav class="md-nav" aria-label="2 The structure of an ANN">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21#the#artificial#neuron" class="md-nav__link">
+    2.1 The artificial neuron
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22#nodes" class="md-nav__link">
+    2.2 Nodes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#23#the#bias" class="md-nav__link">
+    2.3 The bias
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#24#putting#together#the#structure" class="md-nav__link">
+    2.4 Putting together the structure
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#25#the#notation" class="md-nav__link">
+    2.5 The notation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3#the#feed-forward#pass" class="md-nav__link">
+    3 The feed-forward pass
+  </a>
+  
+    <nav class="md-nav" aria-label="3 The feed-forward pass">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31#a#feed-forward#example" class="md-nav__link">
+    3.1 A feed-forward example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32#our#first#attempt#at#a#feed-forward#function" class="md-nav__link">
+    3.2 Our first attempt at a feed-forward function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33#a#more#efficient#implementation" class="md-nav__link">
+    3.3 A more efficient implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#34#vectorisation#in#neural#networks" class="md-nav__link">
+    3.4 Vectorisation in neural networks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4#gradient#descent#and#optimisation" class="md-nav__link">
+    4 Gradient descent and optimisation
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Gradient descent and optimisation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41#a#simple#example#in#code" class="md-nav__link">
+    4.1 A simple example in code
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42#the#cost#function" class="md-nav__link">
+    4.2 The cost function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43#gradient#descent#in#neural#networks" class="md-nav__link">
+    4.3 Gradient descent in neural networks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44#a#two#dimensional#gradient#descent#example" class="md-nav__link">
+    4.4 A two dimensional gradient descent example
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45#backpropagation#in#depth" class="md-nav__link">
+    4.5 Backpropagation in depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46#propagating#into#the#hidden#layers" class="md-nav__link">
+    4.6 Propagating into the hidden layers
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#48#implementing#the#gradient#descent#step" class="md-nav__link">
+    4.8 Implementing the gradient descent step
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#49#the#final#gradient#descent#algorithm" class="md-nav__link">
+    4.9 The final gradient descent algorithm
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5#implementing#the#neural#network#in#python" class="md-nav__link">
+    5 Implementing the neural network in Python
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="neural#networks#tutorial#a#pathway#to#deep#learning"><a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/">Neural Networks Tutorial – A Pathway to Deep Learning</a></h1>
+<p>Chances are, if you are searching for a tutorial on artificial neural networks (ANN) you already have some idea of what they are, and what they are capable of doing.  But did you know that neural networks are the foundation of the new and exciting field of deep learning?  Deep learning is the field of machine learning that is making many state-of-the-art advancements, from beating players at <a href="http://www.sciencemag.org/news/2016/01/huge-leap-forward-computer-mimics-human-brain-beats-professional-game-go">Go</a> and <a href="http://www.sciencemag.org/news/2017/03/artificial-intelligence-goes-deep-beat-humans-poker">Poker</a> (<a href="https://adventuresinmachinelearning.com/reinforcement-learning-tutorial-python-keras/">reinforcement learning</a>), to speeding up <a href="http://www.nanalyze.com/2016/01/4-companies-using-deep-learning-for-drug-discovery/">drug discovery</a> and <a href="http://spectrum.ieee.org/cars-that-think/transportation/self-driving/driveai-brings-deep-learning-to-selfdriving-cars">assisting self-driving cars</a>.  If these types of cutting edge applications excite you like they excite me, then you will be interesting in learning as much as you can about deep learning.  However, that requires you to know quite a bit about how neural networks work.  This tutorial article is designed to help you get up to speed in neural networks as quickly as possible.</p>
+<p>In this tutorial I’ll be presenting some concepts, code and maths that will enable you to build <em>and understand</em> a simple neural network.  Some tutorials focus only on the code and skip the maths – but this impedes understanding. I’ll take things as slowly as possible, but it might help to brush up on your <a href="https://www.khanacademy.org/math/precalculus/precalc-matrices">matrices</a> and <a href="https://www.khanacademy.org/math/differential-calculus">differentiation</a> if you need to. The code will be in Python, so it will be beneficial if you have a basic understanding of how Python works.  You’ll pretty much get away with knowing about Python functions, loops and the basics of the <a href="http://www.numpy.org/">numpy</a> library.  By the end of this neural networks tutorial you’ll be able to build an ANN in Python that will correctly classify handwritten digits in images with a fair degree of accuracy.</p>
+<p>Once you’re done with this tutorial, you can dive a little deeper with the following posts:</p>
+<p><a href="https://adventuresinmachinelearning.com/python-tensorflow-tutorial/">Python TensorFlow Tutorial – Build a Neural Network</a>
+<a href="https://adventuresinmachinelearning.com/improve-neural-networks-part-1/">Improve your neural networks – Part 1 [TIPS AND TRICKS]</a>
+<a href="https://adventuresinmachinelearning.com/stochastic-gradient-descent/">Stochastic Gradient Descent – Mini-batch and more</a></p>
+<p>All of the relevant code in this tutorial can be found <a href="https://github.com/adventuresinML/adventures-in-ml-code">here</a>.</p>
+<p>Here’s an outline of the tutorial, with links, so you can easily navigate to the parts you want:</p>
+<p><a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#what-are-anns">1 What are artificial neural networks?</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#structure-ann">2 The structure of an ANN</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#the-artificial-neuron">2.1 The artificial neuron</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#nodes">2.2 Nodes</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#the-bias">2.3 The bias</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#putting-together-the-structure">2.4 Putting together the structure</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#the-notation">2.5 The notation</a>
+<strong>3 The feed-forward pass</strong>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#the-feed-forward-pass">3.1 A feed-forward example</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#first-attempt-feed-forward">3.2 Our first attempt at a feed-forward function</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#more-efficient-implementation">3.3 A more efficient implementation</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#vectorisation">3.4 Vectorisation in neural networks</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#matrix-mult">3.5 Matrix multiplication</a>
+<strong>4 Gradient descent and optimisation</strong>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#simple-example">4.1 A simple example in code</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#the-cost-function">4.2 The cost function</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#gradient-descent-in-nn">4.3 Gradient descent in neural networks</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#two-dimensional">4.4 A two dimensional gradient descent example</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#backprop-in-depth">4.5 Backpropagation in depth</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#prop-in-hidden-layers">4.6 Propagating into the hidden layers</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#vector-backprop">4.7 Vectorisation of backpropagation</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#imp-gradient-desc">4.8 Implementing the gradient descent step</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#final-gradient-desc-algo">4.9 The final gradient descent algorithm</a>
+<strong>5 Implementing the neural network in Python</strong>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#scaling-data">5.1 Scaling data</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#test-and-train">5.2 Creating test and training datasets</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#setting-up-output">5.3 Setting up the output layer</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#creating-nn">5.4 Creating the neural network</a>
+<a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#creating-nn">5.5 Assessing the accuracy of the trained model</a></p>
+<h2 id="1#what#are#artificial#neural#networks">1 What are artificial neural networks?</h2>
+<p>Artificial neural networks (ANNs) are software implementations of the neuronal structure of our brains.  We don’t need to talk about the complex biology of our brain structures, but suffice to say, the brain contains <strong><em>neurons</em></strong> which are kind of like <strong>organic switches</strong>.  These can change their output state depending on the strength of their electrical or chemical input.  The neural network in a person’s brain is a hugely interconnected network of <strong>neurons</strong>, where the output of any given neuron may be the input to thousands of other neurons.  Learning occurs by repeatedly <strong>activating</strong> certain neural connections over others, and this reinforces（加强） those connections.  This makes them more likely to produce a desired outcome given a specified input.  This learning involves <em>feedback</em> – when the desired outcome occurs, the neural connections causing that outcome become strengthened.</p>
+<p><em>Artificial</em> neural networks attempt to simplify and mimic（模仿） this brain behaviour.  They can be trained in a <em>supervised</em> or <em>unsupervised</em> manner.  In a <em>supervised</em> ANN, the network is trained by providing matched input and output data samples, with the intention of getting the ANN to provide a desired output for a given input.  An example is an e-mail spam filter – the input training data could be the count of various words in the body of the e-mail, and the output training data would be a classification of whether the e-mail was truly spam or not.  If many examples of e-mails are passed through the neural network this allows the network to <em>learn</em> what input data makes it likely that an e-mail is spam or not.  This learning takes place be adjusting the <em>weights</em> of the ANN connections, but this will be discussed further in the next section.</p>
+<p><em>Unsupervised</em> learning in an ANN is an attempt to get the ANN to “understand” the structure of the provided input data “on its own”.  This type of ANN will not be discussed in this post.</p>
+<h2 id="2#the#structure#of#an#ann">2 The structure of an ANN</h2>
+<h3 id="21#the#artificial#neuron">2.1 The artificial neuron</h3>
+<p>The <strong>biological neuron</strong> is simulated in an ANN by an <strong><em>activation function</em></strong>. In classification tasks (e.g. identifying spam e-mails) this <strong>activation function</strong> has to have a “switch on” characteristic – in other words, once the input is greater than a certain value, the output should change state i.e. from 0 to 1, from -1 to 1 or from 0 to &gt;0. This simulates the “turning on” of a <strong>biological neuron</strong>. A common <strong>activation function</strong> that is used is the sigmoid function:
+$$
+\begin{equation*} 
+f(z) = \frac{1}{1+exp(-z)} 
+\end{equation*}
+$$
+Which looks like this:</p>
+<p><img alt="img" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/sigmoid.png?resize=300%2C210&amp;ssl=1" /></p>
+<p>As can be seen in the figure above, the function is “activated” i.e. it moves from 0 to 1 when the input <em>x</em> is greater than a certain value. The sigmoid function isn’t a step function however, the edge is “soft”, and the output doesn’t change instantaneously. This means that there is a derivative（导数） of the function and this is important for the training algorithm which is discussed more in <a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#gradient-desc-opt">Section 4</a>.</p>
+<h3 id="22#nodes">2.2 Nodes</h3>
+<p>As mentioned previously, <strong>biological neurons</strong> are <strong>connected hierarchical networks</strong>, with the outputs of some neurons being the inputs to others. We can represent these networks as connected layers of <em>nodes.</em> Each node takes multiple <strong>weighted inputs</strong>, applies the <em>activation function</em> to the <strong>summation</strong> of these inputs, and in doing so generates an output. I’ll break this down further, but to help things along, consider the diagram below:</p>
+<p><img alt="img" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Node-diagram.jpg?resize=300%2C125&amp;ssl=1" /></p>
+<p>Figure 2. Node with inputs</p>
+<p>The circle in the image above represents the node. The node is the “seat” of the <strong>activation function</strong>, and takes the weighted inputs, sums them, then inputs them to the activation function. The output of the activation function is shown as <em>h</em> in the above diagram. Note: a <em>node</em> as I have shown above is also called a <em>perceptron</em>（感知机） in some literature.</p>
+<p>What about this “weight” idea that has been mentioned? The <strong>weights</strong> are real valued numbers (i.e. not binary 1s or 0s), which are multiplied by the inputs and then summed up in the node. So, in other words, the weighted input to the node above would be:
+$$
+\begin{equation*} 
+x_1w_1 + x_2w_2 + x_3w_3 + b 
+\end{equation*}
+$$
+Here the <span><span class="MathJax_Preview">w_i</span><script type="math/tex">w_i</script></span> values are weights (ignore the <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span> for the moment).  What are these weights all about?  Well, they are the variables that are changed during the learning process, and, along with the input, determine the output of the node.  The <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span> is the weight of the +1 <em>bias</em> element – the inclusion of this <strong>bias</strong> enhances the flexibility of the node, which is best demonstrated in an example.</p>
+<h3 id="23#the#bias">2.3 The bias</h3>
+<p>Let’s take an extremely simple node, with only one input and one output:</p>
+<p><img alt="img" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-node.jpg?resize=300%2C51&amp;ssl=1" /></p>
+<p>Figure 2. Simple node</p>
+<p>The input to the activation function of the node in this case is simply <span><span class="MathJax_Preview">x_1w_1</span><script type="math/tex">x_1w_1</script></span>.  What does changing <span><span class="MathJax_Preview">w_1</span><script type="math/tex">w_1</script></span> do in this simple network?</p>
+<div class="highlight"><pre><span></span><code><span class="n">w1</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">w3</span> <span class="o">=</span> <span class="mf">2.0</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="s1">&#39;w = 0.5&#39;</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="s1">&#39;w = 1.0&#39;</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="s1">&#39;w = 2.0&#39;</span>
+<span class="k">for</span> <span class="n">w</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">w1</span><span class="p">,</span> <span class="n">l1</span><span class="p">),</span> <span class="p">(</span><span class="n">w2</span><span class="p">,</span> <span class="n">l2</span><span class="p">),</span> <span class="p">(</span><span class="n">w3</span><span class="p">,</span> <span class="n">l3</span><span class="p">)]:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">w</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;h_w(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="img" src="https://i2.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Weight-adjustment-example-300x210.png?resize=300%2C210&amp;ssl=1" /></p>
+<p>Figure 4. Effect of adjusting weights</p>
+<p>Here we can see that changing the weight changes the slope（斜率） of the output of the <strong>sigmoid activation function</strong>, which is obviously useful if we want to model different strengths of relationships between the input and output variables.  However, what if we only want the output to change when x is greater than 1?  This is where the bias comes in – let’s consider the same network with a bias input:</p>
+<p><img alt="img" src="https://i2.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Simple-node-with-bias.png?resize=300%2C126&amp;ssl=1" /></p>
+<p>Figure 5. Effect of bias</p>
+<div class="highlight"><pre><span></span><code><span class="n">w</span> <span class="o">=</span> <span class="mf">5.0</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="o">-</span><span class="mf">8.0</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="mf">8.0</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="s1">&#39;b = -8.0&#39;</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="s1">&#39;b = 0.0&#39;</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="s1">&#39;b = 8.0&#39;</span>
+<span class="k">for</span> <span class="n">b</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">b1</span><span class="p">,</span> <span class="n">l1</span><span class="p">),</span> <span class="p">(</span><span class="n">b2</span><span class="p">,</span> <span class="n">l2</span><span class="p">),</span> <span class="p">(</span><span class="n">b3</span><span class="p">,</span> <span class="n">l3</span><span class="p">)]:</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">w</span><span class="o">+</span><span class="n">b</span><span class="p">)))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">l</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;h_wb(x)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="img" src="https://i2.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Bias-adjustment-example-300x210.png?resize=300%2C210&amp;ssl=1" /></p>
+<p>Figure 6. Effect of bias adjusments</p>
+<p>In this case, the <span><span class="MathJax_Preview">w_1</span><script type="math/tex">w_1</script></span> has been increased to simulate a more defined “turn on” function.  As you can see, by varying the bias “weight” <span><span class="MathJax_Preview">b</span><script type="math/tex">b</script></span>, you can change when the node activates.  Therefore, by adding a bias term, you can make the node simulate a generic <strong>if</strong> function, i.e. <em>if (x &gt; z) then 1 else 0</em>.  Without a bias term, you are unable to vary the <em>z</em> in that if statement, it will be always stuck around 0.  This is obviously very useful if you are trying to simulate <strong>conditional relationships</strong>.</p>
+<h3 id="24#putting#together#the#structure">2.4 Putting together the structure</h3>
+<p>Hopefully the previous explanations have given you a good overview of how a given node/neuron/perceptron in a neural network operates.  However, as you are probably aware, there are many such interconnected nodes in a fully fledged（成熟的） neural network.  These structures can come in a myriad of different forms, but the most common simple neural network structure consists of an <em>input layer</em>, a <em>hidden layer</em> and an <em>output layer</em>.  An example of such a structure can be seen below:</p>
+<p><img alt="img" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Three-layer-network.png?resize=300%2C158&amp;ssl=1" /></p>
+<p>Figure 10. Three layer neural network</p>
+<p>The three layers of the network can be seen in the above figure – Layer 1 represents the <strong>input layer</strong>, where the external input data enters the network. Layer 2 is called the <strong>hidden layer</strong> as this layer is not part of the input or output. Note: neural networks can have many hidden layers, but in this case for simplicity I have just included one. Finally, Layer 3 is the <strong>output layer</strong>. You can observe the many connections between the layers, in particular between Layer 1 (L1) and Layer 2 (L2). As can be seen, each node in L1 has a connection to all the nodes in L2. Likewise for the nodes in L2 to the single output node L3. Each of these connections will have an associated weight.</p>
+<h3 id="25#the#notation">2.5 The notation</h3>
+<p>The maths below requires some fairly precise notation so that we know what we are talking about.  The notation I am using here is similar to that used in the Stanford deep learning tutorial.  In the upcoming equations, each of these weights are identified with the following notation: <span><span class="MathJax_Preview">{w_{ij}}^{(l)}</span><script type="math/tex">{w_{ij}}^{(l)}</script></span>. <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> refers to the node number of the connection in layer <span><span class="MathJax_Preview">l+1</span><script type="math/tex">l+1</script></span> and <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> refers to the node number of the connection in layer <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>. Take special note of this order. So, for the connection between node 1 in layer 1 and node 2 in layer 2, the weight notation would be <span><span class="MathJax_Preview">{w_{21}}^{(1)}</span><script type="math/tex">{w_{21}}^{(1)}</script></span>. This notation may seem a bit odd, as you would expect the <em>i</em> and <em>j</em> to refer the node numbers in layers <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> and <span><span class="MathJax_Preview">l+1</span><script type="math/tex">l+1</script></span> respectively (i.e. in the direction of input to output), rather than the opposite. However, this notation makes more sense when you add the bias.</p>
+<p>As you can observe in the figure above – the (+1) bias is connected to each of the nodes in the subsequent layer. So the bias in layer 1 is connected to the all the nodes in layer two. Because the bias is not a true node with an <strong>activation function</strong>, it has no inputs (it always outputs the value +1). The notation of the bias weight is <span><span class="MathJax_Preview">{b_i}^{(l)}</span><script type="math/tex">{b_i}^{(l)}</script></span>, where <em>i</em> is the node number in the layer <span><span class="MathJax_Preview">l+1</span><script type="math/tex">l+1</script></span> – the same as used for the normal weight notation <span><span class="MathJax_Preview">{w_{21}}^{(1)}</span><script type="math/tex">{w_{21}}^{(1)}</script></span>. So, the weight on the connection between the bias in layer 1 and the second node in layer 2 is given by <span><span class="MathJax_Preview">{b_2}^{(1)}</span><script type="math/tex">{b_2}^{(1)}</script></span>.</p>
+<p>Remember, these values – <span><span class="MathJax_Preview">{w_{ji}}^{(1)}</span><script type="math/tex">{w_{ji}}^{(1)}</script></span> and <span><span class="MathJax_Preview">{b_i}^{(l)}</span><script type="math/tex">{b_i}^{(l)}</script></span> – all need to be calculated in the training phase of the ANN.</p>
+<p>Finally, the node output notation is <span><span class="MathJax_Preview">{h_j}^{(l)}</span><script type="math/tex">{h_j}^{(l)}</script></span>, where <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> denotes the node number in layer <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> of the network. As can be observed in the three layer network above, the output of node 2 in layer 2 has the notation of <span><span class="MathJax_Preview">{h_2}^{(2)}</span><script type="math/tex">{h_2}^{(2)}</script></span>.</p>
+<p>Now that we have the notation all sorted out, it is now time to look at how you calculate the output of the network when the input and the weights are known. The process of calculating the output of the neural network given these values is called the <em>feed-forward</em> pass or process.</p>
+<h2 id="3#the#feed-forward#pass">3 The feed-forward pass</h2>
+<p>To demonstrate how to calculate the output from the input in neural networks, let’s start with the specific case of the three layer neural network that was presented above. Below it is presented in equation form, then it will be demonstrated with a concrete example and some Python code:
+$$
+\begin{align} 
+h_1^{(2)} &amp;= f(w_{11}^{(1)}x_1 + w_{12}^{(1)} x_2 + w_{13}^{(1)} x_3 + b_1^{(1)}) \ 
+h_2^{(2)} &amp;= f(w_{21}^{(1)}x_1 + w_{22}^{(1)} x_2 + w_{23}^{(1)} x_3 + b_2^{(1)}) \ 
+h_3^{(2)} &amp;= f(w_{31}^{(1)}x_1 + w_{32}^{(1)} x_2 + w_{33}^{(1)} x_3 + b_3^{(1)}) \ 
+h_{W,b}(x) &amp;= h_1^{(3)} = f(w_{11}<sup>{(2)}h_1</sup>{(2)} + w_{12}^{(2)} h_2^{(2)} + w_{13}^{(2)} h_3^{(2)} + b_1^{(2)}) 
+\end{align}
+$$
+<strong><em>SUMMARY</em></strong> : 
+$$
+\begin{align} 
+h_1^{(2)} &amp;= f(w_{11}^{(1)}x_1 + w_{12}^{(1)} x_2 + w_{13}^{(1)} x_3 + b_1^{(1)}) \ </p>
+<p>\end{align}
+$$
+第一层节点1到第二层节点1，第一层节点2到第二层节点1，第一层节点3到第二层节点1；</p>
+<p>In the equation above <span><span class="MathJax_Preview">f(\bullet)</span><script type="math/tex">f(\bullet)</script></span> refers to the <strong>node activation function</strong>, in this case the sigmoid function. The first line, <span><span class="MathJax_Preview">{h_1}^{(2)}</span><script type="math/tex">{h_1}^{(2)}</script></span> is the output of the first node in the second layer, and its inputs are <span><span class="MathJax_Preview">w_{11}^{(1)} x_1</span><script type="math/tex">w_{11}^{(1)} x_1</script></span>  <span><span class="MathJax_Preview">w_{12}^{(1)} x_2</span><script type="math/tex">w_{12}^{(1)} x_2</script></span> <span><span class="MathJax_Preview">w_{13}^{(1)} x_3</span><script type="math/tex">w_{13}^{(1)} x_3</script></span>  and <span><span class="MathJax_Preview">b_1^{(1)}</span><script type="math/tex">b_1^{(1)}</script></span>. These inputs can be traced in the three-layer connection diagram above. They are simply summed and then passed through the <strong>activation function</strong> to calculate the output of the first node. Likewise, for the other two nodes in the second layer.</p>
+<p>The final line is the output of the only node in the third and final layer, which is ultimate output of the neural network. As can be observed, rather than taking the weighted input variables (<span><span class="MathJax_Preview">x_1, x_2, x_3</span><script type="math/tex">x_1, x_2, x_3</script></span>), the final node takes as input the weighted output of the nodes of the second layer (<span><span class="MathJax_Preview">h_{1}^{(1)}</span><script type="math/tex">h_{1}^{(1)}</script></span>, <span><span class="MathJax_Preview">h_{2}^{(2)}</span><script type="math/tex">h_{2}^{(2)}</script></span>, <span><span class="MathJax_Preview">h_{3}^{(3)}</span><script type="math/tex">h_{3}^{(3)}</script></span>), plus the weighted bias. Therefore, you can see in equation form the hierarchical nature of artificial neural networks.</p>
+<h3 id="31#a#feed-forward#example">3.1 A feed-forward example</h3>
+<p>Now, let’s do a simple first example of the output of this neural network in Python. First things first, notice that the weights between layer 1 and 2 (<span><span class="MathJax_Preview">w_{11}^{(1)}</span><script type="math/tex">w_{11}^{(1)}</script></span>, <span><span class="MathJax_Preview">w_{12}^{(1)}</span><script type="math/tex">w_{12}^{(1)}</script></span>,…) are ideally suited to matrix representation? Observe:
+$$
+\begin{equation} 
+W^{(1)} = 
+\begin{pmatrix} 
+w_{11}^{(1)} &amp; w_{12}^{(1)} &amp; w_{13}^{(1)} \ 
+w_{21}^{(1)} &amp; w_{22}^{(1)} &amp; w_{23}^{(1)} \ 
+w_{31}^{(1)} &amp; w_{32}^{(1)} &amp; w_{33}^{(1)} \ 
+\end{pmatrix} 
+\end{equation}
+$$
+This matrix can be easily represented using numpy arrays:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">w1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]])</span>
+</code></pre></div>
+<p>Here I have just filled up the layer 1 weight array with some example weights. We can do the same for the layer 2 weight array:
+$$
+\begin{equation} 
+W^{(2)} = 
+\begin{pmatrix} 
+w_{11}^{(2)} &amp; w_{12}^{(2)} &amp; w_{13}^{(2)} 
+\end{pmatrix} 
+\end{equation}
+$$</p>
+<div class="highlight"><pre><span></span><code><span class="n">w2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">w2</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">])</span>
+</code></pre></div>
+<p>We can also setup some dummy values in the layer 1 <strong>bias weight</strong> array/vector, and the layer 2 <strong>bias weight</strong> (which is only a single value in this neural network structure – i.e. a scalar):</p>
+<div class="highlight"><pre><span></span><code><span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">])</span>
+</code></pre></div>
+<p>Finally, before we write the main program to calculate the output from the neural network, it’s handy to setup a separate Python function for the <strong>activation function</strong>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="32#our#first#attempt#at#a#feed-forward#function">3.2 Our first attempt at a feed-forward function</h3>
+<p>Below is a simple way of calculating the output of the neural network, using nested loops in python.  We’ll look at more efficient ways of calculating the output shortly.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">simple_looped_nn_calc</span><span class="p">(</span><span class="n">n_layers</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_layers</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="c1">#Setup the input array which the weights will be multiplied by for each layer</span>
+        <span class="c1">#If it&#39;s the first layer, the input array will be the x input vector</span>
+        <span class="c1">#If it&#39;s not the first layer, the input to the next layer will be the </span>
+        <span class="c1">#output of the previous layer</span>
+        <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">node_in</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">node_in</span> <span class="o">=</span> <span class="n">h</span>
+        <span class="c1">#Setup the output array for the nodes in layer l + 1</span>
+        <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],))</span>
+        <span class="c1">#loop through the rows of the weight array</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="c1">#setup the sum inside the activation function</span>
+            <span class="n">f_sum</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="c1">#loop through the columns of the weight array</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">f_sum</span> <span class="o">+=</span> <span class="n">w</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">node_in</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="c1">#add the bias</span>
+            <span class="n">f_sum</span> <span class="o">+=</span> <span class="n">b</span><span class="p">[</span><span class="n">l</span><span class="p">][</span><span class="n">i</span><span class="p">]</span>
+            <span class="c1">#finally use the activation function to calculate the</span>
+            <span class="c1">#i-th output i.e. h1, h2, h3</span>
+            <span class="n">h</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">f_sum</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">h</span>
+</code></pre></div>
+<p>This function takes as input the number of layers in the neural network, the x input array/vector, then Python tuples or lists of the weights and bias weights of the network, with each element in the tuple/list representing a layer ll in the network.  In other words, the inputs are setup in the following:</p>
+<div class="highlight"><pre><span></span><code><span class="n">w</span> <span class="o">=</span> <span class="p">[</span><span class="n">w1</span><span class="p">,</span> <span class="n">w2</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="p">[</span><span class="n">b1</span><span class="p">,</span> <span class="n">b2</span><span class="p">]</span>
+<span class="c1">#a dummy x input vector</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]</span>
+</code></pre></div>
+<p>The function first checks what the input is to the layer of nodes/weights being considered. If we are looking at the first layer, the input to the second layer nodes is the input vector xx multiplied by the relevant weights. After the first layer though, the inputs to subsequent layers are the output of the previous layers. Finally, there is a nested loop through the relevant ii and jj values of the weight vectors and the bias. The function uses the dimensions of the weights for each layer to figure out the number of nodes and therefore the structure of the network.</p>
+<p>Calling the function:</p>
+<div class="highlight"><pre><span></span><code><span class="n">simple_looped_nn_calc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+<p>gives the output of 0.8354.  We can confirm this results by manually performing the calculations in the original equations:
+$$
+\begin{align} 
+h_1^{(2)} &amp;= f(0.2*1.5 + 0.2*2.0 + 0.2*3.0 + 0.8) = 0.8909 \ 
+h_2^{(2)} &amp;= f(0.4*1.5 + 0.4*2.0 + 0.4*3.0 + 0.8) = 0.9677 \ 
+h_3^{(2)} &amp;= f(0.6*1.5 + 0.6*2.0 + 0.6*3.0 + 0.8) = 0.9909 \ 
+h_{W,b}(x) &amp;= h_1^{(3)} = f(0.5*0.8909 + 0.5*0.9677 + 0.5*0.9909 + 0.2) = 0.8354 
+\end{align}
+$$</p>
+<h3 id="33#a#more#efficient#implementation">3.3 A more efficient implementation</h3>
+<p>As was stated earlier – using loops isn’t the most efficient way of calculating the feed forward step in Python. This is because the loops in Python are notoriously slow. An alternative, more efficient mechanism of doing the feed forward step in Python and numpy will be discussed shortly. We can benchmark how efficient the algorithm is by using the <code>%timeit</code> function in IPython, which runs the function a number of times and returns the average time that the function takes to run:</p>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">timeit</span> <span class="n">simple_looped_nn_calc</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+<p>Running this tells us that the looped feed forward takes <span><span class="MathJax_Preview">40\mu s</span><script type="math/tex">40\mu s</script></span>. A result in the tens of microseconds sounds very fast, but when applied to very large practical NNs with 100s of nodes per layer, this speed will become prohibitive, especially when training the network, as will become clear later in this tutorial.  If we try a four layer neural network using the same code, we get significantly worse performance – <span><span class="MathJax_Preview">70\mu s</span><script type="math/tex">70\mu s</script></span> in fact.</p>
+<h3 id="34#vectorisation#in#neural#networks">3.4 Vectorisation in neural networks</h3>
+<p>There is a way to write the equations even more compactly, and to calculate the feed forward process in neural networks more efficiently, from a computational perspective.  Firstly, we can introduce a new variable <span><span class="MathJax_Preview">z_{i}^{(l)}</span><script type="math/tex">z_{i}^{(l)}</script></span> which is the summated input into node <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> of layer <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>, including the bias term.  So in the case of the first node in layer 2, <span><span class="MathJax_Preview">z</span><script type="math/tex">z</script></span> is equal to:
+$$
+z_{1}^{(2)} = w_{11}^{(1)}x_1 + w_{12}^{(1)} x_2 + w_{13}^{(1)} x_3 + b_1^{(1)} = \sum_{j=1}^{n} w_{ij}^{(1)}x_i + b_{i}^{(1)}
+$$
+where <code>n</code> is the number of nodes in layer 1.  Using this notation, the unwieldy previous set of equations for the example three layer network can be reduced to:</p>
+<div>
+<div class="MathJax_Preview">
+\begin{align} 
+z^{(2)} &amp;= W^{(1)} x + b^{(1)} \\ 
+h^{(2)} &amp;= f(z^{(2)}) \\ 
+z^{(3)} &amp;= W^{(2)} h^{(2)} + b^{(2)} \\ 
+h_{W,b}(x) &amp;= h^{(3)} = f(z^{(3)}) 
+\end{align}
+</div>
+<script type="math/tex; mode=display">
+\begin{align} 
+z^{(2)} &= W^{(1)} x + b^{(1)} \\ 
+h^{(2)} &= f(z^{(2)}) \\ 
+z^{(3)} &= W^{(2)} h^{(2)} + b^{(2)} \\ 
+h_{W,b}(x) &= h^{(3)} = f(z^{(3)}) 
+\end{align}
+</script>
+</div>
+<h2 id="4#gradient#descent#and#optimisation">4 Gradient descent and optimisation</h2>
+<h3 id="41#a#simple#example#in#code">4.1 A simple example in code</h3>
+<p>Below is an example of a simple Python implementation of gradient descent for solving the minimum of the equation <span><span class="MathJax_Preview">f(x) = x^4 – 3x^3 + 2</span><script type="math/tex">f(x) = x^4 – 3x^3 + 2</script></span> taken from <a href="https://en.wikipedia.org/wiki/Gradient_descent">Wikipedia.</a>  The gradient of this function is able to be calculated analytically (i.e. we can do it easily using calculus, which we can’t do with many real world applications) and is <span><span class="MathJax_Preview">f'(x) = 4x^3 – 9x^2</span><script type="math/tex">f'(x) = 4x^3 – 9x^2</script></span>. This means at every value of xx, we can calculate the gradient of the function by using a simple equation. Again, using calculus we can know that the exact minimum of this equation is <span><span class="MathJax_Preview">x=2.25</span><script type="math/tex">x=2.25</script></span>.</p>
+<p>Previously, we’ve talked about iteratively minimising the error of the output of the neural network by varying the <strong>weights</strong> in <strong>gradient descent</strong>. However, as it turns out, there is a mathematically more generalised way of looking at things that allows us to reduce the error while also preventing things like <em>overfitting</em> (this will be discussed more in later articles). This more general optimisation formulation revolves around minimising what’s called the <strong>cost function</strong>. The equivalent cost function of a single training pair (<span><span class="MathJax_Preview">x^z</span><script type="math/tex">x^z</script></span>, <span><span class="MathJax_Preview">y^z</span><script type="math/tex">y^z</script></span>) in a neural network is:</p>
+<div class="highlight"><pre><span></span><code><span class="n">x_old</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># The value does not matter as long as abs(x_new - x_old) &gt; precision</span>
+<span class="n">x_new</span> <span class="o">=</span> <span class="mi">6</span> <span class="c1"># The algorithm starts at x=6</span>
+<span class="n">gamma</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># step size</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="mf">0.00001</span>
+
+<span class="k">def</span> <span class="nf">df</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">9</span> <span class="o">*</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span>
+    <span class="k">return</span> <span class="n">y</span>
+
+<span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x_new</span> <span class="o">-</span> <span class="n">x_old</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">precision</span><span class="p">:</span>
+    <span class="n">x_old</span> <span class="o">=</span> <span class="n">x_new</span>
+    <span class="n">x_new</span> <span class="o">+=</span> <span class="o">-</span><span class="n">gamma</span> <span class="o">*</span> <span class="n">df</span><span class="p">(</span><span class="n">x_old</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The local minimum occurs at </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">x_new</span><span class="p">)</span>
+</code></pre></div>
+<p>This function prints “The local minimum occurs at 2.249965”, which agrees with the exact solution within the precision.  This code implements the <strong>weight adjustment algorithm</strong> that I showed above, and can be seen to find the minimum of the function correctly within the given precision. This is a very simple example of <strong>gradient descent</strong>, and finding the gradient works quite differently when training <strong>neural networks</strong>. However, the main idea remains – we figure out the <strong>gradient</strong> of the neural network then <strong>adjust</strong> the <strong>weights</strong> in a step to try to get closer to the <strong>minimum error</strong> that we are trying to find. Another difference between this toy example of gradient descent is that the <strong>weight vector</strong> is multi-dimensional, and therefore the gradient descent method must search a multi-dimensional space for the minimum point.</p>
+<p>The way we figure out the gradient of a neural network is via the famous <strong><em>backpropagation</em></strong> method, which will be discussed shortly. First however, we have to look at the error function more closely.</p>
+<h3 id="42#the#cost#function">4.2 The cost function</h3>
+<h3 id="43#gradient#descent#in#neural#networks">4.3 Gradient descent in neural networks</h3>
+<p>Gradient descent for every weight <span><span class="MathJax_Preview">w_{(ij)}^{(l)}</span><script type="math/tex">w_{(ij)}^{(l)}</script></span> and every bias <span><span class="MathJax_Preview">b_i^{(l)}</span><script type="math/tex">b_i^{(l)}</script></span> in the neural network looks like the following:
+$$
+\begin{align} 
+w_{ij}^{(l)} &amp;= w_{ij}^{(l)} – \alpha \frac{\partial}{\partial w_{ij}^{(l)}} J(w,b) \ 
+b_{i}^{(l)} &amp;= b_{i}^{(l)} – \alpha \frac{\partial}{\partial b_{i}^{(l)}} J(w,b) 
+\end{align}
+$$
+Basically, the equation above is similiar to the previously shown gradient descent algorithm: <span><span class="MathJax_Preview">w_{new} = w_{old} – \alpha * \nabla error</span><script type="math/tex">w_{new} = w_{old} – \alpha * \nabla error</script></span>. The new and old subscripts are missing, but the values on the left side of the equation are <em>new</em> and the values on the right side are <em>old</em>. Again, we have an iterative process whereby the weights are updated in each iteration, this time based on the cost function <span><span class="MathJax_Preview">J(w,b)</span><script type="math/tex">J(w,b)</script></span>.</p>
+<p>The values <span><span class="MathJax_Preview">\frac{\partial}{\partial w_{ij}^{(l)}}</span><script type="math/tex">\frac{\partial}{\partial w_{ij}^{(l)}}</script></span> and <span><span class="MathJax_Preview">\frac{\partial}{\partial b_{i}^{(l)}}</span><script type="math/tex">\frac{\partial}{\partial b_{i}^{(l)}}</script></span> are the <em>partial derivatives</em> of the single sample cost function based on the weight values. What does this mean? Recall that for the simple gradient descent example mentioned previously, each step depends on the <em>slope</em> of the error/cost term with respect to the weights. Another word for slope or gradient is the <em>derivative</em>. A normal derivative has the notation <span><span class="MathJax_Preview">\frac{d}{dx}</span><script type="math/tex">\frac{d}{dx}</script></span>. If <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span> in this instance is a vector, then such a derivative will also be a vector, displaying the gradient in all the dimensions of <span><span class="MathJax_Preview">x</span><script type="math/tex">x</script></span>.</p>
+<h3 id="44#a#two#dimensional#gradient#descent#example">4.4 A two dimensional gradient descent example</h3>
+<h3 id="45#backpropagation#in#depth">4.5 Backpropagation in depth</h3>
+<p>In this section, I’m going to delve into the maths a little. If you’re wary of the maths of how <strong>backpropagation</strong> works, then it may be best to skip this section.  The next <a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#implementing-nn">section</a> will show you how to implement <strong>backpropagation</strong> in code – so if you want to skip straight on to using this method, feel free to skip the rest of this section. However, if you don’t mind a little bit of maths, I encourage you to push on to the end of this section as it will give you a good depth of understanding in <strong>training</strong> neural networks. This will be invaluable to understanding some of the key <strong>ideas</strong> in deep learning, rather than just being a code cruncher who doesn’t really understand how the code works.</p>
+<p><strong><em>SUMMARY</em></strong> : neural network的training；</p>
+<p>First let’s recall some of the foundational equations from <a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#the-feed-forward-pass">Section 3</a> for the following three layer neural network:</p>
+<p><img alt="img" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Three-layer-network.png?resize=300%2C158&amp;ssl=1" /></p>
+<p>Figure 10. Three layer neural network (again)</p>
+<p>The output of this neural network can be calculated by:
+$$
+\begin{equation} 
+h_{W,b}(x) = h_1^{(3)} = f(w_{11}<sup>{(2)}h_1</sup>{(2)} + w_{12}^{(2)} h_2^{(2)} + w_{13}^{(2)} h_3^{(2)} + b_1^{(2)}) 
+\end{equation}
+$$
+We can also simplify the above to <span><span class="MathJax_Preview">h_1^{(3)} = f(z_1^{(2)})</span><script type="math/tex">h_1^{(3)} = f(z_1^{(2)})</script></span> by defining <span><span class="MathJax_Preview">z_1^{(2)}</span><script type="math/tex">z_1^{(2)}</script></span> as:
+$$
+z_{1}^{(2)} = w_{11}<sup>{(2)}h_1</sup>{(2)} + w_{12}^{(2)} h_2^{(2)} + w_{13}^{(2)} h_3^{(2)} + b_1^{(2)}
+$$
+<strong><em>SUMMARY</em></strong> : <span><span class="MathJax_Preview">z_1^{(2)}</span><script type="math/tex">z_1^{(2)}</script></span>表示的是第2层输入到第2+1层的第1个节点的sum；</p>
+<p>Let’s say we want to find out how much a <strong>change</strong> in the weight <span><span class="MathJax_Preview">w_{12}^{(2)}</span><script type="math/tex">w_{12}^{(2)}</script></span> has on the <strong>cost function</strong> <span><span class="MathJax_Preview">J</span><script type="math/tex">J</script></span>. This is to evaluate <span><span class="MathJax_Preview">\frac {\partial J}{\partial w_{12}^{(2)}}</span><script type="math/tex">\frac {\partial J}{\partial w_{12}^{(2)}}</script></span>. To do so, we have to use something called the chain function:
+$$
+\frac {\partial J}{\partial w_{12}^{(2)}} = \frac {\partial J}{\partial h_1^{(3)}} \frac {\partial h_1^{(3)}}{\partial z_1^{(2)}} \frac {\partial z_1^{(2)}}{\partial w_{12}^{(2)}}
+$$
+<strong><em>SUMMARY</em></strong> : 如果有多层隐藏层的话，上述公式是否依然适用？</p>
+<p>If you look at the terms on the right – the numerators “cancel out” the denominators, in the same way that <span><span class="MathJax_Preview">\frac {2}{5} \frac {5}{2} = \frac {2}{2} = 1</span><script type="math/tex">\frac {2}{5} \frac {5}{2} = \frac {2}{2} = 1</script></span>. Therefore we can construct <span><span class="MathJax_Preview">\frac {\partial J}{\partial w_{12}^{(2)}}</span><script type="math/tex">\frac {\partial J}{\partial w_{12}^{(2)}}</script></span> by stringing together a few <strong>partial derivatives</strong> (which are quite easy, thankfully). Let’s start with <span><span class="MathJax_Preview">\frac {\partial z_1^{(2)}}{\partial w_{12}^{(2)}}</span><script type="math/tex">\frac {\partial z_1^{(2)}}{\partial w_{12}^{(2)}}</script></span>
+$$
+\begin{align} 
+\frac {\partial z_1^{(2)}}{\partial w_{12}^{(2)}} &amp;= \frac {\partial}{\partial w_{12}^{(2)}} (w_{11}<sup>{(1)}h_1</sup>{(2)} + w_{12}^{(1)} h_2^{(2)} + w_{13}^{(1)} h_3^{(2)} + b_1^{(1)})\ 
+&amp;= \frac {\partial}{\partial w_{12}^{(2)}} (w_{12}^{(1)} h_2^{(2)})\ 
+&amp;= h_2^{(2)} 
+\end{align}
+$$
+The partial derivative of <span><span class="MathJax_Preview">z_1^{(2)}</span><script type="math/tex">z_1^{(2)}</script></span> with respect <span><span class="MathJax_Preview">w_{12}^{(2)}</span><script type="math/tex">w_{12}^{(2)}</script></span> only operates on one term within the parentheses, <span><span class="MathJax_Preview">w_{12}^{(1)} h_2^{(2)}</span><script type="math/tex">w_{12}^{(1)} h_2^{(2)}</script></span>, as all the other terms don’t vary at all when <span><span class="MathJax_Preview">w_{12}^{(2)}</span><script type="math/tex">w_{12}^{(2)}</script></span> does. The derivative of a constant is 1, therefore <span><span class="MathJax_Preview">\frac {\partial}{\partial w_{12}^{(2)}} (w_{12}^{(1)} h_2^{(2)})</span><script type="math/tex">\frac {\partial}{\partial w_{12}^{(2)}} (w_{12}^{(1)} h_2^{(2)})</script></span> collapses to just <span><span class="MathJax_Preview">h_2^{(2)}</span><script type="math/tex">h_2^{(2)}</script></span>, which is simply the output of the second node in layer 2.</p>
+<p>The next partial derivative in the chain is <span><span class="MathJax_Preview">\frac {\partial h_1^{(3)}}{\partial z_1^{(2)}}</span><script type="math/tex">\frac {\partial h_1^{(3)}}{\partial z_1^{(2)}}</script></span>, which is the <strong>partial derivative</strong> of the <strong>activation function</strong> of the <span><span class="MathJax_Preview">h_1^{(3)}</span><script type="math/tex">h_1^{(3)}</script></span> <strong>output node</strong>. Because of the requirement to be able to derive this derivative, the activation functions in neural networks need to be <em>differentiable</em>. For the common sigmoid activation function (shown in <a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#the-artificial-neuron">Section 2.1</a>), the derivative is:
+$$
+\frac {\partial h}{\partial z} = f'(z) = f(z)(1-f(z))
+$$
+Where <span><span class="MathJax_Preview">f(z)</span><script type="math/tex">f(z)</script></span> is the activation function. So far so good – now we have to work out how to deal with the first term <span><span class="MathJax_Preview">\frac {\partial J}{\partial h_1^{(3)}}</span><script type="math/tex">\frac {\partial J}{\partial h_1^{(3)}}</script></span>. Remember that <span><span class="MathJax_Preview">J(w,b,x,y)</span><script type="math/tex">J(w,b,x,y)</script></span> is the mean squared error loss function, which looks like (for our case):
+$$
+J(w,b,x,y) = \frac{1}{2} \parallel y_1 – h_1<sup>{(3)}(z_1</sup>{(2)}) \parallel ^2
+$$
+Here <span><span class="MathJax_Preview">y_1</span><script type="math/tex">y_1</script></span> is the training target for the <strong>output node</strong>. Again using the chain rule:
+$$
+\begin{align} 
+&amp;Let u = \parallel y_1 – h_1<sup>{(3)}(z_1</sup>{(2)}) \parallel and J = \frac {1}{2} u^2\ 
+&amp;Using \frac {\partial J}{\partial h} = \frac {\partial J}{\partial u} \frac {\partial u}{\partial h}:\ 
+&amp;\frac {\partial J}{\partial h} = -(y_1 – h_1^{(3)}) 
+\end{align}
+$$
+<strong><em>SUMMARY</em></strong> : 上述推导并没有搞清楚；</p>
+<p>So we’ve now figured out how to calculate <span><span class="MathJax_Preview">\frac {\partial J}{\partial w_{12}^{(2)}}</span><script type="math/tex">\frac {\partial J}{\partial w_{12}^{(2)}}</script></span>, at least for the <strong>weights</strong> connecting the <strong>output layer</strong>. </p>
+<p>Before we move to any <strong>hidden layers</strong> (i.e. layer 2 in our example case), let’s introduce some simplifications to tighten up our notation and introduce <span><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>:
+$$
+\delta_i^{(n_l)} = -(y_i – h_i^{(n_l)})\cdot f<sup>\prime(z_i</sup>{(n_l)})
+$$
+Where <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> is the node number of the <strong>output layer</strong>. </p>
+<p><strong><em>SUMMARY</em></strong> : <span><span class="MathJax_Preview">\delta_i^{(n_l)}</span><script type="math/tex">\delta_i^{(n_l)}</script></span>中包含<span><span class="MathJax_Preview">z_i^{(n_l)}</span><script type="math/tex">z_i^{(n_l)}</script></span></p>
+<p>In our selected example there is only one such layer, therefore <span><span class="MathJax_Preview">i=1</span><script type="math/tex">i=1</script></span> always in this case. Now we can write the complete cost function derivative as:
+$$
+\begin{align} 
+\frac{\partial}{\partial W_{ij}^{(l)}} J(W,b,x, y) &amp;= h^{(l)}_j \delta_i^{(l+1)} \ 
+\end{align}
+$$</p>
+<p>Where, for the output layer in our case, <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> = 2 and <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> remains the node number.</p>
+<p><strong><em>SUMMARY</em></strong> : 这是神经网络中的链式法则的通用形式；以开头所提出的问题：Let’s say we want to find out how much a <strong>change</strong> in the weight <span><span class="MathJax_Preview">w_{12}^{(2)}</span><script type="math/tex">w_{12}^{(2)}</script></span> has on the <strong>cost function</strong> <span><span class="MathJax_Preview">J</span><script type="math/tex">J</script></span>. This is to evaluate <span><span class="MathJax_Preview">\frac {\partial J}{\partial w_{12}^{(2)}}</span><script type="math/tex">\frac {\partial J}{\partial w_{12}^{(2)}}</script></span>. </p>
+<p>使用上述公式来看的话，<span><span class="MathJax_Preview">\frac {\partial J}{\partial w_{12}^{(2)}}= h^{(2)}_2 \delta_1^{(2+1)}</span><script type="math/tex">\frac {\partial J}{\partial w_{12}^{(2)}}= h^{(2)}_2 \delta_1^{(2+1)}</script></span>. <span><span class="MathJax_Preview">h^{(2)}_2</span><script type="math/tex">h^{(2)}_2</script></span>表示第2层第2个节点的输出值；<span><span class="MathJax_Preview">\delta_1^{(2+1)}</span><script type="math/tex">\delta_1^{(2+1)}</script></span>，<span><span class="MathJax_Preview">w_{12}^{(2)}</span><script type="math/tex">w_{12}^{(2)}</script></span>是第2层的节点2与第三层的节点1之间的连接权重；</p>
+<h3 id="46#propagating#into#the#hidden#layers">4.6 Propagating into the hidden layers</h3>
+<p>What about for weights feeding into any <strong>hidden layers</strong> (layer 2 in our case)? For the <strong>weights</strong> connecting the <strong>output layer</strong>, the <span><span class="MathJax_Preview">\frac {\partial J}{\partial h} = -(y_i – h_i^{(n_l)})</span><script type="math/tex">\frac {\partial J}{\partial h} = -(y_i – h_i^{(n_l)})</script></span> derivative made sense, as the <strong>cost function</strong> can be directly calculated by comparing the <strong>output layer</strong> to the <strong>training data</strong>. The output of the hidden nodes, however, have no such direct reference, rather, they are connected to the <strong>cost function</strong> only through mediating <strong>weights</strong> and potentially other layers of nodes. How can we find the variation in the <strong>cost function</strong> from changes to <strong>weights</strong> embedded deep within the neural network? As mentioned previously, we use the <em>backpropagation</em> method.</p>
+<p><strong><em>SUMMARY</em></strong> : 上面这段话的意思是如何来计算调整输入到hidden layer的weight对cost function的影响；如果以上述三层神经网络为例的话，此处的weight就是input layer到hidden layer的weight；对于这种weigh而言，因为它们并不是直接连接到输出层，所以无法直接使用comparing the <strong>output layer</strong> to the <strong>training data</strong>. 那如何来计算那些改变那些不是直接连接到输出层而是嵌入地比较深的层的节点的权重对neural network的影响呢？此处就需要使用backpropagation；</p>
+<p><strong><em>SUMMARY</em></strong> : 上述给出了backpropagation的价值所在</p>
+<p>Now that we’ve done the hard work using the <strong>chain rule</strong>, we’ll now take a more graphical approach. The term that needs to propagate back through the network is the <span><span class="MathJax_Preview">\delta_i^{(n_l)}</span><script type="math/tex">\delta_i^{(n_l)}</script></span> term, as this is the network’s ultimate connection to the <strong>cost function</strong>. What about node <code>j</code> in the second layer (hidden layer)? How does it contribute to <span><span class="MathJax_Preview">\delta_i^{(n_l)}</span><script type="math/tex">\delta_i^{(n_l)}</script></span> in our test network? It contributes via the weight <span><span class="MathJax_Preview">w_{ij}^{(2)}</span><script type="math/tex">w_{ij}^{(2)}</script></span> – see the diagram below for the case of <span><span class="MathJax_Preview">j=1</span><script type="math/tex">j=1</script></span> and <span><span class="MathJax_Preview">i=1</span><script type="math/tex">i=1</script></span>.</p>
+<p><img alt="img" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Backpropagation-illustration.jpg?resize=300%2C204&amp;ssl=1" /></p>
+<p>Figure 11. Simple backpropagation illustration</p>
+<p><strong><em>SUMMARY</em></strong> : 上图中，比较模糊的公式是：
+$$
+\delta_i^{(2)} = \delta_i^{(3)} w_{11}^{(2)}
+$$
+As can be observed from above, the output layer <span><span class="MathJax_Preview">δ</span><script type="math/tex">δ</script></span> is <em>communicated</em> to the hidden node by the weight of the connection. In the case where there is only one output layer node, the generalised hidden layer <span><span class="MathJax_Preview">δ</span><script type="math/tex">δ</script></span> is defined as:
+$$
+\delta_j^{(l)} = \delta_1^{(l+1)} w_{1j}<sup>{(l)} f</sup>\prime(z_j)^{(l)}
+$$
+<strong><em>SUMMARY</em></strong> : 这是一个递归关系，问题是这个递归关系是如何得到的？</p>
+<p>Where <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> is the node number in layer <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span>. What about the case where there are multiple output nodes? In this case, the weighted sum of all the communicated errors are taken to calculate <span><span class="MathJax_Preview">\delta_j^{(l)}</span><script type="math/tex">\delta_j^{(l)}</script></span>, as shown in the diagram below:</p>
+<p><img alt="img" src="https://i0.wp.com/adventuresinmachinelearning.com/wp-content/uploads/2017/03/Backpropagation-illustration-with-multiple-outputs.jpg?resize=300%2C242&amp;ssl=1" /></p>
+<p>Figure 12. Backpropagation illustration with multiple outputs</p>
+<p><strong><em>SUMMARY</em></strong> : 上图中，比较模糊的公式是：
+$$
+\delta_1^{(2)} = (\sum_{i=1}^{3} w_{i1}^{(2)} \delta_i<sup>{(3)}) f</sup>\prime(z_i^{(2)})
+$$
+As can be observed from the above, each <span><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span> value from the output layer is included in the sum used to calculate <span><span class="MathJax_Preview">\delta_1^{(2)}</span><script type="math/tex">\delta_1^{(2)}</script></span>, but each output  <span><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>  is weighted according to the appropriate <span><span class="MathJax_Preview">w_{i1}^{(2)}</span><script type="math/tex">w_{i1}^{(2)}</script></span> value. In other words, node 1 in layer 2 contributes to the error of three output nodes, therefore the <strong>measured error</strong> (or <strong>cost function value</strong>) at each of these nodes has to be “<strong>passed back</strong>”（传回） to the <span><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span> value for this node. Now we can develop a generalised expression for the  <span><span class="MathJax_Preview">\delta</span><script type="math/tex">\delta</script></span>  values for nodes in the hidden layers:
+$$
+\delta_j^{(l)} = (\sum_{i=1}^{s_{(l+1)}} w_{ij}^{(l)} \delta_i<sup>{(l+1)}) f</sup>\prime(z_j^{(l)})
+$$
+Where <span><span class="MathJax_Preview">j</span><script type="math/tex">j</script></span> is the node number in layer <span><span class="MathJax_Preview">l</span><script type="math/tex">l</script></span> and <span><span class="MathJax_Preview">i</span><script type="math/tex">i</script></span> is the node number in layer <span><span class="MathJax_Preview">l+1</span><script type="math/tex">l+1</script></span>(which is the same notation we have used from the start). The value <span><span class="MathJax_Preview">s_{(l+1)}</span><script type="math/tex">s_{(l+1)}</script></span> is the number of nodes in layer <span><span class="MathJax_Preview">(l+1)</span><script type="math/tex">(l+1)</script></span>.</p>
+<p><strong><em>SUMMARY</em></strong> : 上式是递归公式，在Wikipedia的<a href="https://en.wikipedia.org/wiki/Backpropagation">Backpropagation</a>有相应的介绍；</p>
+<p>So we now know how to calculate:
+$$
+\frac{\partial}{\partial W_{ij}^{(l)}} J(W,b,x, y) = h^{(l)}_j \delta_i^{(l+1)}
+$$
+<strong><em>SUMMARY</em></strong> : 根据该公式就可以得到调整任意的<span><span class="MathJax_Preview">W_{ij}^{(l)}</span><script type="math/tex">W_{ij}^{(l)}</script></span>对cost function的影响；</p>
+<p>as shown previously. What about the <strong>bias weights</strong>? I’m not going to derive them as I did with the normal weights in the interest of saving time / space. However, the reader shouldn’t have too many issues following the same steps, using the chain rule, to arrive at:
+$$
+\frac{\partial}{\partial b_{i}^{(l)}} J(W,b,x, y) = \delta_i^{(l+1)}
+$$
+Great – so we now know how to perform our original <strong>gradient descent problem</strong> for neural networks:
+$$
+\begin{align} 
+w_{ij}^{(l)} &amp;= w_{ij}^{(l)} – \alpha \frac{\partial}{\partial w_{ij}^{(l)}} J(w,b) \ 
+b_{i}^{(l)} &amp;= b_{i}^{(l)} – \alpha \frac{\partial}{\partial b_{i}^{(l)}} J(w,b) 
+\end{align}
+$$
+However, to perform this gradient descent training of the weights, we would have to resort to loops within loops. As previously shown in <a href="https://adventuresinmachinelearning.com/neural-networks-tutorial/#vectorisation">Section 3.4</a> of this neural network tutorial, performing such calculations in Python using loops is slow for large networks. Therefore, we need to figure out how to vectorise such calculations, which the next section will show.</p>
+<h3 id="48#implementing#the#gradient#descent#step">4.8 Implementing the gradient descent step</h3>
+<h3 id="49#the#final#gradient#descent#algorithm">4.9 The final gradient descent algorithm</h3>
+<h2 id="5#implementing#the#neural#network#in#python">5 Implementing the neural network in Python</h2>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../Artificial-neural-network/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Artificial-neural-network
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../ujjwalkarn-A-Quick-Introduction-to-Neural-Networks/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              ujjwalkarn-A-Quick-Introduction-to-Neural-Networks
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - Markov-model: Markov-model
+    - CRF: CRF

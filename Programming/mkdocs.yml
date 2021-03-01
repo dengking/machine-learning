@@ -1,4 +1,6 @@
 nav:
-    - Model-And-layer-And-computation-And-computational-graph: Model-And-layer-And-computation-And-computational-graph.md
-    - Programming-paradigm-of-deep-learning: Programming-paradigm-of-deep-learning.md
+    - Programming-paradigm: Programming-paradigm
+    - TensorFlow: TensorFlow
+    - pytorch: pytorch
+    - Keras: Keras
     - VS-pytorch-vs-tensorflow: VS-pytorch-vs-tensorflow.md

@@ -1,0 +1,5582 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/machine-learning/Programming/TensorFlow/Implementation/TensorFlow-white-paper/whitepaper2015/">
+      
+      <link rel="shortcut icon" href="../../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>whitepaper2015 - machine-learning</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../../../css/extra.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-27795084-5","mkdocs.org"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tensorflow#large-scale#machine#learning#on#heterogeneous#distributed#systems" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://dengking.github.io/machine-learning" title="machine-learning" class="md-header__button md-logo" aria-label="machine-learning">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            machine-learning
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              whitepaper2015
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/dengking/machine-learning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://dengking.github.io/machine-learning" title="machine-learning" class="md-nav__button md-logo" aria-label="machine-learning">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    machine-learning
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/dengking/machine-learning" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../AI-meeting/" class="md-nav__link">
+        AI-meeting
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        AI-papers
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AI-papers" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          AI-papers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../AI-papers/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../AI-papers/Reading-record/" class="md-nav__link">
+        Reading-record
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        Research-Institution&Researcher
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Research-Institution&Researcher" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Research-Institution&Researcher
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Research-Institution%26Researcher/Researcher/" class="md-nav__link">
+        Researcher
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Research-Institution%26Researcher/Research-institution/" class="md-nav__link">
+        Research-institution
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        Theory
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Theory" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          Theory
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        Deep-learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Deep-learning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Deep-learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2" type="checkbox" id="__nav_5_2_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2">
+        Book-deep-learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Book-deep-learning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Book-deep-learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Deep-learning-book/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2" type="checkbox" id="__nav_5_2_2_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2">
+        Part-I-Applied-Math-and-Machine-Learning-Basics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Part-I-Applied-Math-and-Machine-Learning-Basics" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Part-I-Applied-Math-and-Machine-Learning-Basics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/1-Introduction/" class="md-nav__link">
+        1-Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2" type="checkbox" id="__nav_5_2_2_2_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2">
+        5-Machine-Learning-Basics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5-Machine-Learning-Basics" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          5-Machine-Learning-Basics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5-Machine-Learning-Basics/" class="md-nav__link">
+        5-Machine-Learning-Basics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.1-Learning-Algorithms/" class="md-nav__link">
+        5.1-Learning-Algorithms
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_3" type="checkbox" id="__nav_5_2_2_2_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_3">
+        Task
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Task" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Task
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Pattern-recognition/" class="md-nav__link">
+        Pattern-recognition
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_3_2" type="checkbox" id="__nav_5_2_2_2_2_3_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_3_2">
+        Sequence-labeling
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sequence-labeling" data-md-level="7">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Sequence-labeling
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling/" class="md-nav__link">
+        Sequence-labeling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative/" class="md-nav__link">
+        Sequence-Labeling-Generative-and-Discriminative
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting/" class="md-nav__link">
+        5.2-Capacity-Overfitting-and-Underfitting
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_5" type="checkbox" id="__nav_5_2_2_2_2_5" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_5">
+        5.3-Hyperparameters-and-Validation-Sets
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5.3-Hyperparameters-and-Validation-Sets" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          5.3-Hyperparameters-and-Validation-Sets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Hyperparameter%28machine-learning%29/" class="md-nav__link">
+        Hyperparameter(machine-learning)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Cross-validation%28statistics%29/" class="md-nav__link">
+        Cross-validation(statistics)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_6" type="checkbox" id="__nav_5_2_2_2_2_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_6">
+        5.4-Estimators-Bias-and-Variance
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5.4-Estimators-Bias-and-Variance" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          5.4-Estimators-Bias-and-Variance
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/5.4-Estimators-Bias-and-Variance/" class="md-nav__link">
+        5.4-Estimators-Bias-and-Variance
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/Bias%E2%80%93variance%20tradeoff/" class="md-nav__link">
+        Bias–variance tradeoff
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_2_2_7" type="checkbox" id="__nav_5_2_2_2_2_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_2_2_7">
+        5.5-Maximum-Likelihood-Estimation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5.5-Maximum-Likelihood-Estimation" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_2_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          5.5-Maximum-Likelihood-Estimation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.5-Maximum-Likelihood-Estimation/5.5-Maximum-Likelihood-Estimation/" class="md-nav__link">
+        5.5-Maximum-Likelihood-Estimation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3" type="checkbox" id="__nav_5_2_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3">
+        Part-II-Deep-Networks-Modern-Practices
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Part-II-Deep-Networks-Modern-Practices" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Part-II-Deep-Networks-Modern-Practices
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/Part-II-Deep-Networksb-Modern-Practice/" class="md-nav__link">
+        Part-II-Deep-Networksb-Modern-Practice
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2" type="checkbox" id="__nav_5_2_2_3_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2">
+        6-Deep-Feedforward-Networks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6-Deep-Feedforward-Networks" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          6-Deep-Feedforward-Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6-Deep-Feedforward-Network/" class="md-nav__link">
+        6-Deep-Feedforward-Network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.2-Gradient-Based-Learning/" class="md-nav__link">
+        6.2-Gradient-Based-Learning
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2_3" type="checkbox" id="__nav_5_2_2_3_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2_3">
+        6.4-Architecture-Design
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6.4-Architecture-Design" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          6.4-Architecture-Design
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/6.4-Architecture-Design/" class="md-nav__link">
+        6.4-Architecture-Design
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/Universal-approximation-theorem/" class="md-nav__link">
+        Universal-approximation-theorem
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2_4" type="checkbox" id="__nav_5_2_2_3_2_4" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2_4">
+        6.5-Back-Propagation-and-Other-Differentiation-algorithms
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6.5-Back-Propagation-and-Other-Differentiation-algorithms" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          6.5-Back-Propagation-and-Other-Differentiation-algorithms
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_2_4_2" type="checkbox" id="__nav_5_2_2_3_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_2_4_2">
+        Back-Propagation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Back-Propagation" data-md-level="7">
+        <label class="md-nav__title" for="__nav_5_2_2_3_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Back-Propagation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/zhihu-Back-Propagation/" class="md-nav__link">
+        zhihu-Back-Propagation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/wikipedia-Backpropagation/" class="md-nav__link">
+        wikipedia-Backpropagation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/6.5-Back-Propagation-and-Other-Differentiation/" class="md-nav__link">
+        6.5-Back-Propagation-and-Other-Differentiation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Implementation/" class="md-nav__link">
+        Implementation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Backpropagation-through-time/" class="md-nav__link">
+        Backpropagation-through-time
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_3" type="checkbox" id="__nav_5_2_2_3_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_3">
+        7-Regularization-for-Deep-Learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="7-Regularization-for-Deep-Learning" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          7-Regularization-for-Deep-Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/7-Regularization-for-Deep-Learning/7.8-Early-Stopping/" class="md-nav__link">
+        7.8-Early-Stopping
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_4" type="checkbox" id="__nav_5_2_2_3_4" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_4">
+        8-Optimization-for-Training-Deep-Models
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="8-Optimization-for-Training-Deep-Models" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          8-Optimization-for-Training-Deep-Models
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/8-Optimization-for-Training-Deep-Models/" class="md-nav__link">
+        8-Optimization-for-Training-Deep-Models
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_4_2" type="checkbox" id="__nav_5_2_2_3_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_4_2">
+        SGD
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="SGD" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          SGD
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/5.9-Stochastic-Gradient-Descent/" class="md-nav__link">
+        5.9-Stochastic-Gradient-Descent
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Gradient-descent/" class="md-nav__link">
+        Gradient-descent
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Stochastic-gradient-descent/" class="md-nav__link">
+        Stochastic-gradient-descent
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5" type="checkbox" id="__nav_5_2_2_3_5" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5">
+        9-Convolutional-Networks
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="9-Convolutional-Networks" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          9-Convolutional-Networks
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9-Convolutional-Networks/" class="md-nav__link">
+        9-Convolutional-Networks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9.3-Pooling/" class="md-nav__link">
+        9.3-Pooling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5_3" type="checkbox" id="__nav_5_2_2_3_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5_3">
+        CS231n
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="CS231n" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          CS231n
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/Convolutional-Neural-Networks%28CNNs-or-ConvNets%29/" class="md-nav__link">
+        Convolutional-Neural-Networks(CNNs-or-ConvNets)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-translation-invariance/" class="md-nav__link">
+        CNN-translation-invariance
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-pooling-layer/" class="md-nav__link">
+        CNN-pooling-layer
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5_6" type="checkbox" id="__nav_5_2_2_3_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5_6">
+        VGG
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="VGG" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          VGG
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/VGG/VGG/" class="md-nav__link">
+        VGG
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_5_7" type="checkbox" id="__nav_5_2_2_3_5_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_5_7">
+        AlexNet
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="AlexNet" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_5_7">
+          <span class="md-nav__icon md-icon"></span>
+          AlexNet
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/AlexNet/AlexNet/" class="md-nav__link">
+        AlexNet
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/Fei-Fei-Li/" class="md-nav__link">
+        Fei-Fei-Li
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/ImageNet/" class="md-nav__link">
+        ImageNet
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/paper-Convolutional-Sequence-to-Sequence-Learning/" class="md-nav__link">
+        paper-Convolutional-Sequence-to-Sequence-Learning
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_6" type="checkbox" id="__nav_5_2_2_3_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_6">
+        10-Sequence-Modeling-Recurrent-and-Recursive-Nets
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="10-Sequence-Modeling-Recurrent-and-Recursive-Nets" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          10-Sequence-Modeling-Recurrent-and-Recursive-Nets
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10-Sequence-Modeling-Recurrentand-Recursive-Nets/" class="md-nav__link">
+        10-Sequence-Modeling-Recurrentand-Recursive-Nets
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.1-Unfolding-Computational-Graphs/" class="md-nav__link">
+        10.1-Unfolding-Computational-Graphs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.3-Bidirectional-RNNs/" class="md-nav__link">
+        10.3-Bidirectional-RNNs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures/" class="md-nav__link">
+        10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.10-The-Long-Short-Term-Memory-and-Other-Gated/" class="md-nav__link">
+        10.10-The-Long-Short-Term-Memory-and-Other-Gated
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_6_6" type="checkbox" id="__nav_5_2_2_3_6_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_6_6">
+        LSTM
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LSTM" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_6_6">
+          <span class="md-nav__icon md-icon"></span>
+          LSTM
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/LSTM/" class="md-nav__link">
+        LSTM
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/colah-Understanding-LSTM-Networks/" class="md-nav__link">
+        colah-Understanding-LSTM-Networks
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/RNN-and-LSTM-tutorial/" class="md-nav__link">
+        RNN-and-LSTM-tutorial
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_6_7" type="checkbox" id="__nav_5_2_2_3_6_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_6_7">
+        RNN
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="RNN" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_6_7">
+          <span class="md-nav__icon md-icon"></span>
+          RNN
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/RNN/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_7" type="checkbox" id="__nav_5_2_2_3_7" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_7">
+        12-Applications
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="12-Applications" data-md-level="5">
+        <label class="md-nav__title" for="__nav_5_2_2_3_7">
+          <span class="md-nav__icon md-icon"></span>
+          12-Applications
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_2_3_7_1" type="checkbox" id="__nav_5_2_2_3_7_1" >
+      
+      <label class="md-nav__link" for="__nav_5_2_2_3_7_1">
+        12.4-Natural-Language-Processing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="12.4-Natural-Language-Processing" data-md-level="6">
+        <label class="md-nav__title" for="__nav_5_2_2_3_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          12.4-Natural-Language-Processing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/12-Applications/12.4-Natural-Language-Processing/12.4.5-Neural-Machine-Translation/" class="md-nav__link">
+        12.4.5-Neural-Machine-Translation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_3" type="checkbox" id="__nav_5_2_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_3">
+        Book-Neural-Networks-and-Deep-Learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Book-Neural-Networks-and-Deep-Learning" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Book-Neural-Networks-and-Deep-Learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Book-Neural-Networks-and-Deep-Learning/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4" type="checkbox" id="__nav_5_2_4" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4">
+        Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Guide" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_1" type="checkbox" id="__nav_5_2_4_1" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_1">
+        Tutorial
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorial" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Tutorial/Artificial-neural-network/" class="md-nav__link">
+        Artificial-neural-network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Tutorial/Neural-Networks-Tutorial/" class="md-nav__link">
+        Neural-Networks-Tutorial
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Tutorial/ujjwalkarn-A-Quick-Introduction-to-Neural-Networks/" class="md-nav__link">
+        ujjwalkarn-A-Quick-Introduction-to-Neural-Networks
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_2" type="checkbox" id="__nav_5_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_2">
+        Computation-And-model-And-computational-graph
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Computation-And-model-And-computational-graph" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Computation-And-model-And-computational-graph
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/Computational-graph/" class="md-nav__link">
+        Computational-graph
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_3" type="checkbox" id="__nav_5_2_4_3" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_3">
+        Model-capacity
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Model-capacity" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Model-capacity
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Model-capacity/Model-capacity/" class="md-nav__link">
+        Model-capacity
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_4" type="checkbox" id="__nav_5_2_4_4" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_4">
+        Model-initialization
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Model-initialization" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Model-initialization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Model-initialization/Model-initialization/" class="md-nav__link">
+        Model-initialization
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_5" type="checkbox" id="__nav_5_2_4_5" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_5">
+        Batch-epoch-step
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Batch-epoch-step" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Batch-epoch-step
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Buzz-word-batch-size.md" class="md-nav__link">
+        Buzz-word-batch-size
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Batch-VS-epoch/" class="md-nav__link">
+        Batch-VS-epoch
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Steps-VS-epochs/" class="md-nav__link">
+        Steps-VS-epochs
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Word-epoch.md" class="md-nav__link">
+        Word-epoch
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_6" type="checkbox" id="__nav_5_2_4_6" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_6">
+        Activation-function
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Activation-function" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Activation-function
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Activation-function/Activation-function/" class="md-nav__link">
+        Activation-function
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Activation-function/ReLU-VS-sigmoid-VS-softmax/" class="md-nav__link">
+        ReLU-VS-sigmoid-VS-softmax
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Activation-function/sigmoid-in-deep-learning/" class="md-nav__link">
+        sigmoid-in-deep-learning
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Design-neural-network/" class="md-nav__link">
+        Design-neural-network
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_8" type="checkbox" id="__nav_5_2_4_8" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_8">
+        End-to-end
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="End-to-end" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          End-to-end
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/End-to-end/End-to-end/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/End-to-end/wikipedia-End-to-end-reinforcement-learning/" class="md-nav__link">
+        End-to-end-reinforcement-learning
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2_4_9" type="checkbox" id="__nav_5_2_4_9" >
+      
+      <label class="md-nav__link" for="__nav_5_2_4_9">
+        Transformer-and-attention
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Transformer-and-attention" data-md-level="4">
+        <label class="md-nav__title" for="__nav_5_2_4_9">
+          <span class="md-nav__icon md-icon"></span>
+          Transformer-and-attention
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Deep-learning/Guide/Transformer-and-attention/Papers/" class="md-nav__link">
+        Papers
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        Feature-engineering
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Feature-engineering" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          Feature-engineering
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Feature-engineering/Data-transformation%28statistics%29/" class="md-nav__link">
+        Data-transformation(statistics)
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Feature-engineering/Feature-scaling/" class="md-nav__link">
+        Feature-scaling
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Feature-engineering/Normalization%28statistics%29/" class="md-nav__link">
+        Normalization(statistics)
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        Machine-learning
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Machine-learning" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          Machine-learning
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Machine-learning/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_2" type="checkbox" id="__nav_5_4_2" >
+      
+      <label class="md-nav__link" for="__nav_5_4_2">
+        Markov-model
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Markov-model" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Markov-model
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Machine-learning/Markov-model/Markov-chain/" class="md-nav__link">
+        Markov-chain
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Machine-learning/Markov-model/Markov-models/" class="md-nav__link">
+        Markov-models
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Machine-learning/Markov-model/Hidden-Markov-model/" class="md-nav__link">
+        Hidden-Markov-model
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Machine-learning/Markov-model/Viterbi-algorithm/" class="md-nav__link">
+        Viterbi-algorithm
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Machine-learning/Markov-model/Forward-algorithm/" class="md-nav__link">
+        Forward-algorithm
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4_3" type="checkbox" id="__nav_5_4_3" >
+      
+      <label class="md-nav__link" for="__nav_5_4_3">
+        CRF
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="CRF" data-md-level="3">
+        <label class="md-nav__title" for="__nav_5_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          CRF
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Machine-learning/CRF/crf/" class="md-nav__link">
+        CRF
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/Data-generating-process/" class="md-nav__link">
+        Data-generating-process
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/VS-statistical-model-VS-machine-learning-model/" class="md-nav__link">
+        VS-statistical-model-VS-machine-learning-model
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Theory/VS-statistical-model-VS-stochastic-process/" class="md-nav__link">
+        VS-statistics-model-VS-stochastic-process
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" checked>
+      
+      <label class="md-nav__link" for="__nav_6">
+        Programming
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Programming
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_1" type="checkbox" id="__nav_6_1" >
+      
+      <label class="md-nav__link" for="__nav_6_1">
+        Programming-paradigm
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Programming-paradigm" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_1">
+          <span class="md-nav__icon md-icon"></span>
+          Programming-paradigm
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Programming-paradigm/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Programming-paradigm/Symbolic-and-imperative/" class="md-nav__link">
+        Symbolic-and-imperative
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2" type="checkbox" id="__nav_6_2" checked>
+      
+      <label class="md-nav__link" for="__nav_6_2">
+        TensorFlow
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="TensorFlow" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          TensorFlow
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Doc/" class="md-nav__link">
+        Doc
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3" type="checkbox" id="__nav_6_2_3" checked>
+      
+      <label class="md-nav__link" for="__nav_6_2_3">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3_2" type="checkbox" id="__nav_6_2_3_2" checked>
+      
+      <label class="md-nav__link" for="__nav_6_2_3_2">
+        TensorFlow-white-paper
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="TensorFlow-white-paper" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          TensorFlow-white-paper
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          whitepaper2015
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        whitepaper2015
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1#introduction" class="md-nav__link">
+    1 Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2#programming#model#and#basic#concepts" class="md-nav__link">
+    2 Programming Model and Basic Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Programming Model and Basic Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control#dependencies#edge" class="md-nav__link">
+    Control dependencies edge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations#and#kernels" class="md-nav__link">
+    Operations and Kernels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessions" class="md-nav__link">
+    Sessions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3#implementation" class="md-nav__link">
+    3 Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clientmaster#and#worker#process" class="md-nav__link">
+    Client、master and worker process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local#implementation" class="md-nav__link">
+    Local implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed#implementation" class="md-nav__link">
+    Distributed implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#devices" class="md-nav__link">
+    Devices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tensors" class="md-nav__link">
+    Tensors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31#single-device#execution" class="md-nav__link">
+    3.1 Single-Device Execution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32#multi-device#execution" class="md-nav__link">
+    3.2 Multi-Device Execution
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Multi-Device Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321#node#placement" class="md-nav__link">
+    3.2.1 Node Placement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322#cross-device#communication" class="md-nav__link">
+    3.2.2 Cross-Device Communication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33#distributed#execution" class="md-nav__link">
+    3.3 Distributed Execution
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Distributed Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fault#tolerance" class="md-nav__link">
+    Fault Tolerance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4#extensions" class="md-nav__link">
+    4 Extensions
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41#gradient#computation" class="md-nav__link">
+    4.1 Gradient Computation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42#partial#execution" class="md-nav__link">
+    4.2 Partial Execution
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Partial Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output#of#a#node" class="md-nav__link">
+    Output of a node
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run#call" class="md-nav__link">
+    Run call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph#transformation" class="md-nav__link">
+    Graph transformation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43#device#constraints" class="md-nav__link">
+    4.3 Device Constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44#control#flow" class="md-nav__link">
+    4.4 Control Flow
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 Control Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tags#and#frames" class="md-nav__link">
+    Tags and frames
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed#coordination#mechanism" class="md-nav__link">
+    Distributed coordination mechanism
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control#flow#and#backprog" class="md-nav__link">
+    Control flow and backprog
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45#input#operations" class="md-nav__link">
+    4.5 Input Operations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46#queues" class="md-nav__link">
+    4.6 Queues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47#containers" class="md-nav__link">
+    4.7 Containers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5#optimizations" class="md-nav__link">
+    5 Optimizations
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Optimizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51#common#subexpression#elimination" class="md-nav__link">
+    5.1 Common Subexpression Elimination
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52#controlling#data#communication#and#memory#usage" class="md-nav__link">
+    5.2 Controlling Data Communication and Memory Usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53#asynchronous#kernels" class="md-nav__link">
+    5.3 Asynchronous Kernels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54#optimized#libraries#for#kernel#implementations" class="md-nav__link">
+    5.4 Optimized Libraries for Kernel Implementations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55#lossy#compression" class="md-nav__link">
+    5.5 Lossy Compression
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6#status#and#experience" class="md-nav__link">
+    6 Status and Experience
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7#common#programming#idioms" class="md-nav__link">
+    7 Common Programming Idioms
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Common Programming Idioms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data#parallel#training" class="md-nav__link">
+    Data Parallel Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model#parallel#training" class="md-nav__link">
+    Model Parallel Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concurrent#steps#for#model#computation#pipelining" class="md-nav__link">
+    Concurrent Steps for Model Computation Pipelining
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8#performance" class="md-nav__link">
+    8 Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9#tools" class="md-nav__link">
+    9 Tools
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91#tensorboard#visualization#of#graph#structures#and#summary#statistics" class="md-nav__link">
+    9.1 TensorBoard: Visualization of graph structures and summary statistics
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1 TensorBoard: Visualization of graph structures and summary statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualization#of#computation#graphs" class="md-nav__link">
+    Visualization of Computation Graphs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization#of#summary#data" class="md-nav__link">
+    Visualization of Summary Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92#performance#tracing" class="md-nav__link">
+    9.2 Performance Tracing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10#future#work" class="md-nav__link">
+    10 Future Work
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11#related#work" class="md-nav__link">
+    11 Related Work
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12#conclusions" class="md-nav__link">
+    12 Conclusions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3_3" type="checkbox" id="__nav_6_2_3_3" >
+      
+      <label class="md-nav__link" for="__nav_6_2_3_3">
+        XLA
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="XLA" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          XLA
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../XLA/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_3_4" type="checkbox" id="__nav_6_2_3_4" >
+      
+      <label class="md-nav__link" for="__nav_6_2_3_4">
+        Tensorflow-src-explanation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tensorflow-src-explanation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          Tensorflow-src-explanation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Tensorflow-src-explanation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4" type="checkbox" id="__nav_6_2_4" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4">
+        API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API" data-md-level="3">
+        <label class="md-nav__title" for="__nav_6_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2" type="checkbox" id="__nav_6_2_4_2" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2">
+        Python
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Python" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/Python/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/Python/Core-graph-data-structures/" class="md-nav__link">
+        Core-graph-data-structures
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2_3" type="checkbox" id="__nav_6_2_4_2_3" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2_3">
+        Building-Graphs
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Building-Graphs" data-md-level="5">
+        <label class="md-nav__title" for="__nav_6_2_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Building-Graphs
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/Python/Building-Graphs/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/Python/Building-Graphs/tf.control_dependencies/" class="md-nav__link">
+        tf.control_dependencies
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2_4" type="checkbox" id="__nav_6_2_4_2_4" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2_4">
+        Low-level-API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Low-level-API" data-md-level="5">
+        <label class="md-nav__title" for="__nav_6_2_4_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Low-level-API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_2_4_1" type="checkbox" id="__nav_6_2_4_2_4_1" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_2_4_1">
+        tf.placeholder-VS-tf.Variable
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="tf.placeholder-VS-tf.Variable" data-md-level="6">
+        <label class="md-nav__title" for="__nav_6_2_4_2_4_1">
+          <span class="md-nav__icon md-icon"></span>
+          tf.placeholder-VS-tf.Variable
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/How-to-understand-tf.Variable/" class="md-nav__link">
+        How-to-understand-tf.Variable
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_2_4_3" type="checkbox" id="__nav_6_2_4_3" >
+      
+      <label class="md-nav__link" for="__nav_6_2_4_3">
+        TODO-C++
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="TODO-C++" data-md-level="4">
+        <label class="md-nav__title" for="__nav_6_2_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          TODO-C++
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../API/TODO-C%2B%2B/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_3" type="checkbox" id="__nav_6_3" >
+      
+      <label class="md-nav__link" for="__nav_6_3">
+        pytorch
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="pytorch" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_3">
+          <span class="md-nav__icon md-icon"></span>
+          pytorch
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../pytorch/paper-Automatic-differentiation-in-PyTorch/" class="md-nav__link">
+        paper-Automatic-differentiation-in-PyTorch
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6_4" type="checkbox" id="__nav_6_4" >
+      
+      <label class="md-nav__link" for="__nav_6_4">
+        Keras
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Keras" data-md-level="2">
+        <label class="md-nav__title" for="__nav_6_4">
+          <span class="md-nav__icon md-icon"></span>
+          Keras
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Keras/intro-Keras/" class="md-nav__link">
+        intro-Keras
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Keras/Getting-started-with-the-Keras-Sequential-model/" class="md-nav__link">
+        Getting-started-with-the-Keras-Sequential-model
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../Keras/keras-Layers-Convolutional-Layers/" class="md-nav__link">
+        keras-Layers-Convolutional-Layers
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../VS-pytorch-vs-tensorflow/" class="md-nav__link">
+        VS-pytorch-vs-tensorflow
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      <label class="md-nav__link" for="__nav_7">
+        Data-set
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data-set" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          Data-set
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Data-set/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        Application
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Application" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          Application
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1" type="checkbox" id="__nav_8_1" >
+      
+      <label class="md-nav__link" for="__nav_8_1">
+        NLP
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NLP" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          NLP
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP/" class="md-nav__link">
+        NLP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/WordNet/" class="md-nav__link">
+        WordNet
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4" type="checkbox" id="__nav_8_1_4" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4">
+        NLP-progress
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NLP-progress" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_4">
+          <span class="md-nav__icon md-icon"></span>
+          NLP-progress
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Task-of-NLP/" class="md-nav__link">
+        Task-of-NLP
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_2" type="checkbox" id="__nav_8_1_4_2" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_2">
+        Entity-Linking
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Entity-Linking" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Entity-Linking
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Entity-Linking/Entity-Linking/" class="md-nav__link">
+        Entity-Linking
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_3" type="checkbox" id="__nav_8_1_4_3" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_3">
+        Relationship-Extraction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Relationship-Extraction" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Relationship-Extraction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Relationship-Extraction/Relationship-Extraction/" class="md-nav__link">
+        Relationship-Extraction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_4" type="checkbox" id="__nav_8_1_4_4" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_4">
+        Shallow-parsing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Shallow-parsing" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Shallow-parsing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Shallow-parsing/Shallow-parsing/" class="md-nav__link">
+        Shallow-parsing
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_5" type="checkbox" id="__nav_8_1_4_5" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_5">
+        Text-Classification
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Text-Classification" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Text-Classification
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Text-Classification/Text-Classification/" class="md-nav__link">
+        Text-Classification
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Text-Classification/paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer/" class="md-nav__link">
+        paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_6" type="checkbox" id="__nav_8_1_4_6" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_6">
+        Part-of-speech-tagging
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Part-of-speech-tagging" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Part-of-speech-tagging
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Part-of-speech-tagging/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_7" type="checkbox" id="__nav_8_1_4_7" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_7">
+        Neural-machine-translation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Neural-machine-translation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_7">
+          <span class="md-nav__icon md-icon"></span>
+          Neural-machine-translation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Neural-machine-translation/Neural-machine-translation/" class="md-nav__link">
+        Neural-machine-translation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_4_8" type="checkbox" id="__nav_8_1_4_8" >
+      
+      <label class="md-nav__link" for="__nav_8_1_4_8">
+        Distant-supervision
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Distant-supervision" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_4_8">
+          <span class="md-nav__icon md-icon"></span>
+          Distant-supervision
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/NLP-progress/Distant-supervision/Distant-supervision/" class="md-nav__link">
+        Distant-supervision
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_5" type="checkbox" id="__nav_8_1_5" >
+      
+      <label class="md-nav__link" for="__nav_8_1_5">
+        Representation-of-word
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Representation-of-word" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_5">
+          <span class="md-nav__icon md-icon"></span>
+          Representation-of-word
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Representation-of-word/Representation-of-image-VS--word/" class="md-nav__link">
+        Representation-of-image-VS--word
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_6" type="checkbox" id="__nav_8_1_6" >
+      
+      <label class="md-nav__link" for="__nav_8_1_6">
+        Linguistics
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Linguistics" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_6">
+          <span class="md-nav__icon md-icon"></span>
+          Linguistics
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Linguistics/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Linguistics/Part-of-speech/" class="md-nav__link">
+        Part-of-speech
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_7" type="checkbox" id="__nav_8_1_7" >
+      
+      <label class="md-nav__link" for="__nav_8_1_7">
+        Model
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Model" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_7">
+          <span class="md-nav__icon md-icon"></span>
+          Model
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_7_1" type="checkbox" id="__nav_8_1_7_1" >
+      
+      <label class="md-nav__link" for="__nav_8_1_7_1">
+        BERT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="BERT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_7_1">
+          <span class="md-nav__icon md-icon"></span>
+          BERT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT/" class="md-nav__link">
+        BERT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-paper/" class="md-nav__link">
+        BERT-paper
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-implementation/" class="md-nav__link">
+        BERT-implementation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_7_2" type="checkbox" id="__nav_8_1_7_2" >
+      
+      <label class="md-nav__link" for="__nav_8_1_7_2">
+        GPT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="GPT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          GPT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/GPT/openai-GPT-2/" class="md-nav__link">
+        openai-GPT-2
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_8" type="checkbox" id="__nav_8_1_8" >
+      
+      <label class="md-nav__link" for="__nav_8_1_8">
+        Lib
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lib" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_8">
+          <span class="md-nav__icon md-icon"></span>
+          Lib
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_8_1" type="checkbox" id="__nav_8_1_8_1" >
+      
+      <label class="md-nav__link" for="__nav_8_1_8_1">
+        BERT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="BERT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_8_1">
+          <span class="md-nav__icon md-icon"></span>
+          BERT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT/" class="md-nav__link">
+        BERT
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-paper/" class="md-nav__link">
+        BERT-paper
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/BERT/BERT-implementation/" class="md-nav__link">
+        BERT-implementation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_8_2" type="checkbox" id="__nav_8_1_8_2" >
+      
+      <label class="md-nav__link" for="__nav_8_1_8_2">
+        GPT
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="GPT" data-md-level="4">
+        <label class="md-nav__title" for="__nav_8_1_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          GPT
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Model/GPT/openai-GPT-2/" class="md-nav__link">
+        openai-GPT-2
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_1_9" type="checkbox" id="__nav_8_1_9" >
+      
+      <label class="md-nav__link" for="__nav_8_1_9">
+        Book-Natural-Language-Processing-with-Python
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Book-Natural-Language-Processing-with-Python" data-md-level="3">
+        <label class="md-nav__title" for="__nav_8_1_9">
+          <span class="md-nav__icon md-icon"></span>
+          Book-Natural-Language-Processing-with-Python
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NLP/Book-Natural-Language-Processing-with-Python/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_2" type="checkbox" id="__nav_8_2" >
+      
+      <label class="md-nav__link" for="__nav_8_2">
+        Computable-knowledge
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Computable-knowledge" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_2">
+          <span class="md-nav__icon md-icon"></span>
+          Computable-knowledge
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/Computable-knowledge/Knowledge-representation-and-reasoning/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_3" type="checkbox" id="__nav_8_3" >
+      
+      <label class="md-nav__link" for="__nav_8_3">
+        Sequence
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Sequence" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_3">
+          <span class="md-nav__icon md-icon"></span>
+          Sequence
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/Sequence/Sequence/" class="md-nav__link">
+        Sequence
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8_4" type="checkbox" id="__nav_8_4" >
+      
+      <label class="md-nav__link" for="__nav_8_4">
+        NRE
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="NRE" data-md-level="2">
+        <label class="md-nav__title" for="__nav_8_4">
+          <span class="md-nav__icon md-icon"></span>
+          NRE
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../Application/NRE/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#abstract" class="md-nav__link">
+    Abstract
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1#introduction" class="md-nav__link">
+    1 Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2#programming#model#and#basic#concepts" class="md-nav__link">
+    2 Programming Model and Basic Concepts
+  </a>
+  
+    <nav class="md-nav" aria-label="2 Programming Model and Basic Concepts">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control#dependencies#edge" class="md-nav__link">
+    Control dependencies edge
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#operations#and#kernels" class="md-nav__link">
+    Operations and Kernels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sessions" class="md-nav__link">
+    Sessions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    Variables
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3#implementation" class="md-nav__link">
+    3 Implementation
+  </a>
+  
+    <nav class="md-nav" aria-label="3 Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clientmaster#and#worker#process" class="md-nav__link">
+    Client、master and worker process
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local#implementation" class="md-nav__link">
+    Local implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed#implementation" class="md-nav__link">
+    Distributed implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#devices" class="md-nav__link">
+    Devices
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tensors" class="md-nav__link">
+    Tensors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#31#single-device#execution" class="md-nav__link">
+    3.1 Single-Device Execution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32#multi-device#execution" class="md-nav__link">
+    3.2 Multi-Device Execution
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2 Multi-Device Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#321#node#placement" class="md-nav__link">
+    3.2.1 Node Placement
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#322#cross-device#communication" class="md-nav__link">
+    3.2.2 Cross-Device Communication
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33#distributed#execution" class="md-nav__link">
+    3.3 Distributed Execution
+  </a>
+  
+    <nav class="md-nav" aria-label="3.3 Distributed Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fault#tolerance" class="md-nav__link">
+    Fault Tolerance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4#extensions" class="md-nav__link">
+    4 Extensions
+  </a>
+  
+    <nav class="md-nav" aria-label="4 Extensions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#41#gradient#computation" class="md-nav__link">
+    4.1 Gradient Computation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#42#partial#execution" class="md-nav__link">
+    4.2 Partial Execution
+  </a>
+  
+    <nav class="md-nav" aria-label="4.2 Partial Execution">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#output#of#a#node" class="md-nav__link">
+    Output of a node
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run#call" class="md-nav__link">
+    Run call
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graph#transformation" class="md-nav__link">
+    Graph transformation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#43#device#constraints" class="md-nav__link">
+    4.3 Device Constraints
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#44#control#flow" class="md-nav__link">
+    4.4 Control Flow
+  </a>
+  
+    <nav class="md-nav" aria-label="4.4 Control Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tags#and#frames" class="md-nav__link">
+    Tags and frames
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#distributed#coordination#mechanism" class="md-nav__link">
+    Distributed coordination mechanism
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control#flow#and#backprog" class="md-nav__link">
+    Control flow and backprog
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#45#input#operations" class="md-nav__link">
+    4.5 Input Operations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#46#queues" class="md-nav__link">
+    4.6 Queues
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#47#containers" class="md-nav__link">
+    4.7 Containers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5#optimizations" class="md-nav__link">
+    5 Optimizations
+  </a>
+  
+    <nav class="md-nav" aria-label="5 Optimizations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#51#common#subexpression#elimination" class="md-nav__link">
+    5.1 Common Subexpression Elimination
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#52#controlling#data#communication#and#memory#usage" class="md-nav__link">
+    5.2 Controlling Data Communication and Memory Usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#53#asynchronous#kernels" class="md-nav__link">
+    5.3 Asynchronous Kernels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#54#optimized#libraries#for#kernel#implementations" class="md-nav__link">
+    5.4 Optimized Libraries for Kernel Implementations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#55#lossy#compression" class="md-nav__link">
+    5.5 Lossy Compression
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6#status#and#experience" class="md-nav__link">
+    6 Status and Experience
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7#common#programming#idioms" class="md-nav__link">
+    7 Common Programming Idioms
+  </a>
+  
+    <nav class="md-nav" aria-label="7 Common Programming Idioms">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data#parallel#training" class="md-nav__link">
+    Data Parallel Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#model#parallel#training" class="md-nav__link">
+    Model Parallel Training
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#concurrent#steps#for#model#computation#pipelining" class="md-nav__link">
+    Concurrent Steps for Model Computation Pipelining
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8#performance" class="md-nav__link">
+    8 Performance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9#tools" class="md-nav__link">
+    9 Tools
+  </a>
+  
+    <nav class="md-nav" aria-label="9 Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#91#tensorboard#visualization#of#graph#structures#and#summary#statistics" class="md-nav__link">
+    9.1 TensorBoard: Visualization of graph structures and summary statistics
+  </a>
+  
+    <nav class="md-nav" aria-label="9.1 TensorBoard: Visualization of graph structures and summary statistics">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#visualization#of#computation#graphs" class="md-nav__link">
+    Visualization of Computation Graphs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualization#of#summary#data" class="md-nav__link">
+    Visualization of Summary Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#92#performance#tracing" class="md-nav__link">
+    9.2 Performance Tracing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10#future#work" class="md-nav__link">
+    10 Future Work
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11#related#work" class="md-nav__link">
+    11 Related Work
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12#conclusions" class="md-nav__link">
+    12 Conclusions
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="tensorflow#large-scale#machine#learning#on#heterogeneous#distributed#systems"><a href="http://download.tensorflow.org/paper/whitepaper2015.pdf">TensorFlow: Large-Scale Machine Learning on Heterogeneous Distributed Systems</a></h1>
+<h2 id="abstract">Abstract</h2>
+<p>TensorFlow [1] is an interface for expressing machine learning algorithms, and an implementation for executing such algorithms. </p>
+<blockquote>
+<p>NOTE: tensorflow既实现了interface（front end）也实现了computation engine（back end），而<a href="https://en.wikipedia.org/wiki/Keras">Keras</a>则仅仅提供interface，而将tensorflow等作为back end。</p>
+</blockquote>
+<p>A computation expressed using TensorFlow can be executed with little or no change on a wide variety of heterogeneous（异构的） systems, ranging from mobile devices such as phones and tablets up to large-scale distributed systems of hundreds of machines and thousands of computational devices such as GPU cards. </p>
+<blockquote>
+<p>NOTE: 显然，tensorflow类似于一个抽象层，通过这个抽象层，我们的algorithm可以运行在heterogeneous system上。</p>
+</blockquote>
+<p>The system is flexible and can be used to express a wide variety of algorithms, including training and inference algorithms for deep neural network models, and it has been used for conducting research and for deploying machine learning systems into production across more than a dozen areas of computer science and other fields, including speech recognition, computer vision, robotics, information retrieval, natural language processing, geographic information extraction, and computational drug discovery. </p>
+<blockquote>
+<p>NOTE: machine learning的广泛应用。</p>
+</blockquote>
+<p>This paper describes the TensorFlow interface and an implementation of that interface that we have built at Google. </p>
+<p>The TensorFlow API and a reference implementation were released as an open-source package under the Apache 2.0 license in November, 2015 and are available at <a href="http://www.tensorflow.org">www.tensorflow.org</a>.</p>
+<h2 id="1#introduction">1 Introduction</h2>
+<p>Based on our experience with DistBelief and a more complete understanding of the desirable system properties and requirements for training and using neural networks, we have built TensorFlow, our second-generation system for the implementation and deployment of large-scale machine learning models. </p>
+<p>TensorFlow takes computations described using a <strong>dataflow-like model</strong> and maps them onto a wide variety of different hardware platforms, ranging from running inference on mobile device platforms such as Android and iOS to modest-sized training and inference systems using single machines containing one or many GPU cards to large-scale training systems running on hundreds of specialized machines with thousands of GPUs. </p>
+<blockquote>
+<p>NOTE: dataflow-like model，其实非常类似于dataflow programming。</p>
+</blockquote>
+<p>Having a single system that can span such a broad range of platforms significantly simplifies the real-world use of machine learning system, as we have found that having separate systems for large-scale training and small-scale deployment leads to significant maintenance burdens and leaky abstractions(泄露的抽象). </p>
+<blockquote>
+<p>NOTE: 统一/abstraction的优势</p>
+</blockquote>
+<p>TensorFlow computations are expressed as <strong>stateful dataflow graphs</strong> (described in more detail in Section 2), and we have focused on making the system both flexible enough for quickly experimenting with new models for research purposes and sufficiently high performance and robust for production training and deployment of machine learning models. </p>
+<p>For scaling neural network training to larger deployments, TensorFlow allows clients to easily express various kinds of <strong>parallelism</strong> through replication and parallel execution of a <strong>core model dataflow graph</strong>, with many different computational devices all collaborating to update a set of <strong>shared parameters</strong> or other <strong>state</strong>. Modest changes in the description of the computation allow a wide variety of different approaches to parallelism to be achieved and tried with low effort [14, 29, 42]. Some TensorFlow uses allow some flexibility in terms of the consistency of parameter updates, and we can easily express and take advantage of these relaxed synchronization requirements in some of our larger deployments. Compared to DistBelief, TensorFlow’s programming model is more flexible, its performance is significantly better, and it supports training and using a broader range of models on a wider variety of heterogeneous hardware platforms</p>
+<blockquote>
+<p>NOTE: 这一段作者所要表达的核心思想是：如果将tensorflow的interface看做是一门programming language，这个programming language是flexible、expressive的。使用它，client能够轻松地表述各种parallelism。</p>
+<p>需要注意的是，tensorflow的设计者是将它定位为“Large-Scale Machine Learning on Heterogeneous Distributed Systems”，所以在上面这段话中，<strong>parallelism</strong> 、<strong>consistency</strong> 等**distributed computing**领域的术语是不足为奇的。关于**distributed computing**此，参见工程parallel computing。</p>
+</blockquote>
+<p>Although these applications have concentrated on machine learning and deep neural networks in particular, we expect that TensorFlow’s <strong>abstractions</strong> will be useful in a variety of other domains, including other kinds of machine learning algorithms, and possibly other kinds of <strong>numerical computations</strong>. </p>
+<blockquote>
+<p>NOTE: tensorflow的本质是一个numerical computation framework。</p>
+</blockquote>
+<p>The rest of this paper describes TensorFlow in more detail. </p>
+<p>Section 2 describes the <strong>programming model</strong> and basic concepts of the TensorFlow interface.</p>
+<p>Section 3 describes both our <strong>single machine</strong> and <strong>distributed implementations</strong>. </p>
+<p>Section 4 describes several extensions to the basic programming model.</p>
+<p>Section 5 describes several optimizations to the basic implementations. </p>
+<p>Section 6 describes some of our experiences in using TensorFlow.</p>
+<p>Section 7 describes several <strong>programming idioms</strong> we have found helpful when using TensorFlow.</p>
+<p>Section 9 describes several auxiliary tools we have built around the core TensorFlow system. </p>
+<p>Sections 10 and 11 discuss future and related work, respectively.</p>
+<p>Section 12 offers concluding thoughts.</p>
+<h2 id="2#programming#model#and#basic#concepts">2 Programming Model and Basic Concepts</h2>
+<p>A TensorFlow computation is described by a directed <strong><em>graph</em></strong>, which is composed of a set of <strong><em>nodes</em></strong>. The graph represents a <strong>dataflow computation</strong>, with extensions for allowing some kinds of nodes to maintain and update <strong>persistent state</strong>（<code>tf.Variable</code>） and for <strong>branching</strong> and <strong>looping</strong> control structures within the graph in a manner similar to Naiad <a href="http://research.microsoft.com:8082/pubs/201100/naiad_sosp2013.pdf">[36]</a>. Clients typically construct a <strong>computational graph</strong> using one of the supported <strong>front end</strong> languages (<code>C++</code> or Python). An example fragment to construct and then execute a TensorFlow graph using the Python front end is shown in Figure 1, and the resulting computation graph
+in Figure 2.</p>
+<blockquote>
+<p>NOTE: 需要注意的是， TensorFlow的computation model是借鉴的<a href="https://www.microsoft.com/en-us/research/project/naiad/">Naiad</a> 。</p>
+<p>在</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="mi">100</span><span class="p">]))</span> <span class="c1"># 100-d vector, init to zeroes</span>
+<span class="n">W</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">random_uniform</span><span class="p">([</span><span class="mi">784</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 784x100 matrix w/rnd vals</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span> <span class="c1"># Placeholder for input</span>
+<span class="n">relu</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="c1"># Relu(Wx+b)</span>
+<span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span><span class="p">]</span> <span class="c1"># Cost computed as a function</span>
+<span class="c1"># of Relu</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="nb">input</span> <span class="o">=</span> <span class="o">...</span><span class="n">construct</span> <span class="mi">100</span><span class="o">-</span><span class="n">D</span> <span class="nb">input</span> <span class="n">array</span> <span class="o">...</span> <span class="c1"># Create 100-d vector for input</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="nb">input</span><span class="p">})</span> <span class="c1"># Fetch cost, feeding x=input</span>
+    <span class="nb">print</span> <span class="n">step</span><span class="p">,</span> <span class="n">result</span>
+</code></pre></div>
+<p><img alt="" src="../Figure-2-Corresponding-computation-graph-for-Figure-1.jpg" /></p>
+<p>Figure 2: Corresponding computation graph for Figure 1</p>
+<blockquote>
+<p>NOTE: 正如这个图片中所展示的，<code>b</code>、<code>W</code>、<code>X</code>都是node；</p>
+</blockquote>
+<p>In a TensorFlow graph, each <strong><em>node</em></strong> has zero or more inputs and zero or more outputs, and represents the instantiation of an <strong><em>operation</em></strong>. Values that flow along normal edges in the graph (from outputs to inputs) are <strong><em>tensors</em></strong>, arbitrary dimensionality arrays where the underlying element type is specified or inferred at graph-construction time. </p>
+<h3 id="control#dependencies#edge">Control dependencies edge</h3>
+<p>Special <strong>edges</strong>, called <strong><em>control dependencies</em></strong>, can also exist in the graph: no data flows along such edges, but they indicate that the <strong>source node for the control dependence</strong> must finish executing before the <strong>destination node for the control dependence</strong> starts executing. Since our model includes <strong>mutable state</strong>, <strong>control dependencies</strong> can be used directly by clients to enforce <strong>happens before</strong>
+<strong>relationships</strong>. Our implementation also sometimes inserts <strong>control dependencies</strong> to enforce <strong>orderings</strong> between otherwise independent operations as a way of, for example, controlling the peak memory usage.</p>
+<blockquote>
+<p>NOTE: 上面引入了非常重要的概念：</p>
+<table>
+<thead>
+<tr>
+<th>graph</th>
+<th>tensorflow graph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>node</td>
+<td>operation</td>
+</tr>
+<tr>
+<td>edge</td>
+<td>tensor、 control dependencies</td>
+</tr>
+</tbody>
+</table>
+<p>关于control dependency，参见<code>TensorFlow\API\Python\Building-Graphs\tf.control_dependencies</code>。</p>
+<p>为什么叫control dependencies?</p>
+<p>因为computation graph其实可以看做是dependency graph，它本身描述了dependency关系，control dependencies edge给予了user对dependency 的更多控制。</p>
+</blockquote>
+<h3 id="operations#and#kernels">Operations and Kernels</h3>
+<blockquote>
+<p>NOTE: 本节描述了operation和kernel之间的关系，其实它们的关系非常类似于interface and implementation: operation是interface，kernel是implementation。一个operation是可以有多个kernel的，关于这一点，在haosdent <a href="https://haosdent.gitbooks.io/tensorflow-document/content/how_tos/adding_an_op/">Adding a New Op</a> 中有说明:</p>
+<blockquote>
+<p>Implement the Op in C++. This implementation is called a "kernel", and there can be multiple kernels for different architectures (e.g. CPUs, GPUs) or input / output types.</p>
+</blockquote>
+<p>显然，TensorFlow的实现也是遵循program to interface原则，这样的设计，实现了支持heterogeneous（异构的） systems的特性。</p>
+<p>关于如何add a new op，参见<code>TensorFlow\Guide\Adding-a-New-Op</code>。</p>
+<p>TensorFlow的operation和kernel采用的是registration mechanism，这增加了它的可扩展性。</p>
+</blockquote>
+<p>An <strong><em>operation</em></strong> has a name and represents an <strong>abstract computation</strong> (e.g., “matrix multiply”, or “add”). An operation can have <strong><em>attributes</em></strong>, and all attributes must be provided or inferred at <strong>graph-construction time</strong> in order to instantiate a node to perform the operation. One common use of <strong>attributes</strong> is to make operations polymorphic over different tensor element types (e.g., add of two tensors of type float versus add of two tensors of type int32). </p>
+<p>A <strong><em>kernel</em></strong> is a <strong>particular implementation</strong> of an <strong>operation</strong> that can be run on a particular type of device (e.g., CPU or GPU). A TensorFlow binary defines the sets of <strong>operations</strong> and <strong>kernels</strong> available via a registration mechanism, and this set can be extended by linking in additional operation and/or kernel definitions/registrations. Table 1 shows some of the kinds of <strong>operations</strong> built into the core TensorFlow library.</p>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Element-wise mathematical operations</td>
+<td>Add, Sub, Mul, Div, Exp, Log, Greater, Less, Equal, ...</td>
+</tr>
+<tr>
+<td>Array operations</td>
+<td>Concat, Slice, Split, Constant, Rank, Shape, Shuffle, ...</td>
+</tr>
+<tr>
+<td>Matrix operations</td>
+<td>MatMul, MatrixInverse, MatrixDeterminant, ...</td>
+</tr>
+<tr>
+<td>Stateful operations</td>
+<td>Variable, Assign, AssignAdd, ...</td>
+</tr>
+<tr>
+<td>Neural-net building blocks</td>
+<td>SoftMax, Sigmoid, ReLU, Convolution2D, MaxPool, ...</td>
+</tr>
+<tr>
+<td>Checkpointing operations</td>
+<td>Save, Restore</td>
+</tr>
+<tr>
+<td>Queue and synchronization operations</td>
+<td>Enqueue, Dequeue, MutexAcquire, MutexRelease, ...</td>
+</tr>
+<tr>
+<td>Control flow operations</td>
+<td>Merge, Switch, Enter, Leave, NextIteration</td>
+</tr>
+</tbody>
+</table>
+<p>Table 1: Example TensorFlow operation types</p>
+<blockquote>
+<p>NOTE: tensorflow是一个distributed system，所以它提供了”Queue and synchronization operations“</p>
+<p>NOTE: 训练数据需要流经整个网络，我们需要对训练数据执行一定的运算；训练数据可能会和weight，bias等进行运算，显然weight和bias等是和训练数据不同的，它们是需要由模型来进行学习的，在具体编码的时候，训练数据往往使用<code>tf.placeholder</code>来表示，而weight和bias等则是使用<code>tf.Variable</code>来表示；理解两者最最简单的方式是实现一个MLP；</p>
+</blockquote>
+<h3 id="sessions">Sessions</h3>
+<p>Clients programs interact with the TensorFlow system by creating a <strong><em>Session</em></strong>. To create a <strong>computation graph</strong>, the Session interface supports an <strong><code>Extend</code></strong> method to augment（扩展） the current graph managed by the session with additional nodes and edges (the initial graph when a session is created is empty). The other primary operation supported by the session interface is <strong><code>Run</code></strong>, which takes a set of output names that need to be computed, as well as an optional set of <strong>tensors</strong> to be fed into the graph in place of certain outputs of nodes. Using the arguments to <code>Run</code>, the TensorFlow implementation can compute the <strong>transitive closure</strong> of all nodes that must be executed in order to compute the outputs that were requested, and can then arrange to execute the appropriate nodes in an order that respects their dependencies (as described in more detail in 3.1). Most of our uses of TensorFlow set up a Session with a graph once, and then execute the full graph or a few distinct subgraphs thousands or millions of times via Run calls.</p>
+<blockquote>
+<p>NOTE: tensorflow的computation graph其实也可以看做是一个dependency graph，显然最终的输出节点是依赖于所有流向它的输入tensor的，而这些tensor又进一步依赖于流入它的tensor的，显然这种dependency关系是transitive的，也就是为了计算出output，需要计算出所有的transitive closure。这就是在graph theory中总结的dependency model。关于TensorFlow core是如何执行computation graph的，在后面的:</p>
+<ul>
+<li>3.1 Single-Device Execution</li>
+<li>3.2 Multi-Device Execution</li>
+<li>3.3 Distributed Execution</li>
+</ul>
+<p>第一次阅读这一段的时候，我想到了在《<a href="https://dengking.github.io/compiler-principle/">compile principle</a>》</p>
+<ul>
+<li>
+<p>4.6 Introduction to LR Parsing: Simple LR<a href="https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/#46-introduction-to-lr-parsing-simple-lr">#</a></p>
+</li>
+<li>
+<p>5.2 Evaluation Orders for SDD's<a href="https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/#52-evaluation-orders-for-sdds">#</a></p>
+</li>
+</ul>
+<p>NOTE: 关于Sessions，参见haosdent <a href="https://haosdent.gitbooks.io/tensorflow-document/content/api_docs/python/client.html">Running Graphs</a>。</p>
+</blockquote>
+<h3 id="variables">Variables</h3>
+<p>In most computations a graph is executed multiple times. Most tensors do not survive past a single execution of the graph. However, a Variable is a special kind of operation that returns a handle to a persistent mutable tensor that survives across executions of a graph. Handles to these persistent mutable tensors can be passed to a handful of special operations, such as Assign and <code>AssignAdd</code> (equivalent to <code>+=</code>) that mutate the referenced tensor. For machine learning applications of TensorFlow, the parameters of the model are typically stored in tensors held in variables, and are updated as part of the Run of the training graph for the model.</p>
+<h2 id="3#implementation">3 Implementation</h2>
+<h3 id="clientmaster#and#worker#process">Client、master and worker process</h3>
+<p>The main components in a TensorFlow system are the <strong><em>client</em></strong>, which uses the Session interface to communicate with the <strong><em>master</em></strong>, and one or more <strong><em>worker processes</em></strong>, with each worker process responsible for arbitrating（仲裁） access to one or more computational devices (such as CPU cores or GPU cards) and for executing graph nodes on those devices as instructed by the master. </p>
+<blockquote>
+<p>NOTE: client和master进行communicate，master instruct(通知、指挥) worker process在computational device上执行graph nodes。</p>
+<p>关于它们，参见下面的figure3。</p>
+<p>关于worker process和device之间的关系，参见下面的device章节。</p>
+</blockquote>
+<p>We have both <strong><em>local</em></strong> and <strong><em>distributed</em></strong> implementations of the TensorFlow interface. </p>
+<p><img alt="" src="../Figure-3-Single-machine-and-distributed-system-structure.jpg" /></p>
+<h3 id="local#implementation">Local implementation</h3>
+<p>The <strong>local implementation</strong> is used when the client, the master, and the worker all run on a single machine in the context of a single operating system process (possibly with multiple devices, if for example, the machine has many GPU cards installed). </p>
+<h3 id="distributed#implementation">Distributed implementation</h3>
+<p>The <strong>distributed implementation</strong> shares most of the code with the local implementation, but extends it with support for an environment where the client, the master, and the workers can all be in different processes on different machines. In our distributed environment, these different tasks are containers in jobs managed by a <strong>cluster scheduling system</strong> [51]. These two different modes are illustrated in Figure 3. </p>
+<p>Most of the rest of this section discusses issues that are common to both implementations, while Section 3.3 discusses some issues that are particular to the distributed implementation.</p>
+<h3 id="devices">Devices</h3>
+<p>Devices are the computational heart of TensorFlow. Each worker is responsible for one or more devices, and each device has a <strong>device type</strong>, and a <strong>name</strong>. <strong>Device names</strong> are composed of pieces that identify the <strong>device’s type</strong>, the device’s index within the worker, and, in our distributed setting, an identification of the job and task of the worker (or localhost for the case where the devices are local to the process). Example device names are"<code>/job:localhost/device:cpu:0</code>"or "<code>/job:worker/task:17/device:gpu:3</code>". </p>
+<p>We have implementations of our Device interface for CPUs and GPUs, and new device implementations for other device types can be provided via a registration mechanism. Each device object is responsible for managing allocation and deallocation of device memory, and for arranging for the execution of any kernels that are requested by higher levels in the TensorFlow implementation.</p>
+<h3 id="tensors">Tensors</h3>
+<p>A tensor in our implementation is a typed, multi-dimensional array. We support a variety of tensor element types, including signed and unsigned integers ranging in size from 8 bits to 64 bits, IEEE float and double
+types, a complex number type, and a string type (an arbitrary byte array). Backing store of the appropriate size is managed by an allocator that is specific to the device on which the tensor resides. Tensor backing store buffers are reference counted and are deallocated when no references remain.</p>
+<h3 id="31#single-device#execution">3.1 Single-Device Execution</h3>
+<p>Let’s first consider the simplest execution scenario: a single <strong>worker process</strong> with a <strong>single device</strong>. The nodes of the graph are executed in an order that respects the <strong>dependencies</strong> between nodes. In particular, we keep track of a <strong>count</strong> per node of the number of dependencies of that node that have not yet been executed. Once this count drops to zero, the node is eligible(合格) for execution and is added to a <strong>ready queue</strong>. </p>
+<p>The <strong>ready queue</strong> is processed in some unspecified order, delegating execution of the kernel for a node to the device object. When a node has finished executing, the counts of all nodes that depend on the completed node are decremented.</p>
+<blockquote>
+<p>NOTE: 从上面两段描述来，TensorFlow的execution算法如下:</p>
+<p>1) 首先根据dependency关系进行拓扑排序，需要注意的是，只能够得到partial order，无法得到total order，也就是说，存在一些node，它们的execution order是无法确定的。这一步所得到的只是静态顺序，真实的执行顺序，还依赖于具体的执行情况</p>
+<p>2) 每个node完成执行后，则它的所有的child nodes的count都需要decrease 1。一旦一个node的dependency都满足了，则它就eligible for execution了，就将它放到ready queue中。</p>
+</blockquote>
+<h3 id="32#multi-device#execution">3.2 Multi-Device Execution</h3>
+<p>Once a system has multiple devices, there are two main complications: </p>
+<p>1) deciding which device to place the computation for each node in the graph</p>
+<p>2) and then managing the required communication of data across device boundaries implied by these placement decisions. </p>
+<p>This subsection discusses these two issues.</p>
+<h4 id="321#node#placement">3.2.1 Node Placement</h4>
+<blockquote>
+<p>NOTE: TensorFlow使用place algorithm来安排node placement，这个algorithm的输入有:</p>
+<p>1) cost model</p>
+<p>2) nodes</p>
+<p>3) <strong>feasible devices</strong> </p>
+<p>输出是: 将哪些nodes放到哪个device上进行执行，放到同一个device的nodes形成了一个subgraph，显然这个结果就是将原computation graph分割为了一些列subgraph。这就引出了这些subgraph之间的Cross-Device Communication问题，这在"3.2.2 Cross-Device Communication"中进行了介绍。</p>
+</blockquote>
+<p>Given a computation graph, one of the main responsibilities of the TensorFlow implementation is to map the computation onto the set of available devices. A simplified version of this algorithm is presented here. See Section 4.3 for extensions supported by this algorithm.</p>
+<p>One input to the <strong>placement algorithm</strong> is a <strong>cost model</strong>, which contains estimates of the sizes (in bytes) of the input and output tensors for each graph <strong>node</strong>, along with estimates of the computation time required for each <strong>node</strong> when presented with its input tensors. This <strong>cost model</strong> is either statically estimated based on heuristics associated with different <strong>operation types</strong>, or is measured based on an actual set of placement decisions for earlier executions of the graph. </p>
+<blockquote>
+<p>NOTE: </p>
+</blockquote>
+<p>The placement algorithm first runs a simulated execution of the graph. The simulation is described below and ends up picking a device for each node in the graph using <strong>greedy heuristics</strong>. The node to device placement generated by this simulation is also used as the placement for the real execution.</p>
+<p>The <strong>placement algorithm</strong> starts with the sources of the <strong>computation graph</strong>, and simulates the activity on each device in the system as it progresses. For each node that is reached in this traversal, the set of <strong>feasible devices</strong> is considered (a device may not be feasible if the device does not provide a kernel that implements the particular operation). For nodes with multiple feasible devices, the <strong>placement algorithm</strong> uses a <strong>greedy heuristic</strong> that examines the effects on the completion time of the node of placing the node on each possible device. This heuristic takes into account the estimated or measured execution time of the operation on that kind of device from the <strong>cost model</strong>, and also includes the costs of any communication that would be introduced in order to transmit inputs to this node from other devices to the considered device. </p>
+<blockquote>
+<p>NOTE: 思考：source of computation graph是computation graph的哪一端？</p>
+<p>上面这一段所描述的是“The placement algorithm first runs a simulated execution of the graph”，即“simulation ”</p>
+</blockquote>
+<p>The device where the node’s operation would finish the soonest is selected as the device for that operation, and the placement process then continues onwards to make placement decisions for other nodes in the graph, including downstream nodes that are now ready for their own simulated execution. Section 4.3 describes some extensions that allow users to provide hints and partial constraints to guide the <strong>placement algorithm</strong>. The placement algorithm is an area of ongoing development within the system.</p>
+<h4 id="322#cross-device#communication">3.2.2 Cross-Device Communication</h4>
+<p>Once the node placement has been computed, the graph is partitioned into a set of subgraphs, one per device. Any cross-device edge from x to y is removed and replaced by an edge from x to a new <strong>Send node</strong> in x’s subgraph and an edge from a corresponding <strong>Receive node</strong> to y in y’s subgraph. See Figure 4 for an example of this graph transformation.</p>
+<p><img alt="" src="../Figure-4-Before-and-after-insertion-of-Send-Receive-nodes.jpg" /></p>
+<p>At runtime, the implementations of the <strong>Send</strong> and <strong>Receive nodes</strong> coordinate to transfer data across devices. This allows us to isolate all communication inside <strong>Send</strong> and <strong>Receive</strong> implementations, which simplifies the rest of the runtime. </p>
+<blockquote>
+<p>NOTE: 由send node和receive node来实现cross-device communication。在同一个subgraph内的所有node之间的tensor flow是不经过send node和receive node的。这就是上面这段话的最后一句: "This allows us to isolate all communication inside <strong>Send</strong> and <strong>Receive</strong> implementations"的含义。</p>
+</blockquote>
+<p>When we insert <strong>Send</strong> and <strong>Receive</strong> nodes, we canonicalize（规范化转换） all users of a particular tensor on a particular device to use a single <strong>Receive node</strong>, rather than one Receive node per downstream user on a particular device. This ensures that the data for the needed tensor is only transmitted once between a source (device → destination device pair), and that memory for the tensor on the destination device is only allocated once, rather than multiple times (e.g., see nodes <code>b</code> and <code>c</code> in Figure 4) </p>
+<blockquote>
+<p>NOTE: 上面这段话可以这样来进行简单理解: 每个subgraph只有一个receive node，这样做的好处有:</p>
+<p>1) 不同的subgraph之间只需要一次cross-device transfer</p>
+<p>2) 下面这一段描述了另外一个好处，它的大致意思是:</p>
+<p>这样的设计能够让TensorFlow将"<strong>scheduling</strong> of individual nodes of the graph on different devices"(核心词语是**scheduling**)分散到各个worker，即而不是由master负责全部的node的调度，关于这一点，原文中使用的是"decentralized"这个词语，原文对它的具体解释是: </p>
+<p>the Send and Receive nodes impart(传授) the necessary <strong>synchronization</strong> between different workers and devices, and the master only needs to issue a single <strong>Run request</strong> per graph execution to each worker that has any nodes for the graph</p>
+<p>这样做的优势是: 相比于由master负责全部的node的调度，这种做法能够使系统更加scalable、allows much finer-granularity node executions 。</p>
+</blockquote>
+<p>By handling communication in this manner, we also allow the scheduling of individual nodes of the graph on different devices to be decentralized into the workers: the Send and Receive nodes impart(传授) the necessary <strong>synchronization</strong> between different workers and devices, and the master only needs to issue a single <strong>Run request</strong> per graph execution to each worker that has any nodes for the graph, rather than being involved in the scheduling of every node or every cross-device communication. This makes the system much more scalable and allows much finer-granularity node executions than if the scheduling were forced to be done by the master.</p>
+<h3 id="33#distributed#execution">3.3 Distributed Execution</h3>
+<p>Distributed execution of a graph is very similar to multidevice execution. After device placement, a subgraph is created per device. Send/Receive node pairs that communicate across worker processes use remote communication mechanisms such as TCP or RDMA to move data across machine boundaries.</p>
+<blockquote>
+<p>NOTE: 这些workerprocess位于不同的machine，所以需要通过network进行communicate。</p>
+</blockquote>
+<h4 id="fault#tolerance">Fault Tolerance</h4>
+<p>Failures in a distributed execution can be detected in a variety of places. The main ones we rely on are </p>
+<p>(a) an error in a communication between a Send and Receive node pair, and </p>
+<p>(b) periodic health-checks from the master process to every worker process. </p>
+<p>When a failure is detected, the entire graph execution is aborted and restarted from scratch. Recall however that Variable nodes refer to tensors that persist across executions of the graph. We support consistent checkpointing and recovery of this state on a restart. In partcular, each <strong>Variable node</strong> is connected to a <strong>Save node</strong>. These Save nodes are executed periodically, say once every N iterations, or once every N seconds. When they execute, the contents of the variables are written to persistent storage, e.g., a distributed file system. Similarly each Variable is connected to a <strong>Restore node</strong> that is only enabled in the first iteration after a restart. See Section 4.2 for details on how some nodes can only be enabled on some executions of the graph.</p>
+<blockquote>
+<p>NOTE: 原文本段主要讨论TensorFlow的fault Tolerance；其中非常重要的一点是TensorFlow variable的实现。Variable node的特性是: 在图的执行过程中保持不变，即它是state，在前面的论述中已经使用了state这个词语。显然为了支持variable的特性，TensorFlow需要进行特殊的实现:</p>
+<p>1) consistent checkpoint</p>
+<p>2) recover</p>
+<p>上面这段话的后半段描述了TensorFlow内部对variable的实现: </p>
+<p>每个**Variable node**被连接到一个**Save node**。这些**Save node**被周期性地执行。当它们执行时，variable的内容被写入持久存储，例如，一个分布式文件系统。</p>
+<p>每个**Variable node**都连接到一个**Restore node** ，该节点仅在重启后的第一次迭代中启用。</p>
+</blockquote>
+<h2 id="4#extensions">4 Extensions</h2>
+<p>In this section we describe several more advanced features of the basic programming model that was introduced in Section 2.</p>
+<h3 id="41#gradient#computation">4.1 Gradient Computation</h3>
+<blockquote>
+<p>NOTE: 其实就是反向传播算法。在deep learning book的"6.5.5 Symbol-to-Symbol Derivatives"中，已经介绍了TensorFlow Gradient Computation的思路了，deep learning book中将这种思路称为Symbol-to-Symbol Derivatives: </p>
+<p>Another approach is to take a <strong>computational graph</strong> and add additional nodes to the graph that provide a <strong>symbolic description</strong> of the desired derivatives. This is the approach taken by Theano (Bergstra et al., 2010; Bastien et al., 2012) and <strong>TensorFlow</strong> (Abadi et al., 2015). An example of how this approach works is illustrated in figure 6.10. </p>
+<p>The primary advantage of this approach is that the derivatives are described in the same language as the original expression. Because the derivatives are just another computational graph, it is possible to run back-propagation again, differentiating the derivatives in order to obtain higher derivatives. </p>
+<p>Computation of higher-order derivatives is described in section 6.5.10.</p>
+</blockquote>
+<p>Many optimization algorithms, including common machine learning training algorithms like <strong>stochastic gradient descent</strong> [45], compute the <strong>gradient</strong> of a cost function with respect to a set of inputs. Because this is such a common need, TensorFlow has built-in support for <strong>automatic gradient computation</strong>. If a tensor <code>C</code> in a TensorFlow graph depends, perhaps through a complex subgraph of operations, on some set of tensors <code>{X k }</code>, then there is a built-in function that will return the tensors <code>{dC/dX k }</code>（这就是gradient）. <strong>Gradient tensors</strong> are computed, like other tensors, by extending the <strong>TensorFlow graph</strong>, using the following procedure.</p>
+<p>When TensorFlow needs to compute the gradient of a tensor <code>C</code> with respect to some tensor <code>I</code> on which <code>C</code>
+depends, it first finds the path in the computation graph from <code>I</code> to <code>C</code>. Then it backtracks from <code>C</code> to <code>I</code>, and for each operation on the <strong>backward path</strong> it adds a <strong>node</strong> to the TensorFlow graph, composing the <strong>partial gradients</strong> along the <strong>backwards path</strong> using the <strong>chain rule</strong>. The newly added node computes the “<strong>gradient function</strong>” for the corresponding operation in the <strong>forward path</strong>. </p>
+<blockquote>
+<p>NOTE: 每个operation对应的是一个node、一个function，它的求导函数是已知的。TensorFlow新增的为了计算gradient的node实现了gradient function的功能。</p>
+</blockquote>
+<p>A <strong>gradient function</strong> may be registered by any operation. This function takes as input not only the partial gradients computed already along the backward path, but also, optionally, the inputs and outputs of the <strong>forward operation</strong>. Figure 5 shows gradients for a cost computed from the example of Figure 2. Grey arrows show potential inputs to <strong>gradient functions</strong> that are not used for the particular operations shown. The addition needed to Figure 1 to compute these gradients is:</p>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="n">db</span><span class="p">,</span><span class="n">dW</span><span class="p">,</span><span class="n">dx</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tf</span><span class="err">.</span><span class="n">gradients</span><span class="p">(</span><span class="n">C</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">b</span><span class="p">,</span><span class="n">W</span><span class="p">,</span><span class="n">x</span><span class="p">])</span><span class="w"></span>
+</code></pre></div>
+<p><img alt="" src="../Figure-5-Gradients-computed-for-graph-in-Figure-2.jpg" /></p>
+<p>In general an operation may have multiple outputs, and <code>C</code> may only depend on some of them. If, for example, operation <code>O</code> has two outputs <code>y1</code> and <code>y2</code>, and <code>C</code> only depends on <code>y2</code>, then the first input to <code>O</code>’s gradient function is set to 0 since <code>dC=dy1 = 0</code>.</p>
+<p><strong>Automatic gradient computation</strong> complicates optimization, particularly of memory usage. When executing “forward” computation subgraphs, i.e., those that are explicitly constructed by the user, a sensible heuristic breaks ties when deciding which node to execute next by observing the order in which the graph was constructed.</p>
+<blockquote>
+<p>翻译: 自动梯度计算使优化复杂化，特别是内存的使用。当执行“正向”计算子图时，也就是那些由用户显式构造的子图时，一个合理的启发式通过观察图的构造顺序来决定接下来执行哪个节点。</p>
+<p>理解上面这段话的重点是理解"breaks ties"，记得之前遇到过这个词语，它的意思是: 打破僵局</p>
+<p>NOTE: forward computation subgraph是由user显式构造的；backward computation subgraph是TensorFlow隐式构造的；</p>
+</blockquote>
+<p>This generally means that temporary outputs are consumed soon after being constructed, so their memory  can be reused quickly. When the heuristic is ineffective, the user can change the order of graph construction, or add <strong>control dependencies</strong> as described in Section 5. When gradient nodes are automatically added to the graph, the user has less control, and the heuristics may break down(发生故障、失效). In particular, because gradients reverse the <strong>forward computation order</strong>, tensors that are used early in a graph’s execution are frequently needed again near the end of a gradient computation. Such tensors can hold on to a lot of scarce GPU memory and unnecessarily limit the size of computations. We are actively working on improvements to memory management to deal better with such cases. Options include using more <strong>sophisticated heuristics</strong> to determine the order of graph execution, recomputing tensors instead of retaining them in memory, and swapping out long-lived tensors from GPU memory to more plentiful host CPU memory.</p>
+<blockquote>
+<p>NOTE: 这段话作者所描述的是在实现反向传播算法时所遇到的难题，作者所描述的难题主要是GPU memory，作者给出的解决方法是:</p>
+<p>1) using more <strong>sophisticated heuristics</strong> to determine the order of graph execution</p>
+<blockquote>
+<p>NOTE: algorithm中的heuristic的设计，貌似是一个比较高深的内容</p>
+</blockquote>
+<p>2) ecomputing tensors instead of retaining them in memory</p>
+<blockquote>
+<p>NOTE: 因为GPU memory是主要矛盾，而GPU computation是非常容易的，所以无需cache。这和我们的寻常认知是相反的</p>
+</blockquote>
+<p>3) swapping out long-lived tensors from GPU memory to more plentiful host CPU memory</p>
+</blockquote>
+<h3 id="42#partial#execution">4.2 Partial Execution</h3>
+<p>Often a client wants to execute just a subgraph of the entire execution graph. To support this, once the client has set up a computation graph in a Session, our <code>Run</code> method allows them to execute an arbitrary subgraph of the whole graph, and to inject arbitrary data along any edge in the graph, and to retrieve data flowing along any edge in the graph.</p>
+<h4 id="output#of#a#node">Output of a node</h4>
+<p>Each node in the graph has a name, and each output of a node is identified by the <strong>source node name</strong> and the <strong>output port</strong> from the node, numbered from 0 (e.g., “<code>bar:0</code>” refers to the 1<sup>st</sup> output of the “<code>bar</code>” node, while “<code>bar:1</code>” refers to the 2<sup>nd</sup> output).</p>
+<blockquote>
+<p>NOTE: output port的含义是什么？使用类比的思想来理解port的含义，在network中，port标识一个service，在TensorFlow中，一个node是可以有多个output的，所以需要标识每个output，这就是port的用途。</p>
+</blockquote>
+<h4 id="run#call"><code>Run</code> call</h4>
+<p>Two arguments to the <code>Run</code> call help define the exact subgraph of the computation graph that will be executed. </p>
+<p>First, the <code>Run</code> call accepts <strong>inputs</strong>, an optional mapping of <code>name:port</code> names to “fed” tensors values. </p>
+<blockquote>
+<p>NOTE: 为什么input中需要指定port？</p>
+</blockquote>
+<p>Second, the <code>Run</code> call accepts <strong><code>output_names</code></strong>, a list of output <code>name[:port]</code> specifications indicating which nodes should be executed, and, if the port portion is present in a name, that that particular output tensor value for the node should be returned to the client if the <code>Run</code> call completes successfully.</p>
+<blockquote>
+<p>NOTE: 显然对于<code>Run</code>而言，最最重要的就是指定input和output</p>
+</blockquote>
+<h4 id="graph#transformation">Graph transformation</h4>
+<p>The graph is transformed based on the values of <strong>inputs</strong> and <strong>outputs</strong>. </p>
+<p>Each <code>node:port</code> specified in inputs is replaced with a <strong>feed node</strong>, which will pick up the provided input tensor from specially-initialized entries in a Rendezvous object used for the Run call. </p>
+<p>Similarly, each output name with a port is connected to a special <strong>fetch node</strong> that arranges to save the <strong>output tensor</strong> and return it to the client when the Run call is complete. </p>
+<p>Finally, once the graph has been rewritten with the insertion of these special <strong>feed</strong> and <strong>fetch</strong> nodes, the set of nodes to execute can be determined by starting at each of the nodes named by any output and working backwards in the graph using the graph dependencies to determine the full set of nodes that must be executed in the rewritten graph in order to compute the outputs. </p>
+<p>Figure 6 shows an original graph on the left, and the transformed graph that results when <code>Run</code> is invoked with <code>inputs==fbg</code> and <code>outputs==ff:0g</code>. Since we only need to compute the output of node <code>f</code>, we will not execute nodes <code>d</code> and <code>e</code>, since they have no contribution to the output of <code>f</code>.</p>
+<p><img alt="" src="../Figure-6-Before-and-after-graph-transformation.png" /></p>
+<h3 id="43#device#constraints">4.3 Device Constraints</h3>
+<p>TensorFlow clients can control the placement of nodes on devices by providing partial constraints for a node about which devices it can execute on. </p>
+<p>For example, “only place this node on a device of type GPU”, or “this node can be placed on any device in <code>/job:worker/task:17</code>”, or “Colocate(共置，即放到一起) this node with the node named <code>variable13</code>”. </p>
+<p>Within the confines of these constraints, the <strong>placement algorithm</strong> is responsible for choosing an assignment of nodes to devices that provides fast execution of the computation and also satisfies various constraints imposed by the devices themselves, such as limiting the total amount of memory needed on a device in order to execute its subset of graph nodes.</p>
+<p>Supporting such constraints requires changes to the <strong>placement algorithm</strong> described in Section 3.2.1. We first compute the feasible set of devices for each node, and then use <strong>union-find</strong> on the graph of colocation constraints to compute the graph components that must be placed together. For each such component, we compute the intersection of the feasible device sets. The computed feasible device set per node fits easily into the placement algorithm’s simulator.</p>
+<blockquote>
+<p>NOTE: 上述描述的算法的内部实现逻辑，比较复杂</p>
+</blockquote>
+<h3 id="44#control#flow">4.4 Control Flow</h3>
+<blockquote>
+<p>NOTE: TensorFlow的control flow operator其实和各种高级语言语言中的control statement本质上是相同的。TensorFlow支持如下类型的control flow:</p>
+<p>1) <strong>conditionals</strong> </p>
+<p>2) <strong>loops</strong> </p>
+</blockquote>
+<p>Although dataflow graphs without any explicit <strong>control flow</strong> are quite expressive, we have observed a number of cases where supporting <strong>conditionals</strong> and <strong>loops</strong> can lead to more concise and efficient representations of machine learning algorithms.</p>
+<p>Much as in the <strong>dataflow-machine</strong> approach described by Arvind [3], we introduce a small set of primitive <strong>control flow operators</strong> into TensorFlow and generalize TensorFlow to handle cyclic dataflow graphs. </p>
+<p>The <code>Switch</code> and <code>Merge</code> operators allow us to skip the execution of an entire subgraph based on the value of a boolean tensor.</p>
+<p>The <code>Enter</code>, <code>Leave</code>, and <code>NextIteration</code> operators allow us to express iteration. </p>
+<p>High-level programming constructs such as if-conditionals and while-loops can be easily compiled into dataflow graphs with these control flow operators.</p>
+<h4 id="tags#and#frames">Tags and frames</h4>
+<p>The TensorFlow runtime implements a notion of <strong>tags</strong> and <strong>frames</strong> conceptually similar to the MIT Tagged-
+Token machine [4]. Each iteration of a loop is uniquely identified by a <strong>tag</strong>, and its <strong>execution state</strong> is represented by a <strong>frame</strong>. An input can enter an iteration whenever it becomes available; thus, multiple iterations can be executed concurrently.</p>
+<h4 id="distributed#coordination#mechanism">Distributed coordination mechanism</h4>
+<p>TensorFlow uses a <strong>distributed coordination mechanism</strong> to execute graphs with <strong>control flow</strong>. In general, a loop can contain nodes that are assigned to many different devices. Therefore, managing the state of a loop becomes a problem of <strong>distributed termination detection</strong>. TensorFlow’s solution is based on <strong>graph rewriting</strong>. During the graph partitioning, we automatically add <strong>control nodes</strong> to each <strong>partition</strong>. These nodes implement a small <strong>state machine</strong> that orchestrates(把…协调地结合起来) the start and termination
+of each iteration, and decides the termination of the loop. For each iteration, the device that owns the loop termination predicate sends a tiny control message to every participating device.</p>
+<h4 id="control#flow#and#backprog">Control flow and backprog</h4>
+<p>As explained above, we often train machine learning models by <strong>gradient descent</strong>, and represent gradient computations as part of dataflow graphs. When a model includes control-flow operations, we must account for them in the corresponding gradient computation. </p>
+<p>For example, the gradient computation for a model with an if-conditional will need to know which branch of the conditional was taken, then apply the gradient logic to this branch. Similarly, the gradient computation for a model with a while-loop will need to know how many iterations were taken, and will also rely on the intermediate values computed during those iterations. The basic technique is to rewrite the graph so to memorize the values needed for the gradient computation. We omit the somewhat intricate(复杂的) details of this encoding.</p>
+<h3 id="45#input#operations">4.5 Input Operations</h3>
+<p>Although input data can be provided to a computation via <strong>feed</strong> nodes, another common mechanism used for training large-scale machine learning models is to have special input operation nodes in the graph, which are typically configured with a set of filenames and which yield a tensor containing one or more examples from the data stored in that set of files each time they are executed. This allows data to be read directly from the underlying storage system into the memory of the machine that will perform subsequent processing on the data. In configurations where the client process is separate from the worker process, if the data were fed, it typically would require an extra network hop (from the storage system to the client
+and then from the client to the worker vs. directly from the storage system to ther worker when using an input node).</p>
+<blockquote>
+<p>NOTE: 主要讨论的是big data的feed问题。</p>
+</blockquote>
+<h3 id="46#queues">4.6 Queues</h3>
+<p>Queues are a useful feature that we have added to TensorFlow. They allow different portions of the graph to execute asynchronously, possibly at different candences, and to hand off data through <code>Enqueue</code> and <code>Dequeue</code> operations. </p>
+<p><code>Enqueue</code> operations can block until space becomes available in the queue, and <code>Dequeue</code> operations can block until a desired minimum number of elements are available in the queue. </p>
+<p>One use of queues is to allow input data to be prefetched from disk files while a previous batch of data is still being processed by the computational portion of a machine learning model. They can also be used for other kinds of grouping, including accumulating many gradients in order to compute some more complex combination of gradients over a larger batch, or to group different input sentences for recurrent language
+models into bins of sentences that are approximately the same length, which can then be processed
+more efficiently.</p>
+<p>In addition to normal FIFO queues, we have also implemented a shuffling queue, which randomly shuffles its elements within a large in-memory buffer. This shuffling functionality is useful for machine learning algorithms that want to randomize the order in which they process examples, for example.</p>
+<h3 id="47#containers">4.7 Containers</h3>
+<p>A Container is the mechanism within TensorFlow for managing longer-lived mutable state. The backing store for a <strong>Variable</strong> lives in a <strong>container</strong>. The default container is one that persists until the process terminates, but we also allow other named containers. A container can be reset by clearing it of its contents entirely. Using containers, it is possible to share state even across completely disjoint computation graphs associated with different Sessions.</p>
+<h2 id="5#optimizations">5 Optimizations</h2>
+<blockquote>
+<p>NOTE: 这一节所描述的TensorFlow实现层面的优化，不是machine learning中的optimization。</p>
+</blockquote>
+<p>In this section, we describe some of the optimizations in the TensorFlow implementation that improve performance or resource usage of the system.</p>
+<h3 id="51#common#subexpression#elimination">5.1 Common Subexpression Elimination</h3>
+<blockquote>
+<p>NOTE: 这是compiler principle中最最常用的一种手段</p>
+</blockquote>
+<p>Since the construction of computation graphs is often done by many different layers of abstractions in the client code, computation graphs can easily end up with redundant copies of the same computation. To handle this, we have implemented a common subexpression pass similar to the algorithm described by Click [<a href="https://courses.cs.washington.edu/courses/cse501/06wi/reading/click-pldi95.pdf">12</a>] that runs over the <strong>computation graph</strong> and canonicalizes multiple copies of operations with identical inputs and operation types to just a single one of these nodes, and redirects graph edges appropriately to reflect this canonicalization（标准化）.</p>
+<h3 id="52#controlling#data#communication#and#memory#usage">5.2 Controlling Data Communication and Memory Usage</h3>
+<blockquote>
+<p>NOTE: 本段标题已经总结得非常好了: 通过控制data communication和memory usage来实现optimization。</p>
+</blockquote>
+<h3 id="53#asynchronous#kernels">5.3 Asynchronous Kernels</h3>
+<p>In addition to normal synchronous kernels that complete their execution at the end of the <code>Compute</code> method, our framework also supports <strong>non-blocking kernels</strong>. Such <strong>non-blocking kernels</strong> use a slightly different interface whereby the <code>Compute</code> method is passed a <strong>continuation</strong> that should be invoked when the kernel’s execution is complete. This is an optimization for environments where having many active threads is relatively expensive in terms of memory usage or other resources, and allows us to avoid tying up an execution thread for unbounded periods of time while waiting for I/O or other events to occur. </p>
+<blockquote>
+<p>NOTE: 最后一段描述了使用asynchronous kernel的原因，可以这样理解: 使用non-blocking kernel，我们可以只使用一个thread来处理很多的事情，因为当I/O未完成的时候、期待的event未发生的时候，thread是可以不阻塞的，可以去做其他的事情；这种做法非常类似于<code>epoll</code>等IO multiplex。</p>
+</blockquote>
+<p>Examples of asynchronous kernels include the <code>Receive</code> kernel, and the <code>Enqueue</code> and <code>Dequeue</code> kernels
+(which might need to block if queue space is not available or if no data is available to be read, respectively).</p>
+<h3 id="54#optimized#libraries#for#kernel#implementations">5.4 Optimized Libraries for Kernel Implementations</h3>
+<p>We often make use of pre-existing highly-optimized numerical libraries to implement kernels for some operations. For example, there are a number of optimized libraries for performing matrix multiplies on different devices including BLAS [15] and cuBLAS [39], or GPU libraries for convolutional kernels for deep neural nets such as cuda-convnet [28] and cuDNN [9]. Many of our kernel implementations are relatively thin wrappers around such optimized libraries.</p>
+<p>We make fairly extensive use of the open-source Eigen linear algebra library [25] for many of the kernel implementations in the system. As one part of the development of TensorFlow, our team (primarily Benoit Steiner) has extended the open source Eigen library with support for arbitrary dimensionality tensor operations.</p>
+<h3 id="55#lossy#compression">5.5 Lossy Compression</h3>
+<blockquote>
+<p>NOTE: 含义是: 有损压缩</p>
+</blockquote>
+<p>Some machine learning algorithms, including those typically used for training neural networks, are tolerant of noise and reduced precision arithmetic. In a manner similar to the DistBelief system [14], we often use <strong>lossy compression</strong> of higher precision internal representations when sending data between devices (sometimes within the same machine but especially across machine boundaries).</p>
+<p>For example, we often insert special conversion nodes that convert 32-bit floating point representations
+into a 16-bit floating point representation (not the proposed IEEE 16-bit floating point standard, but rather just a 32-bit IEEE 794 float format, but with 16 bits less precision in the mantissa), and then convert back to a 32-bit representation on the other side of the communication channel (by just filling in zeroes for the lost portion of the mantissa, since that’s less computationally expensive than doing the mathematically correct probabilistic rounding when doing this 32 -16 - 32-bit conversion).</p>
+<h2 id="6#status#and#experience">6 Status and Experience</h2>
+<p>The TensorFlow interface and a reference implementation have been open sourced under an Apache 2.0
+license, and the system is available for download at <a href="http://www.tensorflow.org">www.tensorflow.org</a>. The system includes detailed documentation, a number of tutorials, and a number of examples demonstrating how to use the system for a variety of different machine learning tasks. The examples include models for classifying hand-written digits from the MNIST dataset (the “hello world” of machine learning algorithms) [32], classifying images from the CIFAR-10 dataset [30], doing language modeling using a recurrent LSTM [22] network, training word embedding vectors [35] and more.</p>
+<p>The system includes front-ends for specifying TensorFlow computations in Python and C++, and we expect
+other front-ends to be added over time in response to the desires of both internal Google users and the broader open-source community.</p>
+<h2 id="7#common#programming#idioms">7 Common Programming Idioms</h2>
+<p>TensorFlow’s basic <strong>dataflow graph model</strong> can be used in a variety of ways for machine learning applications. One domain we care about is speeding up training of computationally intensive neural network models on large datasets. This section describes several techniques that we and others have developed in order to accomplish this, and illustrates how to use TensorFlow to realize these various approaches.</p>
+<p>The approaches in this subsection assume that the model is being trained using stochastic gradient descent (SGD) with relatively modest-sized mini-batches of 100 to 1000 examples.</p>
+<h3 id="data#parallel#training">Data Parallel Training</h3>
+<p>One simple technique for speeding up SGD is to parallelize the computation of the gradient for a mini-batch across mini-batch elements. For example, if we are using a mini-batch size of 1000 elements, we can use 10 replicas of the model to each compute the gradient for 100 elements, and then combine the gradients and apply updates to the parameters synchronously, in order to behave exactly as if we were running the sequential SGD algorithm with a batch size of 1000 elements. In this case, the TensorFlow graph simply has many replicas of the portion of the graph that does the bulk of the model computation, and a single client thread drives the entire training loop for this large graph. This is illustrated in the top portion of Figure 7.</p>
+<p>This approach can also be made asynchronous, where the TensorFlow graph has many replicas of the portion of the graph that does the bulk of the model computation, and each one of these replicas also applies the parameter updates to the model parameters asynchronously. In this configuration, there is one client thread for each of the graph replicas. This is illustrated in the bottom portion of Figure 7. This asynchronous approach was also described in [14].</p>
+<p><img alt="" src="../Figure-7-Synchronous-and-asynchronous-data-parallel-training.png" /></p>
+<h3 id="model#parallel#training">Model Parallel Training</h3>
+<p>Model parallel training, where different portions of the model computation are done on different computational devices simultaneously for the same batch of examples, is also easy to express in TensorFlow. Figure 8 shows an example of a recurrent, deep LSTM model used for sequence to sequence learning (see [47]), parallelized across three different devices.</p>
+<p><img alt="" src="../Figure-8-Model-parallel-training.png" /></p>
+<h3 id="concurrent#steps#for#model#computation#pipelining">Concurrent Steps for Model Computation Pipelining</h3>
+<p>Another common way to get better utilization for training deep neural networks is to pipeline the computation of the model within the same devices, by running a small number of concurrent steps within the same set of devices. This is shown in Figure 9. It is somewhat similar to asynchronous data parallelism, except that the parallelism occurs within the same device(s), rather than replicating the computation graph on different devices. This allows “filling in the gaps” where computation of a single batch of examples might not be able to fully utilize the full parallelism on all devices at all times during a single step.</p>
+<p><img alt="" src="../Figure-9-Concurrent-steps.png" /></p>
+<h2 id="8#performance">8 Performance</h2>
+<h2 id="9#tools">9 Tools</h2>
+<p>This section describes some tools we have developed that sit alongside the core TensorFlow graph execution engine.</p>
+<h3 id="91#tensorboard#visualization#of#graph#structures#and#summary#statistics">9.1 TensorBoard: Visualization of graph structures and summary statistics</h3>
+<p>In order to help users understand the structure of their computation graphs and also to understand the overall behavior of machine learning models, we have built TensorBoard, a companion visualization tool for TensorFlow that is included in the open source release.</p>
+<h4 id="visualization#of#computation#graphs">Visualization of Computation Graphs</h4>
+<h4 id="visualization#of#summary#data">Visualization of Summary Data</h4>
+<h3 id="92#performance#tracing">9.2 Performance Tracing</h3>
+<h2 id="10#future#work">10 Future Work</h2>
+<p>We have several different directions for future work.</p>
+<p>One extension to the basic programming model that we are considering is a <strong>function mechanism</strong>, whereby a user can specify an entire subgraph of a TensorFlow computation to be a reusable component. In the implementation we have designed, these functions can become reusable components even across different front-end languages for TensorFlow, so that a user could define a function using the Python front end, but then use that function as a basic building block from within the C++ frontend. We are hopeful that this cross-language reusability will bootstrap a vibrant community of machine learning researchers publishing not just whole examples of their research, but also small reusable components from their
+work that can be reused in other contexts.</p>
+<p>We also have a number of concrete directions to improve the performance of TensorFlow. One such direction is our initial work on a just-in-time compiler that can take a subgraph of a TensorFlow execution, perhaps with some runtime profiling information about the typical sizes and shapes of tensors, and can generate an optimized routine for this subgraph. This compiler will understand the semantics of perform a number of optimizations such as loop fusion, blocking and tiling for locality, specialization for particular shapes and sizes, etc.</p>
+<p>We also imagine that a significant area for future work will be in improving the placement and node scheduling algorithms used to decide where different nodes will execute, and when they should start executing. We have currently implemented a number of heuristics in these subsystems, and we’d like to have the system instead learn to make good placement decisions (perhaps using a deep neural network, combined with a reinforcement learning objective function).</p>
+<h2 id="11#related#work">11 Related Work</h2>
+<p>There are many other systems that are comparable in various ways with TensorFlow. Theano [7], Torch [13], Caffe [26], Chainer [49] and the Computational Network Toolkit [54] are a few systems designed primarily for the training of neural networks. Each of these systems maps the computation onto <strong>a single machine</strong>, unlike the <strong>distributed TensorFlow implementation</strong>. </p>
+<p>Like Theano and Chainer, TensorFlow supports <strong>symbolic differentiation</strong>, thus making it easier to define and work with gradient based optimization algorithms. </p>
+<p>Like Caffe, TensorFlow has a core written in C++, simplifying the deployment of trained models in a wide variety of production settings, including memory- and computation-constrained environments such as mobile devices.</p>
+<p>The TensorFlow system shares some design characteristics with its predecessor system, DistBelief [14],
+and with later systems with similar designs like Project Adam [10] and the Parameter Server project [33]. Like DistBelief and Project Adam, TensorFlow allows computations to be spread out across many computational devices across many machines, and allows users to specify machine learning models using relatively high-level descriptions.</p>
+<p>Unlike DistBelief and Project Adam, though, the general-purpose dataflow graph model in TensorFlow
+is more flexible and more amenable to expressing a wider variety of machine learning models and optimization algorithms. It also permits a significant simplification by allowing the expression of stateful parameter nodes as <strong>variables</strong>, and variable update operations that are just additional nodes in the graph; in contrast, DistBelief, Project Adam and the Parameter Server systems all have whole separate parameter server subsystems devoted to communicating and updating parameter values.</p>
+<h2 id="12#conclusions">12 Conclusions</h2>
+<p>We have described TensorFlow, a flexible data flowbased programming model, as well as single machine and distributed implementations of this programming model.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../../XLA/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Introduction
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

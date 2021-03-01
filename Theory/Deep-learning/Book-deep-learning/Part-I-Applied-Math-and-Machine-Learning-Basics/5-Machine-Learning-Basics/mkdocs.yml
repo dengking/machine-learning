@@ -1,0 +1,8 @@
+nav:
+    - 5-Machine-Learning-Basics: 5-Machine-Learning-Basics.md
+    - 5.1-Learning-Algorithms: 5.1-Learning-Algorithms.md
+    - Task: Task
+    - 5.2-Capacity-Overfitting-and-Underfitting: 5.2-Capacity-Overfitting-and-Underfitting.md
+    - 5.3-Hyperparameters-and-Validation-Sets: 5.3-Hyperparameters-and-Validation-Sets
+    - 5.4-Estimators-Bias-and-Variance: 5.4-Estimators-Bias-and-Variance
+    - 5.5-Maximum-Likelihood-Estimation: 5.5-Maximum-Likelihood-Estimation

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://openai.com/blog/language-unsupervised/ -->
+<html lang="en" class="js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <script type="text/javascript" async="" src="./Improving Language Understanding with Unsupervised Learning_files/analytics.js.download"></script><script async="" src="./Improving Language Understanding with Unsupervised Learning_files/js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-71156606-1');
+  </script>
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Improving  Language Understanding with Unsupervised Learning</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" type="text/css" href="./Improving Language Understanding with Unsupervised Learning_files/all.css">
+  
+  <script type="text/javascript">document.documentElement.className = 'js';</script>
+  <link rel="shortcut icon" href="https://openai.com/favicon.png" type="image/png">
+    <link rel="canonical" href="https://openai.com/blog/language-unsupervised/">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    
+    <meta property="og:site_name" content="OpenAI">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Improving  Language Understanding with Unsupervised Learning">
+    <meta property="og:description" content="We&#39;ve obtained state-of-the-art results on a suite of diverse language tasks with a scalable, task-agnostic system, which we&#39;re also releasing. Our approach is a combination of two existing ideas: transformers and unsupervised pre-training.">
+    <meta property="og:url" content="https://openai.com/blog/language-unsupervised/">
+    <meta property="og:image" content="https://openai.com/content/images/2018/06/language-twitter-card.png">
+    <meta property="article:published_time" content="2018-06-11T18:11:50.000Z">
+    <meta property="article:modified_time" content="2020-03-02T22:25:57.000Z">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/openai.research">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Improving  Language Understanding with Unsupervised Learning">
+    <meta name="twitter:description" content="We&#39;ve obtained state-of-the-art results on a suite of diverse language tasks with a scalable, task-agnostic system, which we&#39;re also releasing. Our approach is a combination of two existing ideas: transformers and unsupervised pre-training.">
+    <meta name="twitter:url" content="https://openai.com/blog/language-unsupervised/">
+    <meta name="twitter:image" content="https://openai.com/content/images/2018/06/language-twitter-card.png">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Alec Radford">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="">
+    <meta name="twitter:site" content="@openai">
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="314">
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "OpenAI",
+        "url": "https://openai.com/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://openai.com/content/images/2019/05/openai-avatar.png",
+            "width": 60,
+            "height": 60
+        }
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Alec Radford",
+        "url": "https://openai.com/blog/authors/alec/",
+        "sameAs": []
+    },
+    "headline": "Improving  Language Understanding with Unsupervised Learning",
+    "url": "https://openai.com/blog/language-unsupervised/",
+    "datePublished": "2018-06-11T18:11:50.000Z",
+    "dateModified": "2020-03-02T22:25:57.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "https://openai.com/content/images/2018/06/language-twitter-card.png",
+        "width": 600,
+        "height": 314
+    },
+    "description": "We&#x27;ve obtained state-of-the-art results on a suite of diverse language tasks with a scalable, task-agnostic system, which we&#x27;re also releasing. Our approach is a combination of two existing ideas: transformers and unsupervised pre-training.",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://openai.com/"
+    }
+}
+    </script>
+
+    <script defer="" src="./Improving Language Understanding with Unsupervised Learning_files/members.min.js.download"></script>
+    <meta name="generator" content="Ghost 3.21">
+    <link rel="alternate" type="application/rss+xml" title="OpenAI" href="https://openai.com/blog/language-unsupervised/">
+  <link rel="shortcut icon" href="https://openai.com/favicon.png">
+  <link rel="apple-touch-icon" href="https://openai.com/favicon.png">
+<style>.fluidvids {width: 100%; max-width: 100%; position: relative;}.fluidvids-item {position: absolute; top: 0px; left: 0px; width: 100%; height: 100%;}</style></head>
+<body class="browser-chrome os-windows engine-webkit is-nav-fixed is-below-fold">
+  <main>
+    
+<article class="post" id="post-language-unsupervised">
+  
+  <header class="post-header post-header--cover bg-light-warm-gray bg-cover color-white" style="background-image:url(https://cdn.openai.com/research-covers/language-unsupervised/gradient.jpg)">
+  <nav class="nav js-nav" style="position: fixed; top: -65px;">
+  <div class="container">
+    <div class="nav-row row d-flex justify-content-between align-items-center">
+      <div class="col-2">
+        <a href="https://openai.com/" class="nav-symbol fade"><svg id="openai-symbol" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 51"><path d="M47.21,20.92a12.65,12.65,0,0,0-1.09-10.38A12.78,12.78,0,0,0,32.36,4.41,12.82,12.82,0,0,0,10.64,9a12.65,12.65,0,0,0-8.45,6.13,12.78,12.78,0,0,0,1.57,15A12.64,12.64,0,0,0,4.84,40.51a12.79,12.79,0,0,0,13.77,6.13,12.65,12.65,0,0,0,9.53,4.25A12.8,12.8,0,0,0,40.34,42a12.66,12.66,0,0,0,8.45-6.13A12.8,12.8,0,0,0,47.21,20.92ZM28.14,47.57a9.46,9.46,0,0,1-6.08-2.2l.3-.17,10.1-5.83a1.68,1.68,0,0,0,.83-1.44V23.69l4.27,2.47a.15.15,0,0,1,.08.11v11.8A9.52,9.52,0,0,1,28.14,47.57ZM7.72,38.85a9.45,9.45,0,0,1-1.13-6.37l.3.18L17,38.49a1.63,1.63,0,0,0,1.65,0L31,31.37V36.3a.17.17,0,0,1-.07.13L20.7,42.33A9.51,9.51,0,0,1,7.72,38.85Zm-2.66-22a9.48,9.48,0,0,1,5-4.17v12a1.62,1.62,0,0,0,.82,1.43L23.17,33.2,18.9,35.67a.16.16,0,0,1-.15,0L8.54,29.78A9.52,9.52,0,0,1,5.06,16.8ZM40.14,25,27.81,17.84l4.26-2.46a.16.16,0,0,1,.15,0l10.21,5.9A9.5,9.5,0,0,1,41,38.41v-12A1.67,1.67,0,0,0,40.14,25Zm4.25-6.39-.3-.18L34,12.55a1.64,1.64,0,0,0-1.66,0L20,19.67V14.74a.14.14,0,0,1,.06-.13L30.27,8.72a9.51,9.51,0,0,1,14.12,9.85ZM17.67,27.35,13.4,24.89a.17.17,0,0,1-.08-.12V13a9.51,9.51,0,0,1,15.59-7.3l-.3.17-10.1,5.83a1.68,1.68,0,0,0-.83,1.44Zm2.32-5,5.5-3.17L31,22.35v6.34l-5.49,3.17L20,28.69Z"></path></svg></a>
+      </div>
+      <div class="col" hidden="">
+        <a href="https://openai.com/" class="nav-wordmark fade"><svg id="openai-wordmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 180"><path d="M410.22,41.09c-13.75,0-23.57,4.7-28.39,13.59l-2.59,4.79V43.41h-22.4v97.85H380.4V83.05c0-13.91,7.55-21.89,20.73-21.89,12.56,0,19.76,7.76,19.76,21.31v58.79h23.56v-63C444.45,55,431.65,41.09,410.22,41.09ZM296,41.09c-27.79,0-45.06,17.33-45.06,45.25v13.74c0,26.83,17.42,43.51,45.45,43.51,18.74,0,31.88-6.88,40.15-21l-14.61-8.39c-6.11,8.15-15.86,13.19-25.54,13.19-14.19,0-22.67-8.76-22.67-23.44v-3.89h65.79V83.82c0-26-17.08-42.73-43.51-42.73Zm22.08,43.14H273.72V81.89c0-16.12,7.91-25,22.28-25,13.83,0,22.08,8.76,22.08,23.44ZM678.32,27.3V8.58H596.87V27.3h28.56v95.25H596.87v18.71h81.45V122.55H649.76V27.3ZM60.67,5.87c-36.39,0-59,22.68-59,59.18V84.79c0,36.51,22.6,59.18,59,59.18s59-22.67,59-59.18V65.05C119.66,28.55,97.05,5.87,60.67,5.87ZM95.33,86.14c0,24.24-12.63,38.15-34.66,38.15S26,110.38,26,86.14V63.7c0-24.24,12.63-38.15,34.66-38.15S95.32,39.46,95.32,63.7Zm98.31-45c-12.36,0-23.07,5.11-28.64,13.69l-2.54,3.9V43.41H140.07V174.93h23.55V127.3l2.53,3.74c5.3,7.85,15.65,12.55,27.68,12.55,20.31,0,40.8-13.28,40.8-42.93V84c0-21.35-12.63-42.91-41-42.91Zm17.44,58.4c0,15.77-9.2,25.57-24,25.57-13.8,0-23.44-10.35-23.44-25.18V85.23c0-15.06,9.72-25.57,23.63-25.57,14.7,0,23.83,9.8,23.83,25.57ZM509.55,8.63,462,141.26h23.9l9.1-28.44h54.65l.09.28,9,28.16h23.93L535.08,8.58Zm-8.67,85.52L522.32,27l21.23,67.07Z"></path></svg></a>
+      </div>
+      <div class="col-auto">
+        <ul class="nav-items d-none d-desktop-flex justify-content-end small-caps">
+                        
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/about/">About</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/progress/">Progress</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/resources/">Resources</a>
+            </li>
+            
+            <li class="nav-item">
+              <a class="fade" href="https://openai.com/blog/">Blog</a>
+            </li>
+        </ul>
+        <button class="nav-toggle nav-toggle--open js-mobile-nav-open fade d-desktop-none"><svg id="mobile-nav-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22,13H2a1,1,0,0,1,0-2H22a1,1,0,0,1,0,2Z"></path><path d="M22,6H2A1,1,0,0,1,2,4H22a1,1,0,0,1,0,2Z"></path><path d="M22,20H2a1,1,0,0,1,0-2H22a1,1,0,0,1,0,2Z"></path></svg></button>
+      </div>
+    </div>
+  </div>
+</nav><nav class="nav js-nav" aria-hidden="true" style="visibility: hidden;"></nav>
+<nav class="mobile-nav js-mobile-nav text-left">
+  <div class="container">
+    <div class="nav-row row d-flex justify-content-between align-items-center">
+      <div class="col-2">
+      </div>
+      <div class="col-auto">
+        <button class="nav-toggle nav-toggle--close js-mobile-nav-close"><svg id="mobile-nav-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path id="Glyph" d="M19.77,5.63,13.41,12l6.36,6.37a1,1,0,0,1-1.41,1.41L12,13.41,5.63,19.77a1,1,0,0,1-1.44-1.39l0,0L10.58,12,4.21,5.63a1,1,0,0,1,0-1.42,1,1,0,0,1,1.41,0l0,0L12,10.58l6.37-6.37a1,1,0,0,1,1.41,0A1,1,0,0,1,19.77,5.63Z"></path></svg></button>
+      </div>
+    </div>
+  </div>
+  <div class="container font-large">
+    <ul class="mt-0.25 small-caps">
+                
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/about/">About</a>
+          </li>
+          <hr class="bg-fg">
+        
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/progress/">Progress</a>
+          </li>
+          <hr class="bg-fg">
+        
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/resources/">Resources</a>
+          </li>
+          <hr class="bg-fg">
+        
+          <li>
+            <a class="fade d-block py-0.75" href="https://openai.com/blog/">Blog</a>
+          </li>
+          <hr class="bg-fg">
+      <li>
+        <a class="fade d-block py-0.75" href="https://openai.com/jobs/">Jobs</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+  
+  <div class="container">
+    <hr class="mb-1 js-nav-fold hr-strong">
+    <div class="row mb-2">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-9 col-sm-8 col-md-5 col-xl-4 offset-xl-1">
+            
+<figure class="release-cover mb-1 rounded shadowed-heavy mb-0">
+  <div class="position-relative bg-light-warm-gray" style="padding-bottom:132.915360502%">
+      <img class="position-absolute trbl-0 js-lazy js-lazy-loaded" src="./Improving Language Understanding with Unsupervised Learning_files/2x-no-mark.jpg" alt="Improving  Language Understanding with Unsupervised Learning">
+  </div>
+</figure>
+
+
+          </div>
+          <div class="col-12 col-md-7 col-xl-6">
+            <div class="h-100 d-flex flex-column justify-content-between last-child-mb-1" style="--fg:255,255,255">
+                  <div>
+                      <h1 class="balance-text mb-0.5" style="">Improving  Language<br data-owner="balance-text">Understanding with<br data-owner="balance-text">Unsupervised Learning</h1>
+                      <div class="post-excerpt medium-copy mb-0.5 color-fg-80 color-fg js-excerpt-container js-widow"><p>We’ve obtained state-of-the-art results on a suite of diverse language tasks with a scalable, task-agnostic system, which we’re also releasing. Our approach is a combination of two existing ideas: <a href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener">transformers</a> and <a href="https://arxiv.org/abs/1511.01432" target="_blank" rel="noopener">unsupervised pre-training</a>. These results provide a convincing example that pairing supervised learning methods with unsupervised pre-training works very well; this is an idea that many have explored in the past, and we hope our result motivates further research into applying this idea on larger and more diverse&nbsp;datasets.</p></div>
+                  </div>
+                    <div class="xsmall-caps color-fg-40 mt-0.25 mb-1 color-fg">
+    <time datetime="2018-06-11">June 11, 2018</time>
+    <div class="reading-time">9 minute read</div>
+  </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+</header>
+
+  <section class="container">
+  <div class="row">
+    <section class="content">
+      <!--kg-card-begin: markdown-->
+<section class="btns"><a href="https://cdn.openai.com/research-covers/language-unsupervised/language_understanding_paper.pdf" class="btn btn-padded icon-paper" target="_blank" rel="noopener">Read Paper</a><a href="https://github.com/openai/finetune-transformer-lm" class="btn btn-padded icon-code" target="_blank" rel="noopener">View Code</a></section>
+<table class="d-table">
+  <thead>
+  <tr>
+    <th>Dataset</th>
+    <th>Task</th>
+    <th>SOTA</th>
+    <th>Ours</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>SNLI</td>
+    <td>Textual Entailment</td>
+    <td>89.3</td>
+    <td><b>89.9</b></td>
+  </tr>
+  <tr>
+    <td>MNLI Matched</td>
+    <td>Textual Entailment</td>
+    <td>80.6</td>
+    <td><b>82.1</b></td>
+  </tr>
+  <tr>
+    <td>MNLI Mismatched</td>
+    <td>Textual Entailment</td>
+    <td>80.1</td>
+    <td><b>81.4</b></td>
+  </tr>
+  <tr>
+    <td>SciTail</td>
+    <td>Textual Entailment</td>
+    <td>83.3</td>
+    <td><b>88.3</b></td>
+  </tr>
+  <tr>
+    <td>QNLI</td>
+    <td>Textual Entailment</td>
+    <td>82.3</td>
+    <td><b>88.1</b></td>
+  </tr>
+  <tr>
+    <td>RTE</td>
+    <td>Textual Entailment</td>
+    <td><b>61.7</b></td>
+    <td>56.0</td>
+  </tr>
+  <tr>
+    <td>STS-B</td>
+    <td>Semantic Similarity</td>
+    <td>81.0</td>
+    <td><b>82.0</b></td>
+  </tr>
+  <tr>
+    <td>QQP</td>
+    <td>Semantic Similarity</td>
+    <td>66.1</td>
+    <td><b>70.3</b></td>
+  </tr>
+  <tr>
+    <td>MRPC</td>
+    <td>Semantic Similarity</td>
+    <td><b>86.0</b></td>
+    <td>82.3</td>
+  </tr>
+  <tr>
+    <td>RACE</td>
+    <td>Reading Comprehension</td>
+    <td>53.3</td>
+    <td><b>59.0</b></td>
+  </tr>
+  <tr>
+    <td>ROCStories</td>
+    <td>Commonsense Reasoning</td>
+    <td>77.6</td>
+    <td><b>86.5</b></td>
+  </tr>
+  <tr>
+    <td>COPA</td>
+    <td>Commonsense Reasoning</td>
+    <td>71.2</td>
+    <td><b>78.6</b></td>
+  </tr>
+  <tr>
+    <td>SST-2</td>
+    <td>Sentiment Analysis</td>
+    <td><b>93.2</b></td>
+    <td>91.3</td>
+  </tr>
+  <tr>
+    <td>CoLA</td>
+    <td>Linguistic Acceptability</td>
+    <td>35.0</td>
+    <td><b>45.4</b></td>
+  </tr>
+  <tr>
+    <td>GLUE</td>
+    <td>Multi Task Benchmark</td>
+    <td>68.9</td>
+    <td><b>72.8</b></td>
+  </tr>
+  </tbody>
+</table>
+<p>Our system works in two stages; first we train a transformer model on a very large amount of data in an unsupervised manner — using language modeling as a training signal — then we fine-tune this model on much smaller supervised datasets to help it solve specific tasks. We developed this approach following our <a href="https://blog.openai.com/unsupervised-sentiment-neuron/" target="_blank" rel="noopener">sentiment neuron</a> work, in which we noted that unsupervised learning techniques can yield surprisingly discriminative features when trained on enough data. Here, we wanted to further explore this idea: can we develop one model, train it in an unsupervised way on a large amount of data, and then fine-tune the model to achieve good performance on many different tasks? Our results indicate that this approach works surprisingly well; the same core model can be fine-tuned for very different tasks with minimal&nbsp;adaptation.</p>
+<p>This work builds on the approach introduced in <a href="https://arxiv.org/abs/1511.01432" target="_blank" rel="noopener">Semi-supervised Sequence Learning</a>, which showed how to improve document classification performance by using unsupervised pre-training of an LSTM followed by supervised fine-tuning. It also extends <a href="https://arxiv.org/abs/1801.06146" target="_blank" rel="noopener">ULMFiT</a>, research that shows how a single dataset-agnostic LSTM language model can be fine-tuned to get state-of-the-art performance on a variety of document classification datasets; our work shows how a Transformer-based model can be used in this approach to succeed at a broader range of tasks beyond document classification, such as commonsense reasoning, semantic similarity, and reading comprehension. It is also similar to but more task-agnostic than <a href="https://allennlp.org/elmo" target="_blank" rel="noopener">ELMo</a>, which incorporates pre-training but uses task-customized architectures to get state-of-the-art results on a broad suite of&nbsp;tasks.</p>
+<p>Very little tuning was used to achieve our results. All datasets use a single forward language model, without any ensembling, and the majority of the reported results use the exact same hyperparameter&nbsp;settings.</p>
+<p>A result we are particularly excited about is the performance of our approach on three datasets — <a href="http://people.ict.usc.edu/~gordon/copa.html" target="_blank" rel="noopener">COPA</a>, <a href="https://arxiv.org/abs/1704.04683" target="_blank" rel="noopener">RACE</a>, and <a href="http://cs.rochester.edu/nlp/rocstories/" target="_blank" rel="noopener">ROCStories</a> — designed to test commonsense reasoning and reading comprehension. Our model obtains new state-of-the-art results on these datasets by a wide margin. These datasets are thought to require multi-sentence reasoning and significant world knowledge to solve suggesting that our model improves these skills predominantly via unsupervised learning. This suggests there’s hope for developing complex language understanding capabilities via unsupervised&nbsp;techniques.</p>
+<h2 id="whyunsupervisedlearning">Why Unsupervised Learning?</h2>
+<p>Supervised learning is at the core of most of the recent success of machine learning. However, it can require large, carefully cleaned, and expensive to create datasets to work well. Unsupervised learning is attractive because of its potential to address these drawbacks. Since unsupervised learning removes the bottleneck of explicit human labeling it also scales well with current trends of <a href="https://blog.openai.com/ai-and-compute/" target="_blank" rel="noopener">increasing compute</a> and availability of raw data. Unsupervised learning is a <a href="https://arxiv.org/abs/1611.09842" target="_blank" rel="noopener">very</a> <a href="https://arxiv.org/abs/1606.03657" target="_blank" rel="noopener">active</a> <a href="https://arxiv.org/abs/1606.05579" target="_blank" rel="noopener">area</a> <a href="https://arxiv.org/abs/1603.09246" target="_blank" rel="noopener">of</a> <a href="https://arxiv.org/abs/1712.06651" target="_blank" rel="noopener">research</a> but practical uses of it are often still&nbsp;limited.</p>
+<p>There’s been a recent push to try to further language capabilities by using  unsupervised learning to augment systems with large amounts of unlabeled data; representations of words trained via unsupervised techniques can use large datasets consisting of terabytes of information and, when integrated with supervised learning, improve performance on a wide range of NLP tasks. Until recently, these unsupervised techniques for NLP (for example, <a href="https://nlp.stanford.edu/projects/glove/" target="_blank" rel="noopener">GLoVe</a> and <a href="https://arxiv.org/abs/1310.4546" target="_blank" rel="noopener">word2vec</a>) used simple models (word vectors) and training signals (the local co-occurence of words). <a href="https://arxiv.org/abs/1506.06726" target="_blank" rel="noopener">Skip-Thought Vectors</a> is a notable early demonstration of the potential improvements more complex approaches can realize. But new techniques are now being used which are further boosting performance. These include the use of pre-trained sentence representation models, contextualized word vectors (notably <a href="https://allennlp.org/elmo" target="_blank" rel="noopener">ELMo</a> and <a href="https://einstein.ai/research/learned-in-translation-contextualized-word-vectors" target="_blank" rel="noopener">CoVE</a>), and approaches which use customized architectures to fuse unsupervised pre-training with supervised fine-tuning, like our&nbsp;own.</p>
+<p><img src="./Improving Language Understanding with Unsupervised Learning_files/zero-shot-transfer@2x.png" alt="zero-shot-transfer@2x"></p>
+<div class="caption">Pre-training our model on a large corpus of text significantly improves its performance on challenging natural language processing tasks like Winograd Schema Resolution.</div>
+<p>We also noticed we can use the underlying language model to begin to perform tasks without ever training on them. For example, performance on tasks like picking the right answer to a multiple choice question steadily increases as the underlying language model improves. While the absolute performance of these methods is still often quite low compared to the supervised state-of-the-art (for question answering it still outperformed by a simple sliding-window baseline) it is encouraging that this behavior is robust across a broad set of tasks. Randomly initialized networks containing no information about the task and the world perform no-better than random using these heuristics. This provides some insight into why generative pre-training can improve performance on downstream&nbsp;tasks.</p>
+<p>We can also use the existing language functionality in the model to perform sentiment analysis. For the Stanford Sentiment Treebank dataset, which consists of sentences from positive and negative movie reviews, we can use the language model to guess whether a review is positive or negative by inputting the word “very” after the sentence and seeing whether the model predicts the word “positive” or “negative” as more likely. This approach, without adapting the model at all to the task, performs on par with classic baselines <a href="https://nlp.stanford.edu/~socherr/EMNLP2013_RNTN.pdf" target="_blank" rel="noopener">~80%&nbsp;accuracy</a>.</p>
+<p>Our work is also a validation of the robustness and usefulness of the transformer architecture, indicating that it is sufficiently flexible to achieve state-of-the-art results on a wide range of tasks without requiring complicated task-specific customization or hyperparameter&nbsp;tuning.</p>
+<h2 id="drawbacks">Drawbacks</h2>
+<p>This project has a few outstanding issues which are worth&nbsp;noting:</p>
+<ul>
+<li><strong>Compute Requirements</strong>: Many previous approaches to NLP tasks train relatively small models on a single GPU from scratch. Our approach requires an expensive pre-training step - 1 month on 8 GPUs. Luckily, this only has to be done once and we’re releasing our model so others can avoid it. It is also a large model (in comparison to prior work) and consequently uses more compute and memory — we used a 37-layer (12 block) Transformer architecture, and we train on sequences of up to 512 tokens. Most experiments were conducted on 4 and 8 GPU systems. The model does fine-tune to new tasks very quickly which helps mitigate the additional resource&nbsp;requirements.</li>
+<li><strong>The limits and bias of learning about the world through text</strong>: Books and text readily available on the internet do not contain complete or even accurate information about the world. <a href="https://arxiv.org/abs/1705.11168" target="_blank" rel="noopener">Recent work</a> has shown that certain kinds of information are difficult to learn via just text and <a href="https://arxiv.org/abs/1803.02324" target="_blank" rel="noopener">other work</a> has shown that models learn and exploit biases in data&nbsp;distributions.</li>
+<li><strong>Still brittle generalization</strong>: Although our approach improves performance across a broad range of tasks, current deep learning NLP models still exhibit surprising and counterintuitive behavior - especially when evaluated in a systematic, adversarial, or out-of-distribution way. Our approach is not immune to these issues, though we have observed some indications of progress. Our approach shows improved lexical robustness over previous purely neural approaches to textual entailment. On the dataset introduced in <a href="https://arxiv.org/abs/1805.02266" target="_blank" rel="noopener">Glockner et al. (2018)</a> our model achieves 83.75%, performing similarly to <a href="https://arxiv.org/abs/1711.04289" target="_blank" rel="noopener">KIM</a>, which incorporates external knowledge via&nbsp;WordNet.</li>
+</ul>
+<h2 id="future">Future</h2>
+<ul>
+<li><strong>Scaling the approach</strong>: We’ve observed that improvements in the performance of the language model are well correlated with improvements on downstream tasks. We’re currently using commodity hardware (a single 8 GPU machine) and a training dataset of only a few thousand books (~5GB of text). This suggests there is significant room for improvement using the well-validated approach of more compute and&nbsp;data.</li>
+<li><strong>Improved fine-tuning</strong>: Our approach is currently very simple. It is likely that substantial improvements can be made using more intricate adaptation and transfer techniques such as those explored in <a href="https://arxiv.org/abs/1801.06146" target="_blank" rel="noopener">ULMFiT</a>.</li>
+<li><strong>Better understanding of why generative pre-training helps</strong>: Although we’ve discussed some ideas we are partial to here, more targeted experiments and research will help distinguish between competing explanations. For instance, how much of the benefits we observe are due to improved ability to process broader context versus improved world&nbsp;knowledge?</li>
+</ul>
+<h2 id="appendixdatasetexamples">Appendix: Dataset Examples</h2>
+<div class="wide d-block d-md-table mt-0">
+<table>
+  <thead>
+  <tr>
+    <th>Dataset</th>
+    <th>Example</th>
+    <th>Label</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>SNLI</td>
+    <td>1. A black race car starts up in front of a crowd of people.
+        <br>
+        2. A man is driving down a lonely road.</td>
+    <td>Contra.</td>
+  </tr>
+  <tr>
+    <td>MNLI</td>
+    <td>1. At the other end of Pennsylvania Avenue, people began to line up for a White House tour. 
+        <br>
+        2. People formed a line at the end of Pennsylvania Avenue.</td>
+    <td>Entails</td>
+  </tr>
+  <tr>
+    <td>SciTail</td>
+    <td>1. Because type 1 diabetes is a relatively rare disease, you may wish to focus on prevention only if you know your child is at special risk for the disease.
+        <br>
+        2. Diabetes is unpreventable in the type one form but may be prevented by diet if it is of the second type.
+</td>
+    <td>Neutral</td>
+  </tr>
+  <tr>
+    <td>QNLI</td>
+    <td>Context:  In meteorology, precipitation is any product of the condensation of atmospheric water vapor that falls under gravity.
+        <br>
+        Statement:  What causes precipitation to fall? 
+</td>
+    <td>Entails</td>
+  </tr>
+  <tr>
+    <td>RTE</td>
+    <td>1. Passions surrounding Germany’s final match turned violent when a woman stabbed her partner because she didn’t want to watch the game. 
+        <br>
+        2. A woman passionately wanted to watch the game.
+</td>
+    <td>Contra.</td>
+  </tr>
+  <tr>
+    <td>STS-B</td>
+    <td>1. They flew out of the nest in groups. 
+        <br>
+        2. They flew into the nest together.
+</td>
+    <td>Similarity 2/5</td>
+  </tr>
+  <tr>
+    <td>QQP</td>
+    <td>1. What are natural numbers
+        <br>
+        2. What is the least natural number
+</td>
+    <td>Not same</td>
+  </tr>
+  <tr>
+    <td>MRPC</td>
+    <td>1. If people took the pill daily, they would lower their risk of heart attack by 88 percent and of stroke by 80 percent, the scientists claim.
+        <br>
+        2. Taking the pill would lower the risk of heart attack by 88 percent and of stroke by 80 percent, the scientists said.
+</td>
+    <td>Same</td>
+  </tr>
+  <tr>
+    <td>RACE</td>
+    <td>In a small village in England about 150 years ago, a mail coach was standing on the street. It didn’t come to that village often. People had to pay a lot to get a letter. The person who sent the letter didn’t have to pay the postage, while the receiver had to. “Here’s a letter for Miss Alice Brown,” said the mailman. “ I’m Alice Brown,” a girl of about 18 said in a low voice. Alice looked at the envelope for a minute, and then handed it back to the mailman. “I’m sorry I can’t take it, I don’t have enough money to pay it”, she said. A gentleman standing around were very sorry for her. Then he came up and paid the postage for her. When the gentleman gave the letter to her, she said with a smile, “ Thank you very much, This letter is from Tom. I’m going to marry him. He went to London to look for work. I’ve waited a long time for this letter, but now I don’t need it, there is nothing in it.” “Really? How do you know that?” the gentleman said in surprise. “He told me that he would put some signs on the envelope. Look, sir, this cross in the corner means that he is well and this circle means he has found work. That’s good news.” The gentleman was Sir Rowland Hill. He didn’t forgot Alice and her letter. “The postage to be paid by the receiver has to be changed,” he said to himself and had a good plan. “The postage has to be much lower, what about a penny? And the person who sends the letter pays the postage. He has to buy a stamp and put it on the envelope.” he said . The government accepted his plan. Then the first stamp was put out in 1840. It was called the “Penny Black”. It had a picture of the Queen on it.
+        <br>
+        <br>
+     The girl handed the letter back to the mailman because:
+        <br>
+        <br>
+        1. she didn’t know whose letter it was 
+        <br>
+        2. she had no money to pay the postage 
+        <br>
+        3. she received the letter but she didn’t want to open it 
+        <br>
+        4. she had already known what was written in the letter
+</td>
+    <td>4</td>
+  </tr>
+  <tr>
+    <td>ROCStories</td>
+    <td>Karen was assigned a roommate her first year of college. Her roommate asked her to go to a nearby city for a concert. Karen agreed happily. The show was absolutely exhilarating.
+        <br>
+        <br>
+        1. Karen became good friends with her roommate.
+        <br>
+        2. Karen hated her roommate.
+</td>
+    <td>1</td>
+  </tr>
+  <tr>
+    <td>COPA</td>
+    <td>The man broke his toe. What was the CAUSE of this?
+        <br>
+        1. He got a hole in his sock. 
+        <br>
+        2. He dropped a hammer on his foot.
+</td>
+    <td>2</td>
+  </tr>
+  <tr>
+    <td>SST-2</td>
+    <td>Just the labor involved in creating the layered richness of the imagery in this chiaroscuro of madness and light is astonishing.
+</td>
+    <td>Positive</td>
+  </tr>
+  <tr>
+    <td>CoLA</td>
+    <td>As you eat the most, you want the least.
+</td>
+    <td>Not acceptable</td>
+  </tr>
+  </tbody>
+</table>
+</div>
+<h2 id="compute">Compute</h2>
+<p>We’re increasingly interested in understanding the <a href="https://blog.openai.com/ai-and-compute/" target="_blank" rel="noopener">relationship between the compute we expend on training models and the resulting output</a>. The total compute used to train this model was 0.96 petaflop days&nbsp;(pfs-days).</p>
+<pre><code>8 P600 GPU's * 30 days * 12 TFLOPS/GPU * 0.33 utilization = 
+= .96 pfs-days
+</code></pre>
+<footer class="post-footer js-post-footer">
+    <hr>
+    <div class="row" id="authors">
+      <div class="col">Authors</div>
+      <div class="col js-post-footer-authors-list ">
+        <span class="post-author"><a class="fade" href="https://openai.com/blog/authors/alec/">Alec Radford</a></span>
+      </div>
+    </div>
+  
+    <hr>
+    <div class="row">
+      <div class="col">Cover Artwork</div>
+      <div class="col">Ben Barry</div>
+    </div>
+  </footer><!--kg-card-end: markdown-->
+    </section>
+  </div>
+</section>
+  
+
+</article>
+  
+
+  </main>
+  <footer>
+  <div class="container mt-2.5 pb-0.5 pb-lg-1">
+    <hr>
+    <nav class="py-0.5 color-fg-50 small-copy">
+      <div class="row">
+
+        <div class="col-12 col-md mb-0.5 col-lg mb-lg-0">
+          <ul class="list-inline">
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/about/">About</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/progress/">Progress</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/resources/">Resources</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/blog/">Blog</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/charter/">Charter</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/jobs/">Jobs</a></li>
+            <li class="d-block d-sm-inline mb-0.125 mb-sm-0"><a class="fade d-block d-sm-inline" href="https://openai.com/press/">Press</a></li>
+          </ul>
+        </div>
+
+        <div class="col-12 mt-n0.2 mt-sm-0 col-sm-auto order-sm-last col-lg-2 order-lg-first">
+          <div class="d-flex align-items-center">
+            <a class="fade color-fg-40 mr-5/12 footer-icon footer-icon--twitter" href="https://twitter.com/openai" target="_blank" rel="noopener"><svg id="twitter" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 18"><path d="M7.86,17.93a12.84,12.84,0,0,0,13-12.63V5.11c0-.19,0-.39,0-.58A9.52,9.52,0,0,0,23.15,2.2a9.58,9.58,0,0,1-2.63.71,4.59,4.59,0,0,0,2-2.5,9.25,9.25,0,0,1-2.91,1.1A4.63,4.63,0,0,0,16.29.08a4.55,4.55,0,0,0-4.58,4.5,4.46,4.46,0,0,0,.12,1A13.05,13.05,0,0,1,2.4.91a4.46,4.46,0,0,0,1.42,6,4.52,4.52,0,0,1-2.07-.57v.06a4.53,4.53,0,0,0,3.67,4.42A5,5,0,0,1,4.21,11a4.12,4.12,0,0,1-.86-.09A4.55,4.55,0,0,0,7.62,14,9.34,9.34,0,0,1,.85,15.9a13.17,13.17,0,0,0,7,2"></path></svg></a>
+            <a class="fade color-fg-40 footer-icon footer-icon--facebook" href="https://www.facebook.com/openai.research" target="_blank" rel="noopener"><svg id="facebook" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20,10A10,10,0,1,0,8.44,19.88v-7H5.9V10H8.44V7.8a3.52,3.52,0,0,1,3.77-3.89,15.72,15.72,0,0,1,2.24.19V6.56H13.19a1.45,1.45,0,0,0-1.63,1.56V10h2.78l-.45,2.89H11.56v7A10,10,0,0,0,20,10Z"></path></svg></a>
+          </div>
+        </div>
+
+
+      </div>
+    </nav>
+  </div>
+</footer>
+  <script type="text/javascript" src="./Improving Language Understanding with Unsupervised Learning_files/main.js.download"></script>
+  
+  
+  
+
+
+</body></html>

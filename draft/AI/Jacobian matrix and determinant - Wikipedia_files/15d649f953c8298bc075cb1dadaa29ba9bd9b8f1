@@ -1,0 +1,34 @@
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="15.962ex" height="3.343ex" style="vertical-align: -1.005ex;" viewBox="0 -1006.6 6872.4 1439.2" role="img" focusable="false" xmlns="http://www.w3.org/2000/svg" aria-labelledby="MathJax-SVG-1-Title">
+<title id="MathJax-SVG-1-Title">{\displaystyle \mathbf {J} _{\mathbf {f} ^{-1}}\circ \mathbf {f} ={\mathbf {J} _{\mathbf {f} }}^{-1}.}</title>
+<defs aria-hidden="true">
+<path stroke-width="1" id="E1-MJMAINB-4A" d="M174 114Q174 96 169 82T159 63T144 47L155 45Q183 40 203 40Q271 40 290 104Q294 118 294 150T295 380V624H154V686H169Q196 683 365 683Q499 683 517 686H527V624H446V379Q446 183 446 153T441 108Q413 32 315 2Q266 -11 208 -11Q160 -11 118 -2T42 37T8 114V122Q8 150 30 174T91 198T152 174T174 122V114Z"></path>
+<path stroke-width="1" id="E1-MJMAINB-66" d="M308 0Q290 3 172 3Q58 3 49 0H40V62H109V382H42V444H109V503L110 562L112 572Q127 625 178 658T316 699Q318 699 330 699T348 700Q381 698 404 687T436 658T449 629T452 606Q452 576 432 557T383 537Q355 537 335 555T314 605Q314 635 328 649H325Q311 649 293 644T253 618T227 560Q226 555 226 498V444H340V382H232V62H318V0H308Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-2218" d="M55 251Q55 328 112 386T249 444T386 388T444 249Q444 171 388 113T250 55Q170 55 113 112T55 251ZM245 403Q188 403 142 361T96 250Q96 183 141 140T250 96Q284 96 313 109T354 135T375 160Q403 197 403 250Q403 313 360 358T245 403Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path>
+<path stroke-width="1" id="E1-MJMAIN-2E" d="M78 60Q78 84 95 102T138 120Q162 120 180 104T199 61Q199 36 182 18T139 0T96 17T78 60Z"></path>
+</defs>
+<g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)" aria-hidden="true">
+ <use xlink:href="#E1-MJMAINB-4A" x="0" y="0"></use>
+<g transform="translate(594,-313)">
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAINB-66" x="0" y="0"></use>
+<g transform="translate(342,274)">
+ <use transform="scale(0.574)" xlink:href="#E1-MJMAIN-2212" x="0" y="0"></use>
+ <use transform="scale(0.574)" xlink:href="#E1-MJMAIN-31" x="778" y="0"></use>
+</g>
+</g>
+ <use xlink:href="#E1-MJMAIN-2218" x="2064" y="0"></use>
+ <use xlink:href="#E1-MJMAINB-66" x="2786" y="0"></use>
+ <use xlink:href="#E1-MJMAIN-3D" x="3518" y="0"></use>
+<g transform="translate(4574,0)">
+ <use xlink:href="#E1-MJMAINB-4A" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAINB-66" x="840" y="-214"></use>
+<g transform="translate(1015,413)">
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-2212" x="0" y="0"></use>
+ <use transform="scale(0.707)" xlink:href="#E1-MJMAIN-31" x="778" y="0"></use>
+</g>
+</g>
+ <use xlink:href="#E1-MJMAIN-2E" x="6593" y="0"></use>
+</g>
+</svg>

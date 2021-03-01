@@ -1,0 +1,4 @@
+nav:
+    - intro-Keras: intro-Keras.md
+    - Getting-started-with-the-Keras-Sequential-model: Getting-started-with-the-Keras-Sequential-model.md
+    - keras-Layers-Convolutional-Layers: keras-Layers-Convolutional-Layers.md
