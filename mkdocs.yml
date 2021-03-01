@@ -1,78 +1,257 @@
 edit_uri: ''
 extra_css:
 - css/extra.css
+extra_javascript:
+- https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
 google_analytics:
 - UA-27795084-5
 - mkdocs.org
 markdown_extensions:
 - toc:
-    permalink: '#'
+    separator: '#'
+- admonition
+- def_list
+- mdx_gh_links:
+    repo: mkdocs
+    user: mkdocs
+- pymdownx.arithmatex
+- pymdownx.betterem:
+    smart_enable: all
+- pymdownx.caret
+- pymdownx.critic
+- pymdownx.details
+- pymdownx.inlinehilite
+- pymdownx.magiclink
+- pymdownx.mark
+- pymdownx.smartsymbols
+- pymdownx.superfences
+- pymdownx.tasklist:
+    custom_checkbox: true
+- pymdownx.tilde
 nav:
 - Home: index.md
 - AI-meeting: AI-meeting.md
-- AI-papers: AI-papers.md
+- AI-papers:
+  - Introduction: AI-papers/index.md
+  - Reading-record: AI-papers/Reading-record.md
 - Research-Institution&Researcher:
   - Researcher: Research-Institution&Researcher/Researcher.md
   - Research-institution: Research-Institution&Researcher/Research-institution.md
 - Theory:
   - Introduction: Theory/index.md
-  - Probability-theory-and-Statistics:
-    - Introduction: Theory/Probability-theory-and-Statistics/index.md
-    - Probability-theory:
-      - Probability-theory: Theory/Probability-theory-and-Statistics/Probability-theory/Probability-theory.md
-      - Stochastic-process:
-        - Stochastic-process: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Stochastic-process.md
-        - Markov-chain: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Markov-chain.md
-        - Independent-and-identically-distributed-random-variables: Theory/Probability-theory-and-Statistics/Probability-theory/Stochastic-process/Independent-and-identically-distributed-random-variables.md
-    - Statistics:
-      - Introduction: Theory/Probability-theory-and-Statistics/Statistics/index.md
-      - Statistics: Theory/Probability-theory-and-Statistics/Statistics/Statistics.md
-      - Statistical-inference: Theory/Probability-theory-and-Statistics/Statistics/Statistical-inference.md
-      - Statistical-model: Theory/Probability-theory-and-Statistics/Statistics/Statistical-model.md
-      - VS-statistical-interference-VS-descriptive-statistics: Theory/Probability-theory-and-Statistics/Statistics/VS-statistical-interference-VS-descriptive-statistics.md
   - Deep-learning:
+    - Introduction: Theory/Deep-learning/index.md
     - Book-deep-learning:
       - Introduction: Theory/Deep-learning/Book-deep-learning/Deep-learning-book.md
-      - Chapter-1-Introduction: Theory/Deep-learning/Book-deep-learning/Chapter-1-Introduction.md
-      - Artificial-neural-network: Theory/Deep-learning/Book-deep-learning/Artificial-neural-network.md
-      - Chapter-5-Machine-Learning-Basics:
-        - Chapter-5-Machine-Learning-Basics: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Chapter-5-Machine-Learning-Basics.md
-        - Task:
-          - Pattern-recognition: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Pattern-recognition.md
-          - Sequence-labeling:
-            - Sequence-labeling: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling.md
-            - Sequence-Labeling-Generative-and-Discriminative: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative.md
-        - 5.2-Capacity-Overfitting-and-Underfitting: Theory/Deep-learning/Book-deep-learning/Chapter-5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting.md
-    - End-to-end:
-      - Introduction: Theory/Deep-learning/End-to-end/End-to-end.md
-      - End-to-end-reinforcement-learning: Theory/Deep-learning/End-to-end/wikipedia-End-to-end-reinforcement-learning.md
-    - Attention:
-      - Papers: Theory/Deep-learning/Attention/Papers.md
+      - Part-I-Applied-Math-and-Machine-Learning-Basics:
+        - 1-Introduction: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/1-Introduction.md
+        - 5-Machine-Learning-Basics:
+          - 5-Machine-Learning-Basics: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5-Machine-Learning-Basics.md
+          - 5.1-Learning-Algorithms: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.1-Learning-Algorithms.md
+          - Task:
+            - Pattern-recognition: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Pattern-recognition.md
+            - Sequence-labeling:
+              - Sequence-labeling: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling.md
+              - Sequence-Labeling-Generative-and-Discriminative: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative.md
+          - 5.2-Capacity-Overfitting-and-Underfitting: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting.md
+          - 5.3-Hyperparameters-and-Validation-Sets:
+            - Hyperparameter(machine-learning): Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Hyperparameter(machine-learning).md
+            - Cross-validation(statistics): Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Cross-validation(statistics).md
+          - 5.4-Estimators-Bias-and-Variance:
+            - 5.4-Estimators-Bias-and-Variance: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/5.4-Estimators-Bias-and-Variance.md
+            - "Bias\u2013variance tradeoff": "Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/Bias\u2013\
+                variance tradeoff.md"
+          - 5.5-Maximum-Likelihood-Estimation:
+            - 5.5-Maximum-Likelihood-Estimation: Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.5-Maximum-Likelihood-Estimation/5.5-Maximum-Likelihood-Estimation.md
+      - Part-II-Deep-Networks-Modern-Practices:
+        - Part-II-Deep-Networksb-Modern-Practice: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/Part-II-Deep-Networksb-Modern-Practice.md
+        - 6-Deep-Feedforward-Networks:
+          - 6-Deep-Feedforward-Network: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6-Deep-Feedforward-Network.md
+          - 6.2-Gradient-Based-Learning: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.2-Gradient-Based-Learning.md
+          - 6.4-Architecture-Design:
+            - 6.4-Architecture-Design: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/6.4-Architecture-Design.md
+            - Universal-approximation-theorem: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/Universal-approximation-theorem.md
+          - 6.5-Back-Propagation-and-Other-Differentiation-algorithms:
+            - Introduction: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/index.md
+            - Back-Propagation:
+              - Introduction: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/index.md
+              - zhihu-Back-Propagation: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/zhihu-Back-Propagation.md
+              - wikipedia-Backpropagation: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/wikipedia-Backpropagation.md
+            - 6.5-Back-Propagation-and-Other-Differentiation: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/6.5-Back-Propagation-and-Other-Differentiation.md
+            - Implementation: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Implementation.md
+            - Backpropagation-through-time: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Backpropagation-through-time.md
+        - 7-Regularization-for-Deep-Learning:
+          - 7.8-Early-Stopping: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/7-Regularization-for-Deep-Learning/7.8-Early-Stopping.md
+        - 8-Optimization-for-Training-Deep-Models:
+          - 8-Optimization-for-Training-Deep-Models: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/8-Optimization-for-Training-Deep-Models.md
+          - SGD:
+            - 5.9-Stochastic-Gradient-Descent: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/5.9-Stochastic-Gradient-Descent.md
+            - Gradient-descent: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Gradient-descent.md
+            - Stochastic-gradient-descent: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Stochastic-gradient-descent.md
+        - 9-Convolutional-Networks:
+          - 9-Convolutional-Networks: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9-Convolutional-Networks.md
+          - 9.3-Pooling: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9.3-Pooling.md
+          - CS231n:
+            - Introduction: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/index.md
+            - Convolutional-Neural-Networks(CNNs-or-ConvNets): Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/Convolutional-Neural-Networks(CNNs-or-ConvNets).md
+          - CNN-translation-invariance: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-translation-invariance.md
+          - CNN-pooling-layer: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-pooling-layer.md
+          - VGG:
+            - VGG: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/VGG/VGG.md
+          - AlexNet:
+            - AlexNet: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/AlexNet/AlexNet.md
+          - Fei-Fei-Li: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/Fei-Fei-Li.md
+          - ImageNet: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/ImageNet.md
+          - paper-Convolutional-Sequence-to-Sequence-Learning: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/paper-Convolutional-Sequence-to-Sequence-Learning.md
+        - 10-Sequence-Modeling-Recurrent-and-Recursive-Nets:
+          - 10-Sequence-Modeling-Recurrentand-Recursive-Nets: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10-Sequence-Modeling-Recurrentand-Recursive-Nets.md
+          - 10.1-Unfolding-Computational-Graphs: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.1-Unfolding-Computational-Graphs.md
+          - 10.3-Bidirectional-RNNs: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.3-Bidirectional-RNNs.md
+          - 10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures.md
+          - 10.10-The-Long-Short-Term-Memory-and-Other-Gated: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.10-The-Long-Short-Term-Memory-and-Other-Gated.md
+          - LSTM:
+            - LSTM: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/LSTM.md
+            - colah-Understanding-LSTM-Networks: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/colah-Understanding-LSTM-Networks.md
+            - RNN-and-LSTM-tutorial: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/RNN-and-LSTM-tutorial.md
+          - RNN:
+            - Introduction: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/RNN/index.md
+        - 12-Applications:
+          - 12.4-Natural-Language-Processing:
+            - 12.4.5-Neural-Machine-Translation: Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/12-Applications/12.4-Natural-Language-Processing/12.4.5-Neural-Machine-Translation.md
+    - Book-Neural-Networks-and-Deep-Learning:
+      - Introduction: Theory/Deep-learning/Book-Neural-Networks-and-Deep-Learning/index.md
+    - Guide:
+      - Tutorial:
+        - Artificial-neural-network: Theory/Deep-learning/Guide/Tutorial/Artificial-neural-network.md
+        - Neural-Networks-Tutorial: Theory/Deep-learning/Guide/Tutorial/Neural-Networks-Tutorial.md
+        - ujjwalkarn-A-Quick-Introduction-to-Neural-Networks: Theory/Deep-learning/Guide/Tutorial/ujjwalkarn-A-Quick-Introduction-to-Neural-Networks.md
+      - Computation-And-model-And-computational-graph:
+        - Introduction: Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/index.md
+        - Computational-graph: Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/Computational-graph.md
+      - Model-capacity:
+        - Model-capacity: Theory/Deep-learning/Guide/Model-capacity/Model-capacity.md
+      - Model-initialization:
+        - Model-initialization: Theory/Deep-learning/Guide/Model-initialization/Model-initialization.md
+      - Batch-epoch-step:
+        - Buzz-word-batch-size: Theory/Deep-learning/Guide/Batch-epoch-step/Buzz-word-batch-size.md
+        - Batch-VS-epoch: Theory/Deep-learning/Guide/Batch-epoch-step/Batch-VS-epoch.md
+        - Steps-VS-epochs: Theory/Deep-learning/Guide/Batch-epoch-step/Steps-VS-epochs.md
+        - Word-epoch: Theory/Deep-learning/Guide/Batch-epoch-step/Word-epoch.md
+      - Activation-function:
+        - Activation-function: Theory/Deep-learning/Guide/Activation-function/Activation-function.md
+        - ReLU-VS-sigmoid-VS-softmax: Theory/Deep-learning/Guide/Activation-function/ReLU-VS-sigmoid-VS-softmax.md
+        - sigmoid-in-deep-learning: Theory/Deep-learning/Guide/Activation-function/sigmoid-in-deep-learning.md
+      - Design-neural-network: Theory/Deep-learning/Guide/Design-neural-network.md
+      - End-to-end:
+        - Introduction: Theory/Deep-learning/Guide/End-to-end/End-to-end.md
+        - End-to-end-reinforcement-learning: Theory/Deep-learning/Guide/End-to-end/wikipedia-End-to-end-reinforcement-learning.md
+      - Transformer-and-attention:
+        - Papers: Theory/Deep-learning/Guide/Transformer-and-attention/Papers.md
   - Feature-engineering:
     - Data-transformation(statistics): Theory/Feature-engineering/Data-transformation(statistics).md
     - Feature-scaling: Theory/Feature-engineering/Feature-scaling.md
     - Normalization(statistics): Theory/Feature-engineering/Normalization(statistics).md
-  - Markov-model:
-    - Markov-chain: Theory/Markov-model/Markov-chain.md
-    - Markov-models: Theory/Markov-model/Markov-models.md
-    - Hidden-Markov-model: Theory/Markov-model/Hidden-Markov-model.md
-    - Viterbi-algorithm: Theory/Markov-model/Viterbi-algorithm.md
-    - Forward-algorithm: Theory/Markov-model/Forward-algorithm.md
-  - CRF:
-    - CRF: Theory/CRF/crf.md
+  - Machine-learning:
+    - Introduction: Theory/Machine-learning/index.md
+    - Markov-model:
+      - Markov-chain: Theory/Machine-learning/Markov-model/Markov-chain.md
+      - Markov-models: Theory/Machine-learning/Markov-model/Markov-models.md
+      - Hidden-Markov-model: Theory/Machine-learning/Markov-model/Hidden-Markov-model.md
+      - Viterbi-algorithm: Theory/Machine-learning/Markov-model/Viterbi-algorithm.md
+      - Forward-algorithm: Theory/Machine-learning/Markov-model/Forward-algorithm.md
+    - CRF:
+      - CRF: Theory/Machine-learning/CRF/crf.md
   - Data-generating-process: Theory/Data-generating-process.md
   - VS-statistical-model-VS-machine-learning-model: Theory/VS-statistical-model-VS-machine-learning-model.md
   - VS-statistics-model-VS-stochastic-process: Theory/VS-statistical-model-VS-stochastic-process.md
 - Programming:
-  - Model-And-layer-And-computation-And-computational-graph: Programming/Model-And-layer-And-computation-And-computational-graph.md
-  - Programming-paradigm-of-deep-learning: Programming/Programming-paradigm-of-deep-learning.md
+  - Programming-paradigm:
+    - Introduction: Programming/Programming-paradigm/index.md
+    - Symbolic-and-imperative: Programming/Programming-paradigm/Symbolic-and-imperative.md
+  - TensorFlow:
+    - Introduction: Programming/TensorFlow/index.md
+    - Doc: Programming/TensorFlow/Doc.md
+    - Implementation:
+      - Introduction: Programming/TensorFlow/Implementation/index.md
+      - TensorFlow-white-paper:
+        - Introduction: Programming/TensorFlow/Implementation/TensorFlow-white-paper/index.md
+        - whitepaper2015: Programming/TensorFlow/Implementation/TensorFlow-white-paper/whitepaper2015.md
+      - XLA:
+        - Introduction: Programming/TensorFlow/Implementation/XLA/index.md
+      - Tensorflow-src-explanation:
+        - Introduction: Programming/TensorFlow/Implementation/Tensorflow-src-explanation/index.md
+    - API:
+      - Introduction: Programming/TensorFlow/API/index.md
+      - Python:
+        - Introduction: Programming/TensorFlow/API/Python/index.md
+        - Core-graph-data-structures: Programming/TensorFlow/API/Python/Core-graph-data-structures.md
+        - Building-Graphs:
+          - Introduction: Programming/TensorFlow/API/Python/Building-Graphs/index.md
+          - tf.control_dependencies: Programming/TensorFlow/API/Python/Building-Graphs/tf.control_dependencies.md
+        - Low-level-API:
+          - tf.placeholder-VS-tf.Variable:
+            - Introduction: Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/index.md
+            - How-to-understand-tf.Variable: Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/How-to-understand-tf.Variable.md
+      - TODO-C++:
+        - Introduction: Programming/TensorFlow/API/TODO-C++/index.md
+  - pytorch:
+    - paper-Automatic-differentiation-in-PyTorch: Programming/pytorch/paper-Automatic-differentiation-in-PyTorch.md
+  - Keras:
+    - intro-Keras: Programming/Keras/intro-Keras.md
+    - Getting-started-with-the-Keras-Sequential-model: Programming/Keras/Getting-started-with-the-Keras-Sequential-model.md
+    - keras-Layers-Convolutional-Layers: Programming/Keras/keras-Layers-Convolutional-Layers.md
   - VS-pytorch-vs-tensorflow: Programming/VS-pytorch-vs-tensorflow.md
 - Data-set:
   - Introduction: Data-set/index.md
 - Application:
-  - NLP: Application/NLP.md
+  - NLP:
+    - Introduction: Application/NLP/index.md
+    - NLP: Application/NLP/NLP.md
+    - WordNet: Application/NLP/WordNet.md
+    - NLP-progress:
+      - Task-of-NLP: Application/NLP/NLP-progress/Task-of-NLP.md
+      - Entity-Linking:
+        - Entity-Linking: Application/NLP/NLP-progress/Entity-Linking/Entity-Linking.md
+      - Relationship-Extraction:
+        - Relationship-Extraction: Application/NLP/NLP-progress/Relationship-Extraction/Relationship-Extraction.md
+      - Shallow-parsing:
+        - Shallow-parsing: Application/NLP/NLP-progress/Shallow-parsing/Shallow-parsing.md
+      - Text-Classification:
+        - Text-Classification: Application/NLP/NLP-progress/Text-Classification/Text-Classification.md
+        - paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer: Application/NLP/NLP-progress/Text-Classification/paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer.md
+      - Part-of-speech-tagging:
+        - Introduction: Application/NLP/NLP-progress/Part-of-speech-tagging/index.md
+      - Neural-machine-translation:
+        - Neural-machine-translation: Application/NLP/NLP-progress/Neural-machine-translation/Neural-machine-translation.md
+      - Distant-supervision:
+        - Distant-supervision: Application/NLP/NLP-progress/Distant-supervision/Distant-supervision.md
+    - Representation-of-word:
+      - Representation-of-image-VS--word: Application/NLP/Representation-of-word/Representation-of-image-VS--word.md
+    - Linguistics:
+      - Introduction: Application/NLP/Linguistics/index.md
+      - Part-of-speech: Application/NLP/Linguistics/Part-of-speech.md
+    - Model:
+      - BERT:
+        - BERT: Application/NLP/Model/BERT/BERT.md
+        - BERT-paper: Application/NLP/Model/BERT/BERT-paper.md
+        - BERT-implementation: Application/NLP/Model/BERT/BERT-implementation.md
+      - GPT:
+        - openai-GPT-2: Application/NLP/Model/GPT/openai-GPT-2.md
+    - Lib:
+      - BERT:
+        - BERT: Application/NLP/Model/BERT/BERT.md
+        - BERT-paper: Application/NLP/Model/BERT/BERT-paper.md
+        - BERT-implementation: Application/NLP/Model/BERT/BERT-implementation.md
+      - GPT:
+        - openai-GPT-2: Application/NLP/Model/GPT/openai-GPT-2.md
+    - Book-Natural-Language-Processing-with-Python:
+      - Introduction: Application/NLP/Book-Natural-Language-Processing-with-Python/index.md
   - Computable-knowledge:
     - Introduction: Application/Computable-knowledge/Knowledge-representation-and-reasoning.md
+  - Sequence:
+    - Sequence: Application/Sequence/Sequence.md
+  - NRE:
+    - Introduction: Application/NRE/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/machine-learning

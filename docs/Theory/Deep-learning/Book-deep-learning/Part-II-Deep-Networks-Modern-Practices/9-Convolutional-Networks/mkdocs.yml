@@ -1,7 +1,7 @@
 nav:
     - 9-Convolutional-Networks: 9-Convolutional-Networks.md
     - 9.3-Pooling: 9.3-Pooling.md
-    - CS231n-Convolutional-Neural-Networks-for-Visual-Recognition: CS231n-Convolutional-Neural-Networks-for-Visual-Recognition
+    - CS231n: CS231n
     - CNN-translation-invariance: CNN-translation-invariance.md
     - CNN-pooling-layer: CNN-pooling-layer.md
     - VGG: VGG

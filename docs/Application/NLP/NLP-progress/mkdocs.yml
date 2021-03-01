@@ -1,7 +1,7 @@
 nav:
     - Task-of-NLP: Task-of-NLP.md
     - Entity-Linking: Entity-Linking
-    - Named-entity-recognition: Named-entity-recognition
+
     - Relationship-Extraction: Relationship-Extraction
     - Shallow-parsing: Shallow-parsing
     - Text-Classification: Text-Classification

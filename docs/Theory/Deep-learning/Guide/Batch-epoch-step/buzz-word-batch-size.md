@@ -1,4 +1,4 @@
-# [What is batch size in neural network?](https://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network)
+# stackexchange [What is batch size in neural network?](https://stats.stackexchange.com/questions/153531/what-is-batch-size-in-neural-network)
 
 I'm using `Python Keras package` for neural network. This is the [link](http://keras.io/models/). Is `batch_size` equals to number of test samples? From Wikipedia we have [this](http://en.wikipedia.org/wiki/Stochastic_gradient_descent#cite_note-2) information:
 

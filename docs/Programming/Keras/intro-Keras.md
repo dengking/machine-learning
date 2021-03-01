@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 
 
 # [Keras: The Python Deep Learning library](https://keras.io/)
@@ -31,7 +27,7 @@ Keras is compatible with: **Python 2.7-3.6**.
 
 
 
-***SUMMARY*** : 好的software就应当提供如Keras这样的API；
+> NOTE: 好的software就应当提供如Keras这样的API；
 
 ## Getting started: 30 seconds to Keras
 

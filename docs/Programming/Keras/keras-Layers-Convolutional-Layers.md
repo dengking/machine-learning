@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # [Convolutional Layers](https://keras.io/layers/convolutional/)
 
 ### Conv1D
@@ -28,11 +24,11 @@ When using this layer as the first layer in a model, provide an `input_shape` ar
 
 
 
-***SUMMARY*** : 关于**filters**和**kernel_size**，参见下面这篇文章：[Keras conv1d layer parameters: filters and kernel_size](https://stackoverflow.com/questions/46503816/keras-conv1d-layer-parameters-filters-and-kernel-size)
+> NOTE: 关于**filters**和**kernel_size**，参见下面这篇文章：[Keras conv1d layer parameters: filters and kernel_size](https://stackoverflow.com/questions/46503816/keras-conv1d-layer-parameters-filters-and-kernel-size)
 
 
 
-***SUMMARY*** : 关于channel-last和channel-first，参见这篇文章：[A Gentle Introduction to Channels-First and Channels-Last Image Formats](https://machinelearningmastery.com/a-gentle-introduction-to-channels-first-and-channels-last-image-formats-for-deep-learning/)
+> NOTE : 关于channel-last和channel-first，参见这篇文章：[A Gentle Introduction to Channels-First and Channels-Last Image Formats](https://machinelearningmastery.com/a-gentle-introduction-to-channels-first-and-channels-last-image-formats-for-deep-learning/)
 
 
 
@@ -40,7 +36,7 @@ When using this layer as the first layer in a model, provide an `input_shape` ar
 
 3D tensor with shape: `(batch, steps, channels)`
 
-***SUMMARY*** : 要想理解这段话中`steps`、`channels`的含义，首先需要仔细阅读上面的第三段，其中已经给出了一个example；这里我再补充一个例子：
+> NOTE: 要想理解这段话中`steps`、`channels`的含义，首先需要仔细阅读上面的第三段，其中已经给出了一个example；这里我再补充一个例子：
 
 如果以[Distant Supervision for Relation Extraction via Piecewise Convolutional Neural Networks](http://www.emnlp2015.org/proceedings/EMNLP/pdf/EMNLP203.pdf)中的sentence为例，那么`steps`则表示的sentence的长度，即sentence中word的个数；`channels`则表示word embedding+position embedding的长度；
 
@@ -48,11 +44,11 @@ When using this layer as the first layer in a model, provide an `input_shape` ar
 
 3D tensor with shape: `(batch, new_steps, filters)` `steps` value might have changed due to padding or strides.
 
-***SUMMARY*** : 上述output shape和[Distant Supervision for Relation Extraction via Piecewise Convolutional Neural Networks](http://www.emnlp2015.org/proceedings/EMNLP/pdf/EMNLP203.pdf)中描述的不同；
+> NOTE: 上述output shape和[Distant Supervision for Relation Extraction via Piecewise Convolutional Neural Networks](http://www.emnlp2015.org/proceedings/EMNLP/pdf/EMNLP203.pdf)中描述的不同；
 
 
 
-***SUMMARY*** : 一般在讲解model的原理时候都是不会涉及到`batch_size`的，而是仅仅一一条输入数据为例来进行说明，但是实现库中则必须要涉及到`batch_size`，这里便是这样；其实我觉得应该这样来理解：Conv1D肯定会对输入的`batch_size`条记录中的每一条都执行系统的卷积过程；
+> NOTE: 一般在讲解model的原理时候都是不会涉及到`batch_size`的，而是仅仅一一条输入数据为例来进行说明，但是实现库中则必须要涉及到`batch_size`，这里便是这样；其实我觉得应该这样来理解：Conv1D肯定会对输入的`batch_size`条记录中的每一条都执行系统的卷积过程；
 
 
 
