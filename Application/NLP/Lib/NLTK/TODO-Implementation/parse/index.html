@@ -13,21 +13,21 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/docs/">
+        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/TODO-Implementation/parse/">
       
-      <link rel="shortcut icon" href="../../../../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>Index - machine-learning</title>
+        <title>parser的实现分析 - machine-learning</title>
       
     
     
-      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.1655a90d.min.css">
+      <link rel="stylesheet" href="../../../../../../assets/stylesheets/main.1655a90d.min.css">
       
         
-        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.7fa14f5b.min.css">
+        <link rel="stylesheet" href="../../../../../../assets/stylesheets/palette.7fa14f5b.min.css">
         
       
     
@@ -42,7 +42,7 @@
     
     
     
-      <link rel="stylesheet" href="../../../../../css/extra.css">
+      <link rel="stylesheet" href="../../../../../../css/extra.css">
     
     
       
@@ -68,6 +68,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#parser" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -97,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Index
+              parser的实现分析
             
           </span>
         </div>
@@ -206,7 +211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../.." class="md-nav__link">
+      <a href="../../../../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -221,7 +226,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../AI-meeting/" class="md-nav__link">
+      <a href="../../../../../../AI-meeting/" class="md-nav__link">
         AI-meeting
       </a>
     </li>
@@ -257,7 +262,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../AI-papers/" class="md-nav__link">
+      <a href="../../../../../../AI-papers/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -269,7 +274,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../AI-papers/Reading-record/" class="md-nav__link">
+      <a href="../../../../../../AI-papers/Reading-record/" class="md-nav__link">
         Reading-record
       </a>
     </li>
@@ -311,7 +316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Research-Institution%26Researcher/Researcher/" class="md-nav__link">
+      <a href="../../../../../../Research-Institution%26Researcher/Researcher/" class="md-nav__link">
         Researcher
       </a>
     </li>
@@ -323,7 +328,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Research-Institution%26Researcher/Research-institution/" class="md-nav__link">
+      <a href="../../../../../../Research-Institution%26Researcher/Research-institution/" class="md-nav__link">
         Research-institution
       </a>
     </li>
@@ -365,7 +370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/" class="md-nav__link">
+      <a href="../../../../../../Theory/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -398,7 +403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -431,7 +436,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Deep-learning-book/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Deep-learning-book/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -464,7 +469,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/1-Introduction/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/1-Introduction/" class="md-nav__link">
         1-Introduction
       </a>
     </li>
@@ -497,7 +502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5-Machine-Learning-Basics/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5-Machine-Learning-Basics/" class="md-nav__link">
         5-Machine-Learning-Basics
       </a>
     </li>
@@ -509,7 +514,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.1-Learning-Algorithms/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.1-Learning-Algorithms/" class="md-nav__link">
         5.1-Learning-Algorithms
       </a>
     </li>
@@ -542,7 +547,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Pattern-recognition/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Pattern-recognition/" class="md-nav__link">
         Pattern-recognition
       </a>
     </li>
@@ -575,7 +580,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-labeling/" class="md-nav__link">
         Sequence-labeling
       </a>
     </li>
@@ -587,7 +592,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/Task/Sequence-labeling/Sequence-Labeling-Generative-and-Discriminative/" class="md-nav__link">
         Sequence-Labeling-Generative-and-Discriminative
       </a>
     </li>
@@ -611,7 +616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.2-Capacity-Overfitting-and-Underfitting/" class="md-nav__link">
         5.2-Capacity-Overfitting-and-Underfitting
       </a>
     </li>
@@ -644,7 +649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Hyperparameter%28machine-learning%29/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Hyperparameter%28machine-learning%29/" class="md-nav__link">
         Hyperparameter(machine-learning)
       </a>
     </li>
@@ -656,7 +661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Cross-validation%28statistics%29/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.3-Hyperparameters-and-Validation-Sets/Cross-validation%28statistics%29/" class="md-nav__link">
         Cross-validation(statistics)
       </a>
     </li>
@@ -695,7 +700,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/5.4-Estimators-Bias-and-Variance/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/5.4-Estimators-Bias-and-Variance/" class="md-nav__link">
         5.4-Estimators-Bias-and-Variance
       </a>
     </li>
@@ -707,7 +712,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/Bias%E2%80%93variance%20tradeoff/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.4-Estimators-Bias-and-Variance/Bias%E2%80%93variance%20tradeoff/" class="md-nav__link">
         Bias–variance tradeoff
       </a>
     </li>
@@ -746,7 +751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.5-Maximum-Likelihood-Estimation/5.5-Maximum-Likelihood-Estimation/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-I-Applied-Math-and-Machine-Learning-Basics/5-Machine-Learning-Basics/5.5-Maximum-Likelihood-Estimation/5.5-Maximum-Likelihood-Estimation/" class="md-nav__link">
         5.5-Maximum-Likelihood-Estimation
       </a>
     </li>
@@ -797,7 +802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/Part-II-Deep-Networksb-Modern-Practice/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/Part-II-Deep-Networksb-Modern-Practice/" class="md-nav__link">
         Part-II-Deep-Networksb-Modern-Practice
       </a>
     </li>
@@ -830,7 +835,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6-Deep-Feedforward-Network/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6-Deep-Feedforward-Network/" class="md-nav__link">
         6-Deep-Feedforward-Network
       </a>
     </li>
@@ -842,7 +847,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.2-Gradient-Based-Learning/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.2-Gradient-Based-Learning/" class="md-nav__link">
         6.2-Gradient-Based-Learning
       </a>
     </li>
@@ -875,7 +880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/6.4-Architecture-Design/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/6.4-Architecture-Design/" class="md-nav__link">
         6.4-Architecture-Design
       </a>
     </li>
@@ -887,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/Universal-approximation-theorem/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.4-Architecture-Design/Universal-approximation-theorem/" class="md-nav__link">
         Universal-approximation-theorem
       </a>
     </li>
@@ -926,7 +931,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -959,7 +964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -971,7 +976,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/zhihu-Back-Propagation/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/zhihu-Back-Propagation/" class="md-nav__link">
         zhihu-Back-Propagation
       </a>
     </li>
@@ -983,7 +988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/wikipedia-Backpropagation/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Back-Propagation/wikipedia-Backpropagation/" class="md-nav__link">
         wikipedia-Backpropagation
       </a>
     </li>
@@ -1001,7 +1006,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/6.5-Back-Propagation-and-Other-Differentiation/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/6.5-Back-Propagation-and-Other-Differentiation/" class="md-nav__link">
         6.5-Back-Propagation-and-Other-Differentiation
       </a>
     </li>
@@ -1013,7 +1018,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Implementation/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Implementation/" class="md-nav__link">
         Implementation
       </a>
     </li>
@@ -1025,7 +1030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Backpropagation-through-time/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/6-Deep-Feedforward-Networks/6.5-Back-Propagation-and-Other-Differentiation-algorithms/Backpropagation-through-time/" class="md-nav__link">
         Backpropagation-through-time
       </a>
     </li>
@@ -1070,7 +1075,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/7-Regularization-for-Deep-Learning/7.8-Early-Stopping/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/7-Regularization-for-Deep-Learning/7.8-Early-Stopping/" class="md-nav__link">
         7.8-Early-Stopping
       </a>
     </li>
@@ -1109,7 +1114,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/8-Optimization-for-Training-Deep-Models/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/8-Optimization-for-Training-Deep-Models/" class="md-nav__link">
         8-Optimization-for-Training-Deep-Models
       </a>
     </li>
@@ -1142,7 +1147,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/5.9-Stochastic-Gradient-Descent/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/5.9-Stochastic-Gradient-Descent/" class="md-nav__link">
         5.9-Stochastic-Gradient-Descent
       </a>
     </li>
@@ -1154,7 +1159,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Gradient-descent/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Gradient-descent/" class="md-nav__link">
         Gradient-descent
       </a>
     </li>
@@ -1166,7 +1171,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Stochastic-gradient-descent/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/8-Optimization-for-Training-Deep-Models/SGD/Stochastic-gradient-descent/" class="md-nav__link">
         Stochastic-gradient-descent
       </a>
     </li>
@@ -1211,7 +1216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9-Convolutional-Networks/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9-Convolutional-Networks/" class="md-nav__link">
         9-Convolutional-Networks
       </a>
     </li>
@@ -1223,7 +1228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9.3-Pooling/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/9.3-Pooling/" class="md-nav__link">
         9.3-Pooling
       </a>
     </li>
@@ -1256,7 +1261,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1268,7 +1273,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/Convolutional-Neural-Networks%28CNNs-or-ConvNets%29/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CS231n/Convolutional-Neural-Networks%28CNNs-or-ConvNets%29/" class="md-nav__link">
         Convolutional-Neural-Networks(CNNs-or-ConvNets)
       </a>
     </li>
@@ -1286,7 +1291,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-translation-invariance/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-translation-invariance/" class="md-nav__link">
         CNN-translation-invariance
       </a>
     </li>
@@ -1298,7 +1303,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-pooling-layer/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/CNN-pooling-layer/" class="md-nav__link">
         CNN-pooling-layer
       </a>
     </li>
@@ -1331,7 +1336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/VGG/VGG/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/VGG/VGG/" class="md-nav__link">
         VGG
       </a>
     </li>
@@ -1370,7 +1375,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/AlexNet/AlexNet/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/AlexNet/AlexNet/" class="md-nav__link">
         AlexNet
       </a>
     </li>
@@ -1388,7 +1393,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/Fei-Fei-Li/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/Fei-Fei-Li/" class="md-nav__link">
         Fei-Fei-Li
       </a>
     </li>
@@ -1400,7 +1405,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/ImageNet/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/ImageNet/" class="md-nav__link">
         ImageNet
       </a>
     </li>
@@ -1412,7 +1417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/paper-Convolutional-Sequence-to-Sequence-Learning/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/9-Convolutional-Networks/paper-Convolutional-Sequence-to-Sequence-Learning/" class="md-nav__link">
         paper-Convolutional-Sequence-to-Sequence-Learning
       </a>
     </li>
@@ -1451,7 +1456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10-Sequence-Modeling-Recurrentand-Recursive-Nets/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10-Sequence-Modeling-Recurrentand-Recursive-Nets/" class="md-nav__link">
         10-Sequence-Modeling-Recurrentand-Recursive-Nets
       </a>
     </li>
@@ -1463,7 +1468,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.1-Unfolding-Computational-Graphs/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.1-Unfolding-Computational-Graphs/" class="md-nav__link">
         10.1-Unfolding-Computational-Graphs
       </a>
     </li>
@@ -1475,7 +1480,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.3-Bidirectional-RNNs/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.3-Bidirectional-RNNs/" class="md-nav__link">
         10.3-Bidirectional-RNNs
       </a>
     </li>
@@ -1487,7 +1492,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures/" class="md-nav__link">
         10.4-Encoder-Decoder-Sequence-to-Sequence-Architectures
       </a>
     </li>
@@ -1499,7 +1504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.10-The-Long-Short-Term-Memory-and-Other-Gated/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/10.10-The-Long-Short-Term-Memory-and-Other-Gated/" class="md-nav__link">
         10.10-The-Long-Short-Term-Memory-and-Other-Gated
       </a>
     </li>
@@ -1532,7 +1537,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/LSTM/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/LSTM/" class="md-nav__link">
         LSTM
       </a>
     </li>
@@ -1544,7 +1549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/colah-Understanding-LSTM-Networks/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/colah-Understanding-LSTM-Networks/" class="md-nav__link">
         colah-Understanding-LSTM-Networks
       </a>
     </li>
@@ -1556,7 +1561,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/RNN-and-LSTM-tutorial/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/LSTM/RNN-and-LSTM-tutorial/" class="md-nav__link">
         RNN-and-LSTM-tutorial
       </a>
     </li>
@@ -1595,7 +1600,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/RNN/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/10-Sequence-Modeling-Recurrent-and-Recursive-Nets/RNN/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1661,7 +1666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/12-Applications/12.4-Natural-Language-Processing/12.4.5-Neural-Machine-Translation/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-deep-learning/Part-II-Deep-Networks-Modern-Practices/12-Applications/12.4-Natural-Language-Processing/12.4.5-Neural-Machine-Translation/" class="md-nav__link">
         12.4.5-Neural-Machine-Translation
       </a>
     </li>
@@ -1718,7 +1723,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Book-Neural-Networks-and-Deep-Learning/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Book-Neural-Networks-and-Deep-Learning/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1778,7 +1783,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Tutorial/Artificial-neural-network/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Tutorial/Artificial-neural-network/" class="md-nav__link">
         Artificial-neural-network
       </a>
     </li>
@@ -1790,7 +1795,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Tutorial/Neural-Networks-Tutorial/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Tutorial/Neural-Networks-Tutorial/" class="md-nav__link">
         Neural-Networks-Tutorial
       </a>
     </li>
@@ -1802,7 +1807,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Tutorial/ujjwalkarn-A-Quick-Introduction-to-Neural-Networks/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Tutorial/ujjwalkarn-A-Quick-Introduction-to-Neural-Networks/" class="md-nav__link">
         ujjwalkarn-A-Quick-Introduction-to-Neural-Networks
       </a>
     </li>
@@ -1841,7 +1846,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1853,7 +1858,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/Computational-graph/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Computation-And-model-And-computational-graph/Computational-graph/" class="md-nav__link">
         Computational-graph
       </a>
     </li>
@@ -1892,7 +1897,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Model-capacity/Model-capacity/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Model-capacity/Model-capacity/" class="md-nav__link">
         Model-capacity
       </a>
     </li>
@@ -1931,7 +1936,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Model-initialization/Model-initialization/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Model-initialization/Model-initialization/" class="md-nav__link">
         Model-initialization
       </a>
     </li>
@@ -1970,7 +1975,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Buzz-word-batch-size.md" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Buzz-word-batch-size.md" class="md-nav__link">
         Buzz-word-batch-size
       </a>
     </li>
@@ -1982,7 +1987,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Batch-VS-epoch/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Batch-VS-epoch/" class="md-nav__link">
         Batch-VS-epoch
       </a>
     </li>
@@ -1994,7 +1999,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Steps-VS-epochs/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Steps-VS-epochs/" class="md-nav__link">
         Steps-VS-epochs
       </a>
     </li>
@@ -2006,7 +2011,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Word-epoch.md" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Batch-epoch-step/Word-epoch.md" class="md-nav__link">
         Word-epoch
       </a>
     </li>
@@ -2045,7 +2050,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Activation-function/Activation-function/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Activation-function/Activation-function/" class="md-nav__link">
         Activation-function
       </a>
     </li>
@@ -2057,7 +2062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Activation-function/ReLU-VS-sigmoid-VS-softmax/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Activation-function/ReLU-VS-sigmoid-VS-softmax/" class="md-nav__link">
         ReLU-VS-sigmoid-VS-softmax
       </a>
     </li>
@@ -2069,7 +2074,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Activation-function/sigmoid-in-deep-learning/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Activation-function/sigmoid-in-deep-learning/" class="md-nav__link">
         sigmoid-in-deep-learning
       </a>
     </li>
@@ -2087,7 +2092,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Design-neural-network/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Design-neural-network/" class="md-nav__link">
         Design-neural-network
       </a>
     </li>
@@ -2120,7 +2125,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/End-to-end/End-to-end/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/End-to-end/End-to-end/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2132,7 +2137,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/End-to-end/wikipedia-End-to-end-reinforcement-learning/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/End-to-end/wikipedia-End-to-end-reinforcement-learning/" class="md-nav__link">
         End-to-end-reinforcement-learning
       </a>
     </li>
@@ -2171,7 +2176,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Deep-learning/Guide/Transformer-and-attention/Papers/" class="md-nav__link">
+      <a href="../../../../../../Theory/Deep-learning/Guide/Transformer-and-attention/Papers/" class="md-nav__link">
         Papers
       </a>
     </li>
@@ -2222,7 +2227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Feature-engineering/Data-transformation%28statistics%29/" class="md-nav__link">
+      <a href="../../../../../../Theory/Feature-engineering/Data-transformation%28statistics%29/" class="md-nav__link">
         Data-transformation(statistics)
       </a>
     </li>
@@ -2234,7 +2239,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Feature-engineering/Feature-scaling/" class="md-nav__link">
+      <a href="../../../../../../Theory/Feature-engineering/Feature-scaling/" class="md-nav__link">
         Feature-scaling
       </a>
     </li>
@@ -2246,7 +2251,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Feature-engineering/Normalization%28statistics%29/" class="md-nav__link">
+      <a href="../../../../../../Theory/Feature-engineering/Normalization%28statistics%29/" class="md-nav__link">
         Normalization(statistics)
       </a>
     </li>
@@ -2285,7 +2290,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Machine-learning/" class="md-nav__link">
+      <a href="../../../../../../Theory/Machine-learning/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2318,7 +2323,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Machine-learning/Markov-model/Markov-chain/" class="md-nav__link">
+      <a href="../../../../../../Theory/Machine-learning/Markov-model/Markov-chain/" class="md-nav__link">
         Markov-chain
       </a>
     </li>
@@ -2330,7 +2335,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Machine-learning/Markov-model/Markov-models/" class="md-nav__link">
+      <a href="../../../../../../Theory/Machine-learning/Markov-model/Markov-models/" class="md-nav__link">
         Markov-models
       </a>
     </li>
@@ -2342,7 +2347,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Machine-learning/Markov-model/Hidden-Markov-model/" class="md-nav__link">
+      <a href="../../../../../../Theory/Machine-learning/Markov-model/Hidden-Markov-model/" class="md-nav__link">
         Hidden-Markov-model
       </a>
     </li>
@@ -2354,7 +2359,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Machine-learning/Markov-model/Viterbi-algorithm/" class="md-nav__link">
+      <a href="../../../../../../Theory/Machine-learning/Markov-model/Viterbi-algorithm/" class="md-nav__link">
         Viterbi-algorithm
       </a>
     </li>
@@ -2366,7 +2371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Machine-learning/Markov-model/Forward-algorithm/" class="md-nav__link">
+      <a href="../../../../../../Theory/Machine-learning/Markov-model/Forward-algorithm/" class="md-nav__link">
         Forward-algorithm
       </a>
     </li>
@@ -2405,7 +2410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Machine-learning/CRF/crf/" class="md-nav__link">
+      <a href="../../../../../../Theory/Machine-learning/CRF/crf/" class="md-nav__link">
         CRF
       </a>
     </li>
@@ -2429,7 +2434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/Data-generating-process/" class="md-nav__link">
+      <a href="../../../../../../Theory/Data-generating-process/" class="md-nav__link">
         Data-generating-process
       </a>
     </li>
@@ -2441,7 +2446,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/VS-statistical-model-VS-machine-learning-model/" class="md-nav__link">
+      <a href="../../../../../../Theory/VS-statistical-model-VS-machine-learning-model/" class="md-nav__link">
         VS-statistical-model-VS-machine-learning-model
       </a>
     </li>
@@ -2453,7 +2458,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Theory/VS-statistical-model-VS-stochastic-process/" class="md-nav__link">
+      <a href="../../../../../../Theory/VS-statistical-model-VS-stochastic-process/" class="md-nav__link">
         VS-statistics-model-VS-stochastic-process
       </a>
     </li>
@@ -2516,7 +2521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/Programming-paradigm/" class="md-nav__link">
+      <a href="../../../../../../Programming/Programming-paradigm/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2528,7 +2533,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/Programming-paradigm/Symbolic-and-imperative/" class="md-nav__link">
+      <a href="../../../../../../Programming/Programming-paradigm/Symbolic-and-imperative/" class="md-nav__link">
         Symbolic-and-imperative
       </a>
     </li>
@@ -2567,7 +2572,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2579,7 +2584,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/Doc/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/Doc/" class="md-nav__link">
         Doc
       </a>
     </li>
@@ -2612,7 +2617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/Implementation/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/Implementation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2645,7 +2650,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/Implementation/TensorFlow-white-paper/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/Implementation/TensorFlow-white-paper/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2657,7 +2662,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/Implementation/TensorFlow-white-paper/whitepaper2015/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/Implementation/TensorFlow-white-paper/whitepaper2015/" class="md-nav__link">
         whitepaper2015
       </a>
     </li>
@@ -2696,7 +2701,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/Implementation/XLA/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/Implementation/XLA/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2735,7 +2740,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/Implementation/Tensorflow-src-explanation/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/Implementation/Tensorflow-src-explanation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2780,7 +2785,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2813,7 +2818,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/Python/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/Python/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2825,7 +2830,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/Python/Core-graph-data-structures/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/Python/Core-graph-data-structures/" class="md-nav__link">
         Core-graph-data-structures
       </a>
     </li>
@@ -2858,7 +2863,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/Python/Building-Graphs/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/Python/Building-Graphs/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2870,7 +2875,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/Python/Building-Graphs/tf.control_dependencies/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/Python/Building-Graphs/tf.control_dependencies/" class="md-nav__link">
         tf.control_dependencies
       </a>
     </li>
@@ -2930,7 +2935,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2942,7 +2947,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/How-to-understand-tf.Variable/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/Python/Low-level-API/tf.placeholder-VS-tf.Variable/How-to-understand-tf.Variable/" class="md-nav__link">
         How-to-understand-tf.Variable
       </a>
     </li>
@@ -2993,7 +2998,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/TensorFlow/API/TODO-C%2B%2B/" class="md-nav__link">
+      <a href="../../../../../../Programming/TensorFlow/API/TODO-C%2B%2B/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3044,7 +3049,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/pytorch/paper-Automatic-differentiation-in-PyTorch/" class="md-nav__link">
+      <a href="../../../../../../Programming/pytorch/paper-Automatic-differentiation-in-PyTorch/" class="md-nav__link">
         paper-Automatic-differentiation-in-PyTorch
       </a>
     </li>
@@ -3083,7 +3088,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/Keras/intro-Keras/" class="md-nav__link">
+      <a href="../../../../../../Programming/Keras/intro-Keras/" class="md-nav__link">
         intro-Keras
       </a>
     </li>
@@ -3095,7 +3100,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/Keras/Getting-started-with-the-Keras-Sequential-model/" class="md-nav__link">
+      <a href="../../../../../../Programming/Keras/Getting-started-with-the-Keras-Sequential-model/" class="md-nav__link">
         Getting-started-with-the-Keras-Sequential-model
       </a>
     </li>
@@ -3107,7 +3112,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/Keras/keras-Layers-Convolutional-Layers/" class="md-nav__link">
+      <a href="../../../../../../Programming/Keras/keras-Layers-Convolutional-Layers/" class="md-nav__link">
         keras-Layers-Convolutional-Layers
       </a>
     </li>
@@ -3125,7 +3130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Programming/VS-pytorch-vs-tensorflow/" class="md-nav__link">
+      <a href="../../../../../../Programming/VS-pytorch-vs-tensorflow/" class="md-nav__link">
         VS-pytorch-vs-tensorflow
       </a>
     </li>
@@ -3167,7 +3172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../../Data-set/" class="md-nav__link">
+      <a href="../../../../../../Data-set/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3230,7 +3235,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../../../" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3242,7 +3247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP/" class="md-nav__link">
+      <a href="../../../../NLP/" class="md-nav__link">
         NLP
       </a>
     </li>
@@ -3254,7 +3259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../WordNet/" class="md-nav__link">
+      <a href="../../../../WordNet/" class="md-nav__link">
         WordNet
       </a>
     </li>
@@ -3287,7 +3292,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Task-of-NLP/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Task-of-NLP/" class="md-nav__link">
         Task-of-NLP
       </a>
     </li>
@@ -3320,7 +3325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Entity-Linking/Entity-Linking/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Entity-Linking/Entity-Linking/" class="md-nav__link">
         Entity-Linking
       </a>
     </li>
@@ -3359,7 +3364,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Relationship-Extraction/Relationship-Extraction/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Relationship-Extraction/Relationship-Extraction/" class="md-nav__link">
         Relationship-Extraction
       </a>
     </li>
@@ -3398,7 +3403,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Shallow-parsing/Shallow-parsing/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Shallow-parsing/Shallow-parsing/" class="md-nav__link">
         Shallow-parsing
       </a>
     </li>
@@ -3437,7 +3442,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Text-Classification/Text-Classification/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Text-Classification/Text-Classification/" class="md-nav__link">
         Text-Classification
       </a>
     </li>
@@ -3449,7 +3454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Text-Classification/paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Text-Classification/paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer/" class="md-nav__link">
         paper-Bidirectional-LSTM-with-attention-mechanism-and-convolutional-layer
       </a>
     </li>
@@ -3488,7 +3493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Part-of-speech-tagging/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Part-of-speech-tagging/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3527,7 +3532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Neural-machine-translation/Neural-machine-translation/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Neural-machine-translation/Neural-machine-translation/" class="md-nav__link">
         Neural-machine-translation
       </a>
     </li>
@@ -3566,7 +3571,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../NLP-progress/Distant-supervision/Distant-supervision/" class="md-nav__link">
+      <a href="../../../../NLP-progress/Distant-supervision/Distant-supervision/" class="md-nav__link">
         Distant-supervision
       </a>
     </li>
@@ -3611,7 +3616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Representation-of-word/Representation-of-image-VS--word/" class="md-nav__link">
+      <a href="../../../../Representation-of-word/Representation-of-image-VS--word/" class="md-nav__link">
         Representation-of-image-VS--word
       </a>
     </li>
@@ -3650,7 +3655,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Linguistics/" class="md-nav__link">
+      <a href="../../../../Linguistics/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3662,7 +3667,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Linguistics/Part-of-speech/" class="md-nav__link">
+      <a href="../../../../Linguistics/Part-of-speech/" class="md-nav__link">
         Part-of-speech
       </a>
     </li>
@@ -3722,7 +3727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/BERT/BERT/" class="md-nav__link">
+      <a href="../../../../Model/BERT/BERT/" class="md-nav__link">
         BERT
       </a>
     </li>
@@ -3734,7 +3739,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/BERT/BERT-paper/" class="md-nav__link">
+      <a href="../../../../Model/BERT/BERT-paper/" class="md-nav__link">
         BERT-paper
       </a>
     </li>
@@ -3746,7 +3751,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/BERT/BERT-implementation/" class="md-nav__link">
+      <a href="../../../../Model/BERT/BERT-implementation/" class="md-nav__link">
         BERT-implementation
       </a>
     </li>
@@ -3785,7 +3790,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/GPT/openai-GPT-2/" class="md-nav__link">
+      <a href="../../../../Model/GPT/openai-GPT-2/" class="md-nav__link">
         openai-GPT-2
       </a>
     </li>
@@ -3851,7 +3856,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/BERT/BERT/" class="md-nav__link">
+      <a href="../../../../Model/BERT/BERT/" class="md-nav__link">
         BERT
       </a>
     </li>
@@ -3863,7 +3868,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/BERT/BERT-paper/" class="md-nav__link">
+      <a href="../../../../Model/BERT/BERT-paper/" class="md-nav__link">
         BERT-paper
       </a>
     </li>
@@ -3875,7 +3880,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/BERT/BERT-implementation/" class="md-nav__link">
+      <a href="../../../../Model/BERT/BERT-implementation/" class="md-nav__link">
         BERT-implementation
       </a>
     </li>
@@ -3914,7 +3919,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Model/GPT/openai-GPT-2/" class="md-nav__link">
+      <a href="../../../../Model/GPT/openai-GPT-2/" class="md-nav__link">
         openai-GPT-2
       </a>
     </li>
@@ -3959,7 +3964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Book-Natural-Language-Processing-with-Python/" class="md-nav__link">
+      <a href="../../../../Book-Natural-Language-Processing-with-Python/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4004,7 +4009,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Computable-knowledge/Knowledge-representation-and-reasoning/" class="md-nav__link">
+      <a href="../../../../../Computable-knowledge/Knowledge-representation-and-reasoning/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4043,7 +4048,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Sequence/Sequence/" class="md-nav__link">
+      <a href="../../../../../Sequence/Sequence/" class="md-nav__link">
         Sequence
       </a>
     </li>
@@ -4082,7 +4087,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../NRE/" class="md-nav__link">
+      <a href="../../../../../NRE/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -4108,20 +4113,249 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    功能分析
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    支持的语法
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nonterminal" class="md-nav__link">
+    Nonterminal
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#productions" class="md-nav__link">
+    Productions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grammars" class="md-nav__link">
+    Grammars
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#grammar" class="md-nav__link">
+    grammar
+  </a>
+  
+    <nav class="md-nav" aria-label="grammar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#class#recursivedescentparserparseri" class="md-nav__link">
+    class RecursiveDescentParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#transitionparserparseri" class="md-nav__link">
+    class TransitionParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#bottomupprobabilisticchartparserparseri" class="md-nav__link">
+    class BottomUpProbabilisticChartParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#maltparserparseri" class="md-nav__link">
+    class MaltParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#genericstanfordparserparseri" class="md-nav__link">
+    class GenericStanfordParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#viterbiparserparseri" class="md-nav__link">
+    class ViterbiParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#chartparserparseri" class="md-nav__link">
+    class ChartParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#genericcorenlpparserparseri#tokenizeri#taggeri" class="md-nav__link">
+    class GenericCoreNLPParser(ParserI, TokenizerI, TaggerI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#bllipparserparseri" class="md-nav__link">
+    class BllipParser(ParserI)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#class#shiftreduceparserparseri" class="md-nav__link">
+    class ShiftReduceParser(ParserI)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Index</h1>
-                
-                <p>这是我阅读<a href="http://www.nltk.org/book/">Natural Language Processing with Python</a>的笔记。</p>
-<p>我是在有一定的NLP知识的基础后来阅读这本书的，读后的收获有：</p>
+                <h1 id="parser">parser的实现分析</h1>
 <ul>
-<li>这个书为读者搭建了一个完整的NLP系统的构成部件，并分章节进行描述。我觉得作者的这种安排这是非常好的，读完后，读者能够清楚地知道需要做哪些事情；</li>
-<li>至于每一部件的实现方式，书中并没有给出具体的实现方式，这是可想而知的。因为随着技术的演进，不断地有全新的技术出现。但是无论技术如何更迭，它所要实现的目标，作者已经告诉了我们。</li>
+<li><code>tree.py</code></li>
+<li><code>probability.py</code></li>
+<li><code>grammar.py</code></li>
+<li>parse</li>
 </ul>
+<h2 id="_1">功能分析</h2>
+<p>根据用户指定的grammar，构造parser。</p>
+<h2 id="_2">支持的语法</h2>
+<ul>
+<li>CFG</li>
+<li>PCFG(<strong>probabilistic context free grammar</strong> )</li>
+</ul>
+<p>首先需要考虑的如何来表示<a href="https://en.wikipedia.org/wiki/Context-free_grammar">CFG</a>? 由<code>grammar.py</code>实现。</p>
+<h2 id="nonterminal">Nonterminal</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class Nonterminal</code></td>
+<td>A non-terminal symbol for a context free grammar, immutable and hashable</td>
+</tr>
+<tr>
+<td><code>class FeatStructNonterminal</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="productions">Productions</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class Production</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class DependencyProduction(Production)</code></td>
+<td>A dependency grammar production</td>
+</tr>
+<tr>
+<td><code>class ProbabilisticProduction</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="grammars">Grammars</h2>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>class CFG</code></td>
+<td>A context-free grammar.  A grammar consists of a start state and a set of productions.</td>
+</tr>
+<tr>
+<td><code>class FeatureGrammar(CFG)</code></td>
+<td>A dependency grammar production</td>
+</tr>
+<tr>
+<td><code>class DependencyGrammar</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>class ProbabilisticDependencyGrammar</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="grammar">grammar</h2>
+<h3 id="class#recursivedescentparserparseri"><code>class RecursiveDescentParser(ParserI)</code></h3>
+<h3 id="class#transitionparserparseri"><code>class TransitionParser(ParserI)</code></h3>
+<h3 id="class#bottomupprobabilisticchartparserparseri"><code>class BottomUpProbabilisticChartParser(ParserI)</code></h3>
+<h3 id="class#maltparserparseri"><code>class MaltParser(ParserI)</code></h3>
+<h3 id="class#genericstanfordparserparseri"><code>class GenericStanfordParser(ParserI)</code></h3>
+<h3 id="class#viterbiparserparseri"><code>class ViterbiParser(ParserI)</code></h3>
+<h3 id="class#chartparserparseri"><code>class ChartParser(ParserI)</code></h3>
+<h3 id="class#genericcorenlpparserparseri#tokenizeri#taggeri"><code>class GenericCoreNLPParser(ParserI, TokenizerI, TaggerI)</code></h3>
+<h3 id="class#bllipparserparseri"><code>class BllipParser(ParserI)</code></h3>
+<h3 id="class#shiftreduceparserparseri"><code>class ShiftReduceParser(ParserI)</code></h3>
                 
               
               
@@ -4155,10 +4389,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../../../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
     
-      <script src="../../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      <script src="../../../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       

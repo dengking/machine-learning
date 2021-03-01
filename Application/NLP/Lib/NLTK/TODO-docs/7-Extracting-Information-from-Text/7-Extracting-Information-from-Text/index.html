@@ -13,14 +13,14 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/implementation/parse/nltk.tree/">
+        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/TODO-docs/7-Extracting-Information-from-Text/7-Extracting-Information-from-Text/">
       
       <link rel="shortcut icon" href="../../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>[nltk.tree.Tree](https://github.com/nltk/nltk/blob/develop/nltk/tree.py) - machine-learning</title>
+        <title>7 Extracting Information from Text - machine-learning</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#nltktreetree" class="md-skip">
+        <a href="#7#extracting#information#from#text" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              [nltk.tree.Tree](https://github.com/nltk/nltk/blob/develop/nltk/tree.py)
+              7 Extracting Information from Text
             
           </span>
         </div>
@@ -4135,40 +4135,130 @@
               
                 
                 
-                <h1 id="nltktreetree"><a href="https://github.com/nltk/nltk/blob/develop/nltk/tree.py">nltk.tree.Tree</a></h1>
-<p>相关文档有：</p>
+                <div class="toc">
 <ul>
-<li><a href="http://www.nltk.org/howto/tree.html">Unit tests for nltk.tree.Tree</a></li>
+<li><a href="#7#extracting#information#from#text">7. Extracting Information from Text</a></li>
+<li><a href="#1#information#extraction">1  Information Extraction</a><ul>
+<li><a href="#11#information#extraction#architecture">1.1  Information Extraction Architecture</a></li>
 </ul>
-<p>看了它的实现后，发现它的实现方式和普通的实现树的方式不同：</p>
-<p>普通的实现方式都是定义<code>class Node</code>，然后<code>Node</code>中包含指向子节点的指针，这种方式是将树的构成看做是<code>Node</code>之间的关联；</p>
-<p>而它显示地定义<code>class Node</code>，直接定义<code>class Tree</code>，它将树的构成看做是<code>Tree</code>之间的关联。</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Tree</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: Expected a node value and child list &quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
-            <span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
-                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">() argument 2 should be a list, not a &quot;</span>
-                <span class="s2">&quot;string&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
-            <span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">list</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">children</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="o">=</span> <span class="n">node</span>
-</code></pre></div>
-<p>显然，虽然<code>class Tree</code>叫做<code>Tree</code>，但是实际上，它的功能非常类似于<code>Node</code>。</p>
-<p>可以看到，<code>class Tree</code>继承了<code>list</code>，它将和子树之间的关联全部保存与<code>list</code>中。</p>
-<p>另外它只有一个成员变量<code>_label</code>，这是因为<code>class Tree</code>主要用作parse tree，parse tree中的每个node只有一个label。</p>
-<p>下面是代码中给出的该类的文档：</p>
+</li>
+<li><a href="#2#chunking">2  Chunking</a><ul>
+<li><a href="#21#noun#phrase#chunking">2.1  Noun Phrase Chunking</a></li>
+<li><a href="#22#tag#patterns">2.2  Tag Patterns</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="7#extracting#information#from#text">7. Extracting Information from Text</h1>
+<p>For any given question, it's likely that someone has written the answer down somewhere. The amount of natural language text that is available in electronic form is truly staggering, and is increasing every day. However, the complexity of natural language can make it very difficult to access the information in that text. The state of the art in NLP is still a long way from being able to build general-purpose representations of meaning from unrestricted text. If we instead focus our efforts on a limited set of questions or "entity relations," such as "where are different facilities located," or "who is employed by what company," we can make significant progress. The goal of this chapter is to answer the following questions:</p>
+<ol>
+<li>How can we build a system that extracts structured data, such as tables, from unstructured text?</li>
+<li>What are some robust methods for identifying the entities and relationships described in a text?</li>
+<li>Which corpora are appropriate for this work, and how do we use them for training and evaluating our models?</li>
+</ol>
+<p>Along the way, we'll apply techniques from the last two chapters to the problems of <strong>chunking</strong> and <strong>named-entity recognition</strong>.</p>
+<h1 id="1#information#extraction">1  Information Extraction</h1>
+<p>Information comes in many shapes and sizes. One important form is <strong>structured data</strong>, where there is a regular and predictable organization of <strong>entities</strong> and <strong>relationships</strong>. For example, we might be interested in the relation between companies and locations. Given a particular company, we would like to be able to identify the locations where it does business; conversely, given a location, we would like to discover which companies do business in that location. If our data is in tabular form, such as the example in <a href="http://www.nltk.org/book/ch07.html#tab-db-locations">1.1</a>, then answering these queries is straightforward.</p>
+<p><strong>Table 1.1</strong>:</p>
+<p>Locations data</p>
+<table>
+<thead>
+<tr>
+<th>OrgName</th>
+<th>LocationName</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Omnicom</td>
+<td>New York</td>
+</tr>
+<tr>
+<td>DDB Needham</td>
+<td>New York</td>
+</tr>
+<tr>
+<td>Kaplan Thaler Group</td>
+<td>New York</td>
+</tr>
+<tr>
+<td>BBDO South</td>
+<td>Atlanta</td>
+</tr>
+<tr>
+<td>Georgia-Pacific</td>
+<td>Atlanta</td>
+</tr>
+</tbody>
+</table>
+<p>Things are more tricky if we try to get similar information out of text. For example, consider the following snippet (from nltk.corpus.ieer, for fileid NYT19980315.0085).</p>
 <blockquote>
-<p>A Tree represents a hierarchical grouping of leaves and subtrees. For example, each constituent in a syntax tree is represented by a single Tree.</p>
-<p>A tree's children are encoded as a list of leaves and subtrees, where a leaf is a basic (non-tree) value; and a subtree is a nested Tree.</p>
+<p>(1)       The fourth Wells account moving to another agency is the packaged paper-products division of Georgia-Pacific Corp., which arrived at Wells only last fall. Like Hertz and the History Channel, it is also leaving for an Omnicom-owned agency, the BBDO South unit of BBDO Worldwide. BBDO South in Atlanta, which handles corporate advertising for Georgia-Pacific, will assume additional duties for brands like Angel Soft toilet tissue and Sparkle paper towels, said Ken Haldin, a spokesman for Georgia-Pacific in Atlanta.</p>
 </blockquote>
-<p>从上述文档中，可以看出<code>class Tree</code>和普通的树的实现方式之间的一个差异：</p>
-<p>在普通的实现中，树中节点的类型都是相同的，这里把它称为<code>class Node</code>，无论是内节点还是叶子节点；</p>
-<p>但是在<code>class Tree</code>中，没有按照这种方式实现，而是所有的内节点的内省都是<code>class Tree</code>，而叶子节点的类型是basic (non-tree)  type。</p>
+<p>If you read through <a href="http://www.nltk.org/book/ch07.html#ex-ie4">(1)</a>, you will glean the information required to answer the example question. But how do we get a machine to understand enough about <a href="http://www.nltk.org/book/ch07.html#ex-ie4">(1)</a> to return the answers in <a href="http://www.nltk.org/book/ch07.html#tab-db-answers">1.2</a>? This is obviously a much harder task. Unlike <a href="http://www.nltk.org/book/ch07.html#tab-db-locations">1.1</a>, <a href="http://www.nltk.org/book/ch07.html#ex-ie4">(1)</a> contains no <strong>structure</strong> that links organization names with location names.</p>
+<p>One approach to this problem involves building a very general representation of meaning (<a href="http://www.nltk.org/book/ch10.html#chap-semantics">10.</a>). In this chapter we take a different approach, deciding in advance that we will only look for very specific kinds of information in text, such as the relation between organizations and locations. Rather than trying to use text like <a href="http://www.nltk.org/book/ch07.html#ex-ie4">(1)</a> to answer the question directly, we first convert the <strong>unstructured data</strong> of natural language sentences into the <strong>structured data</strong> of <a href="http://www.nltk.org/book/ch07.html#tab-db-locations">1.1</a>. Then we reap the benefits of powerful query tools such as SQL. This method of getting meaning from text is called <strong>Information Extraction</strong>.</p>
+<p><strong>Information Extraction</strong> has many applications, including business intelligence, resume harvesting, media analysis, sentiment detection, patent search, and email scanning. A particularly important area of current research involves the attempt to extract structured data out of electronically-available scientific literature, especially in the domain of biology and medicine.</p>
+<h2 id="11#information#extraction#architecture">1.1  Information Extraction Architecture</h2>
+<p><a href="http://www.nltk.org/book/ch07.html#fig-ie-architecture">1.1</a> shows the architecture for a simple <strong>information extraction system</strong>. It begins by processing a document using several of the procedures discussed in <a href="http://www.nltk.org/book/ch03.html#chap-words">3</a> and <a href="http://www.nltk.org/book/ch05.html#chap-tag">5.</a>: first, the raw <strong>text</strong> of the document is split into <strong>sentences</strong> using a <strong>sentence segmenter</strong>, and each <strong>sentence</strong> is further subdivided into <strong>words</strong> using a <strong>tokenizer</strong>. Next, each sentence is tagged with <strong>part-of-speech tags</strong>, which will prove very helpful in the next step, <strong>named entity detection</strong>. In this step, we search for mentions of potentially interesting entities in each sentence. Finally, we use <strong>relation detection</strong> to search for likely relations between different entities in the text.</p>
+<p><img alt="../images/ie-architecture.png" src="http://www.nltk.org/images/ie-architecture.png" /></p>
+<p><strong>Figure 1.1</strong>: Simple Pipeline Architecture for an Information Extraction System. This system takes the raw text of a document as its input, and generates a list of <code>(entity, relation, entity)</code> tuples as its output. For example, given a document that indicates that the company Georgia-Pacific is located in Atlanta, it might generate the tuple <code>([ORG: 'Georgia-Pacific'] 'in' [LOC: 'Atlanta'])</code>.</p>
+<p>To perform the first three tasks, we can define a simple function that simply connects together NLTK's default sentence segmenter [1], word tokenizer [2], and part-of-speech tagger [3]:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">ie_preprocess</span><span class="p">(</span><span class="n">document</span><span class="p">):</span>
+<span class="o">...</span>    <span class="n">sentences</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">sent_tokenize</span><span class="p">(</span><span class="n">document</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="o">...</span>    <span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">word_tokenize</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="o">...</span>    <span class="n">sentences</span> <span class="o">=</span> <span class="p">[</span><span class="n">nltk</span><span class="o">.</span><span class="n">pos_tag</span><span class="p">(</span><span class="n">sent</span><span class="p">)</span> <span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">]</span> <span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<p>Next, in <strong>named entity detection</strong>, we segment and label the entities that might participate in interesting relations with one another. Typically, these will be definite noun phrases such as <em>the knights who say "ni"</em>, or proper names such as <em>Monty Python</em>. In some tasks it is useful to also consider indefinite nouns or noun chunks, such as every student or cats, and these do not necessarily refer to entities in the same way as definite <code>NP</code>s and proper names.</p>
+<p>Finally, in relation extraction, we search for specific patterns between pairs of entities that occur near one another in the text, and use those patterns to build tuples recording the relationships between the entities.</p>
+<h1 id="2#chunking">2  Chunking</h1>
+<p>The basic technique we will use for entity detection is <strong>chunking</strong>, which segments and labels multi-token sequences as illustrated in <a href="http://www.nltk.org/book/ch07.html#fig-chunk-segmentation">2.1</a>. The smaller boxes show the word-level tokenization and part-of-speech tagging, while the large boxes show higher-level chunking. Each of these larger boxes is called a <strong>chunk</strong>. Like tokenization, which omits whitespace, chunking usually selects a subset of the tokens. Also like tokenization, the pieces produced by a chunker do not overlap in the source text.</p>
+<p><img alt="../images/chunk-segmentation.png" src="http://www.nltk.org/images/chunk-segmentation.png" /><strong>Figure 2.1</strong>: Segmentation and Labeling at both the Token and Chunk Levels</p>
+<p>In this section, we will explore chunking in some depth, beginning with the definition and representation of chunks. We will see regular expression and n-gram approaches to chunking, and will develop and evaluate chunkers using the CoNLL-2000 chunking corpus. We will then return in <a href="http://www.nltk.org/book/ch07.html#sec-ner">(5)</a> and <a href="http://www.nltk.org/book/ch07.html#sec-relextract">6</a> to the tasks of named entity recognition and relation extraction.</p>
+<h2 id="21#noun#phrase#chunking">2.1  Noun Phrase Chunking</h2>
+<p>We will begin by considering the task of <strong>noun phrase chunking</strong>, or <strong>NP-chunking</strong>, where we search for chunks corresponding to individual noun phrases. For example, here is some Wall Street Journal text with <code>NP</code>-chunks marked using brackets:</p>
+<blockquote>
+<p>(2)       [ The/DT market/NN ] for/IN [ system-management/NN software/NN ] for/IN [ Digital/NNP ] [ 's/POS hardware/NN ] is/VBZ fragmented/JJ enough/RB that/IN [ a/DT giant/NN ] such/JJ as/IN [ Computer/NNP Associates/NNPS ] should/MD do/VB well/RB there/RB ./.</p>
+</blockquote>
+<p>As we can see, <code>NP</code>-chunks are often smaller pieces than complete noun phrases. For example, <em>the market for system-management software for Digital's hardware</em> is a single noun phrase (containing two nested noun phrases), but it is captured in <code>NP</code>-chunks by the simpler chunk <em>the market</em>. One of the motivations for this difference is that <code>NP</code>-chunks are defined so as not to contain other <code>NP</code>-chunks. Consequently, any prepositional phrases or subordinate clauses that modify a nominal will not be included in the corresponding <code>NP</code>-chunk, since they almost certainly contain further noun phrases.</p>
+<p>One of the most useful sources of information for <code>NP</code>-chunking is <strong>part-of-speech tags</strong>. This is one of the motivations for performing <strong>part-of-speech tagging</strong> in our information extraction system. We demonstrate this approach using an example sentence that has been part-of-speech tagged in <a href="http://www.nltk.org/book/ch07.html#code-chunkex">2.2</a>. In order to create an <code>NP</code>-chunker, we will first define a <strong>chunk grammar</strong>, consisting of rules that indicate how sentences should be chunked. In this case, we will define a simple grammar with a single regular-expression rule. </p>
+<p>This rule says that an NP chunk should be formed whenever the chunker finds an optional determiner (<code>DT</code>) followed by any number of adjectives (<code>JJ</code>) and then a noun (<code>NN</code>). Using this grammar, we create a chunk parser, and test it on our example sentence. The result is a tree, which we can either print, or display graphically.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sentence</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;DT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;little&quot;</span><span class="p">,</span> <span class="s2">&quot;JJ&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;yellow&quot;</span><span class="p">,</span> <span class="s2">&quot;JJ&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;dog&quot;</span><span class="p">,</span> <span class="s2">&quot;NN&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;barked&quot;</span><span class="p">,</span> <span class="s2">&quot;VBD&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;at&quot;</span><span class="p">,</span> <span class="s2">&quot;IN&quot;</span><span class="p">),</span>  <span class="p">(</span><span class="s2">&quot;the&quot;</span><span class="p">,</span> <span class="s2">&quot;DT&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;cat&quot;</span><span class="p">,</span> <span class="s2">&quot;NN&quot;</span><span class="p">)]</span>
+
+<span class="n">grammar</span> <span class="o">=</span> <span class="s2">&quot;NP: {&lt;DT&gt;?&lt;JJ&gt;*&lt;NN&gt;}&quot;</span> 
+
+<span class="n">cp</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">RegexpParser</span><span class="p">(</span><span class="n">grammar</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">cp</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span> 
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span> 
+<span class="p">(</span><span class="n">S</span>
+  <span class="p">(</span><span class="n">NP</span> <span class="n">the</span><span class="o">/</span><span class="n">DT</span> <span class="n">little</span><span class="o">/</span><span class="n">JJ</span> <span class="n">yellow</span><span class="o">/</span><span class="n">JJ</span> <span class="n">dog</span><span class="o">/</span><span class="n">NN</span><span class="p">)</span>
+  <span class="n">barked</span><span class="o">/</span><span class="n">VBD</span>
+  <span class="n">at</span><span class="o">/</span><span class="n">IN</span>
+  <span class="p">(</span><span class="n">NP</span> <span class="n">the</span><span class="o">/</span><span class="n">DT</span> <span class="n">cat</span><span class="o">/</span><span class="n">NN</span><span class="p">))</span>
+<span class="n">result</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span> 
+</code></pre></div>
+<p><a href="http://www.nltk.org/book/pylisting/code_chunkex.py"><strong>Example 2.2 (code_chunkex.py)</strong></a>: <strong>Figure 2.2</strong>: Example of a Simple Regular Expression Based NP Chunker.</p>
+<p><img alt="tree_images/ch07-tree-1.png" src="http://www.nltk.org/book/tree_images/ch07-tree-1.png" /></p>
+<blockquote>
+<p>NOTE: In fact, this is a parse tree.</p>
+</blockquote>
+<h2 id="22#tag#patterns">2.2  Tag Patterns</h2>
+<p>The rules that make up a chunk grammar use <strong>tag patterns</strong> to describe sequences of tagged words. A tag pattern is a sequence of part-of-speech tags delimited using angle brackets, e.g. <code>?*</code>. Tag patterns are similar to regular expression patterns (<a href="http://www.nltk.org/book/ch03.html#sec-regular-expressions-word-patterns">3.4</a>). Now, consider the following noun phrases from the Wall Street Journal:</p>
+<div class="highlight"><pre><span></span><code>another/DT sharp/JJ dive/NN
+trade/NN figures/NNS
+any/DT new/JJ policy/NN measures/NNS
+earlier/JJR stages/NNS
+Panamanian/JJ dictator/NN Manuel/NNP Noriega/NNP
+</code></pre></div>
+<p>We can match these noun phrases using a slight refinement of the first tag pattern above, i.e. <code>?*+</code>. This will chunk any sequence of tokens beginning with an optional determiner, followed by zero or more adjectives of any type (including relative adjectives like <code>earlier/JJR</code>), followed by one or more nouns of any type. However, it is easy to find many more complicated examples which this rule will not cover:</p>
+<div class="highlight"><pre><span></span><code>his/PRP$ Mansion/NNP House/NNP speech/NN
+the/DT price/NN cutting/VBG
+3/CD %/NN to/TO 4/CD %/NN
+more/JJR than/IN 10/CD %/NN
+the/DT fastest/JJS developing/VBG trends/NNS
+&#39;s/POS skill/NN
+</code></pre></div>
+<p>Note</p>
+<p><strong>Your Turn:</strong> Try to come up with tag patterns to cover these cases. Test them using the graphical interface <code>nltk.app.chunkparser()</code>. Continue to refine your tag patterns with the help of the feedback given by this tool.</p>
                 
               
               

@@ -13,14 +13,14 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/docs/5-Categorizing-and-Tagging-Words/wikipedia-Part-of-speech-tagging/">
+        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/TODO-Implementation/parse/nltk.tree/">
       
       <link rel="shortcut icon" href="../../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>wikipedia Part of speech tagging - machine-learning</title>
+        <title>[nltk.tree.Tree](https://github.com/nltk/nltk/blob/develop/nltk/tree.py) - machine-learning</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#part-of-speech#tagging" class="md-skip">
+        <a href="#nltktreetree" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              wikipedia Part of speech tagging
+              [nltk.tree.Tree](https://github.com/nltk/nltk/blob/develop/nltk/tree.py)
             
           </span>
         </div>
@@ -4135,14 +4135,40 @@
               
                 
                 
-                <div class="toc">
+                <h1 id="nltktreetree"><a href="https://github.com/nltk/nltk/blob/develop/nltk/tree.py">nltk.tree.Tree</a></h1>
+<p>相关文档有：</p>
 <ul>
-<li><a href="#part-of-speech#tagging">Part-of-speech tagging</a></li>
+<li><a href="http://www.nltk.org/howto/tree.html">Unit tests for nltk.tree.Tree</a></li>
 </ul>
-</div>
-<h1 id="part-of-speech#tagging"><a href="https://en.wikipedia.org/wiki/Part-of-speech_tagging">Part-of-speech tagging</a></h1>
-<p>In <a href="https://en.wikipedia.org/wiki/Corpus_linguistics">corpus linguistics</a>, <strong>part-of-speech tagging</strong> (<strong>POS tagging</strong> or <strong>PoS tagging</strong> or <strong>POST</strong>), also called <strong>grammatical tagging</strong> or <strong>word-categorydisambiguation</strong>, is the process of marking up a word in a text (corpus) as corresponding to a particular <a href="https://en.wikipedia.org/wiki/Parts_of_speech">part of speech</a>,[<a href="https://en.wikipedia.org/wiki/Part-of-speech_tagging#cite_note-1">1]</a> based on both its definition and its context—i.e., its <a href="https://en.wikipedia.org/wiki/Lexicography">relationship with adjacent and related words</a> in a <a href="https://en.wikipedia.org/wiki/Phrase">phrase</a>, <a href="https://en.wikipedia.org/wiki/Sentence_(linguistics)">sentence</a>, or <a href="https://en.wikipedia.org/wiki/Paragraph">paragraph</a>. A simplified form of this is commonly taught to school-age children, in the identification of words as <a href="https://en.wikipedia.org/wiki/Noun">nouns</a>, <a href="https://en.wikipedia.org/wiki/Verb">verbs</a>, <a href="https://en.wikipedia.org/wiki/Adjective">adjectives</a>, <a href="https://en.wikipedia.org/wiki/Adverb">adverbs</a>, etc.</p>
-<p>Once performed by hand, POS tagging is now done in the context of <a href="https://en.wikipedia.org/wiki/Computational_linguistics">computational linguistics</a>, using <a href="https://en.wikipedia.org/wiki/Algorithms">algorithms</a> which associate discrete terms, as well as hidden parts of speech, in accordance with a set of descriptive tags. POS-tagging algorithms fall into two distinctive groups: rule-based and stochastic. <a href="https://en.wikipedia.org/wiki/Brill_tagger">E. Brill's tagger</a>, one of the first and most widely used English POS-taggers, employs rule-based algorithms.</p>
+<p>看了它的实现后，发现它的实现方式和普通的实现树的方式不同：</p>
+<p>普通的实现方式都是定义<code>class Node</code>，然后<code>Node</code>中包含指向子节点的指针，这种方式是将树的构成看做是<code>Node</code>之间的关联；</p>
+<p>而它显示地定义<code>class Node</code>，直接定义<code>class Tree</code>，它将树的构成看做是<code>Tree</code>之间的关联。</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Tree</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">,</span> <span class="n">children</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">children</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">: Expected a node value and child list &quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">children</span><span class="p">,</span> <span class="n">string_types</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="si">%s</span><span class="s2">() argument 2 should be a list, not a &quot;</span>
+                <span class="s2">&quot;string&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">list</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">children</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_label</span> <span class="o">=</span> <span class="n">node</span>
+</code></pre></div>
+<p>显然，虽然<code>class Tree</code>叫做<code>Tree</code>，但是实际上，它的功能非常类似于<code>Node</code>。</p>
+<p>可以看到，<code>class Tree</code>继承了<code>list</code>，它将和子树之间的关联全部保存与<code>list</code>中。</p>
+<p>另外它只有一个成员变量<code>_label</code>，这是因为<code>class Tree</code>主要用作parse tree，parse tree中的每个node只有一个label。</p>
+<p>下面是代码中给出的该类的文档：</p>
+<blockquote>
+<p>A Tree represents a hierarchical grouping of leaves and subtrees. For example, each constituent in a syntax tree is represented by a single Tree.</p>
+<p>A tree's children are encoded as a list of leaves and subtrees, where a leaf is a basic (non-tree) value; and a subtree is a nested Tree.</p>
+</blockquote>
+<p>从上述文档中，可以看出<code>class Tree</code>和普通的树的实现方式之间的一个差异：</p>
+<p>在普通的实现中，树中节点的类型都是相同的，这里把它称为<code>class Node</code>，无论是内节点还是叶子节点；</p>
+<p>但是在<code>class Tree</code>中，没有按照这种方式实现，而是所有的内节点的内省都是<code>class Tree</code>，而叶子节点的类型是basic (non-tree)  type。</p>
                 
               
               

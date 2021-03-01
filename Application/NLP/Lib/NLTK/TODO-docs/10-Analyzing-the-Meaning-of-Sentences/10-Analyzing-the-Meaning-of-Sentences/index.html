@@ -13,14 +13,14 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/docs/8-Analyzing-Sentence-Structure/8-Analyzing-Sentence-Structure/">
+        <link rel="canonical" href="https://dengking.github.io/machine-learning/Application/NLP/Lib/NLTK/TODO-docs/10-Analyzing-the-Meaning-of-Sentences/10-Analyzing-the-Meaning-of-Sentences/">
       
       <link rel="shortcut icon" href="../../../../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>8 Analyzing Sentence Structure - machine-learning</title>
+        <title>10 Analyzing the Meaning of Sentences - machine-learning</title>
       
     
     
@@ -70,7 +70,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#8#analyzing#sentence#structure" class="md-skip">
+        <a href="#10#analyzing#the#meaning#of#sentences" class="md-skip">
           Skip to content
         </a>
       
@@ -102,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              8 Analyzing Sentence Structure
+              10 Analyzing the Meaning of Sentences
             
           </span>
         </div>
@@ -4137,267 +4137,17 @@
                 
                 <div class="toc">
 <ul>
-<li><a href="#8#analyzing#sentence#structure">8. Analyzing Sentence Structure</a></li>
-<li><a href="#1#some#grammatical#dilemmas">1  Some Grammatical Dilemmas</a><ul>
-<li><a href="#11#linguistic#data#and#unlimited#possibilities">1.1  Linguistic Data and Unlimited Possibilities</a></li>
-<li><a href="#12#ubiquitous#ambiguity">1.2  Ubiquitous Ambiguity</a></li>
-</ul>
-</li>
-<li><a href="#2#whats#the#use#of#syntax">2  What's the Use of Syntax?</a></li>
-<li><a href="#3#context#free#grammar">3  Context Free Grammar</a><ul>
-<li><a href="#31#a#simple#grammar">3.1  A Simple Grammar</a></li>
-<li><a href="#32#writing#your#own#grammars">3.2  Writing Your Own Grammars</a></li>
-<li><a href="#33#recursion#in#syntactic#structure">3.3  Recursion in Syntactic Structure</a></li>
-</ul>
-</li>
-<li><a href="#4#parsing#with#context#free#grammar">4  Parsing With Context Free Grammar</a><ul>
-<li><a href="#41#recursive#descent#parsing">4.1  Recursive Descent Parsing</a></li>
-<li><a href="#42#shift-reduce#parsing">4.2  Shift-Reduce Parsing</a></li>
-<li><a href="#43#the#left-corner#parser">4.3  The Left-Corner Parser</a></li>
-<li><a href="#44#well-formed#substring#tables">4.4  Well-Formed Substring Tables</a></li>
-</ul>
-</li>
-<li><a href="#5#dependencies#and#dependency#grammar">5  Dependencies and Dependency Grammar</a></li>
-<li><a href="#6#grammar#development">6  Grammar Development</a><ul>
-<li><a href="#61#treebanks#and#grammars">6.1  Treebanks and Grammars</a></li>
-<li><a href="#62#pernicious#ambiguity">6.2  Pernicious Ambiguity</a></li>
-<li><a href="#63#weighted#grammar">6.3  Weighted Grammar</a></li>
-</ul>
-</li>
-<li><a href="#7#summary">7  Summary</a></li>
+<li><a href="#10#analyzing#the#meaning#of#sentences">10. Analyzing the Meaning of Sentences</a></li>
 </ul>
 </div>
-<h1 id="8#analyzing#sentence#structure">8. Analyzing Sentence Structure</h1>
-<p>Earlier chapters focused on words: how to identify them, analyze their structure, assign them to lexical categories, and access their meanings. We have also seen how to identify <strong>patterns</strong> in <strong>word sequences</strong> or n-grams. However, these methods only scratch the surface of the complex constraints that govern sentences. We need a way to deal with the ambiguity that <strong>natural language</strong> is famous for. We also need to be able to cope with the fact that there are an unlimited number of possible sentences, and we can only write finite programs to analyze their structures and discover their meanings.</p>
-<blockquote>
-<p>NOTE: As far as grammar is concerned, formal language is much simpler than natural language</p>
-</blockquote>
-<p>The goal of this chapter is to answer the following questions:</p>
+<h1 id="10#analyzing#the#meaning#of#sentences"><a href="http://www.nltk.org/book/ch10.html">10. Analyzing the Meaning of Sentences</a></h1>
+<p>We have seen how useful it is to harness the power of a computer to process text on a large scale. However, now that we have the machinery of parsers and feature based grammars, can we do anything similarly useful by analyzing the meaning of sentences? The goal of this chapter is to answer the following questions:</p>
 <ol>
-<li>How can we use a <strong>formal grammar</strong> to describe the structure of an unlimited set of sentences?</li>
-<li>How do we represent the structure of sentences using <strong>syntax trees</strong>?</li>
-<li>How do <strong>parsers</strong> analyze a sentence and automatically build a <strong>syntax tree</strong>?</li>
+<li>How can we represent natural language meaning so that a computer can process these <strong>representations</strong>?</li>
+<li>How can we associate meaning representations with an unlimited set of sentences?</li>
+<li>How can we use programs that connect the meaning representations of sentences to stores of knowledge?</li>
 </ol>
-<p>Along the way, we will cover the fundamentals of English syntax, and see that there are systematic aspects of meaning that are much easier to capture once we have identified the structure of sentences.</p>
-<blockquote>
-<p>NOTE: My GitHub project <a href="https://github.com/dengking/automata-and-formal-language">automata-and-formal-language</a> summary the knowledge related to formal language. </p>
-</blockquote>
-<h1 id="1#some#grammatical#dilemmas">1  Some Grammatical Dilemmas</h1>
-<h2 id="11#linguistic#data#and#unlimited#possibilities">1.1  Linguistic Data and Unlimited Possibilities</h2>
-<p>In this chapter, we will adopt the formal framework of "generative grammar", in which a "language" is considered to be nothing more than an enormous collection of all grammatical sentences, and a grammar is a formal notation that can be used for "generating" the members of this set. Grammars use recursive <strong>productions</strong> of the form <code>S</code> → <code>S</code> <em>and</em> <code>S</code>, as we will explore in <a href="http://www.nltk.org/book/ch08.html#sec-context-free-grammar">3</a>. In <a href="http://www.nltk.org/book/ch10.html#chap-semantics">10.</a> we will extend this, to automatically build up the meaning of a sentence out of the meanings of its parts.</p>
-<h2 id="12#ubiquitous#ambiguity">1.2  Ubiquitous Ambiguity</h2>
-<p>A well-known example of ambiguity is shown in <a href="http://www.nltk.org/book/ch08.html#ex-marx-elephant">(2)</a>, from the Groucho Marx movie, <em>Animal Crackers</em> (1930):</p>
-<blockquote>
-<p>(2)       While hunting in Africa, I shot an elephant in my pajamas. How he got into my pajamas, I don't know.</p>
-</blockquote>
-<p>Let's take a closer look at the ambiguity in the phrase: <em>I shot an elephant in my pajamas</em>. First we need to define a simple grammar:</p>
-<div class="highlight"><pre><span></span><code><span class="n">groucho_grammar</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">CFG</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;S -&gt; NP VP</span>
-<span class="s2">PP -&gt; P NP</span>
-<span class="s2">NP -&gt; Det N | Det N PP | &#39;I&#39;</span>
-<span class="s2">VP -&gt; V NP | VP PP</span>
-<span class="s2">Det -&gt; &#39;an&#39; | &#39;my&#39;</span>
-<span class="s2">N -&gt; &#39;elephant&#39; | &#39;pajamas&#39;</span>
-<span class="s2">V -&gt; &#39;shot&#39;</span>
-<span class="s2">P -&gt; &#39;in&#39;</span>
-<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
-</code></pre></div>
-<blockquote>
-<p>NOTE: What dose NP, VP mean? see </p>
-<ul>
-<li><a href="2  What's the Use of Syntax?">2  What's the Use of Syntax?</a></li>
-<li><a href="./3  Context Free Grammar">3  Context Free Grammar</a></li>
-</ul>
-</blockquote>
-<p>This grammar permits the sentence to be analyzed in two ways, depending on whether the prepositional phrase <em>in my pajamas</em> describes the elephant or the shooting event.</p>
-<div class="highlight"><pre><span></span><code><span class="n">sent</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;I&#39;</span><span class="p">,</span> <span class="s1">&#39;shot&#39;</span><span class="p">,</span> <span class="s1">&#39;an&#39;</span><span class="p">,</span> <span class="s1">&#39;elephant&#39;</span><span class="p">,</span> <span class="s1">&#39;in&#39;</span><span class="p">,</span> <span class="s1">&#39;my&#39;</span><span class="p">,</span> <span class="s1">&#39;pajamas&#39;</span><span class="p">]</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">ChartParser</span><span class="p">(</span><span class="n">groucho_grammar</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sent</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-</code></pre></div>
-<p>The program produces two bracketed structures, which we can depict as trees, as shown in <a href="http://www.nltk.org/book/ch08.html#ex-elephant">(3b)</a>:</p>
-<p>(3)</p>
-<table>
-<thead>
-<tr>
-<th>a.</th>
-<th><img alt="tree_images/ch08-tree-1.png" src="http://www.nltk.org/book/tree_images/ch08-tree-1.png" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>b.</td>
-<td><img alt="tree_images/ch08-tree-2.png" src="http://www.nltk.org/book/tree_images/ch08-tree-2.png" /></td>
-</tr>
-</tbody>
-</table>
-<p>Notice that there's no ambiguity concerning the meaning of any of the words;</p>
-<p>This chapter presents grammars and parsing, as the formal and computational methods for investigating and modeling the linguistic phenomena we have been discussing. As we shall see, patterns of well-formedness and ill-formedness in a sequence of words can be understood with respect to the phrase structure and dependencies. We can develop formal models of these structures using grammars and parsers. As before, a key motivation is natural language <em>understanding</em>. How much more of the meaning of a text can we access when we can reliably recognize the linguistic structures it contains? Having read in a text, can a program "understand" it enough to be able to answer simple questions about "what happened" or "who did what to whom"? Also as before, we will develop simple programs to process annotated corpora and perform useful tasks.</p>
-<h1 id="2#whats#the#use#of#syntax">2  What's the Use of Syntax?</h1>
-<p>In <a href="http://www.nltk.org/book/ch08.html#fig-ic-diagram-labeled">2.2</a>, we have added grammatical category labels to the words we saw in the earlier figure. The labels <code>NP</code>, <code>VP</code>, and <code>PP</code> stand for <strong>noun phrase</strong>, <strong>verb phrase</strong> and <strong>prepositional phrase</strong> respectively.</p>
-<p><img alt="../images/ic_diagram_labeled.png" src="http://www.nltk.org/images/ic_diagram_labeled.png" /></p>
-<p><strong>Figure 2.2</strong>: Substitution of Word Sequences Plus Grammatical Categories: This diagram reproduces <a href="http://www.nltk.org/book/ch08.html#fig-ic-diagram">2.1</a> along with grammatical categories corresponding to noun phrases (<code>NP</code>), verb phrases (<code>VP</code>), prepositional phrases (<code>PP</code>), and nominals (<code>Nom</code>).</p>
-<p>If we now strip out the words apart from the topmost row, add an <code>S</code> node, and flip the figure over, we end up with a standard phrase structure tree, shown in <a href="http://www.nltk.org/book/ch08.html#ex-phrase-structure-tree">(8)</a>. Each node in this tree (including the words) is called a <strong>constituent</strong>. The <strong>immediate constituents</strong> of <code>S</code> are <code>NP</code> and <code>VP</code>.</p>
-<p>(8)<img alt="tree_images/ch08-tree-3.png" src="http://www.nltk.org/book/tree_images/ch08-tree-3.png" /></p>
-<p>As we will see in the next section, a grammar specifies how the sentence can be subdivided into its immediate constituents, and how these can be further subdivided until we reach the level of individual words.</p>
-<blockquote>
-<p>Note</p>
-<p>As we saw in <a href="http://www.nltk.org/book/ch08.html#sec-dilemmas">1</a>, sentences can have arbitrary length. Consequently, phrase structure trees can have arbitrary <em>depth</em>. The cascaded chunk parsers we saw in <a href="http://www.nltk.org/book/ch07.html#sec-recursion-in-linguistic-structure">4</a> can only produce structures of bounded depth, so chunking methods aren't applicable here.</p>
-</blockquote>
-<h1 id="3#context#free#grammar">3  Context Free Grammar</h1>
-<h2 id="31#a#simple#grammar">3.1  A Simple Grammar</h2>
-<p>Let's start off by looking at a simple context-free grammar. By convention, the left-hand-side of the first production is the <strong>start-symbol</strong> of the grammar, typically <code>S</code>, and all well-formed trees must have this symbol as their root label. In NLTK, context-free grammars are defined in the <code>nltk.grammar</code> module. In <a href="http://www.nltk.org/book/ch08.html#code-cfg1">3.1</a> we define a grammar and show how to parse a simple sentence admitted by the grammar.</p>
-<div class="highlight"><pre><span></span><code><span class="n">grammar1</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">CFG</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">  S -&gt; NP VP</span>
-<span class="s2">  VP -&gt; V NP | V NP PP</span>
-<span class="s2">  PP -&gt; P NP</span>
-<span class="s2">  V -&gt; &quot;saw&quot; | &quot;ate&quot; | &quot;walked&quot;</span>
-<span class="s2">  NP -&gt; &quot;John&quot; | &quot;Mary&quot; | &quot;Bob&quot; | Det N | Det N PP</span>
-<span class="s2">  Det -&gt; &quot;a&quot; | &quot;an&quot; | &quot;the&quot; | &quot;my&quot;</span>
-<span class="s2">  N -&gt; &quot;man&quot; | &quot;dog&quot; | &quot;cat&quot; | &quot;telescope&quot; | &quot;park&quot;</span>
-<span class="s2">  P -&gt; &quot;in&quot; | &quot;on&quot; | &quot;by&quot; | &quot;with&quot;</span>
-<span class="s2">  &quot;&quot;&quot;</span><span class="p">)</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="n">sent</span> <span class="o">=</span> <span class="s2">&quot;Mary saw Bob&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="n">rd_parser</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">RecursiveDescentParser</span><span class="p">(</span><span class="n">grammar1</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">rd_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sent</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-</code></pre></div>
-<p>The grammar in <a href="http://www.nltk.org/book/ch08.html#code-cfg1">3.1</a> contains productions involving various syntactic categories, as laid out in <a href="http://www.nltk.org/book/ch08.html#tab-syncat">3.1</a>.</p>
-<p><strong>Table 3.1</strong>:</p>
-<p>Syntactic Categories</p>
-<table>
-<thead>
-<tr>
-<th>Symbol</th>
-<th>Meaning</th>
-<th>Example</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>S</td>
-<td>sentence</td>
-<td><em>the man walked</em></td>
-</tr>
-<tr>
-<td>NP</td>
-<td>noun phrase</td>
-<td><em>a dog</em></td>
-</tr>
-<tr>
-<td>VP</td>
-<td>verb phrase</td>
-<td><em>saw a park</em></td>
-</tr>
-<tr>
-<td>PP</td>
-<td>prepositional phrase</td>
-<td><em>with a telescope</em></td>
-</tr>
-<tr>
-<td>Det</td>
-<td>determiner</td>
-<td><em>the</em></td>
-</tr>
-<tr>
-<td>N</td>
-<td>noun</td>
-<td><em>dog</em></td>
-</tr>
-<tr>
-<td>V</td>
-<td>verb</td>
-<td><em>walked</em></td>
-</tr>
-<tr>
-<td>P</td>
-<td>preposition</td>
-<td><em>in</em></td>
-</tr>
-</tbody>
-</table>
-<p>A production like <code>VP -&gt; V NP | V NP PP</code> has a disjunction on the righthand side, shown by the <code>|</code> and is an abbreviation for the two productions <code>VP -&gt; V NP</code> and <code>VP -&gt; V NP PP</code>.</p>
-<p><img alt="../images/parse_rdparsewindow.png" src="http://www.nltk.org/images/parse_rdparsewindow.png" /></p>
-<p><strong>Figure 3.2</strong>: Recursive Descent Parser Demo: This tool allows you to watch the operation of a recursive descent parser as it grows the parse tree and matches it against the input words.</p>
-<blockquote>
-<p>Note</p>
-<p><strong>Your Turn:</strong> Try developing a simple grammar of your own, using the recursive descent parser application, <code>nltk.app.rdparser()</code>, shown in <a href="http://www.nltk.org/book/ch08.html#fig-parse-rdparsewindow">3.2</a>. It comes already loaded with a sample grammar, but you can edit this as you please (using the <code>Edit</code> menu). Change the grammar, and the sentence to be parsed, and run the parser using the <em>autostep</em> button.</p>
-</blockquote>
-<p>If we parse the sentence The dog saw a man in the park using the grammar shown in <a href="http://www.nltk.org/book/ch08.html#code-cfg1">3.1</a>, we end up with two trees, similar to those we saw for <a href="http://www.nltk.org/book/ch08.html#ex-elephant">(3b)</a>:</p>
-<table>
-<thead>
-<tr>
-<th>a.</th>
-<th></th>
-<th><img alt="tree_images/ch08-tree-4.png" src="http://www.nltk.org/book/tree_images/ch08-tree-4.png" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>b.</td>
-<td></td>
-<td><img alt="tree_images/ch08-tree-5.png" src="http://www.nltk.org/book/tree_images/ch08-tree-5.png" /></td>
-</tr>
-</tbody>
-</table>
-<h2 id="32#writing#your#own#grammars">3.2  Writing Your Own Grammars</h2>
-<p>If you are interested in experimenting with writing CFGs, you will find it helpful to create and edit your grammar in a text file, say <code>mygrammar.cfg</code>. You can then load it into NLTK and parse with it as follows:</p>
-<div class="highlight"><pre><span></span><code><span class="n">grammar1</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;file:mygrammar.cfg&#39;</span><span class="p">)</span>
-<span class="n">sent</span> <span class="o">=</span> <span class="s2">&quot;Mary saw Bob&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
-<span class="n">rd_parser</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">RecursiveDescentParser</span><span class="p">(</span><span class="n">grammar1</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">rd_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sent</span><span class="p">):</span>
-     <span class="nb">print</span><span class="p">(</span><span class="n">tree</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="33#recursion#in#syntactic#structure">3.3  Recursion in Syntactic Structure</h2>
-<p>A grammar is said to be <strong>recursive</strong> if a category occurring on the left hand side of a production also appears on the righthand side of a production, as illustrated in <a href="http://www.nltk.org/book/ch08.html#code-cfg2">3.3</a>. The production <code>Nom -&gt; Adj Nom</code> (where <code>Nom</code> is the category of nominals) involves <strong>direct recursion</strong> on the category <code>Nom</code>, whereas <strong>indirect recursion</strong> on <code>S</code> arises from the combination of two productions, namely <code>S -&gt; NP VP</code> and <code>VP -&gt; V S</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="n">grammar2</span> <span class="o">=</span> <span class="n">nltk</span><span class="o">.</span><span class="n">CFG</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">  S  -&gt; NP VP</span>
-<span class="s2">  NP -&gt; Det Nom | PropN</span>
-<span class="s2">  Nom -&gt; Adj Nom | N</span>
-<span class="s2">  VP -&gt; V Adj | V NP | V S | V NP PP</span>
-<span class="s2">  PP -&gt; P NP</span>
-<span class="s2">  PropN -&gt; &#39;Buster&#39; | &#39;Chatterer&#39; | &#39;Joe&#39;</span>
-<span class="s2">  Det -&gt; &#39;the&#39; | &#39;a&#39;</span>
-<span class="s2">  N -&gt; &#39;bear&#39; | &#39;squirrel&#39; | &#39;tree&#39; | &#39;fish&#39; | &#39;log&#39;</span>
-<span class="s2">  Adj  -&gt; &#39;angry&#39; | &#39;frightened&#39; |  &#39;little&#39; | &#39;tall&#39;</span>
-<span class="s2">  V -&gt;  &#39;chased&#39;  | &#39;saw&#39; | &#39;said&#39; | &#39;thought&#39; | &#39;was&#39; | &#39;put&#39;</span>
-<span class="s2">  P -&gt; &#39;on&#39;</span>
-<span class="s2">  &quot;&quot;&quot;</span><span class="p">)</span>
-</code></pre></div>
-<p><a href="http://www.nltk.org/book/pylisting/code_cfg2.py"><strong>Example 3.3 (code_cfg2.py)</strong></a>: <strong>Figure 3.3</strong>: A Recursive Context-Free Grammar</p>
-<p>To see how recursion arises from this grammar, consider the following trees. <a href="http://www.nltk.org/book/ch08.html#ex-recnominals">(10a)</a> involves nested nominal phrases, while <a href="http://www.nltk.org/book/ch08.html#ex-recsentences">(10b)</a> contains nested sentences.</p>
-<p>(10)</p>
-<table>
-<thead>
-<tr>
-<th>a.</th>
-<th></th>
-<th><img alt="tree_images/ch08-tree-6.png" src="http://www.nltk.org/book/tree_images/ch08-tree-6.png" /></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>b.</td>
-<td></td>
-<td><img alt="tree_images/ch08-tree-7.png" src="http://www.nltk.org/book/tree_images/ch08-tree-7.png" /></td>
-</tr>
-</tbody>
-</table>
-<p>We've only illustrated two levels of recursion here, but there's no upper limit on the depth. You can experiment with parsing sentences that involve more deeply nested structures. Beware that the <code>RecursiveDescentParser</code> is unable to handle <strong>left-recursive</strong> productions of the form <code>X -&gt; X Y</code>; we will return to this in <a href="http://www.nltk.org/book/ch08.html#sec-parsing">4</a>.</p>
-<h1 id="4#parsing#with#context#free#grammar">4  Parsing With Context Free Grammar</h1>
-<p>A <strong>parser</strong> processes input sentences according to the productions of a grammar, and builds one or more constituent structures that conform to the grammar. A grammar is a declarative specification of well-formedness — it is actually just a string, not a program. A parser is a procedural interpretation of the grammar. It searches through the space of trees licensed by a grammar to find one that has the required sentence along its fringe.</p>
-<p>A parser permits a grammar to be evaluated against a collection of test sentences, helping linguists to discover mistakes in their grammatical analysis. A parser can serve as a model of psycholinguistic processing, helping to explain the difficulties that humans have with processing certain syntactic constructions. Many natural language applications involve parsing at some point; for example, we would expect the natural language questions submitted to a question-answering system to undergo parsing as an initial step.In this section we see two simple parsing algorithms, a top-down method called recursive descent parsing, and a bottom-up method called shift-reduce parsing. We also see some more sophisticated algorithms, a top-down method with bottom-up filtering called <strong>left-corner parsing</strong>, and a <strong>dynamic programming</strong> technique called <strong>chart parsing</strong>.</p>
-<h2 id="41#recursive#descent#parsing">4.1  Recursive Descent Parsing</h2>
-<h2 id="42#shift-reduce#parsing">4.2  Shift-Reduce Parsing</h2>
-<h2 id="43#the#left-corner#parser">4.3  The Left-Corner Parser</h2>
-<h2 id="44#well-formed#substring#tables">4.4  Well-Formed Substring Tables</h2>
-<h1 id="5#dependencies#and#dependency#grammar">5  Dependencies and Dependency Grammar</h1>
-<h1 id="6#grammar#development">6  Grammar Development</h1>
-<p>Parsing builds trees over sentences, according to a phrase structure grammar. Now, all the examples we gave above only involved toy grammars containing a handful of productions. What happens if we try to scale up this approach to deal with realistic corpora of language? In this section we will see how to access treebanks, and look at the challenge of developing broad-coverage grammars.</p>
-<h2 id="61#treebanks#and#grammars">6.1  Treebanks and Grammars</h2>
-<h2 id="62#pernicious#ambiguity">6.2  Pernicious Ambiguity</h2>
-<h2 id="63#weighted#grammar">6.3  Weighted Grammar</h2>
-<h1 id="7#summary">7  Summary</h1>
+<p>Along the way we will learn some formal techniques in the field of logical semantics, and see how these can be used for interrogating databases that store facts about the world.</p>
                 
               
               
