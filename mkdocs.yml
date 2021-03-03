@@ -161,6 +161,7 @@ nav:
       - Forward-algorithm: Theory/Machine-learning/Markov-model/Forward-algorithm.md
     - CRF:
       - CRF: Theory/Machine-learning/CRF/crf.md
+      - paper-Conditional-Random-Fields-Probabilistic-Models: Theory/Machine-learning/CRF/paper-Conditional-Random-Fields-Probabilistic-Models.md
   - Data-generating-process: Theory/Data-generating-process.md
   - VS-statistical-model-VS-machine-learning-model: Theory/VS-statistical-model-VS-machine-learning-model.md
   - VS-statistics-model-VS-stochastic-process: Theory/VS-statistical-model-VS-stochastic-process.md
