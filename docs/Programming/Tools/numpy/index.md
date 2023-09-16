@@ -199,7 +199,67 @@ np.stack(arrays, axis=1).shape
 |          |                                                              |                                                              |
 |          |                                                              |                                                              |
 
-## Common routine
+### Split array
 
-stackoverflow [Easiest way to split 2d numpy array in to two 1d arrays?](https://stackoverflow.com/questions/66327451/easiest-way-to-split-2d-numpy-array-in-to-two-1d-arrays)
+
+
+#### [numpy.split](https://numpy.org/doc/stable/reference/generated/numpy.split.html) 
+
+
+
+> NOTE:
+>
+> 一、stackoverflow [Easiest way to split 2d numpy array in to two 1d arrays?](https://stackoverflow.com/questions/66327451/easiest-way-to-split-2d-numpy-array-in-to-two-1d-arrays) # [A](https://stackoverflow.com/a/66327490)
+>
+> ```python
+> import numpy as np
+> arr=np.array([[0,1],[2,3],[4,5],[6,7],[8,9],[10,11]])
+> arr1,arr2=np.split(arr,2,axis=1)
+> ```
+>
+> ```
+> arr1
+> Out[21]: 
+> array([[ 0],
+>        [ 2],
+>        [ 4],
+>        [ 6],
+>        [ 8],
+>        [10]])
+> 
+> arr2
+> Out[22]: 
+> array([[ 1],
+>        [ 3],
+>        [ 5],
+>        [ 7],
+>        [ 9],
+>        [11]])
+> ```
+>
+> 
+
+
+
+### Flat array
+
+一、geeksforgeeks [Python | Flatten a 2d numpy array into 1d array](https://www.geeksforgeeks.org/python-flatten-a-2d-numpy-array-into-1d-array/)
+
+Method #1 : Using [np.flatten()](https://numpy.org/doc/stable/reference/generated/numpy.ndarray.flatten.html) 
+
+Method #2: Using [np.ravel()](https://numpy.org/doc/stable/reference/generated/numpy.ravel.html) 
+
+Method #3: Using [np.reshape()](https://numpy.org/doc/stable/reference/generated/numpy.reshape.html) 
+
+二、[stackoverflow-From ND to 1D arrays](https://stackoverflow.com/questions/13730468/from-nd-to-1d-arrays)
+
+
+
+## Examples
+
+
+
+### scatter points
+
+https://colab.research.google.com/drive/1BLQ8hipphX0aMUnp6sICbRCe6YE9mZBy?usp=sharing
 
