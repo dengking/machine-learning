@@ -4,3 +4,5 @@ nav:
     - pytorch: pytorch
     - Keras: Keras
     - VS-pytorch-vs-tensorflow: VS-pytorch-vs-tensorflow.md
+    - NumFocus: NumFocus
+    
