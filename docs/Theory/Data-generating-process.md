@@ -7,3 +7,4 @@
 - [Statistical model](https://en.wikipedia.org/wiki/Statistical_model)
 - Deep learning book的5.2 Capacity, Overfitting and Underfitting
 
+
