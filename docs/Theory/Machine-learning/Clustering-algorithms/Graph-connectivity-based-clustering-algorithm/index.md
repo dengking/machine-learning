@@ -128,8 +128,6 @@ public class PerpendicularPointCluster {
 
 ---
 
-
-
 ### Q: strictly speaking, what does the cluster algorithm you just mentioned belong to
 
 Strictly speaking, the clustering algorithm described in the previous answer is an example of **graph-based clustering**. More specifically, it is called **connected component clustering** (or single-link clustering in graph theory).
@@ -170,5 +168,3 @@ Strictly speaking, the clustering algorithm described in the previous answer is 
 ---
 
 If you need a more formal citation or reference to clustering taxonomy, just ask!
-
-
