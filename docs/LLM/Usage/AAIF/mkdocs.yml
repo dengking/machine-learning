@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
     - AGENTS.md: AGENTS.md
+    - Model-Context-Protocol: Model-Context-Protocol
     
