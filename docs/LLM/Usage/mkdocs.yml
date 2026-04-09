@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - Agent: Agent
     - AAIF: AAIF
     - Prompt-Engineering: Prompt-Engineering
     - Harness-Engineering: Harness-Engineering 

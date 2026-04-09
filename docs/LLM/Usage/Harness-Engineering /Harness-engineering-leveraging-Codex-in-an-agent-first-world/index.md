@@ -10,6 +10,8 @@ The product has internal daily users and external alpha testers. It ships, deplo
 
 We intentionally chose this constraint(指的是完全由AI来写) so we would build what was necessary to increase **engineering velocity** by orders of magnitude. We had weeks to ship what ended up being a million lines of code. To do that, we needed to understand what changes when a software engineering team’s primary job is no longer to write code, but to **design environments**, **specify intent**, and **build feedback loops** that allow Codex agents to do reliable work.
 
+> NOTE: 最后一段话概括
+
 This post is about what we learned by building a brand new product with a team of agents—what broke, what compounded, and how to maximize our one truly scarce resource: human time and attention.
 
 翻译: 我们刻意定下这一约束条件，只为搭建出能**成倍提升研发效率**的核心能力。短短数周内，我们完成了最终体量达百万行代码的交付。
@@ -42,13 +44,17 @@ Throughout the development process, humans never directly contributed any code. 
 
 ### Redefining the role of the engineer
 
-The lack of hands-on human coding **introduced a different kind of engineering work, focused on systems, scaffolding, and leverage**.
+The lack of hands-on human coding **introduced a different kind of engineering work, focused on systems, scaffolding(基础框架), and leverage(效能放大)**.
 
-Early progress was slower than we expected, not because Codex was incapable, but because the environment was underspecified. The agent lacked the tools, abstractions, and internal structure required to make progress toward high-level goals. The primary job of our engineering team became enabling the agents to do useful work.
+Early progress was slower than we expected, not because Codex was incapable, but because the environment was underspecified(定义不够完善、说明得不够清晰). The agent lacked the tools, abstractions, and internal structure required to make progress toward **high-level goals**. The primary job of our engineering team became enabling the agents to do useful work.
 
-In practice, this meant working depth-first: breaking down larger goals into smaller building blocks (design, code, review, test, etc), prompting the agent to construct those blocks, and using them to unlock more complex tasks. When something failed, the fix was almost never “try harder.” Because the only way to make progress was to get Codex to do the work, human engineers always stepped into the task and asked: “what capability is missing, and how do we make it both legible(清晰可辨的) and enforceable(能确保按规则执行) for the agent?”
+> NOTE: 人类的指挥限制了AI的发挥，如何更好地指挥AI？
 
-Humans interact with the system almost entirely through prompts: an engineer describes a task, runs the agent, and allows it to open a pull request. To drive a PR to completion, we instruct Codex to review its own changes locally, request additional specific agent reviews both locally and in the cloud, respond to any human or agent given feedback, and iterate in a loop until all agent reviewers are satisfied (effectively this is a [<u class="decoration-1 underline-offset-4"><span>Ralph Wiggum Loop</span></u>⁠(opens in a new window)](https://ghuntley.com/loop/)). Codex uses our standard development tools directly (gh, local scripts, and repository-embedded skills) to gather context without humans copying and pasting into the CLI.
+In practice, this meant working **depth-first**: breaking down larger goals into smaller **building blocks** (design, code, review, test, etc), prompting(提示) the agent to construct those **blocks**(通过提示引导智能体逐一构建这些模块), and using them to unlock more complex tasks. When something failed, the fix was almost never “try harder.” Because the only way to make progress was to get Codex to do the work, human engineers always stepped into the task and asked: “what capability is missing, and how do we make it both legible(清晰可辨的) and enforceable(能确保按规则执行) for the agent?”
+
+> NOTE: 上述提到的是将研发流程进行划分: design、code review、test，实际上还涉及将功能进行划分
+
+Humans interact with the system almost entirely through prompts(提示词): an engineer describes a task, runs the agent, and allows it to open a pull request. To drive a PR to completion, we instruct Codex to review its own changes locally, request additional specific agent reviews both locally and in the cloud, respond to any human or agent given feedback, and iterate in a loop until all agent reviewers are satisfied (effectively this is a [<u class="decoration-1 underline-offset-4"><span>Ralph Wiggum Loop</span></u>⁠(opens in a new window)](https://ghuntley.com/loop/)). Codex uses our standard development tools directly (gh, local scripts, and repository-embedded skills) to gather context without humans copying and pasting into the CLI.
 
 Humans may review pull requests, but aren’t required to. Over time, we’ve pushed almost all review effort towards being handled agent-to-agent.
 
@@ -66,11 +72,13 @@ Humans may review pull requests, but aren’t required to. Over time, we’ve pu
 
 As code throughput increased, our bottleneck became human QA capacity. Because the fixed constraint has been human time and attention, we’ve worked to add more capabilities to the agent by making things like the application UI, logs, and app metrics themselves directly legible to Codex.
 
-For example, we made the app bootable per git worktree, so Codex could launch and drive one instance per change. We also wired the Chrome DevTools Protocol into the agent runtime and created skills for working with DOM snapshots, screenshots, and navigation. This enabled Codex to reproduce bugs, validate fixes, and reason about UI behavior directly.
-
 翻译: 随着代码产出效率不断提升，我们的瓶颈逐渐转为**人工质量保障（QA）能力不足**。由于始终受限于人类的时间与精力，我们持续为智能体增强能力，让应用界面、日志、应用指标等内容**能直接被 Codex 识别和理解**。
 
-例如，我们实现了应用可基于每个 Git 工作树独立启动，这样 Codex 就能**针对每一次代码变更启动并操控一个独立实例**。我们还将 Chrome 开发者工具协议（CDP）接入智能体运行环境，并开发了处理 DOM 快照、截图和页面导航的相关能力。这使得 Codex 能够**直接复现漏洞、验证修复方案，并对界面行为进行推理分析**。
+> NOTE: agent capacity
+
+For example, we made the app bootable per git worktree, so Codex could launch and drive one instance per change. We also wired the Chrome DevTools Protocol into the agent runtime and created skills for working with DOM snapshots, screenshots, and navigation. This enabled Codex to reproduce bugs, validate fixes, and reason about UI behavior directly.
+
+翻译: 例如，我们实现了应用可基于每个 Git 工作树独立启动，这样 Codex 就能**针对每一次代码变更启动并操控一个独立实例**。我们还将 Chrome 开发者工具协议（CDP）接入智能体运行环境，并开发了处理 DOM 快照、截图和页面导航的相关能力。这使得 Codex 能够**直接复现漏洞、验证修复方案，并对界面行为进行推理分析**。
 
 ![Diagram titled “Codex drives the app with Chrome DevTools MCP to validate its work.” Codex selects a target, snapshots the state before and after triggering a UI path, observes runtime events via Chrome DevTools, applies fixes, restarts, and loops re-running validation until the app is clean.](https://images.ctfassets.net/kftzwdyauwt9/1Gu58eNlqDEuITmbqJDmq9/1e2e62f7e15fb16d2da0da5407240564/fig_1__codex_drives_the_app_.png?w=3840&q=90&fm=webp)
 
@@ -104,7 +112,13 @@ We tried the “one big [`AGENTS.md`⁠(opens in a new window)](https://agents.
 - **迅速过时失效**：这种单一的大型手册会沦为一堆过时规则的坟墓。智能体无法分辨哪些信息仍然有效，人类也会停止维护，文件最终会变成一个**诱人的隐患**。
 - **难以验证维护**：单一的大文件不适合进行自动化校验（如覆盖率、新鲜度、归属权、交叉链接等），因此**与实际情况的偏离是必然的**。
 
-因此，我们不再将 `AGENTS.md` 当作百科全书，而是将其定位为**目录索引**。
+
+
+So instead of treating `AGENTS.md` as the encyclopedia, we treat it as **the table of contents**.
+
+The repository’s knowledge base lives in a structured `docs/` directory treated as the system of record(**权威记录体系**). A short `AGENTS.md` (roughly 100 lines) is injected into context and serves primarily as a map, with pointers to deeper sources of truth elsewhere.
+
+翻译: 因此，我们不再将 `AGENTS.md` 当作百科全书，而是将其定位为**目录索引**。
 
 仓库的知识库存储在结构化的 `docs/` 目录中，并将其作为**权威记录体系**。一份简短的 `AGENTS.md`（约 100 行）会被注入上下文，核心作用是充当「导航地图」，并提供指向其他深层权威信息源的指引。
 
@@ -145,3 +159,221 @@ docs/
 ```
 
 Design documentation is catalogued and indexed, including verification status and a set of core beliefs that define agent-first operating principles. [<u class="decoration-1 underline-offset-4"><span>Architecture documentation</span></u>⁠(opens in a new window)](https://matklad.github.io/2021/02/06/ARCHITECTURE.md.html) provides a top-level map of domains and package layering. A quality document grades each product domain and architectural layer, tracking gaps over time.
+
+翻译: 设计文档会被编目并建立索引，其中包含验证状态，以及一套定义「以智能体为先」运营原则的核心理念。架构文档则提供了业务域与包分层的顶层蓝图。一份高质量的文档会为每个产品域和架构层进行评级，并持续追踪其中的缺口。
+
+| 英文术语                                 | 专业译法        | 补充说明                                      |
+| ------------------------------------ | ----------- | ----------------------------------------- |
+| **catalogue and index**              | 编目并建立索引     | 指对文档进行结构化分类、打标签，方便 AI 智能体快速检索和定位          |
+| **verification status**              | 验证状态        | 记录文档 / 规则是否经过校验、是否有效、是否过时                 |
+| **agent-first operating principles** | 以智能体为先的运营原则 | 核心设计理念：所有流程、规范都优先适配 AI 编码智能体的工作方式，而非仅服务人类 |
+| **top-level map**                    | 顶层蓝图        | 类比为项目的「架构导航图」，给智能体提供全局视角                  |
+| **domains and package layering**     | 业务域与包分层     | 软件工程架构术语，指按业务边界划分模块、按依赖关系组织代码层级           |
+| **quality document grades**          | 高质量文档评级     | 指对文档的完整性、准确性、时效性进行量化评估                    |
+| **tracking gaps over time**          | 持续追踪缺口      | 动态监控文档与实际代码 / 架构的偏差，避免知识过时                |
+
+Plans are treated as first-class artifacts. Ephemeral lightweight plans are used for small changes, while complex work is captured in [<u class="decoration-1 underline-offset-4"><span>execution plans</span></u>⁠(opens in a new window)](https://cookbook.openai.com/articles/codex_exec_plans) with progress and decision logs that are checked into the repository. Active plans, completed plans, and known technical debt are all versioned and co-located, allowing agents to operate without relying on external context.
+
+翻译: **计划被视为一等公民（核心资产）**。针对小幅度变更，采用临时的轻量级计划；而复杂工作则需录入**执行计划**，并附带进度与决策日志，且这些内容都需提交至代码仓库。
+无论是**进行中的计划**、**已完成的计划**还是**已知的技术债务**，全都进行版本化管理并集中存放。这使得AI智能体在开展工作时，**无需依赖外部上下文信息**。
+
+---
+
+#### 术语精准释义
+
+| 英文术语                            | 专业译法           | 语境解析                                                        |
+|:------------------------------- |:-------------- |:----------------------------------------------------------- |
+| **First-class artifacts**       | **一等公民（核心资产）** | 指在系统中拥有最高权限、被优先对待的交付物。在AI工程中，意味着计划文件和代码一样，是必须被严谨管理的核心产出。    |
+| **Ephemeral lightweight plans** | **临时的轻量级计划**   | 针对简单任务（如修个小Bug），快速写一段简短的计划描述，用完即弃，不产生冗余负担。                  |
+| **Execution plans**             | **执行计划**       | 针对复杂任务（如重构、新功能开发）的详细行动方案，包含步骤、策略与决策过程。                      |
+| **Decision logs**               | **决策日志**       | 记录制定计划时的关键思考、权衡利弊及最终决定的文档，供AI回溯决策逻辑。                        |
+| **Co-located**                  | **集中存放**       | 计划文件与代码、文档存放在同一仓库目录下，实现代码与知识的同构。                            |
+| **External context**            | **外部上下文**      | 指AI智能体无法从代码仓库内部获取的、依赖外部系统（如Jira、Trello、飞书文档）的信息，消除对外部工具的依赖。 |
+
+#### 核心逻辑总结
+
+这段话体现了团队**“内化一切”**的策略：
+
+1. **资产化**：不再把计划当作随意的口头约定，而是视为代码级别的核心资产。
+2. **分层管理**：简单任务用“轻量计划”高效处理，复杂任务用“执行计划”全流程记录。
+3. **去中心化**：将所有计划、进度、债务记录在代码仓库中，让AI智能体拥有完整的作业环境，打破对外部协作工具的依赖。
+
+
+
+This enables **progressive disclosure**: agents start with a small, stable entry point and are taught where to look next, rather than being overwhelmed up front.
+
+We enforce this mechanically. Dedicated linters and CI jobs validate that the knowledge base is up to date, cross-linked, and structured correctly. A recurring “doc-gardening” agent scans for stale or obsolete documentation that does not reflect the real code behavior and opens fix-up pull requests.
+
+翻译: 这就实现了**渐进式信息披露**：智能体从一个小型、稳定的入口开始工作，系统会引导它下一步该查阅哪些内容，而非在初始阶段就被海量信息淹没。
+我们通过自动化机制来强制执行这一规范：专用的代码检查工具（linter）与持续集成（CI）任务会验证知识库是否保持最新、交叉链接是否有效、结构是否合规。一个定期运行的「文档维护」智能体，会扫描出与实际代码行为不符的过时文档，并自动发起修复用的拉取请求（PR）。
+
+---
+
+#### 术语与细节说明
+
+| 英文术语                                | 专业译法           | 补充说明                                       |
+| ----------------------------------- | -------------- | ------------------------------------------ |
+| **progressive disclosure**          | 渐进式信息披露        | 交互设计/AI领域术语，指分阶段、按需提供信息，避免信息过载，让智能体逐步获取上下文 |
+| **entry point**                     | 入口点            | 指根目录下简短的 `AGENTS.md`，作为智能体访问项目知识的起点        |
+| **mechanically**                    | 通过自动化机制        | 强调用代码、工具而非人工来保障规则落地                        |
+| **linters**                         | 代码检查工具（linter） | 用于检查代码/文档规范、格式、完整性的自动化工具                   |
+| **CI jobs**                         | 持续集成（CI）任务     | 代码提交后自动运行的校验流程，确保文档符合规范                    |
+| **cross-linked**                    | 交叉链接有效         | 指文档间的引用、跳转链接正确，无死链                         |
+| **doc-gardening**                   | 文档维护（直译：文档园艺）  | 形象化表述，指定期清理、更新、维护文档的工作，类比园艺修剪              |
+| **stale or obsolete documentation** | 过时文档           | 与实际代码、流程脱节的失效文档                            |
+| **fix-up pull requests**            | 修复用拉取请求（PR）    | 智能体自动发起的、用于修正文档问题的代码合并请求                   |
+
+---
+
+#### 核心逻辑补充
+
+这段内容是OpenAI「以智能体为先」的仓库知识体系的**落地保障**：
+
+1. **渐进式披露**：解决了大模型上下文窗口有限、信息过载的问题，让智能体从简到繁、按需获取信息
+2. **自动化校验**：用工具链强制保障文档的准确性、时效性，彻底解决人工维护文档的「腐烂」问题
+3. **闭环治理**：通过「文档维护智能体」自动发现并修复问题，形成「生成-校验-修复」的完整闭环，让知识库始终与代码同步
+   需要我帮你把这些规则整理成一份可直接落地的 **AGENTS.md 规范模板** 吗？
+
+## Agent legibility is the goal
+
+As the codebase evolved, Codex’s framework for design decisions needed to evolve, too.
+
+Because the repository is entirely agent-generated, it’s optimized first for *Codex’s* *legibility*. In the same way teams aim to improve navigability of their code for new engineering hires, our human engineers’ goal was making it possible for an agent to reason about the full business domain **directly from the repository itself.**
+
+From the agent’s point of view, anything it can’t access in-context while running effectively doesn’t exist. Knowledge that lives in Google Docs, chat threads, or people’s heads are not accessible to the system. Repository-local, versioned artifacts (e.g., code, markdown, schemas, executable plans) are all it can see.
+
+![Diagram titled “The limits of agent knowledge: What Codex can’t see doesn’t exist.” Codex’s knowledge is shown as a bounded bubble. Below it are examples of unseen knowledge—Google Docs, Slack messages, and tacit human knowledge. Arrows indicate that to make this information visible to Codex, it must be encoded into the codebase as markdown.](https://images.ctfassets.net/kftzwdyauwt9/7uWHsJIC6o3uQPsnQ2Avz9/8be3e321892054bd215afb2b250a176a/OAI_Harness_engineering_The_limits_of_agent_knowledge_desktop-light.png?w=3840&q=90&fm=webp)
+
+翻译: **以智能体的可解析性为目标**
+随着代码库不断迭代演进，Codex 用于设计决策的框架也需随之升级。
+由于该代码仓库完全由 AI 智能体生成，它的优化优先级首先是**为了 Codex 的可解析性**。就像团队致力于提升代码对新入职工程师的可读性一样，我们人类工程师的目标是让智能体能够**直接从代码仓库本身，理解并推理整个业务域**。
+从智能体的视角来看，任何在运行时无法通过上下文获取的东西，对它而言就等同于**不存在**。存储在 Google 文档、聊天记录或人类脑海中的知识，系统无法访问。只有**存放在仓库内、带版本号的交付物**（如代码、Markdown 文档、数据架构、可执行计划），才是它所能感知的全部信息。
+
+---
+
+### 关键术语精准释义
+
+| 英文术语                    | 专业译法        | 场景解析                                                         |
+|:----------------------- |:----------- |:------------------------------------------------------------ |
+| **Agent legibility**    | **智能体可解析性** | **核心概念**：指系统/代码/文档被 AI 智能体直接理解、解析和推理的能力（对应前文的 *legibility*）。 |
+| **Codebase**            | **代码库**     | 指整个项目的源代码集合。                                                 |
+| **Optimized first for** | **优先优化以适配** | 强调设计准则的优先级：先让 AI 看懂，其次才考虑人类阅读。                               |
+| **Business domain**     | **业务域**     | 指项目所覆盖的业务范围、核心逻辑与数据模型。                                       |
+| **In-context**          | **上下文内**    | AI 推理术语，指智能体在工作过程中能够直接访问和处理的输入信息集合。                          |
+| **Repository-local**    | **仓库本地**    | 指数据存储在代码仓库（Git）内部，而非外部系统（如网盘、IM）。                            |
+| **Versioned artifacts** | **带版本的交付物** | 指受 Git 版本控制的各类文件（代码、文档、计划），视为系统的唯一可信资产。                      |
+
+### 核心逻辑总结
+
+这一段是全文的**方法论升华**：
+
+1. **理念转变**：不再为“人”写代码/文档，而是为“智能体”设计。
+2. **唯一信源**：强制将所有知识内化到代码仓库，消除外部孤岛。
+3. **全链路理解**：目标是让 AI 仅凭仓库内的结构化信息，就能独立搞定整个业务的逻辑推理，无需依赖人类记忆或外部聊天记录。
+   
+
+We learned that we needed to push more and more context into the repo over time. That Slack discussion that aligned the team on an architectural pattern? If it isn’t discoverable to the agent, it’s illegible in the same way it would be unknown to a new hire joining three months later.
+
+翻译: 我们逐渐认识到，需要**将越来越多的上下文逐步纳入代码仓库**。那些曾用于统一团队对某种架构模式认知的 **Slack 讨论**，如果智能体无法获取到这些内容，那么它们对智能体来说就是**不可解析**的——这就好比一位三个月后入职的新员工对这些往事一无所知一样。
+
+---
+
+### 关键术语与语境解析
+
+| 英文术语                           | 专业译法           | 场景说明                                                        |
+|:------------------------------ |:-------------- |:----------------------------------------------------------- |
+| **Push context into the repo** | **将上下文纳入代码仓库** | 核心做法：把所有协作信息、决策历史、沟通记录从外部工具（如Slack）迁移到代码仓库的结构化文档中，成为系统可信资产。 |
+| **Discoverable**               | **可被检索/可发现**   | 指AI智能体能通过索引、链接或搜索定位到相关信息。                                   |
+| **Illegible**                  | **不可解析**       | 承接前文核心概念，指智能体无法理解、无法读取并利用该信息。                               |
+| **Align the team**             | **统一团队认知**     | 指通过沟通达成共识。                                                  |
+| **Architectural pattern**      | **架构模式**       | 软件工程通用术语，指特定的代码组织或设计方案。                                     |
+
+### 核心逻辑解读
+
+这段话是对前文“**仓库知识作为权威记录体系**”的深度论证：
+
+* **横向类比**：把“对新员工不可见”的隐性知识，直接等同于“对AI不可见”的隐性知识。
+* **核心主张**：**Slack/聊天记录/口头约定** 这些非结构化信息，必须转化为仓库内的**文档（AGENTS.md、设计文档等）**。只有这样，才能保证AI智能体拥有与人类团队同等完整的“背景知识”，避免AI因为缺乏历史背景而做出错误决策。
+  这是从“人机协作”迈向“AI自主协作”的关键一步：让系统拥有完整的**组织记忆（Organizational Memory）**。
+
+
+
+Giving Codex more context means organizing and exposing the right information so the agent can reason over it, rather than overwhelming it with ad-hoc instructions. In the same way you would onboard a new teammate on product principles, engineering norms, and team culture (emoji preferences included), giving the agent this information leads to better-aligned output.
+
+翻译: 为 Codex 提供更充分的上下文，意味着要**梳理并开放正确的信息**，让智能体能够基于这些信息进行推理，而非用零散的临时指令将其淹没。就像你会为新入职的同事介绍产品原则、工程规范和团队文化（甚至包括 emoji 使用偏好）一样，为智能体提供这些信息，能让它的输出与团队预期**高度对齐**。
+
+### 术语与细节说明
+
+| 英文术语                           | 专业译法          | 补充说明                                 |
+| ------------------------------ | ------------- | ------------------------------------ |
+| **reason over it**             | 基于信息进行推理      | 指AI智能体对上下文信息进行理解、分析、决策的核心能力          |
+| **ad-hoc instructions**        | 零散的临时指令       | 指无结构、非标准化、随用随写的指令，易造成信息过载和理解偏差       |
+| **onboard a new teammate**     | 为新同事做入职引导     | 类比AI智能体的“入职”，强调需要系统、完整地传递团队规则与文化     |
+| **engineering norms**          | 工程规范          | 团队统一的编码、测试、提交等开发流程标准                 |
+| **better-aligned output**      | 高度对齐的输出       | 指AI生成的代码、方案完全符合团队的预期、规范和业务目标         |
+| **emoji preferences included** | 甚至包括emoji使用偏好 | 细节化类比，体现团队文化的细微之处也需要传递给AI，让其完全融入团队协作 |
+
+---
+
+### 核心逻辑补充
+
+这段话是对「以智能体为先」理念的**人性化解读**：
+
+1. **AI也需要“入职培训”**：把AI智能体当作团队的新成员，用对待人类同事的方式，系统传递所有必要信息，而非零散指令
+2. **上下文不是越多越好，而是越准越好**：核心是筛选、组织正确的信息，让AI能有效推理，而非堆砌信息造成过载
+3. **对齐是最终目标**：所有上下文的最终目的，都是让AI的输出与团队的产品、工程、文化完全一致，实现真正的人机协作
+   
+
+Pulling more of the system into a form the agent can inspect, validate, and modify directly increases leverage—not just for Codex, but for other agents (e.g. [<u class="decoration-1 underline-offset-4"><span>Aardvark</span></u>](https://openai.com/index/introducing-aardvark/)) that are working on the codebase as well.
+
+
+
+## Enforcing architecture and taste(强制执行架构规范与代码风格)
+
+Documentation alone doesn’t keep a fully agent-generated codebase coherent. **By enforcing invariants, not micromanaging implementations, we let agents ship fast without undermining the foundation.** For example, we require Codex to [<u class="decoration-1 underline-offset-4"><span>parse data shapes at the boundary</span></u>⁠(opens in a new window)](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/), but are not prescriptive on how that happens (the model seems to like [Zod](https://zod.dev/), but we didn’t specify that specific library).
+
+Agents are most effective in environments with [<u class="decoration-1 underline-offset-4"><span>strict boundaries and predictable structure</span></u>⁠(opens in a new window)](https://bits.logic.inc/p/ai-is-forcing-us-to-write-good-code), so we built the application around a rigid architectural model. Each business domain is divided into a fixed set of layers, with strictly validated dependency directions and a limited set of permissible edges. These constraints are enforced mechanically via custom linters (Codex-generated, of course!) and structural tests.
+
+The diagram below shows the rule: within each business domain (e.g. App Settings), code can only depend “forward” through a fixed set of layers (Types → Config → Repo → Service → Runtime → UI). Cross-cutting concerns (auth, connectors, telemetry, feature flags) enter through a single explicit interface: Providers. Anything else is disallowed and enforced mechanically.
+
+![Diagram titled “Layered domain architecture with explicit cross-cutting boundaries.” Inside the business logic domain are modules: Types → Config → Repo, and Providers → Service → Runtime → UI, with App Wiring + UI at the bottom. A Utils module sits outside the boundary and feeds into Providers.](https://images.ctfassets.net/kftzwdyauwt9/4Rlip1H3T9apPlSmWs7Wr8/7708c176bfbe11951e06ad8e2b83bf01/OAI_Harness_engineering_Layered_domain_architecture_with_explicit_cross-cutting_boundries_desktop-light.png?w=3840&q=90&fm=webp)
+
+翻译: 仅靠文档无法维持完全由智能体生成的代码库的一致性。**通过强制执行不变量，而非微观管控具体实现**，我们让智能体能够快速交付成果，同时不破坏系统的底层架构。例如，我们要求 Codex 在系统边界处解析数据结构，但不规定具体实现方式（模型更倾向于使用 Zod，但我们并未指定这一特定库）。
+智能体在**边界清晰、结构可预测**的环境中效率最高，因此我们围绕一套严格的架构模型搭建了整个应用。每个业务域都被划分为固定的层级，依赖方向经过严格校验，仅允许有限的合法依赖关系。这些约束通过自定义代码检查工具（当然，也是由 Codex 生成的）和结构测试，以自动化方式强制执行。
+下方图表展示了核心规则：在每个业务域（如应用设置）内，代码只能沿固定层级「向前」依赖（类型 → 配置 → 数据层 → 服务层 → 运行时 → 界面）。横切关注点（认证、连接器、遥测、功能开关）仅能通过单一显式接口「Providers」接入，其余依赖方式均被禁止，并由自动化机制强制管控。
+
+---
+
+## 术语精准释义
+
+| 英文术语                                            | 专业译法         | 补充说明                                          |
+| ----------------------------------------------- | ------------ | --------------------------------------------- |
+| **invariants**                                  | 不变量          | 软件架构核心概念，指系统必须始终满足的核心约束（如依赖方向、数据边界），是架构稳定性的基石 |
+| **micromanging implementations**                | 微观管控具体实现     | 指不干预代码细节，只约束架构规则，给智能体留足实现空间                   |
+| **parse data shapes at the boundary**           | 在系统边界处解析数据结构 | 指在系统与外部交互的入口做数据校验，保障输入输出一致性                   |
+| **Zod**                                         | 保留原名         | TypeScript 生态中主流的运行时数据校验库，用于定义和验证数据结构         |
+| **strict boundaries and predictable structure** | 边界清晰、结构可预测   | 智能体高效工作的核心前提，避免架构混乱导致AI推理失效                   |
+| **dependency directions**                       | 依赖方向         | 架构分层的核心规则，确保代码只能从底层向高层单向依赖，避免循环依赖             |
+| **permissible edges**                           | 合法依赖关系       | 架构中允许的模块间依赖链路，其余链路被严格禁止                       |
+| **custom linters**                              | 自定义代码检查工具    | 用于强制执行架构规则的自动化工具，比通用linter更贴合项目架构             |
+| **structural tests**                            | 结构测试         | 验证代码架构是否符合分层、依赖等规则的自动化测试                      |
+| **business domain**                             | 业务域          | 按业务边界划分的代码模块，如用户中心、订单系统等                      |
+| **cross-cutting concerns**                      | 横切关注点        | 贯穿多个业务层的通用功能，如认证、日志、监控等                       |
+| **Providers**                                   | 保留原名         | 架构中统一接入横切关注点的接口，实现解耦与管控                       |
+
+---
+
+## 核心逻辑解读
+
+这段内容是OpenAI「全智能体驱动开发」的**架构治理核心实践**：
+
+1. **「管规则，不管细节」的治理思路**：只约束架构不变量，不干预具体实现，既保证架构一致性，又不限制智能体的开发效率
+2. **为智能体量身打造的架构**：用严格分层、单向依赖、清晰边界，给AI提供「可预测的推理环境」，最大化智能体的工作效率
+3. **自动化强制执行**：用自定义linter、结构测试等工具，把架构规则写进代码，彻底杜绝人工维护的疏漏，让架构约束成为系统的「硬规则」
+4. **横切关注点的统一管控**：通过Providers接口统一接入通用功能，避免横切逻辑污染业务分层，让架构更清晰、AI更易理解
+
+---
+
+## 补充说明
+
+文中提到的分层规则 `Types → Config → Repo → Service → Runtime → UI` 是典型的 **清洁架构（Clean Architecture）** 落地，核心是让依赖方向从底层（类型、配置）指向高层（界面、运行时），保证业务逻辑的独立性和可测试性，同时让AI智能体能清晰理解系统的层级关系，避免架构腐化。
