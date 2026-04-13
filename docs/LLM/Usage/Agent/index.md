@@ -1,5 +1,7 @@
 # Agent
 
+**大模型负责理解与决策，Agent 负责执行与调度** 
+
 ## [cloud.google-What is an AI agent?](https://cloud.google.com/discover/what-are-ai-agents)
 
 **AI agents** are software systems that use AI to pursue goals and complete tasks on behalf of users. They show reasoning, planning, and memory and have a level of autonomy(自主性) to make decisions, learn, and adapt.
@@ -34,8 +36,6 @@ As explained above, while the key features of an AI agent are reasoning and acti
 **协作**：在复杂多变的环境中，与人类或其他 AI 智能体高效配合以达成共同目标，正变得愈发重要。协作需要沟通、协调，以及理解并尊重他人视角的能力。
 
 **自我优化**：自我完善与自适应能力是高级人工智能系统的典型标志。具备自我优化能力的 AI 智能体能够从经验中学习，根据反馈调整行为，并随时间持续提升性能与能力，这一过程可借助机器学习技术、优化算法或其他自我修正方式实现。
-
-
 
 ### What is the difference between AI agents, AI assistants, and bots?
 
