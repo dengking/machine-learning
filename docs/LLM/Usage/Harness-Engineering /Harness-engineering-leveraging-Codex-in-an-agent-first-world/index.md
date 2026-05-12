@@ -112,8 +112,6 @@ We tried the “one big [`AGENTS.md`⁠(opens in a new window)](https://agents.
 - **迅速过时失效**：这种单一的大型手册会沦为一堆过时规则的坟墓。智能体无法分辨哪些信息仍然有效，人类也会停止维护，文件最终会变成一个**诱人的隐患**。
 - **难以验证维护**：单一的大文件不适合进行自动化校验（如覆盖率、新鲜度、归属权、交叉链接等），因此**与实际情况的偏离是必然的**。
 
-
-
 So instead of treating `AGENTS.md` as the encyclopedia, we treat it as **the table of contents**.
 
 The repository’s knowledge base lives in a structured `docs/` directory treated as the system of record(**权威记录体系**). A short `AGENTS.md` (roughly 100 lines) is injected into context and serves primarily as a map, with pointers to deeper sources of truth elsewhere.
@@ -198,8 +196,6 @@ Plans are treated as first-class artifacts. Ephemeral lightweight plans are used
 2. **分层管理**：简单任务用“轻量计划”高效处理，复杂任务用“执行计划”全流程记录。
 3. **去中心化**：将所有计划、进度、债务记录在代码仓库中，让AI智能体拥有完整的作业环境，打破对外部协作工具的依赖。
 
-
-
 This enables **progressive disclosure**: agents start with a small, stable entry point and are taught where to look next, rather than being overwhelmed up front.
 
 We enforce this mechanically. Dedicated linters and CI jobs validate that the knowledge base is up to date, cross-linked, and structured correctly. A recurring “doc-gardening” agent scans for stale or obsolete documentation that does not reflect the real code behavior and opens fix-up pull requests.
@@ -270,7 +266,6 @@ From the agent’s point of view, anything it can’t access in-context while ru
 1. **理念转变**：不再为“人”写代码/文档，而是为“智能体”设计。
 2. **唯一信源**：强制将所有知识内化到代码仓库，消除外部孤岛。
 3. **全链路理解**：目标是让 AI 仅凭仓库内的结构化信息，就能独立搞定整个业务的逻辑推理，无需依赖人类记忆或外部聊天记录。
-   
 
 We learned that we needed to push more and more context into the repo over time. That Slack discussion that aligned the team on an architectural pattern? If it isn’t discoverable to the agent, it’s illegible in the same way it would be unknown to a new hire joining three months later.
 
@@ -296,8 +291,6 @@ We learned that we needed to push more and more context into the repo over time.
 * **核心主张**：**Slack/聊天记录/口头约定** 这些非结构化信息，必须转化为仓库内的**文档（AGENTS.md、设计文档等）**。只有这样，才能保证AI智能体拥有与人类团队同等完整的“背景知识”，避免AI因为缺乏历史背景而做出错误决策。
   这是从“人机协作”迈向“AI自主协作”的关键一步：让系统拥有完整的**组织记忆（Organizational Memory）**。
 
-
-
 Giving Codex more context means organizing and exposing the right information so the agent can reason over it, rather than overwhelming it with ad-hoc instructions. In the same way you would onboard a new teammate on product principles, engineering norms, and team culture (emoji preferences included), giving the agent this information leads to better-aligned output.
 
 翻译: 为 Codex 提供更充分的上下文，意味着要**梳理并开放正确的信息**，让智能体能够基于这些信息进行推理，而非用零散的临时指令将其淹没。就像你会为新入职的同事介绍产品原则、工程规范和团队文化（甚至包括 emoji 使用偏好）一样，为智能体提供这些信息，能让它的输出与团队预期**高度对齐**。
@@ -322,11 +315,8 @@ Giving Codex more context means organizing and exposing the right information so
 1. **AI也需要“入职培训”**：把AI智能体当作团队的新成员，用对待人类同事的方式，系统传递所有必要信息，而非零散指令
 2. **上下文不是越多越好，而是越准越好**：核心是筛选、组织正确的信息，让AI能有效推理，而非堆砌信息造成过载
 3. **对齐是最终目标**：所有上下文的最终目的，都是让AI的输出与团队的产品、工程、文化完全一致，实现真正的人机协作
-   
 
 Pulling more of the system into a form the agent can inspect, validate, and modify directly increases leverage—not just for Codex, but for other agents (e.g. [<u class="decoration-1 underline-offset-4"><span>Aardvark</span></u>](https://openai.com/index/introducing-aardvark/)) that are working on the codebase as well.
-
-
 
 ## Enforcing architecture and taste(强制执行架构规范与代码风格)
 
