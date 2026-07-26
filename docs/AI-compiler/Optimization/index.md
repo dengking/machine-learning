@@ -1,6 +1,6 @@
 # Optimization in AI compiler
 
-AI编译器是连接上层深度学习框架与底层硬件（GPU/[ASIC](https://en.wikipedia.org/wiki/Application-specific_integrated_circuit)）的核心工具链，通过多级中间表示（IR）完成计算图化简、算子重构、内存优化、硬件指令映射，核心目标是破解访存瓶颈、提升算力利用率，尤其适配Transformer、MoE等大模型场景的算力需求。
+AI编译器是连接上层深度学习框架与底层硬件（GPU/[ASIC](https://en.wikipedia.org/wiki/Application-specific_integrated_circuit)）的核心工具链，通过多级中间表示（IR）完成**计算图化简**、算子重构、内存优化、硬件指令映射，核心目标是破解访存瓶颈、提升算力利用率，尤其适配Transformer、MoE等大模型场景的算力需求。
 
 ## 一、通用核心优化技术（编译器标准层级）
 
