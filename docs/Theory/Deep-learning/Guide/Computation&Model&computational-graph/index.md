@@ -1,6 +1,6 @@
-# 前言
+# Computation&Model&computational-graph
 
-# model
+# Model
 
 目前已经使用了三种model：
 
@@ -18,8 +18,6 @@
 
 [Neural Networks, Manifolds, and Topology](https://colah.github.io/posts/2014-03-NN-Manifolds-Topology/)
 
-
-
 ## layer
 
 按照目前的大多数深度学习库，如tensorflow，Keras，都是将model抽象成由多个layer叠加而成的，所以在进行实现的时候，往往是先从实现层入手；并且很多的论文中也是这样描述的；从deep learning book的chapter 6中，也将这个model描述为一个复合函数，复合函数中的每一个都对应了一层；
@@ -29,9 +27,8 @@
 其实computation graph并没有严格的定义，在deep learning book中的computation graph就和TensorFlow的computation graph是定义就是不同的；
 
 deep learning book中的computation graph侧重点在于对computation的形式化地展示，它的规则如下：
--  node in the graph to indicate a variable
 
-
+- node in the graph to indicate a variable
 
 TensorFlow的[computational graph](https://www.tensorflow.org/guide/low_level_intro)的定义如下：
 
@@ -42,23 +39,17 @@ TensorFlow的[computational graph](https://www.tensorflow.org/guide/low_level_in
 
 在下面的描述中，computational graph的描述都是按照TensorFlow中的定义；
 
-
-
 Computational graph的补出内容：
 
 [如何直观地解释 backpropagation 算法？ - YE Y的回答 - 知乎](https://www.zhihu.com/question/27239198/answer/43560763) ：
 
 > Computational graph。最高票答案和 [@龚禹pangolulu](http://www.zhihu.com/people/30eace541ed648ac9ebba5bf420b620e) 的答案中都有提到，就不赘述，其实就是计算代数中的一个最基础办法，从计算机的角度来看还有点动态规划的意思。其优点是表达式给定的情况下对复合函数中所有变量进行快速求导，这正好是神经网络尤其是深度学习的场景。现在主流深度学习框架里的求导也都是基于Computational Graph，比如theano，torch和tensorflow，Caffe也可以看做是computaiona graph，只不过node是layer。
 
-
-
 结构化思维：
 如何直观地解释 backpropagation 算法？ - Anonymous的回答 - 知乎
 https://www.zhihu.com/question/27239198/answer/89853077：多层神经网络本质上是一个多层复合函数
 
 数学是一门简洁但是含义丰富的原因，简单的公式，但是能够表达强大的结构
-
-
 
 # MLP
 
@@ -69,8 +60,6 @@ MLP的model topology：
 MLP的computation：
 
 - matrix multiplication
-
-
 
 下面的代码是摘自[Getting started with the Keras Sequential model](https://keras.io/getting-started/sequential-model-guide/)的Multilayer Perceptron (MLP) for multi-class softmax classification:
 
@@ -140,8 +129,6 @@ score = model.evaluate(x_test, y_test, batch_size=128)
 
 其实从这个数学关系也可以看出为什么要将label以one-hot的方式表示了；
 
-
-
 下面的代码是TensorFlow中构建MLP的一个demo：
 
 ```python
@@ -160,19 +147,9 @@ score = model.evaluate(x_test, y_test, batch_size=128)
             lstm_input_layer = tf.nn.relu(tf.matmul(lstm_input_layer, w_in) + b_in)
 ```
 
-
-
 一般，我们在阅读书籍的时候，书中所描述的流程都是一次输入一条记录，这种做法是理论上的，实际上如果真滴一次仅仅喂入一条数据的话，会非常缓慢；实际的实现是一次喂入一个batch的，即是上面所描述的**输入矩阵**，现代的GPU处理矩阵运算的速度非常快；其实一次喂入一条记录也可以套用上面的矩阵的表示方式，即`batch_size=1`；
 
 从TensorFlow的代码可以看出，输入矩阵和第一层的权重矩阵执行矩阵乘法，根据矩阵**乘法原理**可以知道每一条数据会流入到第一隐藏层中的每一个节点，一条记录流入一个节点产生的输出其实是一个标量；其实这也是full connected的含义所在；
-
-
-
-
-
-
-
-
 
 # CNN
 
@@ -181,37 +158,21 @@ score = model.evaluate(x_test, y_test, batch_size=128)
 - [Convolutional Neural Networks (CNNs / ConvNets)](http://cs231n.github.io/convolutional-networks/)
 - [A Beginner's Guide To Understanding Convolutional Neural Networks](https://adeshpande3.github.io/A-Beginner's-Guide-To-Understanding-Convolutional-Neural-Networks/)
 
-
-
 全连接对应的是矩阵乘法，CNN中的filter则对应的卷积运算，卷积层中的神经元只会和input的一部分进行连接，而不是全连接；
 
 # RNN
-
-
 
 ## LSTM
 
 [Understanding LSTM Networks](https://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 
-
-
 ## Bi-RNN
-
-
 
 ## encoder-decoder/seq2seq
 
-
-
 ## encoder-align model-decoder
 
-paper [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)就是采用的这种架构，它的model topology在blog [Attention mechanism](https://lab.heuritech.com/attention-mechanism)这给出了，两者结合起来能够更加深刻理解它的本质；	
-
-
-
-
-
-
+paper [Neural Machine Translation by Jointly Learning to Align and Translate](https://arxiv.org/pdf/1409.0473.pdf)就是采用的这种架构，它的model topology在blog [Attention mechanism](https://lab.heuritech.com/attention-mechanism)这给出了，两者结合起来能够更加深刻理解它的本质；    
 
 ## 思考
 

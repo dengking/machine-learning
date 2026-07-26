@@ -2,8 +2,6 @@
 
 原书的6.5节《Back-Propagation and Other Differentiation Algorithms》描述Back-Propagation algorithm，这个算法是不容易理解，为了便于理解，可以先阅读科普性的读物：[Back-Propagation](./Back-Propagation/index.md)；在初步了解该算法后，正式进入[6.5-Back-Propagation-and-Other-Differentiation](./6.5-Back-Propagation-and-Other-Differentiation.md)，其中的描述是非常严谨、专业的；掌握该算法后，我们需要考虑如何实现back propagation：[Implementation](./Implementation.md)。
 
-
-
 ## computational-graph and chain-of-calculus and back-propagation
 
 computational-graph是对math function（可以看做是一个expression）的structure representation；
@@ -23,8 +21,6 @@ compiler根据grammar（往往使用production的方式来表达）使用grammar
 其实computational graph非常类似于abstract syntax tree的；
 
 computational graph的构造构成是可以参考parsing的过程的。
-
-
 
 #### Computation graph VS parse tree
 
@@ -57,6 +53,3 @@ chain-of-calculus本质上就是一个formula，和普通的math expression类�
 显然，computational-graph对于实现back-propagation的重要意义，决定了tensorflow、torch的底层都使用computational graph来实现的原因。
 
 back-propagation是对chain-of-calculus的运用，在
-
-
-

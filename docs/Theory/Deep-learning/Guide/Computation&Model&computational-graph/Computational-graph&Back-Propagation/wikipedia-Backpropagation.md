@@ -1,4 +1,10 @@
-#  维基百科[Backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
+# wikipedia [Backpropagation](https://en.wikipedia.org/wiki/Backpropagation)
+
+In [machine learning](https://en.wikipedia.org/wiki/Machine_learning "Machine learning"), **backpropagation** is a [gradient](https://en.wikipedia.org/wiki/Gradient "Gradient") computation method commonly used for training a [neural network](https://en.wikipedia.org/wiki/Neural_network_\(machine_learning\) "Neural network (machine learning)") in computing parameter updates.
+
+> NOTE: 关于计算导数，Jorge-Nocedal-Stephen-J-Wright-Numerical-Optimization # chapter-8-Calculating-Derivatives 中有着很好的说明 
+> 
+> 
 
 The backpropagation algorithm works by computing the gradient of the loss function with respect to each weight by the [chain rule](https://en.wikipedia.org/wiki/Chain_rule), computing the gradient one layer at a time, [iterating](https://en.wikipedia.org/wiki/Iteration) backward from the last layer to avoid redundant calculations of intermediate terms in the chain rule; this is an example of [dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming).[[3\]](https://en.wikipedia.org/wiki/Backpropagation#cite_note-FOOTNOTEGoodfellowBengioCourville2016[httpswwwdeeplearningbookorgcontentsmlphtmlpf33_214]-3)
 
@@ -7,8 +13,6 @@ The backpropagation algorithm works by computing the gradient of the loss functi
 Backpropagation requires the derivatives of activation functions to be known at network design time. [Automatic differentiation](https://en.wikipedia.org/wiki/Automatic_differentiation) is a technique that can automatically and analytically provide the derivatives to the training algorithm. In the context of learning, backpropagation is commonly used by the [gradient descent](https://en.wikipedia.org/wiki/Gradient_descent) optimization algorithm to adjust the weight of neurons by calculating the [gradient](https://en.wikipedia.org/wiki/Gradient) of the [loss function](https://en.wikipedia.org/wiki/Loss_function); backpropagation computes the gradient(s), whereas (stochastic) gradient descent uses the gradients for training the model (via optimization).
 
 > NOTE: backpropagation 和gradient descent之间的关系
-
-
 
 ## Overview
 
@@ -44,16 +48,12 @@ $ f^{l}$
 
 For classification the last layer is usually the [logistic function](https://en.wikipedia.org/wiki/Logistic_function) for binary classification, and [softmax](https://en.wikipedia.org/wiki/Softmax_function) (softargmax) for multi-class classification, while for the hidden layers this was traditionally a [sigmoid function](https://en.wikipedia.org/wiki/Sigmoid_function) (logistic function or others) on each node (coordinate), but today is more varied, with [rectifier](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) ([ramp](https://en.wikipedia.org/wiki/Ramp_function), [ReLU](https://en.wikipedia.org/wiki/ReLU)) being common.
 
-
-
 The overall network is a combination of [function composition](https://en.wikipedia.org/wiki/Function_composition) and [matrix multiplication](https://en.wikipedia.org/wiki/Matrix_multiplication):
 $$
 g(x):=f^{L}(W^{L}f^{L-1}(W^{L-1}\cdots f^{1}(W^{1}x)\cdots ))
 $$
 
 > NOTE: 数学的简洁
-
-
 
 For a training set there will be a set of input–output pairs, $\left\{(x_{i},y_{i})\right\}$. For each input–output pair $ (x_{i},y_{i})$ in the training set, the loss of the model on that pair is the cost of the difference between the predicted output $g(x_{i})$ and the target output $y_{i}$
 
@@ -69,20 +69,18 @@ During **model training**, the input–output pair is fixed, while the weights v
 
 > NOTE: evaluation阶段和training阶段的对比
 
-
-
 Backpropagation computes the gradient for a fixed input–output pair $(x_{i},y_{i})$, where the weights $w_{jk}^{l}$ can vary. Each individual component of the gradient, $\partial C/\partial w_{jk}^{l}$  can be computed by the chain rule; however, doing this separately for each weight is inefficient. Backpropagation efficiently computes the gradient by avoiding duplicate calculations and not computing unnecessary intermediate values, by computing the gradient of each layer – specifically, the gradient of the weighted input of each layer, denoted by $\delta ^{l}$– from back to front.
 
 > NOTE:  $\delta ^{l}$表示的是第$l$层的gradient 
 
 > NOTE: 为什么是front back to front？下面这一段对此进行了直观的解释，如下是我结合整体的理解：
->
+> 
 > 整个模型可以表示为：$g(x):=f^{L}(W^{L}f^{L-1}(W^{L-1}\cdots f^{1}(W^{1}x)\cdots ))$，显然逐层的，可以认为它是一个nesting结构，显然它是一个线性的结构，这样的结构就决定了：
->
+> 
 > the only way a weight in $W^{l}$ affects the loss is through its effect on the next layer, and it does so linearly
->
+> 
 > 这让我想起来：结构决定属性（参见`discrete-math\docs\Guide\Relation-structure-computation`）
->
+> 
 > 显然，在最后一层，它的weight即$W^{l}$直接“affects the loss”，即它无需通过中间层而直接作用于loss，所以$\delta ^{l}$ 可以直接计算得到。在计算得到了$\delta ^{l}$后，就可以计算得到直接依赖于它的$\delta ^{l-1}$；依次可以递归进行直到第一层，从而可以计算得到所有的gradient；
 
 Informally, the key point is that since the only way a weight in $W^{l}$ affects the loss is through its effect on the next layer, and it does so linearly, $\delta ^{l}$ are the only data you need to compute the gradients of the weights at layer $l$, and then you can compute the previous layer $\delta ^{l-1}$ and repeat recursively. 
@@ -102,8 +100,6 @@ $$
 To compute this, one starts with the input $x$ and works forward; denote the weighted input of each layer as $z^{l}$ and the output of layer $l$ as the activation $a^{l}$. For backpropagation, the activation $a^{l}$ as well as the derivatives $(f^{l})'$ (evaluated at $z^{l}$) must be cached for use during the backwards pass.
 
 > NOTE: 所谓$z^{l}$既weighted input，其实就是它的input dot product weight；所谓$a^{l}$，其实就是这一层的output。
-
-
 
 The derivative of the loss in terms of the inputs is given by the chain rule; note that each term is a [total derivative](https://en.wikipedia.org/wiki/Total_derivative), evaluated at the value of the network (at each node) on the input $x$
 $$

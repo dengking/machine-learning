@@ -4,15 +4,4 @@
 
 symbolic computation: computational graph是就是一种典型的symbolic computation，它在6.5.5 Symbol-to-Symbol Derivatives、6.5.4 Back-Propagation Computation in Fully-Connected MLP 中有描述
 
-关于computational graph，参见：
-
-https://www.zhihu.com/question/27239198/answer/734273315
-
-https://zhuanlan.zhihu.com/p/69175484
-
-https://zhuanlan.zhihu.com/p/70075944
-
-https://zhuanlan.zhihu.com/p/71869192
-
-
 
