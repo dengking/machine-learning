@@ -1,6 +1,12 @@
 nav:
     - Introduction: index.md
-    - Book-deep-learning: Book-deep-learning
-    - Book-Neural-Networks-and-Deep-Learning: Book-Neural-Networks-and-Deep-Learning
-    - Guide: Guide
+    - Tutorial: Tutorial
+    - Computation-And-model-And-computational-graph: Computation-And-model-And-computational-graph
+    - Model-capacity: Model-capacity
+    - Model-initialization: Model-initialization
+    - Batch-epoch-step: Batch-epoch-step
+    - Activation-function: Activation-function
+    - Design-neural-network: Design-neural-network.md
+    - End-to-end: End-to-end
+    - Transformer-and-attention: Transformer-and-attention
     
