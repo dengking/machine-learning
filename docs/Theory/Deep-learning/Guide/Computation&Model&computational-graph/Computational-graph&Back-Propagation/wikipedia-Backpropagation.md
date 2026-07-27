@@ -3,8 +3,6 @@
 In [machine learning](https://en.wikipedia.org/wiki/Machine_learning "Machine learning"), **backpropagation** is a [gradient](https://en.wikipedia.org/wiki/Gradient "Gradient") computation method commonly used for training a [neural network](https://en.wikipedia.org/wiki/Neural_network_\(machine_learning\) "Neural network (machine learning)") in computing parameter updates.
 
 > NOTE: 关于计算导数，Jorge-Nocedal-Stephen-J-Wright-Numerical-Optimization # chapter-8-Calculating-Derivatives 中有着很好的说明 
-> 
-> 
 
 The backpropagation algorithm works by computing the gradient of the loss function with respect to each weight by the [chain rule](https://en.wikipedia.org/wiki/Chain_rule), computing the gradient one layer at a time, [iterating](https://en.wikipedia.org/wiki/Iteration) backward from the last layer to avoid redundant calculations of intermediate terms in the chain rule; this is an example of [dynamic programming](https://en.wikipedia.org/wiki/Dynamic_programming).[[3\]](https://en.wikipedia.org/wiki/Backpropagation#cite_note-FOOTNOTEGoodfellowBengioCourville2016[httpswwwdeeplearningbookorgcontentsmlphtmlpf33_214]-3)
 
