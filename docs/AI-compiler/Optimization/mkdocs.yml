@@ -1,4 +1,7 @@
 nav:
     - Introduction: index.md
     - Graph-Level-Optimization: Graph-Level-Optimization
-    
+    - Operator-Level-Optimization: Operator-Level-Optimization
+    - Memory-Optimization: Memory-Optimization
+    - Instruction-Optimization: Instruction-Optimization
+    - LLM-Specific-Optimization: LLM-Specific-Optimization
