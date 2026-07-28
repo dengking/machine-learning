@@ -1,7 +1,5 @@
 # AI-compiler
 
-
-
 ## AI 编译器设计目标
 
 AI 编译器在 AI 领域的应用主要分为两个场景：推理场景和训练场景。这两个场景分别对应了 AI 模型生命周期中的不同阶段，并且对编译器的要求也有所不同。
@@ -27,6 +25,70 @@ AI 编译器在 AI 领域的应用主要分为两个场景：推理场景和训�
 推理场景和训练场景是 AI 编译器应用的两个主要领域，它们各自有着不同的优化目标和挑战。推理场景更注重性能和资源利用，而训练场景则更侧重于代码生成、梯度计算和并行优化。AI 编译器的发展需要同时满足这两个场景的需求，以支持 AI 模型从开发到部署的整个生命周期。
 
 > NOTE: 参考自 [【AI系统】AI 编译器历史阶段](https://cloud.tencent.com/developer/article/2471987?policyId=1003) 
+
+## AI 编译器完整流程（Pipeline）
+
+在深入具体优化技术之前，先建立一个全局观：一个 AI 模型从**框架代码**到**能在硬件上高效执行的机器指令**，中间到底经历了哪些阶段。理解这条主线，能让后续所有的「图优化、算子融合、tiling、张量化、代码生成」等技术点都各归其位。
+
+AI 编译器采用**多层架构**设计，核心是「**两层 IR + 两类优化**」：
+
+- **高层 IR（Graph IR / 计算图 IR）** + **前端优化**（硬件无关）
+- **低层 IR（Tensor IR / 张量 IR）** + **后端优化**（硬件相关）
+
+### 端到端总览
+
+```mermaid
+flowchart TD
+    subgraph FE["① 前端 (Frontend)：框架接入"]
+        A["AI 训练框架模型<br/>PyTorch / MindSpore / PaddlePaddle<br/>(Python 描述的神经网络)"]
+        A --> B["Converter (转换器)<br/>转成统一的 Graph IR"]
+    end
+
+    subgraph GRAPH["② 计算图级优化 (前端优化 / 硬件无关)"]
+        B --> C["Graph IR (计算图 IR)"]
+        C --> D["Graph Optimizer<br/>图算融合 / 数据排布转换<br/>内存优化 / 死代码消除"]
+        D --> E["优化后的计算图"]
+    end
+
+    subgraph OP["③ 算子级优化 (后端优化 / 硬件相关)"]
+        E --> F["Lowering<br/>Graph IR → Tensor IR"]
+        F --> G["Tensor IR (张量 IR / 低层 IR)"]
+        G --> H["Ops Optimizer<br/>循环优化 / 算子融合<br/>Tiling / 张量化 (Tensorize)"]
+        H --> I["更低级的优化后 IR"]
+    end
+
+    subgraph CG["④ 代码生成 (Code Generation)"]
+        I --> J["交给成熟后端编译工具<br/>LLVM / NVCC ..."]
+        J --> K["机器指令 / 可执行 Kernel"]
+    end
+
+    style FE fill:#e3f2fd,stroke:#1976d2
+    style GRAPH fill:#e8f5e9,stroke:#388e3c
+    style OP fill:#fff3e0,stroke:#f57c00
+    style CG fill:#fce4ec,stroke:#c2185b
+```
+
+这条流水线可以浓缩为一句话：
+
+> **框架模型 → Graph IR →（前端优化）→ Tensor IR →（后端优化）→ 低层 IR → 机器码**
+
+### 两层 IR、两类优化的对比
+
+AI 编译器的核心设计哲学，是把**硬件无关**的优化和**硬件相关**的优化解耦到两层 IR 上，各司其职：
+
+| 维度        | 前端优化（Graph 级）          | 后端优化（算子 / Tensor 级）       |
+| --------- | ---------------------- | ------------------------- |
+| **对象**    | 整个计算图的拓扑结构             | 单个算子的内部实现                 |
+| **视野**    | 局部或全局视野                | 只关注单个算子节点                 |
+| **关注点**   | 算子节点的融合、消除、化简          | 输入输出、内存、循环方式、计算逻辑的编排与转换   |
+| **目标**    | 使计算图整体的计算与存储开销最小       | 使单个算子在目标硬件上性能最优           |
+| **硬件相关性** | 硬件无关（通用优化）             | 硬件相关（依赖 ISA、内存带宽、算力、存储层次） |
+| **典型手段**  | 图算融合、数据排布转换、内存优化、死代码消除 | 循环优化、算子融合、Tiling、张量化      |
+| **IR 层级** | Graph IR（高层）           | Tensor IR（低层）             |
+
+
+
+
 
 ## Books
 
@@ -73,9 +135,5 @@ AI编译器迭代速度远超出版周期，FlashAttention、FP8量化、MoE稀�
 - 进阶：《Deep Learning Systems》 → 大模型系统专项 → 啃论文+读源码
 
 需要我按你的基础（入门/进阶）帮你精简成一份3本的必读书单吗？
-
-
-
-
 
 ## [AI 编译器历史阶段](https://cloud.tencent.com/developer/article/2471987?policyId=1003)
