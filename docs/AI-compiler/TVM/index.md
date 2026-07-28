@@ -1,7 +1,5 @@
 # TVM
 
-
-
 ## NNVM compiler
 
 1. [最新 | NNVM 编译器导论：用于AI框架的一种新式端到端编译器](https://mp.weixin.qq.com/s/CHUZX92tERidKq-y3EMTfQ)
