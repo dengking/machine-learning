@@ -6,13 +6,13 @@ AI 编译器是连接上层深度学习框架与底层硬件（GPU / [ASIC](http
 
 AI 编译器优化按编译器标准层级可划分为**四大通用方向 + 一个大模型专项方向**：
 
-| 分类 | 层级 | 优化对象 | 核心目标 | 详见 |
-| --- | --- | --- | --- | --- |
-| **图级优化** | 中端高层（IR 层面） | 完整计算图 | 减少访存 & kernel 启动开销 | [Graph-Level-Optimization](Graph-Level-Optimization/index.md) |
-| **算子级优化** | 中端底层（循环层面） | 单个算子内核 | 最大化单 SM 利用率 | [Operator-Level-Optimization](Operator-Level-Optimization/index.md) |
-| **内存优化** | 贯穿全编译栈 | 张量生命周期与显存 | 降低峰值内存、提升带宽利用率 | [Memory-Optimization](Memory-Optimization/index.md) |
-| **指令优化** | 后端代码生成 | 硬件指令 & 流水线 | 隐藏延迟、打满硬件流水线 | [Instruction-Optimization](Instruction-Optimization/index.md) |
-| **大模型专项优化** | 跨层级组合 | Transformer / MoE / 长上下文 | 针对大模型场景的定制化编译 | [LLM-Specific-Optimization](LLM-Specific-Optimization/index.md) |
+| 分类          | 层级          | 优化对象                     | 核心目标               | 详见                                                                  |
+| ----------- | ----------- | ------------------------ | ------------------ | ------------------------------------------------------------------- |
+| **图级优化**    | 中端高层（IR 层面） | 完整计算图                    | 减少访存 & kernel 启动开销 | [Graph-Level-Optimization](Graph-Level-Optimization/index.md)       |
+| **算子级优化**   | 中端底层（循环层面）  | 单个算子内核                   | 最大化单 SM 利用率        | [Operator-Level-Optimization](Operator-Level-Optimization/index.md) |
+| **内存优化**    | 贯穿全编译栈      | 张量生命周期与显存                | 降低峰值内存、提升带宽利用率     | [Memory-Optimization](Memory-Optimization/index.md)                 |
+| **指令优化**    | 后端代码生成      | 硬件指令 & 流水线               | 隐藏延迟、打满硬件流水线       | [Instruction-Optimization](Instruction-Optimization/index.md)       |
+| **大模型专项优化** | 跨层级组合       | Transformer / MoE / 长上下文 | 针对大模型场景的定制化编译      | [LLM-Specific-Optimization](LLM-Specific-Optimization/index.md)     |
 
 > **核心动机**：现代硬件算力增长 >> 内存带宽增长，很多算子是"访存密集型（Memory-Bound）"，瓶颈在于反复读写中间结果而非计算本身。因此上表中的绝大多数优化，本质都是围绕**"减少访存 / 隐藏延迟 / 提升硬件利用率"**这三条主线展开。
 
