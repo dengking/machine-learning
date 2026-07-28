@@ -11,4 +11,18 @@
 - 主流工具：当前主流的算子开发技术包括CUDA、Triton、TileLang等，其中TileLang针对国产硬件适配痛点提供了分层编程模式，降低了开发门槛。
 - 行业现状：当前AI芯片厂商、大模型厂商均大量投入算子开发相关岗位，同时也在探索AI辅助算子开发的落地路径。
 
+## 素材&books
+
+zhihu [到底什么是算子？大模型的底层动力单元详解](https://zhuanlan.zhihu.com/p/1979137045701100290) 
+
+陈天奇 [Modern GPU Programming For MLSys](https://mlc.ai/modern-gpu-programming-for-mlsys/) 
+
+
+
+
+
+### zhihu 杨军 [五谈AI软件栈--无责乱弹AI软件栈研发方法论](https://zhuanlan.zhihu.com/p/547878945)
+
+> 非常好的文章
+
 
