@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - CUDA-Binary-Utilities: CUDA-Binary-Utilities  
     
