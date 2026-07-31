@@ -89,7 +89,29 @@ The **CUDA programming model** enables arbitrarily large grids to run on GPUs of
 
 #### 1.2.2.1.1. Thread Block Clusters
 
-### 1.2.2.2. Warps and SIMT
+
+
+### 1.2.2.2. Warps(术) and SIMT
+
+Within a thread block, threads are organized into groups of 32 threads called *warps*. A warp executes the kernel code in a *Single-Instruction Multiple-Threads* (SIMT) paradigm. In SIMT, all threads in the warp are executing the same **kernel code**, but each thread may follow different branches through the code. That is, though all threads of the program execute the same code, threads do not need to follow the same **execution path**.
+
+When threads are executed by a warp, they are assigned a **warp lane**. Warp lanes are numbered 0 to 31 and threads from a thread block are assigned to warps in a predictable fashion detailed in [Hardware Multithreading](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-kernel-programming.html#advanced-kernels-hardware-implementation-hardware-multithreading).
+
+#### warp divergence
+
+All threads in the warp execute the same instruction simultaneously. If some threads within a warp follow a **control flow** branch in execution while others do not, the threads which do not follow the branch will be masked off while the threads which follow the branch are executed. For example, if a conditional is only true for half the threads in a warp, the other half of the warp would be masked off while the active threads execute those instructions. This situation is illustrated in [Figure 7](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#active-warp-lanes). When different threads in a warp follow different code paths, this is sometimes called **warp divergence**. It follows that utilization of the GPU is maximized when threads within a warp follow the same control flow path.
+
+[![Warp lanes are masked off when not active](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/active-warp-lanes.png)](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/active-warp-lanes.png)
+
+Figure 7 In this example, only threads with even thread index execute the body of the if statement, the others are masked off while the body is executed.
+
+
+
+In the SIMT model, all threads in a warp progress through the kernel in lock step. Hardware execution may differ. See the sections on [Independent Thread Execution](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-kernel-programming.html#advanced-kernels-independent-thread-scheduling) for more information on where this distinction is important. Exploiting knowledge of how warp execution is actually mapped to real hardware is discouraged. The CUDA programming model and SIMT say that all threads in a warp progress through the code together. Hardware may optimize masked lanes in ways that are transparent to the program so long as the programming model is followed. If the program violates this model, this can result in undefined behavior that can be different in different GPU hardware.
+
+
+
+
 
 ### 1.2.2.3. Tile Programming in CUDA
 
@@ -103,10 +125,16 @@ In addition to the **SIMT model** described in the preceding sections, CUDA supp
 
 Figure 8 Programmer’s view in the **SIMT** and **tile programming models**. In SIMT, the programmer writes **per-thread code** and controls how each thread accesses data. In tile programming, the programmer writes **per-block code** that operates on **tiles**; the compiler maps operations to the threads of the block.
 
-
-
 Within a tile kernel, the block executes a **single control flow**. The programmer specifies operations on tiles, and the compiler distributes the work across the threads of the block. Standard control flow constructs such as conditionals and loops are supported, but because the block follows a **single control flow**, there is no concept of **warp divergence**. Scalar operations, such as computing an index or a loop bound, are executed by a single thread of the block. Tile operations, such as adding two tiles element by element, are collectively executed in parallel by all threads of the block.
+
+#### tile VS block
 
 It is important not to confuse blocks—units of execution—with tiles—units of data. A single block may create and operate on many tiles of different shapes and data types.
 
 翻译: 切勿将**线程块**（执行单元）与**分块瓦片**（数据单元）混淆。单个线程块可创建多种形状、不同数据类型的瓦片并对其进行运算。
+
+#### 1.2.2.3.1. Arrays and tiles
+
+Tile kernels work with two types of data: **arrays** and **tiles**. An array (or global array) is a multidimensional container of elements stored in device memory. Arrays are mutable: their contents can be modified by store operations within a kernel. An array has a shape and a data type.
+
+A tile is a multidimensional collection of values that exists only within **tile code** and is local to a single block. **Tiles** are immutable: every operation on a tile produces a new tile rather than modifying an existing one. Unlike an array, a tile does not necessarily have a representation in memory—the compiler decides how tile data is stored, and may use registers, shared memory, or other resources of the SM. Each dimension of a tile must be a power of two and must be known at **compile time** (that is, its value must be determinable before the kernel executes, rather than computed during execution). Tiles cannot be passed as kernel parameters; they are created and consumed entirely within **tile code**.
