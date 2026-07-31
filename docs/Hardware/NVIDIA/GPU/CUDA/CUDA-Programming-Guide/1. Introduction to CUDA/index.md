@@ -95,12 +95,18 @@ The **CUDA programming model** enables arbitrarily large grids to run on GPUs of
 
 In addition to the **SIMT model** described in the preceding sections, CUDA supports a **tile programming model**. In tile programming, the programmer writes code at the level of an entire **thread block**, describing operations on multidimensional collections of data called **tiles**. The compiler maps these operations to the individual threads of the block.
 
-**Tile kernels** are launched on a grid of blocks, as described in the [Thread Blocks and Grids](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#programming-model-threads-grids) section. Each block executes the tile kernel and can query its position within the grid to determine which portion of the data it is responsible for. The programmer specifies only the grid dimensions; the number of threads per block is determined by the compiler based on the tile operations in the kernel ([Figure 8](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#figure-tile-programming-abstraction)).
+> NOTE: 操作单位不同
+
+**Tile kernels** are launched on a **grid of blocks**, as described in the [Thread Blocks and Grids](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#programming-model-threads-grids) section. Each block executes the **tile kernel** and can query its position within the grid to determine which portion of the data it is responsible for. The programmer specifies only the **grid dimensions**; the number of threads per block is determined by the compiler based on the **tile operations** in the kernel ([Figure 8](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#figure-tile-programming-abstraction)).
 
 [![Programmer's view in the SIMT and tile programming models](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/tile-simt.png)](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/tile-simt.png)
 
-Figure 8 Programmer’s view in the SIMT and tile programming models. In SIMT, the programmer writes per-thread code and controls how each thread accesses data. In tile programming, the programmer writes per-block code that operates on tiles; the compiler maps operations to the threads of the block.
+Figure 8 Programmer’s view in the **SIMT** and **tile programming models**. In SIMT, the programmer writes **per-thread code** and controls how each thread accesses data. In tile programming, the programmer writes **per-block code** that operates on **tiles**; the compiler maps operations to the threads of the block.
 
-Within a tile kernel, the block executes a single control flow. The programmer specifies operations on tiles, and the compiler distributes the work across the threads of the block. Standard control flow constructs such as conditionals and loops are supported, but because the block follows a single control flow, there is no concept of warp divergence. Scalar operations, such as computing an index or a loop bound, are executed by a single thread of the block. Tile operations, such as adding two tiles element by element, are collectively executed in parallel by all threads of the block.
+
+
+Within a tile kernel, the block executes a **single control flow**. The programmer specifies operations on tiles, and the compiler distributes the work across the threads of the block. Standard control flow constructs such as conditionals and loops are supported, but because the block follows a **single control flow**, there is no concept of **warp divergence**. Scalar operations, such as computing an index or a loop bound, are executed by a single thread of the block. Tile operations, such as adding two tiles element by element, are collectively executed in parallel by all threads of the block.
 
 It is important not to confuse blocks—units of execution—with tiles—units of data. A single block may create and operate on many tiles of different shapes and data types.
+
+翻译: 切勿将**线程块**（执行单元）与**分块瓦片**（数据单元）混淆。单个线程块可创建多种形状、不同数据类型的瓦片并对其进行运算。
