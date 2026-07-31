@@ -1,7 +1,5 @@
 # [GPU](https://www.nvidia.com/en-us/)
 
-
-
 ## Programming model&IR
 
 Tile IR 与 PTX 是 CUDA 平台下对应两种不同编程范式的底层中间表示，二者定位对等、范式互补，最终都会编译为 GPU 硬件可执行的 **SASS 指令**。核心差异对比如下：
@@ -58,20 +56,4 @@ Tile IR 与 PTX 是 CUDA 平台下对应两种不同编程范式的底层中间�
 
 需要我补充两者的等价代码示例对比，帮助直观理解差异吗？
 
-
-
-## 术语说明
-
-PTX
-
-Tile IR
-
-
-
-### TMA
-
-
-
-### MMA
-
-
+## 
