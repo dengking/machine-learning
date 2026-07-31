@@ -37,16 +37,78 @@ The code an application executes on the GPU is referred to as *device code*, an
 
 ## 1.2.2. GPU Hardware Model
 
-Like any programming model, CUDA relies on a conceptual model of the underlying hardware. For the purposes of CUDA programming, the GPU can be considered to be a collection of *Streaming Multiprocessors* (SMs) which are organized into groups called *Graphics Processing Clusters* (GPCs). Each SM contains a **local register file**, a **unified data cache**, and a number of **functional units** that perform computations. The **unified data cache** provides the physical resources for *shared memory* and L1 cache. The allocation of the **unified data cache** to L1 and shared memory can be configured at runtime. The sizes of different types of memory and the number of functional units within an SM can vary across GPU architectures.
+Like any programming model, CUDA relies on a conceptual model of the underlying hardware. For the purposes of CUDA programming, the GPU can be considered to be a collection of *Streaming Multiprocessors* (SMs) which are organized into groups called *Graphics Processing Clusters* (GPCs). Each SM contains:
+
+- a **local register file**
+
+- **unified data cache**
+
+- a number of **functional units**(对应下图中的SM的小格子) that perform computations
+
+The **unified data cache** provides the physical resources for *shared memory* and L1 cache. The allocation of the **unified data cache** to L1 and shared memory can be configured at runtime. The sizes of different types of memory and the number of **functional units** within an SM can vary across GPU architectures.
 
 [![The CUDA programming model view of CPU and GPU components and connection](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/gpu-cpu-system-diagram.png)](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/gpu-cpu-system-diagram.png)
 
 Figure 2 A GPU has many streaming multiprocessors (SMs), each of which contains many functional units. Graphics processing clusters (GPCs) are collections of SMs. A GPU is a set of GPCs connected to the GPU memory. A CPU typically has several cores and a memory controller which connects to the system memory. A CPU and a GPU are connected by an interconnect such as PCIe or NVLINK.
 
+#### Q: 上述GPU hardware model中，SM中的小格子代表的是什么？
+
+A: **functional unit**，它负责实际的computation
+
 ### 1.2.2.1. Thread Blocks and Grids
 
-When an application launches a kernel, it does so with many threads, often millions of threads. These threads are organized into blocks. A block of threads is referred to, perhaps unsurprisingly, as a *thread block*. Thread blocks are organized into a *grid*. All the thread blocks in a grid have the same size and dimensions. [Figure 3](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#thread-hierarchy-grid-of-thread-blocks) shows an illustration of a grid of thread blocks.
+When an application launches a kernel, it does so with many threads, often millions of threads. These threads are organized into blocks. A block of threads is referred to, perhaps unsurprisingly, as a *thread block*. **Thread blocks** are organized into a *grid*. All the **thread blocks** in a grid have the same **size** and **dimensions**. [Figure 3](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#thread-hierarchy-grid-of-thread-blocks) shows an illustration of a grid of thread blocks.
 
 [![Grid of Thread Blocks](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/grid-of-thread-blocks.png)](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/grid-of-thread-blocks.png)
 
 Figure 3 Grid of Thread Blocks. Each arrow represents a thread (the number of arrows is not representative of actual number of threads).
+
+
+
+#### why need dimension?
+
+Thread blocks and grids may be 1, 2, or 3 dimensional. These dimensions can simplify mapping of individual threads to units of work or data items.
+
+
+
+#### execution configuration
+
+When a kernel is launched, it is launched using a specific *execution configuration* which specifies the grid and thread block dimensions. The execution configuration may also include optional parameters such as cluster size, stream, and SM configuration settings, which will be introduced in later sections.
+
+
+
+#### location
+
+Using **built-in variables**, each thread executing the kernel can determine its location within its containing block and the location of its block within the containing grid. A thread can also use these built-in variables to determine the dimensions of the thread blocks and the grid on which the kernel was launched. This gives each thread a unique identity among all the threads running the kernel. This identity is frequently used to determine what data or operations a thread is responsible for.
+
+
+
+#### execution: thread block<->SM
+
+All threads of a **thread block** are executed in a single **SM**. This allows threads within a thread block to communicate and synchronize with each other efficiently. Threads within a **thread block** all have access to the **on-chip shared memory**, which can be used for exchanging information between threads of a thread block.
+
+
+
+A grid may consist of millions of **thread blocks**, while the GPU executing the grid may have only tens or hundreds of SMs. All threads of a thread block are executed by a single SM and, in most cases [[1]](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#fn-non-completion), run to completion on that SM. There is no guarantee of scheduling between **thread blocks**, so a **thread block** cannot rely on results from other **thread blocks**, as they may not be able to be scheduled until that **thread block** has completed. [Figure 4](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#thread-block-scheduling) shows an example of how thread blocks from a grid are assigned to an SM.
+
+[![Thread blocks scheduled on SMs](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/thread-block-scheduling.png)](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/thread-block-scheduling.png)
+
+Figure 4 Each SM has one or more active thread blocks. In this example, each SM has three **thread blocks** scheduled simultaneously. There are no guarantees about the order in which thread blocks from a grid are assigned to SMs.
+
+
+
+The **CUDA programming model** enables arbitrarily large grids to run on GPUs of any size, whether it has only one SM or thousands of SMs. To achieve this, the **CUDA programming model**, with some exceptions, requires that there be no **data dependencies** between threads in different thread blocks. That is, a thread should not depend on results from or synchronize with a thread in a different **thread block** of the same grid. All the threads within a **thread block** run on the same SM at the same time. Different thread blocks within the grid are scheduled among the available SMs and may be executed in any order. In short, the CUDA programming model requires that it be possible to execute thread blocks in any order, in parallel or in series.
+
+
+
+#### 1.2.2.1.1. Thread Block Clusters
+
+
+
+### 1.2.2.2. Warps and SIMT
+
+
+
+### 1.2.2.3. Tile Programming in CUDA
+
+In addition to the **SIMT model** described in the preceding sections, CUDA supports a tile programming model. In tile programming, the programmer writes code at the level of an entire thread block, describing operations on multidimensional collections of data called **tiles**. The compiler maps these operations to the individual threads of the block.
