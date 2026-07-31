@@ -63,31 +63,21 @@ When an application launches a kernel, it does so with many threads, often milli
 
 Figure 3 Grid of Thread Blocks. Each arrow represents a thread (the number of arrows is not representative of actual number of threads).
 
-
-
 #### why need dimension?
 
 Thread blocks and grids may be 1, 2, or 3 dimensional. These dimensions can simplify mapping of individual threads to units of work or data items.
-
-
 
 #### execution configuration
 
 When a kernel is launched, it is launched using a specific *execution configuration* which specifies the grid and thread block dimensions. The execution configuration may also include optional parameters such as cluster size, stream, and SM configuration settings, which will be introduced in later sections.
 
-
-
 #### location
 
 Using **built-in variables**, each thread executing the kernel can determine its location within its containing block and the location of its block within the containing grid. A thread can also use these built-in variables to determine the dimensions of the thread blocks and the grid on which the kernel was launched. This gives each thread a unique identity among all the threads running the kernel. This identity is frequently used to determine what data or operations a thread is responsible for.
 
-
-
 #### execution: thread block<->SM
 
 All threads of a **thread block** are executed in a single **SM**. This allows threads within a thread block to communicate and synchronize with each other efficiently. Threads within a **thread block** all have access to the **on-chip shared memory**, which can be used for exchanging information between threads of a thread block.
-
-
 
 A grid may consist of millions of **thread blocks**, while the GPU executing the grid may have only tens or hundreds of SMs. All threads of a thread block are executed by a single SM and, in most cases [[1]](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#fn-non-completion), run to completion on that SM. There is no guarantee of scheduling between **thread blocks**, so a **thread block** cannot rely on results from other **thread blocks**, as they may not be able to be scheduled until that **thread block** has completed. [Figure 4](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#thread-block-scheduling) shows an example of how thread blocks from a grid are assigned to an SM.
 
@@ -95,20 +85,22 @@ A grid may consist of millions of **thread blocks**, while the GPU executing the
 
 Figure 4 Each SM has one or more active thread blocks. In this example, each SM has three **thread blocks** scheduled simultaneously. There are no guarantees about the order in which thread blocks from a grid are assigned to SMs.
 
-
-
 The **CUDA programming model** enables arbitrarily large grids to run on GPUs of any size, whether it has only one SM or thousands of SMs. To achieve this, the **CUDA programming model**, with some exceptions, requires that there be no **data dependencies** between threads in different thread blocks. That is, a thread should not depend on results from or synchronize with a thread in a different **thread block** of the same grid. All the threads within a **thread block** run on the same SM at the same time. Different thread blocks within the grid are scheduled among the available SMs and may be executed in any order. In short, the CUDA programming model requires that it be possible to execute thread blocks in any order, in parallel or in series.
-
-
 
 #### 1.2.2.1.1. Thread Block Clusters
 
-
-
 ### 1.2.2.2. Warps and SIMT
-
-
 
 ### 1.2.2.3. Tile Programming in CUDA
 
-In addition to the **SIMT model** described in the preceding sections, CUDA supports a tile programming model. In tile programming, the programmer writes code at the level of an entire thread block, describing operations on multidimensional collections of data called **tiles**. The compiler maps these operations to the individual threads of the block.
+In addition to the **SIMT model** described in the preceding sections, CUDA supports a **tile programming model**. In tile programming, the programmer writes code at the level of an entire **thread block**, describing operations on multidimensional collections of data called **tiles**. The compiler maps these operations to the individual threads of the block.
+
+**Tile kernels** are launched on a grid of blocks, as described in the [Thread Blocks and Grids](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#programming-model-threads-grids) section. Each block executes the tile kernel and can query its position within the grid to determine which portion of the data it is responsible for. The programmer specifies only the grid dimensions; the number of threads per block is determined by the compiler based on the tile operations in the kernel ([Figure 8](https://docs.nvidia.com/cuda/cuda-programming-guide/01-introduction/programming-model.html#figure-tile-programming-abstraction)).
+
+[![Programmer's view in the SIMT and tile programming models](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/tile-simt.png)](https://docs.nvidia.com/cuda/cuda-programming-guide/_images/tile-simt.png)
+
+Figure 8 Programmer’s view in the SIMT and tile programming models. In SIMT, the programmer writes per-thread code and controls how each thread accesses data. In tile programming, the programmer writes per-block code that operates on tiles; the compiler maps operations to the threads of the block.
+
+Within a tile kernel, the block executes a single control flow. The programmer specifies operations on tiles, and the compiler distributes the work across the threads of the block. Standard control flow constructs such as conditionals and loops are supported, but because the block follows a single control flow, there is no concept of warp divergence. Scalar operations, such as computing an index or a loop bound, are executed by a single thread of the block. Tile operations, such as adding two tiles element by element, are collectively executed in parallel by all threads of the block.
+
+It is important not to confuse blocks—units of execution—with tiles—units of data. A single block may create and operate on many tiles of different shapes and data types.
