@@ -8,10 +8,10 @@
 - **ML infrastructure** - out-of-box bindings and interop across languages. [[Python](https://tvm.apache.org/ffi/get_started/quickstart.html#ship-to-python)][[C++](https://tvm.apache.org/ffi/get_started/quickstart.html#ship-to-cpp)][[Rust](https://tvm.apache.org/ffi/get_started/quickstart.html#ship-to-rust)][[XGrammar](https://github.com/mlc-ai/xgrammar)]
 - **Coding agents** - a unified mechanism for shipping generated code in production.
 
-
-
 ## see also
 
 [构建机器学习系统的开放ABI和FFI标准](https://zhuanlan.zhihu.com/p/81570886474?share_code=hwgF567Z5YkU&utm_psn=1965081659973011118)
+
+[Building an Open ABI and FFI for ML Systems](https://tvm.apache.org/2025/10/21/tvm-ffi)
 
 
