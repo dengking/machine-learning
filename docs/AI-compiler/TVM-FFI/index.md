@@ -8,10 +8,6 @@
 - **ML infrastructure** - out-of-box bindings and interop across languages. [[Python](https://tvm.apache.org/ffi/get_started/quickstart.html#ship-to-python)][[C++](https://tvm.apache.org/ffi/get_started/quickstart.html#ship-to-cpp)][[Rust](https://tvm.apache.org/ffi/get_started/quickstart.html#ship-to-rust)][[XGrammar](https://github.com/mlc-ai/xgrammar)]
 - **Coding agents** - a unified mechanism for shipping generated code in production.
 
-
-
-
-
 ## 要解决的核心问题：ML 系统的互操作性
 
 我们正处在 AI 系统百花齐放的时代，生态中充斥着大量需要**相互集成**的组件：
@@ -44,8 +40,6 @@ flowchart TD
 
     style OLD fill:#ffebee,stroke:#c62828,stroke-width:2px
 ```
-
-
 
 ## 问题的根源：ABI 与 FFI
 
