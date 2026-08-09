@@ -93,7 +93,9 @@ sizeof(TVMFFIAny) = 16，alignof = 8
 
 即：
 
-$$\text{sizeof}(\texttt{TVMFFIAny}) = \underbrace{4}_{\text{type\_index}} + \underbrace{4}_{\text{aux union}} + \underbrace{8}_{\text{value union}} = 16 \text{ bytes}$$
+$$
+\text{sizeof}(\texttt{TVMFFIAny}) = \underbrace{4}_{\text{type\_index}} + \underbrace{4}_{\text{aux union}} + \underbrace{8}_{\text{value union}} = 16 \text{ bytes}
+$$
 
 ### 2.1 第一字段：type_index——不依赖 RTTI 的运行时类型系统
 
@@ -115,7 +117,7 @@ $$\text{sizeof}(\texttt{TVMFFIAny}) = \underbrace{4}_{\text{type\_index}} + \und
 
 **（b）小字符串优化（SSO）。** 这 4 字节不是死空间，它承载 `small_str_len`——长度不超过 7 的短字符串/短字节串直接把内容存进下一个 union 的 `v_bytes[8]`，完全免去堆分配。源码注释点明了为什么内容必须从 offset 8 开始：
 
-```309:313:include/tvm/ffi/c_api.h
+```c
      * \brief Length of small string, with a max value of 7.
      *
      * We keep small str to start at next 4 bytes to ensure alignment
@@ -126,7 +128,7 @@ $$\text{sizeof}(\texttt{TVMFFIAny}) = \underbrace{4}_{\text{type\_index}} + \und
 
 **（c）单次机器字比较与哈希。** ABI 规定一条强不变式：**除小字符串外，`zero_padding` 必须置 0**。有了它，`(type_index, zero_padding)` 恰好拼成一个 8 字节字，`v_uint64` 是另一个 8 字节字——两个 Any 的相等性判断就是两次 64 位整数比较。C++ 侧的 `same_as` 正是如此实现：
 
-```500:503:include/tvm/ffi/any.h
+```c
   TVM_FFI_INLINE bool same_as(const Any& other) const noexcept {
     return data_.type_index == other.data_.type_index &&
            data_.zero_padding == other.data_.zero_padding && data_.v_int64 == other.data_.v_int64;
@@ -167,7 +169,7 @@ TVM FFI 的 ABI 设计原则中明确写着：**"The ABI remains stable across c
 
 所有跨边界函数遵循同一个签名：
 
-```501:502:include/tvm/ffi/c_api.h
+```c
 typedef int (*TVMFFISafeCallType)(void* handle, const TVMFFIAny* args, int32_t num_args,
                                   TVMFFIAny* result);
 ```
@@ -182,7 +184,7 @@ typedef int (*TVMFFISafeCallType)(void* handle, const TVMFFIAny* args, int32_t n
 
 `TVMFFIObject` 头部有一处耐人寻味的成员，其注释直接点题：
 
-```279:283:include/tvm/ffi/c_api.h
+```c
     /*!
      * \brief auxilary field to TVMFFIObject is always 8 bytes aligned.
      * \note This helps us to ensure cross platform compatibility.
@@ -200,7 +202,7 @@ typedef int (*TVMFFISafeCallType)(void* handle, const TVMFFIAny* args, int32_t n
 
 **（4）32 位指针的残位清零。** 值 union 里存 4 字节指针时，高 4 字节在 32 位平台上是不确定的，这会破坏前述"按机器字比较/哈希"的不变式。为此 C++ 侧提供了专用宏：
 
-```213:223:include/tvm/ffi/base_details.h
+```c
 /*!
  * \brief Clear the padding parts so we can safely use v_int64 for hash
  *        and equality check even when the value stored is a pointer.
