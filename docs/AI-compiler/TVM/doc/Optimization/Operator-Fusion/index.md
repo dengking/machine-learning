@@ -10,7 +10,7 @@ TVM provides two complementary fusion mechanisms:
   
   - 翻译: 将匹配用户自定义数据流模式的算子进行归组，通常用于将对应计算任务卸载到外部后端（如 cuBLAS、CUTLASS、DNNL 等）执行。
 
-Both produce the same output: Relax functions marked with `Primitive=True` that are later lowered to fused TIR kernels or dispatched to external libraries.
+Both produce the same output: Relax functions marked with `Primitive=True` that are later lowered to fused **TIR kernels** or dispatched to external libraries.
 
 翻译: 两种方式的最终产出一致：都会生成标记了 `Primitive=True` 的 Relax 函数，这类函数后续会被降级为融合 TIR 算子内核，或调度至外部加速库执行。
 
@@ -31,7 +31,7 @@ IRModule (with fused functions marked Primitive=True)
 IRModule (fused TIR kernels)
 ```
 
-In the compilation pipeline, these passes appear in the backend-specific `legalize_passes` phase. For example, the CUDA pipeline (`python/tvm/relax/backend/cuda/pipeline.py`) runs:
+In the compilation pipeline, these passes appear in the backend-specific `legalize_passes` phase. For example, the **CUDA pipeline** (`python/tvm/relax/backend/cuda/pipeline.py`) runs:
 
 ```python
 LegalizeOps()          # lower Relax ops to call_tir
@@ -40,5 +40,9 @@ FoldConstant()
 FuseOps()              # group ops
 FuseTIR()              # merge TIR functions
 ```
+
+## Operator Pattern Classification
+
+Before fusion, `AnnotateTIROpPattern` analyzes each **TIR function** in the module and assigns an `OpPatternKind`. The fusion algorithm uses these pattern kinds to decide which operators can be fused together.
 
 
